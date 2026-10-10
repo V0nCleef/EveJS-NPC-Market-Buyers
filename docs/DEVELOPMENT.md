@@ -36,6 +36,16 @@ python -B tests/wallet_client_tests.py
 
 Do not upload the reference directories. Contract coverage is not live rendering, actual Python 2 execution or gameplay acceptance.
 
+## Isolated visual testing with GridCheck
+
+The local harness in `tools/stage-gridcheck.cjs` deliberately accepts only the disposable playground, never the live play tree. It backs up modified test files and hashes nine protected live files before staging the candidate. `tools/gridcheck-fixture-loader.cjs` exposes a fixture RPC only in that test tree and for its dedicated test character. These test tools are excluded from Launcher ZIPs.
+
+The fixture creates ten actual sell orders and completes ten native purchases. It adds 12,000 clearly marked historical accounting entries separately; those synthetic entries do not credit a wallet. Reusing a fixture requires keeping its world, market database and mod database together. Do not run the seed a second time against the same world.
+
+`python tools/make-gridcheck-scenario.py` writes `tests/gridcheck/statistics.json`. Validate it with `gridcheck run <path> --check`, then run it against the already populated isolated world in auto/attach mode. Let the test client finish loading its station first: the scenario refuses visual checks while its loading screen is visible. The scenario opens the normal mod window through `owner.open_window()`, validates receipt totals, measures Statistics RPCs, checks archive paging and custom days, and captures ten actual client screenshots. GridCheck's test client does not need the Launcher Mods menu to open this window.
+
+The test world must remain separate in data, native market and ports. Close the test client and stop its managed stack after testing or review. Never stop the player's live stack to run this scenario.
+
 ## Build a Launcher ZIP
 
 ```sh
@@ -44,6 +54,6 @@ python tools/check_source.py
 python pack-release.py
 ```
 
-Output goes to `dist/`. Packaging uses the included reviewed payload; it does not compile Rust or touch a live server. Rebuilt ZIP containers and repository documentation can differ from the original reviewed release asset. The draft 0.1.15 asset retains its original SHA-256 in [release metadata](releases/0.1.15.json).
+Output goes to `dist/`. Packaging uses the included reviewed payload; it does not compile Rust or touch a live server. Rebuilt ZIP containers and repository documentation can differ from the original reviewed release asset. The published 0.1.16 asset's SHA-256 is recorded in [release metadata](../releases/0.1.16.json).
 
 To change the native daemon, build from `native/market-server` with `cargo build --release --locked`. Regenerate the payload only against a separate clean reviewed EveJS baseline. `build-payload.cjs` records baseline hashes; pointing it at an already patched live installation would produce invalid baseline guards. Native source and executable must stay in sync.

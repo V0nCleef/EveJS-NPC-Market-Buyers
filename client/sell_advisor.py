@@ -20,6 +20,20 @@ def _nmb_isk(value):
     return u'{:,.2f} ISK'.format(_nmb_number(value))
 
 
+def _nmb_readable_isk(value):
+    """Use the client's localized wallet units, including thousand and trillion."""
+    amount = _nmb_number(value)
+    from qtyTooltip.tooltip import GetQtyText
+    from qtyTooltip.qtyConst import EDIT_INPUT_TYPE_ISK
+    import eveformat
+    text = GetQtyText(abs(amount), EDIT_INPUT_TYPE_ISK) or eveformat.isk_readable(abs(amount))
+    return (u'-' if amount < 0 else u'') + unicode(text)
+
+
+def _nmb_isk_explained(value):
+    return u'{} ({})'.format(_nmb_isk(value), _nmb_readable_isk(value))
+
+
 def _nmb_advice_text(response):
     preview = response.get('preview') or {}
     reference = preview.get('referencePrice')
@@ -29,7 +43,7 @@ def _nmb_advice_text(response):
         title = _nmb_tr('no_reference_title')
     else:
         titleKey = {'eve_average': 'advice_average_title', 'local_buy_order': 'advice_local_title'}.get(preview.get('referenceKind'), 'advice_title')
-        title = _nmb_tr(titleKey, reference=_nmb_isk(reference), percent=_nmb_number(percent),
+        title = _nmb_tr(titleKey, reference=_nmb_isk_explained(reference), percent=_nmb_number(percent),
                         chance=chance, minimum=preview.get('minQuantity', '?'),
                         maximum=preview.get('maxQuantity', '?'))
     message = _nmb_preview_message(preview, response.get('config'))

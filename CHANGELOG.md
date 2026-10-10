@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.16 — Sales statistics and archived Activity (2026-10-10)
+
+- My Sell Orders shows actual NPC sales, remaining asking value and their combined total for active orders.
+- Statistics shows sales before tax, sales tax, net earnings, top items and online/offline earnings, with graphs for all history or any whole number of days from 1 to 36,500.
+- Activity keeps up to 500 recent entries no older than 30 days. Older entries remain browsable in Archive, with 100 entries per page.
+- A permanent accounting ledger preserves totals when Activity is archived. Existing completed purchase receipts migrate once without creating payments or double-counting sales.
+- ISK displays add localized wallet-style thousand, million, billion and trillion descriptions, including Sell Items advice and the mod's Wallet descriptions.
+- Order labels explicitly say Order ID, which is the EveJS market identifier rather than a count of sales.
+- Daily summaries keep Statistics queries small, and unchanged statistics no longer rebuild the window every refresh.
+
 ## 0.1.15 — Remaining stock bars
 
 - My Orders bars start full and drain as units sell, showing the stock still for sale.

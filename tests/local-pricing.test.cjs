@@ -137,7 +137,7 @@ test('advisory and My Orders pass actual station/quantity through the same fallb
  const {installService}=require('../lib/service');const f=fixture();
  const order={orderID:'1315',sellerID:42,typeID:241,stationID:context.stationID,quantity:42,price:921.5};
  const allowances=[];class Service{}
- installService(Service,{store:{getConfig:()=>DEFAULTS,getRevision:()=>1},quotes:f.provider,
+ installService(Service,{store:{getConfig:()=>DEFAULTS,getRevision:()=>1,statistics:{activeOrders:()=>({activeCount:1,soldISK:0,remainingISK:38703,totalISK:38703})}},quotes:f.provider,
   engine:{previewAllowance:o=>{allowances.push(o);return {availableISK:1e8,remainingDemand:100};}},
   adapter:{listOrders:async()=>[order],ready:async()=>{}},hasStaffAccountRole:()=>true,clock:()=>now});
  const service=new Service(),session={charid:42};

@@ -237,6 +237,14 @@ def _nmb_make_window(owner):
             self._loading = True
             self._rows = []
             self._orderData, self._activityData = [], []
+            self._orderSummary = {}
+            self._activityMeta = {}
+            self._activityScope = 'recent'
+            self._activityCursors = [None]
+            self._activityPage = 0
+            self._statisticsDays = None
+            self._statisticsChoosingCustom = False
+            self._statisticsCustomDays = 30
             self._viewSettings = dict((page, CharSettingEnum('evejsNpcMarketBuyersView_' + page,
                 'details', options=('icons', 'details', 'list'))) for page in ('orders', 'activity'))
             self._helpIcons = []
@@ -282,8 +290,8 @@ def _nmb_make_window(owner):
             Fill(parent=self.footer, align=C.TOTOP, height=1, color=border, state=C.UI_DISABLED)
             self.buttonRow = Container(parent=self.footer, align=C.TOTOP, height=40, padTop=10)
             self.tabs, self.tabLines, self.tabBackgrounds = {}, {}, {}
-            for key, text in (('orders', 'orders_tab'), ('configure', 'configure_tab'), ('activity', 'activity_tab')):
-                tab = button(parent=self.buttonRow, align=C.TOLEFT, minimumWidth=144, padRight=10,
+            for key, text in (('orders', 'orders_tab'), ('configure', 'configure_tab'), ('activity', 'activity_tab'), ('statistics', 'statistics_tab')):
+                tab = button(parent=self.buttonRow, align=C.TOLEFT, minimumWidth=126, padRight=10,
                              label=text, func=self.PageCallback(key))
                 self.tabs[key] = tab
                 self.tabBackgrounds[key] = Fill(bgParent=tab, color=(0.1, 0.65, 0.65, 0.15),
@@ -357,11 +365,18 @@ def _nmb_make_window(owner):
                 if self._page == 'orders':
                     result = owner.request('NpcMarketGetOrders')
                     if self.Valid() and serial == self._serial:
+                        self._orderSummary = result.get('summary') or {}
                         self.RenderOrders(result.get('orders') or [])
                 elif self._page == 'activity':
-                    result = owner.request('NpcMarketActivity')
+                    result = owner.request('NpcMarketActivity', _nmb_json.dumps({'scope': self._activityScope,
+                        'cursor': self._activityCursors[self._activityPage]}))
                     if self.Valid() and serial == self._serial:
+                        self._activityMeta = dict((k, v) for k, v in result.items() if k != 'activity')
                         self.RenderActivity(result.get('activity') or [])
+                elif self._page == 'statistics':
+                    result = owner.request('NpcMarketStatistics', _nmb_json.dumps({'days': self._statisticsDays}))
+                    if self.Valid() and serial == self._serial:
+                        self.RenderStatistics(result.get('statistics') or {})
                 else:
                     self.RenderConfigure()
             except Exception as error:
@@ -456,7 +471,7 @@ def _nmb_make_window(owner):
                 owner.diagnostic('NPC market help popup unavailable')
 
         def Heading(self, key, count=None):
-            strip = Container(parent=self.body, align=C.TOTOP, height=58, padBottom=10)
+            strip = Container(parent=self.body, align=C.TOTOP, height=88 if key == 'my_sell_orders' else 58, padBottom=10)
             title = label(strip, key, align=C.TOPLEFT, top=8, fontsize=20, bold=True)
             Fill(parent=strip, align=C.TOBOTTOM, height=1, color=border, state=C.UI_DISABLED)
             if count is not None:
@@ -466,6 +481,15 @@ def _nmb_make_window(owner):
                 Fill(bgParent=badge, color=(0.1, 0.65, 0.65, 0.08))
                 badgeText = label(badge, text, align=C.CENTER, color=teal, fontsize=14)
                 badge.width = badgeText.textwidth+20
+                if key == 'my_sell_orders' and self._orderSummary:
+                    summary = Container(parent=strip, align=C.TOALL, padding=(badge.left+badge.width+24, 3, 42, 8), state=C.UI_NORMAL)
+                    summary.hint = _nmb_tr('orders_value_help')
+                    for textKey, valueKey, color in (('value_sold', 'soldISK', teal), ('value_remaining', 'remainingISK', white), ('value_total', 'totalISK', muted)):
+                        cell = Container(parent=summary, align=C.TOLEFT_PROP, width=1.0/3, padding=(6, 0, 6, 0))
+                        label(cell, textKey, fontsize=12, color=muted, maxLines=1)
+                        number = label(cell, _nmb_isk(self._orderSummary.get(valueKey, 0)), fontsize=16, color=color, bold=True, padTop=3, maxLines=2, state=C.UI_NORMAL)
+                        number.hint = _nmb_isk_explained(self._orderSummary.get(valueKey, 0))
+                        label(cell, _nmb_readable_isk(self._orderSummary.get(valueKey, 0)), fontsize=13, color=muted, padTop=3, maxLines=1)
             page = {'my_sell_orders': 'orders', 'market_activity': 'activity'}.get(key)
             if page:
                 mode = self.ViewMode(page)
@@ -502,7 +526,7 @@ def _nmb_make_window(owner):
         def RenderOrders(self, rows):
             self._orderData = list(rows)
             mode = self.ViewMode('orders')
-            signature = _nmb_json.dumps([(o.get('orderID'), o.get('quantity'), o.get('volRemaining'), o.get('volEntered'), o.get('originalQuantity'), o.get('price'),
+            signature = _nmb_json.dumps(self._orderSummary, sort_keys=True) + _nmb_json.dumps([(o.get('orderID'), o.get('quantity'), o.get('volRemaining'), o.get('volEntered'), o.get('originalQuantity'), o.get('price'),
                 [(o.get('preview') or {}).get(k) for k in ('referencePrice','referenceKind','pricePercent','chancePercent','reason','warning','minQuantity','maxQuantity')]) for o in rows], sort_keys=True)
             if self._renderSignature == ('orders', mode, signature):
                 return
@@ -510,7 +534,7 @@ def _nmb_make_window(owner):
             previous = self._orderQuantities
             self._orderQuantities = {}
             self.ClearBody()
-            self.Heading('my_sell_orders', len(rows))
+            self.Heading('my_sell_orders', self._orderSummary.get('activeCount', len(rows)))
             if mode != 'details':
                 self.RenderCompactOrders(rows, mode, previous)
                 return
@@ -552,6 +576,9 @@ def _nmb_make_window(owner):
                     else:
                         label(cell, value, padding=(8, 17, 6, 0), fontsize=16,
                               color=teal if index == 6 else white, bold=index in (2, 6), maxLines=2)
+                        if index == 3 or index == 4 and preview.get('referencePrice'):
+                            label(cell, _nmb_readable_isk(order.get('price') if index == 3 else preview['referencePrice']),
+                                padding=(8, 3, 6, 0), fontsize=12, color=muted, maxLines=1)
                         if index == 4 and preview.get('referencePrice') and preview.get('referenceKind') in ('eve_average', 'local_buy_order'):
                             label(cell, 'local_buy_offer' if preview.get('referenceKind') == 'local_buy_order' else 'eve_average', padding=(8, 3, 6, 0), fontsize=13, color=amber)
                 progress = Container(parent=panel, align=C.TOTOP, height=48)
@@ -591,12 +618,15 @@ def _nmb_make_window(owner):
             values = [None, units(original) if validOriginal else _nmb_tr('unknown'), units(remaining),
                 _nmb_isk(order.get('price')), reference, percent, chance]
             helpText = u'{}\n{}: {}\n{}: {} ({})\n{}: {}\n{}: {}\n{}\n{}'.format(
-                _nmb_tr('order', order=orderID), _nmb_tr('unit_price'), values[3], _nmb_tr('tq_price'), reference,
+                _nmb_tr('order', order=orderID), _nmb_tr('unit_price'), _nmb_isk_explained(order.get('price')), _nmb_tr('tq_price'),
+                _nmb_isk_explained(preview['referencePrice']) if preview.get('referencePrice') else reference,
                 _nmb_tr(source), _nmb_tr('your_price'), percent, _nmb_tr('npc_chance'), chance, progress, message)
             if preview.get('minQuantity') is not None and preview.get('maxQuantity') is not None:
                 helpText += u'\n' + _nmb_tr('batch_preview', minimum=units(preview['minQuantity']), maximum=units(preview['maxQuantity']))
             return dict(preview=preview, orderID=orderID, remaining=remaining, original=original,
-                validOriginal=validOriginal, source=source, values=values, helpText=helpText, message=message)
+                validOriginal=validOriginal, source=source, values=values, helpText=helpText, message=message,
+                unitCaption=_nmb_readable_isk(order.get('price')),
+                referenceCaption=_nmb_readable_isk(preview['referencePrice']) if preview.get('referencePrice') else '')
 
         def RenderCompactOrders(self, rows, mode, previous):
             columns = [('item_order', .225), ('original', .11), ('remaining', .11),
@@ -614,7 +644,7 @@ def _nmb_make_window(owner):
                 info = self.OrderPresentation(order)
                 self._orderQuantities[unicode(info['orderID'])] = info['remaining']
                 panel = Container(parent=grid if grid is not None else scroll, align=C.TOPLEFT if grid is not None else C.TOTOP,
-                    width=252 if grid is not None else 0, height=238 if grid is not None else 62,
+                    width=252 if grid is not None else 0, height=278 if grid is not None else 80,
                     padBottom=0 if grid is not None else 4)
                 Fill(bgParent=panel, color=(0.045, 0.073, 0.089, .85))
                 Frame(bgParent=panel, color=border)
@@ -630,12 +660,14 @@ def _nmb_make_window(owner):
                         label(cell, key, fontsize=12, color=muted, maxLines=1)
                         label(cell, info['values'][index], fontsize=15, bold=index == 2, padTop=4, maxLines=1)
                     label(panel, info['values'][3], align=C.TOPLEFT, left=12, top=131, width=228, fontsize=16, bold=True, maxLines=1)
+                    label(panel, info['unitCaption'], align=C.TOPLEFT, left=12, top=152, width=228, fontsize=12, color=muted, maxLines=1)
                     label(panel, u'{}: {} ({})'.format(_nmb_tr(info['source']), info['values'][4], info['values'][5]),
-                        align=C.TOPLEFT, left=12, top=156, width=228, fontsize=12, color=muted, maxLines=2)
+                        align=C.TOPLEFT, left=12, top=176, width=228, fontsize=12, color=muted, maxLines=2)
+                    label(panel, info['referenceCaption'], align=C.TOPLEFT, left=12, top=210, width=228, fontsize=12, color=muted, maxLines=1)
                     label(panel, u'{}: {}'.format(_nmb_tr('npc_chance'), info['values'][6]),
-                        align=C.TOPLEFT, left=12, top=202, width=196, fontsize=14,
+                        align=C.TOPLEFT, left=12, top=245, width=196, fontsize=14,
                         color=teal if info['preview'].get('reason') == 'eligible' else amber, bold=True, maxLines=1)
-                    self.Help(panel, type_name(order.get('typeID')), info['helpText'], left=216, top=199)
+                    self.Help(panel, type_name(order.get('typeID')), info['helpText'], left=216, top=242)
                     fraction = float(info['remaining']) / info['original'] if info['validOriginal'] else 0.0
                     track = Container(parent=panel, align=C.TOBOTTOM, height=3, state=C.UI_DISABLED)
                     Fill(bgParent=track, color=border)
@@ -657,6 +689,9 @@ def _nmb_make_window(owner):
                                 color=teal if info['preview'].get('reason') == 'eligible' else amber, maxLines=1)
                         else:
                             label(cell, value, padding=(8, 12, 6, 0), fontsize=14, bold=index == 2, maxLines=1)
+                            if index in (3, 4):
+                                label(cell, info['unitCaption'] if index == 3 else info['referenceCaption'],
+                                    padding=(8, 3, 6, 0), fontsize=12, color=muted, maxLines=1)
                             if index == 4 and info['preview'].get('referencePrice') and info['source'] != 'tq_trade_hub':
                                 label(cell, info['source'], padding=(8, 4, 6, 0), fontsize=12, color=amber, maxLines=1)
             if len(rows) >= 200:
@@ -688,19 +723,22 @@ def _nmb_make_window(owner):
             unit = _nmb_isk(gross / quantity) if purchase and quantity > 0 and validGross else u'—'
             net = ('+' + _nmb_isk(round(gross-tax, 2)) if validTax else _nmb_tr('net_unknown')) if purchase else u'—'
             order = _nmb_tr('order', order=field(details, ('orderID', 'orderId'), '?'))
-            breakdown = _nmb_tr('gross_tax', gross=_nmb_isk(gross) if validGross else _nmb_tr('unknown'),
-                tax=_nmb_isk(tax) if validTax else _nmb_tr('unknown'))
+            breakdown = _nmb_tr('gross_tax', gross=_nmb_isk_explained(gross) if validGross else _nmb_tr('unknown'),
+                tax=_nmb_isk_explained(tax) if validTax else _nmb_tr('unknown'))
             helpText = u'{} {}\n{}\n{}'.format(date, clock, title, _nmb_tr(status))
             if purchase:
                 helpText += u'\n{}\n{}\n{}\n{}: {}'.format(order,
-                    _nmb_tr('purchase_detail', quantity=units(quantity), price=unit), breakdown, _nmb_tr('net_received'), net)
+                    _nmb_tr('purchase_detail', quantity=units(quantity), price=_nmb_isk_explained(gross / quantity) if validGross and quantity > 0 else unit),
+                    breakdown, _nmb_tr('net_received'), _nmb_isk_explained(gross-tax) if validTax else net)
                 if details.get('offlinePurchase'):
                     helpText += u'\n' + _nmb_tr('offline_time_hint')
             else:
                 helpText += u'\n' + message
             return dict(details=details, kind=kind, purchase=purchase, resolved=resolved, rejected=rejected,
                 color=color, date=date, clock=clock, title=title, status=status, message=message, quantity=quantity,
-                unit=unit, net=net, order=order, breakdown=breakdown, helpText=helpText)
+                unit=unit, net=net, order=order, breakdown=breakdown, helpText=helpText,
+                unitCaption=_nmb_readable_isk(gross / quantity) if purchase and validGross and quantity > 0 else '',
+                netCaption=_nmb_readable_isk(gross-tax) if purchase and validTax else '')
 
         def RenderCompactActivity(self, rows, mode):
             columns = [('activity_time', .09), ('activity_event', .32), ('quantity', .09),
@@ -722,7 +760,7 @@ def _nmb_make_window(owner):
                     if mode == 'icons':
                         grid = FlowContainer(parent=scroll, align=C.TOTOP, contentSpacing=(10, 10), autoHeight=True)
                 panel = Container(parent=grid if grid is not None else scroll, align=C.TOPLEFT if grid is not None else C.TOTOP,
-                    width=304 if grid is not None else 0, height=268 if grid is not None else 70,
+                    width=304 if grid is not None else 0, height=340 if grid is not None else 80,
                     padBottom=0 if grid is not None else 4, state=C.UI_NORMAL)
                 Fill(bgParent=panel, color=(.045, .073, .089, .85))
                 Frame(bgParent=panel, color=border)
@@ -742,12 +780,14 @@ def _nmb_make_window(owner):
                     if info['purchase']:
                         label(panel, _nmb_tr('purchase_detail', quantity=units(info['quantity']), price=info['unit']),
                             align=C.TOPLEFT, left=12, top=116, width=280, fontsize=14, maxLines=2)
-                        label(panel, info['breakdown'], align=C.TOPLEFT, left=12, top=157, width=280, fontsize=12, color=muted, maxLines=2)
-                        label(panel, info['order'], align=C.TOPLEFT, left=12, top=190, width=280, fontsize=12, color=muted, maxLines=1)
-                        label(panel, info['net'], align=C.TOPLEFT, left=12, top=218, width=280, fontsize=17, color=teal, bold=True, maxLines=1)
+                        label(panel, info['unitCaption'], align=C.TOPLEFT, left=12, top=153, width=280, fontsize=12, color=muted, maxLines=1)
+                        label(panel, info['breakdown'], align=C.TOPLEFT, left=12, top=176, width=280, fontsize=12, color=muted, maxLines=4)
+                        label(panel, info['order'], align=C.TOPLEFT, left=12, top=244, width=280, fontsize=12, color=muted, maxLines=1)
+                        label(panel, info['net'], align=C.TOPLEFT, left=12, top=267, width=280, fontsize=17, color=teal, bold=True, maxLines=1)
+                        label(panel, info['netCaption'], align=C.TOPLEFT, left=12, top=290, width=280, fontsize=12, color=muted, maxLines=1)
                     else:
                         label(panel, info['message'], align=C.TOPLEFT, left=12, top=116, width=280, fontsize=14, color=muted, maxLines=4)
-                    label(panel, info['status'], align=C.TOPLEFT, left=12, top=240 if info['purchase'] else 218,
+                    label(panel, info['status'], align=C.TOPLEFT, left=12, top=317 if info['purchase'] else 218,
                         width=280, fontsize=11, color=info['color'], maxLines=1)
                 else:
                     values = [info['clock'], info['title'], units(info['quantity']) if info['purchase'] else u'—',
@@ -772,6 +812,9 @@ def _nmb_make_window(owner):
                                 bold=index == 4, maxLines=2 if index == 5 else 1)
                             if index == 0 and info['details'].get('offlinePurchase'):
                                 text.state = C.UI_NORMAL; text.hint = _nmb_tr('offline_time_hint')
+                            if index in (3, 4):
+                                label(cell, info['unitCaption'] if index == 3 else info['netCaption'],
+                                    padding=(8, 3, 6, 0), fontsize=12, color=muted, maxLines=1)
 
         def RenderConfigure(self):
             self._renderSignature = None
@@ -1047,7 +1090,7 @@ def _nmb_make_window(owner):
                     amount = float(self._editors[key][0].GetValue())
                     if math.isnan(amount) or math.isinf(amount) or amount < 0:
                         raise ValueError('Invalid amount')
-                    caption.text = _nmb_text(GetQtyText(amount, EDIT_INPUT_TYPE_ISK)
+                    caption.text = _nmb_text(_nmb_readable_isk(amount) if amount >= 1000 else GetQtyText(amount, EDIT_INPUT_TYPE_ISK)
                                              or eveformat.isk(amount, fraction=True))
                 except (ValueError, TypeError):
                     caption.text = ''
@@ -1144,15 +1187,179 @@ def _nmb_make_window(owner):
                 self._saving = False
                 self._busy = False
 
+        def ReloadData(self):
+            self._renderSignature = None
+            if self._busy:
+                self._serial += 1
+                self._refreshQueued = True
+            else:
+                self.Refresh()
+
+        def SelectActivityScope(self, control, text, value):
+            if value != self._activityScope:
+                self._activityScope = value
+                self._activityCursors, self._activityPage = [None], 0
+                self.ReloadData()
+
+        def ActivityNext(self, *args):
+            cursor = self._activityMeta.get('nextCursor')
+            if cursor and not self._busy:
+                self._activityCursors = self._activityCursors[:self._activityPage+1] + [cursor]
+                self._activityPage += 1
+                self.ReloadData()
+
+        def ActivityPrevious(self, *args):
+            if self._activityPage and not self._busy:
+                self._activityPage -= 1
+                self.ReloadData()
+
+        def ActivityControls(self):
+            bar = Container(parent=self.body, align=C.TOTOP, height=52, padBottom=8)
+            scope = Combo(parent=bar, align=C.TOPLEFT, width=260, height=32, options=[
+                (_nmb_tr('activity_recent'), 'recent'), (_nmb_tr('activity_archive'), 'archive')],
+                select=self._activityScope, callback=self.SelectActivityScope)
+            scope.OnMouseWheel = lambda *args: None
+            self.Help(bar, 'activity_archive', _nmb_tr('archive_help', recent=units(self._activityMeta.get('recentCount', 0)),
+                archived=units(self._activityMeta.get('archiveCount', 0))), left=274, top=5)
+            button(parent=bar, align=C.TORIGHT, label='next_page', minimumWidth=90,
+                func=self.ActivityNext, state=C.UI_NORMAL if self._activityMeta.get('nextCursor') else C.UI_DISABLED)
+            label(bar, _nmb_tr('page_number', page=self._activityPage+1), align=C.TORIGHT,
+                width=110, top=9, fontsize=14, color=muted, padding=(15, 0, 10, 0))
+            button(parent=bar, align=C.TORIGHT, label='previous_page', minimumWidth=90,
+                func=self.ActivityPrevious, state=C.UI_NORMAL if self._activityPage else C.UI_DISABLED)
+
+        def SelectStatisticsPeriod(self, control, text, value):
+            custom = value == 'custom'
+            self._statisticsChoosingCustom = custom
+            self._statisticsDayEdit.state = C.UI_NORMAL if custom else C.UI_DISABLED
+            self._statisticsApply.state = C.UI_NORMAL if custom else C.UI_DISABLED
+            if not custom and value != self._statisticsDays:
+                self._statisticsDays = value
+                self.ReloadData()
+
+        def ApplyStatisticsDays(self, *args):
+            value = int(self._statisticsDayEdit.GetValue())
+            if 1 <= value <= 36500:
+                self._statisticsCustomDays = value
+                self._statisticsDays = value
+                self._statisticsChoosingCustom = True
+                self.ReloadData()
+
+        def RenderStatistics(self, data):
+            signature = _nmb_json.dumps(dict((k,v) for k,v in data.items() if k not in ('since', 'until')), sort_keys=True)
+            if self._renderSignature == ('statistics', signature):
+                return
+            self._renderSignature = ('statistics', signature)
+            if self._statisticsChoosingCustom and getattr(self, '_statisticsDayEdit', None):
+                try:
+                    value = int(self._statisticsDayEdit.GetValue())
+                    if 1 <= value <= 36500:
+                        self._statisticsCustomDays = value
+                except (ValueError, TypeError):
+                    pass
+            self.ClearBody()
+            self.Heading('statistics_tab')
+            bar = Container(parent=self.body, align=C.TOTOP, height=54)
+            label(bar, 'statistics_period', align=C.TOPLEFT, top=8, fontsize=14, color=muted)
+            choices = [(_nmb_tr('all_history'), None)] + [(_nmb_tr('last_days', days=days), days) for days in (7, 30, 90, 365)]
+            choices.append((_nmb_tr('custom_days'), 'custom'))
+            custom = self._statisticsChoosingCustom or self._statisticsDays is not None and self._statisticsDays not in (7, 30, 90, 365)
+            control = Combo(parent=bar, align=C.TOPLEFT, left=130, width=230, height=32, options=choices,
+                select='custom' if custom else self._statisticsDays, callback=self.SelectStatisticsPeriod)
+            control.OnMouseWheel = lambda *args: None
+            self._statisticsDayEdit = SingleLineEditInteger(parent=bar, align=C.TOPLEFT, left=376, width=110,
+                height=32, minValue=1, maxValue=36500, setvalue=self._statisticsCustomDays,
+                state=C.UI_NORMAL if custom else C.UI_DISABLED)
+            self._statisticsDayEdit.OnMouseWheel = lambda *args: None
+            self._statisticsApply = button(parent=bar, align=C.TOPLEFT, left=500, label='apply_days',
+                minimumWidth=100, func=self.ApplyStatisticsDays, state=C.UI_NORMAL if custom else C.UI_DISABLED)
+            self.Help(bar, 'statistics_tab', _nmb_tr('statistics_help'), left=622, top=6)
+            scroll = ScrollContainer(parent=self.body, align=C.TOALL)
+            totals = data.get('totals') or {}
+            cards = Container(parent=scroll, align=C.TOTOP, height=116, padBottom=12)
+            for title, key, color in (('net_earned', 'netISK', teal), ('gross_sales', 'grossISK', white), ('tax_paid', 'taxISK', amber), ('purchase_batches', 'purchases', white)):
+                cell = Container(parent=cards, align=C.TOLEFT_PROP, width=.25, padRight=10)
+                Fill(bgParent=cell, color=(.045, .073, .089, .85))
+                Frame(bgParent=cell, color=border)
+                Fill(parent=cell, align=C.TOTOP, height=2, color=color)
+                label(cell, title, padding=(14, 12, 14, 0), fontsize=13, color=muted)
+                amount = units(totals.get(key, 0)) if key == 'purchases' else _nmb_isk(totals.get(key, 0))
+                number = label(cell, amount, padding=(14, 9, 12, 0), fontsize=20, bold=True, color=color, maxLines=1, state=C.UI_NORMAL)
+                number.hint = amount
+                if key == 'purchases':
+                    label(cell, _nmb_tr('units_sold', units=units(totals.get('units', 0))), padding=(14, 7, 12, 0), fontsize=12, color=muted)
+                else:
+                    label(cell, _nmb_readable_isk(totals.get(key, 0)), padding=(14, 7, 12, 0), fontsize=13, color=muted, maxLines=1)
+            label(scroll, 'earnings_over_time', fontsize=17, bold=True, padBottom=6)
+            label(scroll, _nmb_tr('chart_caption', days=data.get('bucketDays', 1)), fontsize=12, color=muted, padBottom=10)
+            chart = Container(parent=scroll, align=C.TOTOP, height=214, padBottom=12)
+            Fill(bgParent=chart, color=(.025, .055, .069, .8))
+            Frame(bgParent=chart, color=border)
+            buckets = data.get('buckets') or []
+            peak = max([b.get('netISK', 0) + b.get('taxISK', 0) for b in buckets] + [1])
+            gutter = Container(parent=chart, align=C.TOLEFT, width=148)
+            label(gutter, _nmb_isk(peak), align=C.TOPLEFT, left=10, top=6, fontsize=12, color=muted, maxLines=1)
+            label(gutter, _nmb_readable_isk(peak), align=C.TOPLEFT, left=10, top=25, fontsize=12, color=muted, maxLines=1)
+            label(gutter, _nmb_isk(0), align=C.BOTTOMLEFT, left=10, top=26, fontsize=12, color=muted)
+            plot = Container(parent=chart, align=C.TOALL, padding=(0, 12, 16, 30))
+            for level in (0, .25, .5, .75, 1):
+                Fill(parent=plot, align=C.TOBOTTOM_NOPUSH, top=int(level*166), height=1, color=(.24, .39, .43, .22))
+            for bucket in buckets:
+                cell = Container(parent=plot, align=C.TOLEFT_PROP, width=1.0/max(1, len(buckets)), padding=(2, 0, 2, 0), state=C.UI_NORMAL)
+                date = time.strftime('%Y-%m-%d', time.gmtime(bucket['at']/1000.0))
+                cell.hint = u'{}\n{}: {}\n{}: {}\n{}: {}'.format(date, _nmb_tr('net_earned'),
+                    _nmb_isk_explained(bucket.get('netISK', 0)), _nmb_tr('tax_paid'), _nmb_isk_explained(bucket.get('taxISK', 0)),
+                    _nmb_tr('purchase_batches'), units(bucket.get('purchases', 0)))
+                netHeight = int(166*bucket.get('netISK', 0)/peak)
+                taxHeight = int(166*bucket.get('taxISK', 0)/peak)
+                Fill(parent=cell, align=C.TOBOTTOM, height=netHeight, color=teal, state=C.UI_DISABLED)
+                Fill(parent=cell, align=C.TOBOTTOM, height=taxHeight, color=amber, state=C.UI_DISABLED)
+            if buckets:
+                label(chart, time.strftime('%d %b %Y', time.gmtime(buckets[0]['at']/1000.0)), align=C.BOTTOMLEFT, left=150, top=7, fontsize=12, color=muted)
+                label(chart, time.strftime('%d %b %Y', time.gmtime(data['until']/1000.0)), align=C.BOTTOMRIGHT, left=16, top=7, fontsize=12, color=muted)
+            lower = Container(parent=scroll, align=C.TOTOP, height=390)
+            top = Container(parent=lower, align=C.TOLEFT_PROP, width=.60, padRight=20)
+            label(top, 'top_sellers', fontsize=17, bold=True, padBottom=8)
+            items = data.get('topItems') or []
+            largest = max([i.get('grossISK', 0) for i in items] + [1])
+            for item in items:
+                row = Container(parent=top, align=C.TOTOP, height=56, padBottom=5)
+                icon = item_icon(row, item['typeID'], size=32)
+                icon.left, icon.top = 0, 2
+                text = Container(parent=row, align=C.TOALL, padding=(44, 0, 0, 0))
+                amountCell = Container(parent=text, align=C.TORIGHT, width=195)
+                label(amountCell, _nmb_isk(item.get('grossISK', 0)), fontsize=13, color=teal, maxLines=1)
+                label(amountCell, _nmb_readable_isk(item.get('grossISK', 0)), fontsize=12, color=muted, padTop=3, maxLines=1)
+                nameCell = Container(parent=text, align=C.TOALL, padRight=8)
+                label(nameCell, type_name(item['typeID']), fontsize=14, maxLines=2)
+                track = Container(parent=text, align=C.TOBOTTOM, height=4)
+                Fill(bgParent=track, color=(.12, .2, .23, 1))
+                Fill(parent=track, align=C.TOLEFT_PROP, width=item.get('grossISK', 0)/largest, color=teal)
+            right = Container(parent=lower, align=C.TOALL, padding=(16, 0, 0, 0))
+            label(right, 'sales_breakdown', fontsize=17, bold=True, padBottom=16)
+            for source in data.get('sources') or []:
+                line = Container(parent=right, align=C.TOTOP, height=70)
+                label(line, 'offline_sales' if source.get('offline') else 'online_sales', fontsize=14, color=muted)
+                label(line, _nmb_isk(source.get('netISK', 0)), fontsize=17, bold=True, color=teal, padTop=3)
+                label(line, _nmb_readable_isk(source.get('netISK', 0)), fontsize=13, color=muted, padTop=3)
+            label(right, 'daily_net_average', fontsize=13, color=muted, padTop=12)
+            label(right, _nmb_isk(data.get('averageDailyNetISK', 0)), fontsize=18, color=white, padTop=4)
+            label(right, _nmb_readable_isk(data.get('averageDailyNetISK', 0)), fontsize=13, color=muted, padTop=3)
+            if not totals.get('purchases'):
+                label(right, 'no_statistics', fontsize=14, color=muted, padTop=16)
+            if totals.get('unknownTax'):
+                label(right, 'unknown_historical_tax', fontsize=13, color=amber, padTop=12)
+
         def RenderActivity(self, rows):
             self._activityData = list(rows)
             mode = self.ViewMode('activity')
-            signature = _nmb_json.dumps(rows, sort_keys=True)
+            signature = _nmb_json.dumps([rows, self._activityMeta, self._activityScope, self._activityPage], sort_keys=True)
             if self._renderSignature == ('activity', mode, signature):
                 return
             self._renderSignature = ('activity', mode, signature)
             self.ClearBody()
-            self.Heading('market_activity', len(rows))
+            self.Heading('market_activity', self._activityMeta.get('archiveCount' if self._activityScope == 'archive' else 'recentCount', len(rows)))
+            self.ActivityControls()
             net = Container(parent=self.body, align=C.TOTOP, height=34)
             self.Help(net, 'net_received', _nmb_tr('help_net'), top=0)
             label(net, 'net_received', align=C.TOPLEFT, left=36, top=3, fontsize=13, color=muted)
@@ -1179,7 +1386,7 @@ def _nmb_make_window(owner):
                 resolved = kind == 'recovery' and details.get('resolution') == 'settled'
                 rejected = kind == 'rejected' or details.get('resolution') == 'rejected'
                 color = amber if (kind == 'recovery' and not resolved) or rejected else teal
-                panel = Container(parent=scroll, align=C.TOTOP, height=132 if purchase else 112, padBottom=5)
+                panel = Container(parent=scroll, align=C.TOTOP, height=180 if purchase else 112, padBottom=5)
                 Fill(bgParent=panel, color=(0.045, 0.073, 0.089, .85))
                 Fill(parent=panel, align=C.TOBOTTOM, height=1, color=border, state=C.UI_DISABLED)
                 timeCell = Container(parent=panel, align=C.TOLEFT, width=105, padding=(8, 18, 4, 0))
@@ -1206,12 +1413,14 @@ def _nmb_make_window(owner):
                     validGross = isinstance(gross, (int, long, float)) and not _nmb_math.isnan(gross) and not _nmb_math.isinf(gross) and gross >= 0
                     validTax = isinstance(tax, (int, long, float)) and not _nmb_math.isnan(tax) and not _nmb_math.isinf(tax) and validGross and 0 <= tax <= gross
                     if quantity > 0 and validGross:
-                        label(content, _nmb_tr('purchase_detail', quantity=units(quantity), price=_nmb_isk(gross / quantity)), fontsize=14, padTop=5)
-                    label(content, _nmb_tr('gross_tax', gross=_nmb_isk(gross) if validGross else _nmb_tr('unknown'),
-                          tax=_nmb_isk(tax) if validTax else _nmb_tr('unknown')), fontsize=13, color=muted, padTop=5)
+                        label(content, _nmb_tr('purchase_detail', quantity=units(quantity), price=_nmb_isk_explained(gross / quantity)), fontsize=14, padTop=5, maxLines=2)
+                    label(content, _nmb_tr('gross_tax', gross=_nmb_isk_explained(gross) if validGross else _nmb_tr('unknown'),
+                          tax=_nmb_isk_explained(tax) if validTax else _nmb_tr('unknown')), fontsize=13, color=muted, padTop=5, maxLines=3)
                     label(content, _nmb_tr('order', order=field(details, ('orderID', 'orderId'), '?')), fontsize=13, color=muted, padTop=3)
                     label(payment, 'offline_purchase' if details.get('offlinePurchase') else 'completed', fontsize=12, color=teal, padBottom=8)
                     label(payment, '+' + _nmb_isk(round(gross - tax, 2)) if validTax else _nmb_tr('net_unknown'), fontsize=18, color=teal, bold=True, maxLines=2)
+                    if validTax:
+                        label(payment, _nmb_readable_isk(gross-tax), fontsize=13, color=muted, padTop=4, maxLines=2)
                 else:
                     message = 'configuration_detail' if kind == 'configuration' else ('confirmed_detail' if resolved else ('rejected_detail' if rejected else 'pending_detail'))
                     label(content, message, fontsize=14, color=muted, padTop=7, maxLines=3)

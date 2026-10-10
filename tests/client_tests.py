@@ -111,7 +111,7 @@ class Window(Widget):
 
 
 C = types.SimpleNamespace(**{key: key for key in (
-    'TOTOP', 'TOBOTTOM', 'TOPLEFT', 'TOPRIGHT', 'BOTTOMLEFT', 'TOALL',
+    'TOTOP', 'TOBOTTOM', 'TOPLEFT', 'TOPRIGHT', 'BOTTOMLEFT', 'BOTTOMRIGHT', 'TOBOTTOM_NOPUSH', 'TOALL',
     'TOLEFT_PROP', 'TOLEFT', 'TORIGHT', 'CENTER', 'UI_HIDDEN', 'ANIM_REPEAT',
     'ANIM_WAVE', 'UI_DISABLED', 'UI_NORMAL', 'SCOPE_INGAME')})
 C.ALIGNMENTS_WITH_INCLUDED_HORIZONTAL_PADDING = (C.TOLEFT, C.TORIGHT)
@@ -211,7 +211,7 @@ class NativeButton(Widget):
 
 # Exercise the exact shipped Button.Update_Size_/intrinsic sizing contract.
 # No proprietary source is included in the release ZIP.
-native_file = ROOT / 'evidence/client-source/carbonui/control/button.py'
+native_file = CLIENT_REFERENCE / 'carbonui/control/button.py'
 NATIVE_BUTTON_CONTRACT = native_file.exists()
 if NATIVE_BUTTON_CONTRACT:
     button_tree = ast.parse(native_file.read_text(encoding='utf-8'))
@@ -224,7 +224,7 @@ if NATIVE_BUTTON_CONTRACT:
     exec(compile(ast.fix_missing_locations(contract),str(native_file),'exec'),ns_contract)
     for method in methods:
         setattr(NativeButton,method.name,getattr(ns_contract['Button'],method.name))
-    base_file=ROOT / 'evidence/client-source/carbonui/primitives/base.py'
+    base_file=CLIENT_REFERENCE / 'carbonui/primitives/base.py'
     base_tree=ast.parse(base_file.read_text(encoding='utf-8'))
     native_base=next(n for n in base_tree.body if isinstance(n,ast.ClassDef) and n.name=='Base')
     alignment_methods=[n for n in native_base.body if isinstance(n,ast.FunctionDef) and n.name in
@@ -293,13 +293,13 @@ class CharacterPreferences:
 VIEW_PREFS = CharacterPreferences()
 native_settings_ns = {'settings':types.SimpleNamespace(char=types.SimpleNamespace(ui=VIEW_PREFS)),
     'Signal':lambda *args: lambda *args: None}
-tree = ast.parse((ROOT / 'evidence/client-source/clientsettings/setting.py').read_text(encoding='utf-8'))
+tree = ast.parse((CLIENT_REFERENCE / 'clientsettings/setting.py').read_text(encoding='utf-8'))
 classes = [node for node in tree.body if isinstance(node, ast.ClassDef) and
     node.name in ('_BaseSetting', '_CharSettingMixin', '_BaseSettingEnum', 'CharSettingEnum')]
 exec(compile(ast.Module(body=classes, type_ignores=[]), 'native_settings_contract', 'exec'), native_settings_ns)
 module('clientsettings.setting', CharSettingEnum=native_settings_ns['CharSettingEnum'])
 native_menu_ns = {'MenuEntryData':Entry}
-tree = ast.parse((ROOT / 'evidence/client-source/carbonui/control/contextMenu/menuData.py').read_text(encoding='utf-8'))
+tree = ast.parse((CLIENT_REFERENCE / 'carbonui/control/contextMenu/menuData.py').read_text(encoding='utf-8'))
 classes = [node for node in tree.body if isinstance(node, ast.ClassDef) and node.name in ('BaseMenuData', 'MenuData')]
 exec(compile(ast.Module(body=classes, type_ignores=[]), 'native_menu_contract', 'exec'), native_menu_ns)
 module('carbonui.control.contextMenu.menuData', MenuData=native_menu_ns['MenuData'])
@@ -356,7 +356,7 @@ native_eveformat = module('eveformat', **{key:value for key,value in native_mone
 native_money_ns['eveformat'] = native_eveformat
 native_money_ns['qtyConst'] = module('qtyTooltip.qtyConst', EDIT_INPUT_TYPE_ISK='ISK',
     MIN_AMOUNT_TO_DISPLAY_FULL_TEXT=10000, ABOUT_CHAR='≈')
-tree = ast.parse((ROOT / 'evidence/client-source/qtyTooltip/tooltip.py').read_text(encoding='utf-8'))
+tree = ast.parse((CLIENT_REFERENCE / 'qtyTooltip/tooltip.py').read_text(encoding='utf-8'))
 selected = [node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name=='GetQtyText']
 exec(compile(ast.Module(body=selected, type_ignores=[]), 'GetQtyText', 'exec'), native_money_ns)
 module('qtyTooltip.tooltip', GetQtyText=native_money_ns['GetQtyText'])
@@ -887,7 +887,7 @@ class ClientHud(unittest.TestCase):
                     self.assertEqual((thumbnail.width,thumbnail.height,thumbnail.top),(36,36,15))
                     content=next(w for w in thumbnail.parent.children if getattr(w,'padding',None)==(100,9,8,0))
                     self.assertEqual(content.padding[0],100)
-            self.hud._helpIcons[1].OnClick()  # First icon is the Net received explanation.
+            self.hud._helpIcons[2].OnClick()  # Archive and Net received explanations precede the first sale.
             helpText='\n'.join(TOOLTIPS[-1]['texts'])
             self.assertIn('7,200.00 ISK',helpText)
             self.assertIn(NS['_nmb_tr']('offline_time_hint'),helpText)
@@ -916,7 +916,7 @@ class ClientHud(unittest.TestCase):
     def test_native_icon_flow_wraps_on_resize_at_minimum_default_width_and_client_scaling(self):
         global NATIVE_FLOW_DPI
         try:
-            for page,cardWidth,cardHeight in (('orders',252,238),('activity',304,268)):
+            for page,cardWidth,cardHeight in (('orders',252,278),('activity',304,340)):
                 self.hud._viewSettings[page].set('icons')
                 if page == 'orders':
                     self.hud.RenderOrders([dict(self.sample_orders()[0],orderID=index) for index in range(15)])
@@ -1452,7 +1452,7 @@ class ClientHud(unittest.TestCase):
             self.assertEqual((caption.align,caption.width,caption.top),(C.TOPRIGHT,330,48))
             self.assertGreaterEqual(caption.parent.height,82)
         control = self.hud._editors['dailyBudgetISK'][0]
-        for value, expected in ((9999999,'≈ 10 million ISK'),(10000,'10 thousand ISK'),(1000000000,'1 billion ISK'),(0,'0.00 ISK')):
+        for value, expected in ((1000,'1 thousand ISK'),(9999999,'≈ 10 million ISK'),(10000,'10 thousand ISK'),(1000000000,'1 billion ISK'),(0,'0.00 ISK')):
             control.SetValue(value);self.hud.Changed()
             self.assertEqual(self.hud._moneyCaptions['dailyBudgetISK'].text,expected)
             self.assertEqual(self.hud.ReadPolicy()['dailyBudgetISK'],value)
@@ -1538,6 +1538,79 @@ class ClientHud(unittest.TestCase):
         self.assertNotIn('intervalSeconds', self.hud._editors)
 
 
+    def test_statistics_renders_financial_values_and_custom_days_without_dirty_policy(self):
+        self.hud._page = 'statistics'
+        self.hud.RenderStatistics({'days':None,'until':1791648000000,'bucketDays':1,
+            'totals':{'grossISK':1000,'taxISK':80,'netISK':920,'purchases':3,'units':50},
+            'buckets':[{'at':1791561600000,'grossISK':1000,'taxISK':80,'netISK':920,'purchases':3}],
+            'topItems':[{'typeID':34,'grossISK':1000}],
+            'sources':[{'offline':True,'netISK':920}],'averageDailyNetISK':920})
+        for amount in ('1,000.00 ISK','80.00 ISK','920.00 ISK'):
+            self.assertIn(amount,self.texts())
+        self.hud.SelectStatisticsPeriod(None,'','custom')
+        self.assertEqual(self.hud._statisticsDayEdit.state,C.UI_NORMAL)
+        self.hud._statisticsDayEdit.SetValue(17)
+        self.hud.ApplyStatisticsDays()
+        self.assertEqual(self.hud._statisticsDays,17)
+        self.assertFalse(self.hud._dirty)
+
+    def test_wallet_units_cover_thousand_million_billion_trillion_in_every_order_view(self):
+        for value, word in ((1850,'thousand'),(250000000,'million'),(1250000000,'billion'),(1000000000000,'trillion')):
+            self.assertIn(word,NS['_nmb_readable_isk'](value))
+            row=dict(self.sample_orders()[0],price=value)
+            self.hud._orderSummary={'activeCount':1,'soldISK':value,'remainingISK':value,'totalISK':value*2}
+            for mode in ('icons','details','list'):
+                self.hud._viewSettings['orders'].set(mode)
+                self.hud.RenderOrders([row])
+                self.assertIn(NS['_nmb_readable_isk'](value),self.texts())
+        self.assertTrue(NS['_nmb_readable_isk'](-1850).startswith('-'))
+
+    def test_activity_money_descriptions_survive_all_three_views(self):
+        row={'kind':'purchase','typeID':34,'orderID':9,'timestamp':1791583200000,
+            'quantity':1,'grossISK':1000000000,'taxISK':80000000}
+        for mode in ('icons','details','list'):
+            self.hud._viewSettings['activity'].set(mode)
+            self.hud.RenderActivity([row])
+            self.assertIn('1 billion ISK','\n'.join(self.texts()))
+            self.assertIn('920 million ISK',self.texts())
+
+    def test_our_wallet_descriptions_add_native_units_without_changing_the_receipt(self):
+        text='Gross 1.000.000.000,00 ISK; tax 80.000.000,00 ISK.'
+        reason=json.dumps({'npcMarketBuyersOfflineSummary':{'version':1,'text':text,
+            'amounts':{'1.000.000.000,00':1000000000,'80.000.000,00':80000000}}},separators=(',',':'))
+        result=NS['_nmb_wallet_summary_text'](reason)
+        self.assertIn('1.000.000.000,00 ISK (1 billion ISK)',result)
+        self.assertIn('80.000.000,00 ISK (80 million ISK)',result)
+
+    def test_statistics_poll_does_not_reset_custom_choice_or_rebuild_identical_totals(self):
+        self.hud._page='statistics'
+        data={'since':1791561600000,'until':1791648000000,'totals':{},'buckets':[]}
+        self.hud.RenderStatistics(data)
+        self.hud.SelectStatisticsPeriod(None,'','custom')
+        original=self.hud._statisticsDayEdit
+        original.SetValue(17)
+        self.hud.RenderStatistics(dict(data,since=data['since']+20000,until=data['until']+20000))
+        self.assertIs(original,self.hud._statisticsDayEdit)
+        self.assertEqual(original.GetValue(),17)
+        self.hud._renderSignature=None
+        self.hud.RenderStatistics(data)
+        self.assertEqual(self.hud._statisticsDayEdit.state,C.UI_NORMAL)
+        self.assertEqual(self.hud._statisticsDayEdit.GetValue(),17)
+
+    def test_archive_navigation_is_bounded_reversible_and_scope_change_resets_cursor(self):
+        self.hud._page = 'activity'
+        self.hud._activityMeta = {'recentCount':500,'archiveCount':10500,'nextCursor':{'at':99,'id':8}}
+        self.hud.RenderActivity([])
+        self.hud.ActivityNext()
+        self.assertEqual(self.hud._activityPage,1)
+        self.assertEqual(self.hud._activityCursors,[None,{'at':99,'id':8}])
+        self.hud._busy=False
+        self.hud.ActivityPrevious()
+        self.assertEqual(self.hud._activityPage,0)
+        self.hud.SelectActivityScope(None,'','archive')
+        self.assertEqual(self.hud._activityCursors,[None])
+        self.assertFalse(self.hud._dirty)
+
 class ClientLanguages(unittest.TestCase):
     def setUp(self):
         VIEW_PREFS.values.clear(); VIEW_PREFS.character = 42
@@ -1599,6 +1672,9 @@ class ClientLanguages(unittest.TestCase):
                 hud.RenderSummary();self.assertEqual(hud.statusLabel.text, NS['_nmb_tr']('active'))
                 hud.RenderOrders([{'typeID':34,'orderID':9,'quantity':1000000,'price':10,'preview':preview}])
                 hud.RenderActivity([{'kind':'purchase','quantity':100,'typeID':34,'timestamp':0,'orderID':9,'grossISK':1000}])
+                hud.RenderStatistics({'until':1791648000000,'totals':{'grossISK':1000000000,'netISK':920000000,'taxISK':80000000},
+                    'buckets':[{'at':1791561600000,'netISK':920000000,'taxISK':80000000}],
+                    'topItems':[{'typeID':34,'grossISK':1000000000}],'sources':[{'offline':True,'netISK':920000000}]})
                 for mode in ('icons','details','list'):
                     hud._viewSettings['orders'].set(mode)
                     hud.RenderOrders([{'typeID':34,'orderID':9,'quantity':1000000,'price':10,'preview':preview}])

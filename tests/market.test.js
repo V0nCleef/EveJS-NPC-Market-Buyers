@@ -221,12 +221,12 @@ test('offline recovery completes the same payment, retains backlog and resolves 
   const intendedTime=f.store.db.prepare('SELECT activity_at FROM nm_operations').get().activity_at;
   assert.ok(intendedTime>=900000&&intendedTime<1800000);
   const {installService}=require('../lib/service');class Service{}
-  installService(Service,{store:f.store,quotes:env.options.quotes,engine,adapter:env.adapter,hasStaffAccountRole:()=>true});
+  installService(Service,{store:f.store,quotes:env.options.quotes,engine,adapter:env.adapter,hasStaffAccountRole:()=>true,clock:env.options.clock});
   const events=async()=>JSON.parse(await new Service().Handle_NpcMarketActivity([],{charid:order().sellerID})).activity;
   assert.equal((await events()).find(e=>e.kind==='recovery').resolution,'pending');
   await engine.stop();f.reopen();engine=createEngine({...env.options,store:f.store});await engine.runCycle();
   assert.equal(env.draws,savedDraws);assert.equal(calls,2);assert.equal(engine.status().nextDueAt,1800000);
-  class ReopenedService{}installService(ReopenedService,{store:f.store,quotes:env.options.quotes,engine,adapter:env.adapter,hasStaffAccountRole:()=>true});
+  class ReopenedService{}installService(ReopenedService,{store:f.store,quotes:env.options.quotes,engine,adapter:env.adapter,hasStaffAccountRole:()=>true,clock:env.options.clock});
   const history=JSON.parse(await new ReopenedService().Handle_NpcMarketActivity([],{charid:order().sellerID})).activity;
   assert.equal(history.find(e=>e.kind==='recovery').resolution,'settled');
   assert.equal(history.filter(e=>e.kind==='purchase').length,1);

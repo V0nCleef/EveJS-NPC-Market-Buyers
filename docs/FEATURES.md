@@ -1,15 +1,17 @@
-# NPC Market Buyers 0.1.15
+# NPC Market Buyers 0.1.16
 
-NPCs buy your sell orders in single-player EveJS using configurable probabilities and current TQ prices. The real **Sell Items** window shows the actual price reference, your price percentage, warnings and the base NPC chance while you edit each item. A native in-game dashboard provides **My Orders**, **Configure** and **Activity**, opened from the Launcher's shared **Mods** menu.
+NPCs buy your sell orders in single-player EveJS using configurable probabilities and current TQ prices. The real **Sell Items** window shows the actual price reference, your price percentage, warnings and the base NPC chance while you edit each item. A native in-game dashboard provides **My Orders**, **Configure**, **Activity** and **Statistics**, opened from the Launcher's shared **Mods** menu.
 
 The graphite/teal dashboard shows item icons, original and remaining quantities, remaining-stock bars and subtle status pulses. Navigation and action buttons share one bottom row with stable native sizing. The mode badge sits beside the TQ reference, and progress bars align under the quantity columns. Each setting has a circled **!** with native hover/click popup help; Configure has no permanent help pane. Activity shows purchases, quantities, gross payment, sales tax and net received, with separate pending/confirmed recovery statuses. A missing original quantity or tax is explicitly unavailable.
 
 ## Install
 
-Requires the Native backend, reviewed EveJS **0.12.9**, Launcher **1.0.69+**, and EVE client **3396210**. ZIP import and the real install/verify/prepare/disable helper lifecycle are checked against the current Launcher source in isolation. The inventory-style view switcher and compact layouts need a live-client check after reconnect.
+This guide covers version 0.1.16.
+
+Requires the Native backend, reviewed EveJS **0.12.9**, Launcher **1.0.69+**, and EVE client **3396210**. ZIP import and the real install/verify/prepare/disable helper lifecycle are checked against the current Launcher source in isolation. The new layouts are checked in an isolated real EVE client using GridCheck. Reconnect after updating to load the new companion.
 
 1. Stop the game server and native market from the Launcher.
-2. In **Mods**, use **Add ZIP** and select `NPC-Market-Buyers-0.1.15.zip`.
+2. In **Mods**, use **Add ZIP** and select `NPC-Market-Buyers-0.1.16.zip` from the GitHub release's Assets.
 3. Install/enable **NPC Market Buyers**, start the server, and reconnect the client.
 4. Open **Mods → NPC Market Buyers** in game. Use the ordinary **Sell Items** window to see per-item advice before pressing Sell.
 
@@ -17,15 +19,25 @@ The helper installs the guarded native market executable and its four matching R
 
 The client companion is delivered at login, alongside AutoMining and the shared menu. No client archive patch is needed. Docker support is not advertised by this release.
 
-### Update from 0.1.14
+### Update from an earlier version
 
 My Orders bars now show the fraction of the original quantity **still for sale**. A new order starts full and the bar drains as units sell. This applies to the existing Details and Icons bars. The Details caption and help popup match it in all eight languages. List retains its numeric Original and Remaining columns. Unknown original quantities retain their unavailable explanation.
 
-Stop the server/native market first. Disable the old package, import and enable 0.1.15, then restart and reconnect. Keep only one version enabled. The helper retains the same verified native payload and original rollback files. Settings and receipts live outside the replaceable mod folder.
+Stop the server/native market first and close EVE. Disable/remove the old package, import and enable 0.1.16, then restart and reconnect. Keep only one version enabled. The helper retains the same verified native payload and original rollback files. Settings and receipts live outside the replaceable mod folder. Completed purchase receipts are added to Statistics once on first start, without new payments or inventory changes.
 
-Activity List now keeps the same 36-pixel item thumbnails as My Orders. Non-purchase rows keep their existing settings/recovery/rejection symbols. Icons and help buttons are vertically centred in the existing 70-pixel rows, with room reserved before the event title.
+Activity List keeps the same 36-pixel item thumbnails as My Orders. Non-purchase rows keep their settings/recovery/rejection symbols. Compact rows reserve room for their icons, help buttons and readable currency captions.
 
-My Orders and Activity each have the same native menu button and Icons / Details / List symbols as EVE’s inventory, at the right of the page heading. **Details** preserves the existing layout and is the default. **Icons** shows cards that automatically wrap as the window resizes. **List** uses compact rows (62 pixels for orders, 70 for activity), with full popup explanations available from the circled **!**. Original/remaining quantities, actual reference sources and NPC chance remain available. Activity retains dated groups, per-unit prices, quantities, net ISK, tax breakdown, offline timestamps and separate recovery statuses. Confirmed recovery rows never show another payment.
+My Orders and Activity each have the same native menu button and Icons / Details / List symbols as EVE’s inventory, at the right of the page heading. **Details** shows full rows and is the default. **Icons** shows cards that automatically wrap as the window resizes. **List** uses compact rows, with full popup explanations available from the circled **!**. Original/remaining quantities, actual reference sources and NPC chance remain available. Activity retains dated groups, per-unit prices, quantities, net ISK, tax breakdown, offline timestamps and separate recovery statuses. Confirmed recovery rows never show another payment.
+
+### Active-order values, archive and Statistics
+
+Beside **My Sell Orders**, **Sold** is actual completed NPC sales for orders that are still active. **Remaining** is the unsold quantity at each order's current asking price. **Total value** is sold plus remaining. A price change does not rewrite earlier sale income. These values are before sales tax; closed orders remain in Statistics instead of the active-order header.
+
+Activity's **Recent** view keeps up to 500 entries from the last 30 days. Everything older stays in **Archive**. Both views load 100 rows at a time with Previous and Next buttons. Archiving does not delete sales or remove them from Statistics.
+
+**Statistics** shows sales before tax, sales tax paid, net earned, purchase batches, units sold, top selling items, online/offline earnings and average daily net earnings. Choose **All history**, a preset period, or **Choose number of days** and apply any whole number from 1 to 36,500. The chart groups days on longer periods; hover over a bar for exact amounts. Net earnings exclude broker fees. Old receipts with missing tax show a warning.
+
+Money displays retain the exact amount and add the native wallet's readable wording, such as **≈ 266 million ISK**. This covers Orders, Activity, Statistics, budget fields, Sell Items advice and the mod's Wallet descriptions. Wording follows the client's language. **Order ID** is the market database identifier, not a sale counter.
 
 Each tab remembers its own view in EVE’s native per-character UI settings, including across closing/reopening and reconnecting on the same client. These preferences do not modify inventory settings or the buying policy and need no Save policy action. Switching uses already-loaded data without issuing another server request. The normal refresh keeps the selected view. Configure does not have a view switcher. Existing order/activity response limits are unchanged.
 

@@ -7,7 +7,7 @@ function fixture(t){
   const write=(file,bytes)=>{fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,bytes);};
   write(path.join(root,'server/package.json'),JSON.stringify({version:'0.12.9'}));
   write(path.join(root,'server/src/network/tcp/handshake.js'),fs.readFileSync(path.join(process.env.EVEJS_TEST_ROOT||path.resolve(__dirname,'../../EveJS-v0.12.9'),'server/src/network/tcp/handshake.js')));
-  for(const name of ['i18n.py','sell_advisor.py','hud.py','companion.py'])write(path.join(mod,'client',name),'# fixture\n');
+  for(const name of ['i18n.py','sell_advisor.py','hud.py','companion.py','wallet_summary.py'])write(path.join(mod,'client',name),'# fixture\n');
   const files=ALLOWED.map((target,i)=>{
     const original=Buffer.from('original-'+i),replacement=Buffer.from('replacement-'+i),payload=`native/${i}.bin`;
     write(path.join(root,target),original);write(path.join(mod,'payload',payload),replacement);

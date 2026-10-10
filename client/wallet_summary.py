@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Native Wallet descriptions for receipted NPC sales and offline summaries."""
 import json as _nmb_wallet_json
+import re as _nmb_wallet_re
 try:
     _nmb_wallet_string_types = (basestring,)
 except NameError:
@@ -19,6 +20,11 @@ def _nmb_wallet_summary_text(reason):
         if isinstance(data, dict) and data.get('version') == 1:
             text = data.get('text')
             if isinstance(text, _nmb_wallet_string_types) and text:
+                amounts = data.get('amounts')
+                if isinstance(amounts, dict) and amounts:
+                    pattern = u'(' + u'|'.join(_nmb_wallet_re.escape(key) for key in sorted(amounts, key=len, reverse=True)) + u') ISK'
+                    text = _nmb_wallet_re.sub(pattern, lambda match: u'{} ({})'.format(match.group(0),
+                        _nmb_readable_isk(amounts[match.group(1)])), text)
                 if sale:
                     type_id = int(data.get('typeID', 0))
                     if type_id <= 0 or '{item}' not in text:

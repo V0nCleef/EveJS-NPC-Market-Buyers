@@ -19,6 +19,8 @@ const store = {
     message:'NPC bought 2 units for 220.00 ISK.',
     details:{quantity:2,grossISK:220,taxISK:17.6,orderID:9,typeID:34}}],
 };
+store.activityPage=()=>({activity:store.listActivity(),recentCount:1,archiveCount:0,nextCursor:null});
+store.statistics={activeOrders:()=>({activeCount:1,soldISK:220,remainingISK:1320,totalISK:1540})};
 class Service {}
 installService(Service, {store,
   quotes:{get:async()=>quote,peek:()=>quote},

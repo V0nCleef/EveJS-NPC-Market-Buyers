@@ -1,0 +1,115 @@
+{
+  "name": "npc-market-statistics",
+  "description": "Candidate 0.1.16 native HUD, receipts, archive and statistics visual checks. Run only in the isolated populated fixture world; never in the live play tree.",
+  "world": "starter",
+  "setup": [
+    {
+      "clientLaunch": {
+        "user": "nmbstats",
+        "name": "NPC Buyers Test"
+      }
+    },
+    {
+      "clientEval": "import __builtin__, blue, time\nassert session.charid == 140000006\nassert getattr(sm.GetService('viewState').GetCurrentView(),'name',None) == 'hangar'\nassert not uicore.layer.loading.display, 'Wait for the station loading screen before visual checks'\nassert not any(x.name == 'loadingindicator' and x.display for x in uicore.desktop.children), 'Wait for the client loading indicator before visual checks'\no = __builtin__._evejs_npc_market_buyers_v1\nassert o.usable()\no.open_window()\nw = o.windowClass.GetIfOpen()\nassert w is not None\nw.SetSize(1600,1100)\nw.left,w.top = 200,70\nw.SelectPage('orders')\nblue.pyos.synchro.SleepWallclock(2200)\nassert not w._busy\nassert w._orderSummary == {'activeCount':10,'soldISK':266136500,'remainingISK':714462500,'totalISK':980599000}\nassert len(w._orderData) == 10\nw.SetViewMode('orders','icons')\nblue.pyos.synchro.SleepWallclock(1200)\n{'check':'normal mod window opens; active-order totals match actual native receipts','summary':w._orderSummary}",
+      "user": "nmbstats",
+      "note": "Open the normal native mod window, not a mockup; validate ten real sell orders."
+    },
+    {
+      "clientScreenshot": "orders-icons",
+      "user": "nmbstats"
+    },
+    {
+      "clientEval": "w.SetViewMode('orders','details'); blue.pyos.synchro.SleepWallclock(800); assert len(w._orderQuantities)==10",
+      "user": "nmbstats",
+      "note": "Orders remain complete in details view, with readable ISK captions."
+    },
+    {
+      "clientScreenshot": "orders-details",
+      "user": "nmbstats"
+    },
+    {
+      "clientEval": "w.SetViewMode('orders','list'); blue.pyos.synchro.SleepWallclock(800); assert len(w._orderQuantities)==10",
+      "user": "nmbstats",
+      "note": "Orders remain complete in list view, with readable ISK captions."
+    },
+    {
+      "clientScreenshot": "orders-list",
+      "user": "nmbstats"
+    },
+    {
+      "clientEval": "started=time.time()\nsamples=[]\nfor days in (None,17,36500):\n    t=time.time()\n    response=o.request('NpcMarketStatistics',__import__('json').dumps({'days':days}))\n    assert response.get('success',True)\n    data=response['statistics']\n    assert len(data['buckets'])<=61\n    if days is None:\n        assert data['totals']=={'purchases':12010,'units':52727269,'grossISK':56897756880,'taxISK':4551820548,'netISK':52345936332,'unknownTax':0}\n    samples.append({'days':days,'milliseconds':round((time.time()-t)*1000,1),'purchases':data['totals']['purchases']})\nw.SelectPage('statistics')\nblue.pyos.synchro.SleepWallclock(1800)\nassert not w._busy\n{'check':'all-history and custom-range accounting; bounded graphs','rpcSamples':samples}",
+      "user": "nmbstats",
+      "note": "Read persisted 12,010-sale totals through the real client RPC path; measure three ranges."
+    },
+    {
+      "clientScreenshot": "statistics-all-history",
+      "user": "nmbstats"
+    },
+    {
+      "clientEval": "w.SelectStatisticsPeriod(None,'','custom'); w._statisticsDayEdit.SetValue(17); w.ApplyStatisticsDays(); blue.pyos.synchro.SleepWallclock(1800); assert w._statisticsDays==17; assert not w._dirty; assert w._statisticsDayEdit.GetValue()==17",
+      "user": "nmbstats",
+      "note": "Apply an arbitrary 17-day range without marking configuration dirty."
+    },
+    {
+      "clientScreenshot": "statistics-17-days",
+      "user": "nmbstats"
+    },
+    {
+      "clientEval": "w.SelectPage('activity'); blue.pyos.synchro.SleepWallclock(1800); assert len(w._activityData)==100; assert w._activityMeta['recentCount']==500; assert w._activityMeta['archiveCount']==11510; w.SetViewMode('activity','list'); blue.pyos.synchro.SleepWallclock(1200)",
+      "user": "nmbstats",
+      "note": "Recent Activity stays bounded and keeps icons in List view."
+    },
+    {
+      "clientScreenshot": "activity-recent-list",
+      "user": "nmbstats"
+    },
+    {
+      "clientEval": "w.SelectActivityScope(None,'','archive'); blue.pyos.synchro.SleepWallclock(1800); assert len(w._activityData)==100; first=set(x['id'] for x in w._activityData); w.ActivityNext(); blue.pyos.synchro.SleepWallclock(1800); assert w._activityPage==1; assert not first.intersection(x['id'] for x in w._activityData); w.ActivityPrevious(); blue.pyos.synchro.SleepWallclock(1800); assert first==set(x['id'] for x in w._activityData)",
+      "user": "nmbstats",
+      "note": "Archive Next/Previous paging has no overlapping or missing entries at the boundary."
+    },
+    {
+      "clientScreenshot": "activity-archive-list",
+      "user": "nmbstats"
+    },
+    {
+      "clientEval": "w.SetViewMode('activity','details'); blue.pyos.synchro.SleepWallclock(1000); assert len(w._activityData)==100",
+      "user": "nmbstats",
+      "note": "Archived payment amounts and readable captions remain visible in details view."
+    },
+    {
+      "clientScreenshot": "activity-archive-details",
+      "user": "nmbstats"
+    },
+    {
+      "clientEval": "w.SetViewMode('activity','icons'); blue.pyos.synchro.SleepWallclock(1000); assert len(w._activityData)==100",
+      "user": "nmbstats",
+      "note": "Archived payment amounts and readable captions remain visible in icons view."
+    },
+    {
+      "clientScreenshot": "activity-archive-icons",
+      "user": "nmbstats"
+    },
+    {
+      "clientEval": "w.SetSize(1120,860); w.SelectPage('statistics'); blue.pyos.synchro.SleepWallclock(1800); assert not w._busy; assert not w._dirty; {'check':'minimum window size remains usable'}",
+      "user": "nmbstats",
+      "note": "Check the minimum supported window size with four tabs and custom-range controls."
+    },
+    {
+      "clientScreenshot": "statistics-minimum-size",
+      "user": "nmbstats"
+    },
+    {
+      "clientEval": "w.SetSize(1600,1100); w.SelectPage('orders'); blue.pyos.synchro.SleepWallclock(1200); w.SetViewMode('orders','icons')",
+      "user": "nmbstats",
+      "note": "Leave the ordinary Orders screen ready for review."
+    }
+  ],
+  "until": {
+    "timeout": 1,
+    "from": "start"
+  },
+  "expect": [
+    "no CLIENT_EXCEPTION"
+  ]
+}
