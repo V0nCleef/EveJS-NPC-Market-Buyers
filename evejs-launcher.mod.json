@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 3,
+  "id": "npc-market-buyers",
+  "displayName": "NPC Market Buyers",
+  "version": "0.1.15",
+  "description": "Unlimited NPC buying with fair price references, automatic EVE average / local NPC offer fallback, and native Sell Items advice. In-game dashboard and configuration via Mods.",
+  "kind": "loader",
+  "supportedBackends": [
+    "native"
+  ],
+  "activation": {
+    "strategy": "loader_rename"
+  },
+  "restart": "game_server",
+  "compatibility": {
+    "evejsVersions": [
+      "0.12.9"
+    ]
+  },
+  "launcherApi": {
+    "version": 1,
+    "minLauncherVersion": "1.0.69",
+    "helper": {
+      "runtime": "node",
+      "path": "helper.js"
+    },
+    "capabilities": [
+      "install",
+      "verify",
+      "prepare_profile",
+      "prepare_disable",
+      "prepare_remove",
+      "recover"
+    ]
+  },
+  "clientMenu": {
+    "apiVersion": 1,
+    "entrypoint": "client/menu.py"
+  }
+}

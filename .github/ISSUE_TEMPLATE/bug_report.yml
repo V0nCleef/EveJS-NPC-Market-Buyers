@@ -1,0 +1,22 @@
+name: Bug report
+description: Report a reproducible NPC Market Buyers issue.
+body:
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Mod, EveJS, Launcher and client build.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: What happened?
+      description: Steps, expected result and actual result. Mention online or offline buying where relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Relevant evidence
+      description: Add a cropped screenshot or a short sanitized log excerpt. Remove character/account details and secrets. Do not attach saves or client archives.

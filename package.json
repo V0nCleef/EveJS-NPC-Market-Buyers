@@ -1,0 +1,23 @@
+{
+  "name": "evejs-npc-market-buyers",
+  "version": "0.1.15",
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/V0nCleef/EveJS-NPC-Market-Buyers.git"
+  },
+  "homepage": "https://github.com/V0nCleef/EveJS-NPC-Market-Buyers",
+  "bugs": {
+    "url": "https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/issues"
+  },
+  "scripts": {
+    "test": "node --test tests/pricing.test.cjs tests/local-pricing.test.cjs",
+    "test:native": "node --test tests/*.test.cjs tests/*.test.js",
+    "check": "python tools/check_source.py"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

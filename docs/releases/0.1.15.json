@@ -1,0 +1,9 @@
+{
+  "version": "0.1.15",
+  "asset": "NPC-Market-Buyers-0.1.15.zip",
+  "sha256": "6c83eecc8b4813584ea742e7ee7be96f3becdd5bd75f3abcf0fe2d998febcf35",
+  "bytes": 2986250,
+  "entries": 46,
+  "compatibility": {"evejs": "0.12.9", "launcherMinimum": "1.0.69", "clientBuild": 3396210, "backend": "native"},
+  "publication": "draft; gameplay approved; showcase video requires separate approval"
+}

@@ -1,0 +1,2274 @@
+{
+  "languages": [
+    "en",
+    "de",
+    "fr",
+    "es",
+    "ru",
+    "zh",
+    "ja",
+    "ko"
+  ],
+  "strings": {
+    "order_count": [
+      "{count} active",
+      "{count} aktiv",
+      "{count} actifs",
+      "{count} activas",
+      "{count} активно",
+      "{count} 笔有效",
+      "{count} 件有効",
+      "{count}개 활성"
+    ],
+    "activity_count": [
+      "{count} entries",
+      "{count} Einträge",
+      "{count} entrées",
+      "{count} registros",
+      "{count} записей",
+      "{count} 条记录",
+      "{count} 件の記録",
+      "{count}개 기록"
+    ],
+    "fair_short": [
+      "Fair price",
+      "Fairer Preis",
+      "Prix raisonnable",
+      "Precio justo",
+      "Справедливая цена",
+      "价格合理",
+      "適正価格",
+      "적정 가격"
+    ],
+    "high_short": [
+      "Above TQ price",
+      "Über TQ-Preis",
+      "Au-dessus du prix TQ",
+      "Por encima de TQ",
+      "Выше цены TQ",
+      "高于 TQ 价格",
+      "TQ価格より高い",
+      "TQ 가격보다 높음"
+    ],
+    "low_short": [
+      "Below TQ price",
+      "Unter TQ-Preis",
+      "Sous le prix TQ",
+      "Por debajo de TQ",
+      "Ниже цены TQ",
+      "低于 TQ 价格",
+      "TQ価格より低い",
+      "TQ 가격보다 낮음"
+    ],
+    "offline_purchase": [
+      "Offline purchase",
+      "Offline-Kauf",
+      "Achat hors ligne",
+      "Compra sin conexión",
+      "Офлайн-покупка",
+      "离线购买",
+      "オフライン購入",
+      "오프라인 구매"
+    ],
+    "offline_time_hint": [
+      "Simulated purchase time during your time away. The wallet payment was processed when the server came back online.",
+      "Simulierter Kaufzeitpunkt während deiner Abwesenheit. Die Zahlung wurde verarbeitet, als der Server wieder online war.",
+      "Heure d’achat simulée pendant votre absence. Le paiement a été traité au retour du serveur en ligne.",
+      "Hora de compra simulada durante tu ausencia. El pago se procesó cuando el servidor volvió a conectarse.",
+      "Смоделированное время покупки за время вашего отсутствия. Платёж обработан после запуска сервера.",
+      "这是离线期间模拟的购买时间。钱包款项在服务器恢复上线后处理。",
+      "留守中の購入をシミュレートした時刻です。ウォレットへの支払いはサーバーの再起動後に処理されました。",
+      "자리를 비운 동안의 모의 구매 시각입니다. 지갑 지급은 서버가 다시 온라인이 되었을 때 처리되었습니다."
+    ],
+    "app_name": [
+      "NPC Market Buyers",
+      "NPC-Marktkäufer",
+      "Acheteurs PNJ",
+      "Compradores NPC",
+      "Покупатели NPC",
+      "NPC市场买家",
+      "NPC市場購入者",
+      "NPC 시장 구매자"
+    ],
+    "subtitle": [
+      "Your prices. TQ reference. Real player orders.",
+      "Deine Preise. TQ-Referenz. Echte Spieleraufträge.",
+      "Vos prix. Référence TQ. Vrais ordres de joueurs.",
+      "Tus precios. Referencia TQ. Órdenes reales de jugadores.",
+      "Ваши цены. Ориентир TQ. Реальные ордера игроков.",
+      "你的定价，TQ参考价，真实玩家订单。",
+      "あなたの価格。TQ基準。実際のプレイヤー注文。",
+      "플레이어 가격, TQ 기준, 실제 플레이어 주문."
+    ],
+    "refresh": [
+      "Refresh",
+      "Aktualisieren",
+      "Actualiser",
+      "Actualizar",
+      "Обновить",
+      "刷新",
+      "更新",
+      "새로 고침"
+    ],
+    "reference": [
+      "REFERENCE",
+      "REFERENZ",
+      "RÉFÉRENCE",
+      "REFERENCIA",
+      "ОРИЕНТИР",
+      "参考市场",
+      "基準市場",
+      "기준 시장"
+    ],
+    "at_tq": [
+      "AT TQ PRICE",
+      "ZUM TQ-PREIS",
+      "AU PRIX TQ",
+      "AL PRECIO TQ",
+      "ПО ЦЕНЕ TQ",
+      "按TQ价格",
+      "TQ価格の場合",
+      "TQ 가격 기준"
+    ],
+    "engine": [
+      "ENGINE",
+      "BETRIEB",
+      "ÉTAT",
+      "ESTADO",
+      "СОСТОЯНИЕ",
+      "运行状态",
+      "動作状態",
+      "작동 상태"
+    ],
+    "loading": [
+      "Loading...",
+      "Lädt...",
+      "Chargement...",
+      "Cargando...",
+      "Загрузка...",
+      "正在加载…",
+      "読み込み中…",
+      "불러오는 중..."
+    ],
+    "orders_tab": [
+      "My Orders",
+      "Meine Aufträge",
+      "Mes ordres",
+      "Mis órdenes",
+      "Мои ордера",
+      "我的订单",
+      "自分の注文",
+      "내 주문"
+    ],
+    "configure_tab": [
+      "Configure",
+      "Einstellungen",
+      "Configurer",
+      "Configurar",
+      "Настройки",
+      "设置",
+      "設定",
+      "설정"
+    ],
+    "activity_tab": [
+      "Activity",
+      "Aktivität",
+      "Activité",
+      "Actividad",
+      "События",
+      "交易记录",
+      "履歴",
+      "활동"
+    ],
+    "region": [
+      "Region {region}",
+      "Region {region}",
+      "Région {region}",
+      "Región {region}",
+      "Регион {region}",
+      "星域 {region}",
+      "リージョン {region}",
+      "지역 {region}"
+    ],
+    "active": [
+      "ACTIVE",
+      "AKTIV",
+      "ACTIF",
+      "ACTIVO",
+      "РАБОТАЕТ",
+      "运行中",
+      "稼働中",
+      "작동 중"
+    ],
+    "stopped": [
+      "STOPPED",
+      "GESTOPPT",
+      "ARRÊTÉ",
+      "DETENIDO",
+      "ОСТАНОВЛЕНО",
+      "已停止",
+      "停止中",
+      "중지됨"
+    ],
+    "paused": [
+      "Paused",
+      "Pausiert",
+      "En pause",
+      "En pausa",
+      "Приостановлено",
+      "已暂停",
+      "一時停止",
+      "일시 정지"
+    ],
+    "unavailable": [
+      "UNAVAILABLE",
+      "NICHT VERFÜGBAR",
+      "INDISPONIBLE",
+      "NO DISPONIBLE",
+      "НЕДОСТУПНО",
+      "不可用",
+      "利用不可",
+      "사용 불가"
+    ],
+    "advisor_attached": [
+      "Sell Items advice attached",
+      "Verkaufshinweise aktiv",
+      "Conseils de vente actifs",
+      "Asesor de venta activo",
+      "Подсказки продажи включены",
+      "出售窗口提示已启用",
+      "売却アドバイス有効",
+      "판매 안내 연결됨"
+    ],
+    "advisor_missing": [
+      "Sell Items advice unavailable",
+      "Verkaufshinweise nicht verfügbar",
+      "Conseils de vente indisponibles",
+      "Asesor de venta no disponible",
+      "Подсказки продажи недоступны",
+      "出售窗口提示不可用",
+      "売却アドバイス利用不可",
+      "판매 안내 사용 불가"
+    ],
+    "iron_summary": [
+      "UNLIMITED MODE: no quotas or spending caps",
+      "UNBEGRENZTER MODUS: keine Mengen- oder Ausgabenlimits",
+      "MODE ILLIMITÉ : sans quota ni plafond de dépense",
+      "MODO ILIMITADO: sin cuotas ni límites de gasto",
+      "НЕОГРАНИЧЕННЫЙ РЕЖИМ: без квот и лимитов расходов",
+      "无限制模式：无数量或支出限制",
+      "無制限モード：数量・支出制限なし",
+      "무제한 모드: 수량 및 지출 제한 없음"
+    ],
+    "limited_summary": [
+      "LIMITED MODE: quotas and budgets apply",
+      "LIMITIERTER MODUS: Mengenlimits und Budgets",
+      "MODE LIMITÉ : quotas et budgets actifs",
+      "MODO LIMITADO: cuotas y presupuestos activos",
+      "ОГРАНИЧЕННЫЙ РЕЖИМ: действуют квоты и бюджеты",
+      "限制模式：启用数量及预算限制",
+      "制限モード：数量・予算制限あり",
+      "제한 모드: 수량 및 예산 제한 적용"
+    ],
+    "save_before_tab": [
+      "Save or reload your draft before changing tabs.",
+      "Entwurf vor dem Tabwechsel speichern oder neu laden.",
+      "Enregistrez ou rechargez avant de changer d'onglet.",
+      "Guarda o recarga antes de cambiar de pestaña.",
+      "Сохраните или перезагрузите настройки перед сменой вкладки.",
+      "切换分页前请保存或重新加载草稿。",
+      "タブを切り替える前に保存または再読み込みしてください。",
+      "탭을 바꾸기 전에 저장하거나 다시 불러오세요."
+    ],
+    "draft_kept": [
+      "Unsaved changes kept. Save them or use Reload.",
+      "Ungespeicherte Änderungen behalten. Speichern oder neu laden.",
+      "Modifications conservées. Enregistrez ou rechargez.",
+      "Cambios conservados. Guarda o recarga.",
+      "Несохранённые изменения сохранены в черновике. Сохраните или перезагрузите.",
+      "未保存的更改已保留。请保存或重新加载。",
+      "未保存の変更を保持しています。保存または再読み込みしてください。",
+      "저장하지 않은 변경 사항을 유지했습니다. 저장하거나 다시 불러오세요."
+    ],
+    "player_orders": [
+      "PLAYER SELL ORDERS",
+      "SPIELER-VERKAUFSAUFTRÄGE",
+      "ORDRES DE VENTE DES JOUEURS",
+      "ÓRDENES DE VENTA DE JUGADORES",
+      "ОРДЕРА ИГРОКОВ НА ПРОДАЖУ",
+      "玩家出售订单",
+      "プレイヤーの売り注文",
+      "플레이어 판매 주문"
+    ],
+    "item_order": [
+      "ITEM / ORDER",
+      "GEGENSTAND / AUFTRAG",
+      "OBJET / ORDRE",
+      "OBJETO / ORDEN",
+      "ПРЕДМЕТ / ОРДЕР",
+      "物品 / 订单",
+      "アイテム / 注文",
+      "아이템 / 주문"
+    ],
+    "quantity": [
+      "QUANTITY",
+      "MENGE",
+      "QUANTITÉ",
+      "CANTIDAD",
+      "КОЛИЧЕСТВО",
+      "数量",
+      "数量",
+      "수량"
+    ],
+    "unit_price": [
+      "UNIT PRICE",
+      "STÜCKPREIS",
+      "PRIX UNITAIRE",
+      "PRECIO UNITARIO",
+      "ЦЕНА ЗА ЕД.",
+      "单价",
+      "単価",
+      "개당 가격"
+    ],
+    "tq_price": [
+      "REFERENCE PRICE",
+      "REFERENZPREIS",
+      "PRIX DE RÉFÉRENCE",
+      "PRECIO DE REFERENCIA",
+      "ЦЕНА-ОРИЕНТИР",
+      "参考价",
+      "基準価格",
+      "기준 가격"
+    ],
+    "your_price": [
+      "YOUR PRICE",
+      "DEIN PREIS",
+      "VOTRE PRIX",
+      "TU PRECIO",
+      "ВАША ЦЕНА",
+      "你的价格",
+      "自分の価格",
+      "판매 가격"
+    ],
+    "npc_chance": [
+      "NPC CHANCE",
+      "NPC-CHANCE",
+      "CHANCE PNJ",
+      "PROB. NPC",
+      "ШАНС NPC",
+      "NPC购买概率",
+      "NPC購入確率",
+      "NPC 구매 확률"
+    ],
+    "no_orders": [
+      "No sell orders. List an item in Sell Items.",
+      "Keine Verkaufsaufträge. Stelle einen Gegenstand zum Verkauf.",
+      "Aucun ordre. Mettez un objet en vente.",
+      "Sin órdenes. Pon un objeto a la venta.",
+      "Нет ордеров на продажу. Выставьте предмет через окно продажи.",
+      "没有出售订单。请在出售物品窗口上架物品。",
+      "売り注文はありません。売却画面で出品してください。",
+      "판매 주문이 없습니다. 아이템 판매 창에서 등록하세요."
+    ],
+    "order": [
+      "Order {order}",
+      "Auftrag {order}",
+      "Ordre {order}",
+      "Orden {order}",
+      "Ордер {order}",
+      "订单 {order}",
+      "注文 {order}",
+      "주문 {order}"
+    ],
+    "type": [
+      "Type {type}",
+      "Typ {type}",
+      "Type {type}",
+      "Tipo {type}",
+      "Тип {type}",
+      "类型 {type}",
+      "タイプ {type}",
+      "유형 {type}"
+    ],
+    "no_quote": [
+      "No quote",
+      "Kein Referenzpreis",
+      "Aucune cotation",
+      "Sin cotización",
+      "Нет цены",
+      "无报价",
+      "基準価格なし",
+      "기준가 없음"
+    ],
+    "not_quoted": [
+      "Not quoted",
+      "Noch kein Preis",
+      "Pas encore coté",
+      "Sin cotizar",
+      "Цена не получена",
+      "尚未报价",
+      "未取得",
+      "미조회"
+    ],
+    "first_orders": [
+      "Showing the first 200 orders.",
+      "Die ersten 200 Aufträge werden angezeigt.",
+      "Affichage des 200 premiers ordres.",
+      "Se muestran las primeras 200 órdenes.",
+      "Показаны первые 200 ордеров.",
+      "显示前200条订单。",
+      "最初の200件を表示しています。",
+      "처음 200개 주문을 표시합니다."
+    ],
+    "buyer_policy": [
+      "BUYER POLICY",
+      "KAUFREGELN",
+      "RÈGLES D'ACHAT",
+      "POLÍTICA DE COMPRA",
+      "ПРАВИЛА ПОКУПКИ",
+      "购买规则",
+      "購入ルール",
+      "구매 정책"
+    ],
+    "policy_readonly": [
+      "BUYER POLICY / READ ONLY",
+      "KAUFREGELN / SCHREIBGESCHÜTZT",
+      "RÈGLES D'ACHAT / LECTURE SEULE",
+      "POLÍTICA / SOLO LECTURA",
+      "ПРАВИЛА / ТОЛЬКО ЧТЕНИЕ",
+      "购买规则 / 只读",
+      "購入ルール / 閲覧のみ",
+      "구매 정책 / 읽기 전용"
+    ],
+    "policy_scope": [
+      "Server-wide policy. Only the owner or a GM can save changes.",
+      "Serverweite Regeln. Nur Betreiber oder GM können speichern.",
+      "Règles du serveur. Seul le propriétaire ou un GM peut enregistrer.",
+      "Política del servidor. Solo el propietario o un GM puede guardar.",
+      "Общие настройки сервера. Сохранять может только владелец или GM.",
+      "全服规则，仅服主或GM可保存更改。",
+      "サーバー共通設定。保存できるのは管理者またはGMのみです。",
+      "서버 공통 정책입니다. 소유자 또는 GM만 저장할 수 있습니다."
+    ],
+    "save_policy": [
+      "Save policy",
+      "Regeln speichern",
+      "Enregistrer",
+      "Guardar política",
+      "Сохранить",
+      "保存规则",
+      "設定を保存",
+      "정책 저장"
+    ],
+    "reload": [
+      "Reload",
+      "Neu laden",
+      "Recharger",
+      "Recargar",
+      "Перезагрузить",
+      "重新加载",
+      "再読み込み",
+      "다시 불러오기"
+    ],
+    "pricing_group": [
+      "PRICING & PROBABILITY",
+      "PREISE & WAHRSCHEINLICHKEIT",
+      "PRIX ET PROBABILITÉ",
+      "PRECIOS Y PROBABILIDAD",
+      "ЦЕНЫ И ВЕРОЯТНОСТЬ",
+      "价格与概率",
+      "価格と確率",
+      "가격 및 확률"
+    ],
+    "chance_setting": [
+      "Chance at TQ price (%)",
+      "Chance zum TQ-Preis (%)",
+      "Probabilité au prix TQ (%)",
+      "Probabilidad al precio TQ (%)",
+      "Шанс при цене TQ (%)",
+      "TQ价格时的概率(%)",
+      "TQ価格での確率（%）",
+      "TQ 가격에서의 확률(%)"
+    ],
+    "max_price_setting": [
+      "Maximum price (% of reference)",
+      "Höchstpreis (% der Referenz)",
+      "Prix maximum (% de la référence)",
+      "Precio máximo (% de referencia)",
+      "Максимальная цена (% от ориентира)",
+      "最高价格（参考价的%）",
+      "価格上限（基準比%）",
+      "최대 가격 (기준 대비 %)"
+    ],
+    "high_warning_setting": [
+      "High-price warning (% of TQ)",
+      "Warnung bei hohem Preis (% von TQ)",
+      "Alerte de prix élevé (% de TQ)",
+      "Aviso de precio alto (% de TQ)",
+      "Предупреждение о высокой цене (% от TQ)",
+      "高价警告（TQ的%）",
+      "高値警告（TQ比%）",
+      "고가 경고 (TQ 대비 %)"
+    ],
+    "low_warning_setting": [
+      "Low-price warning (% of TQ)",
+      "Warnung bei niedrigem Preis (% von TQ)",
+      "Alerte de prix bas (% de TQ)",
+      "Aviso de precio bajo (% de TQ)",
+      "Предупреждение о низкой цене (% от TQ)",
+      "低价警告（TQ的%）",
+      "安値警告（TQ比%）",
+      "저가 경고 (TQ 대비 %)"
+    ],
+    "batch_group": [
+      "BATCH SIZE",
+      "KAUFMENGE",
+      "TAILLE DES LOTS",
+      "TAMAÑO DEL LOTE",
+      "РАЗМЕР ПАРТИИ",
+      "每批购买量",
+      "購入数量",
+      "구매 묶음 크기"
+    ],
+    "batch_mode": [
+      "Batch sizing",
+      "Mengenwahl",
+      "Choix du lot",
+      "Selección de tamaño",
+      "Выбор размера партии",
+      "批量选择方式",
+      "数量の決め方",
+      "구매 수량 방식"
+    ],
+    "random_batches": [
+      "Randomised batches",
+      "Zufällige Kaufmengen",
+      "Lots aléatoires",
+      "Lotes aleatorios",
+      "Случайные партии",
+      "随机批量",
+      "ランダム数量",
+      "무작위 묶음"
+    ],
+    "fixed_batches": [
+      "Fixed percentage",
+      "Fester Prozentsatz",
+      "Pourcentage fixe",
+      "Porcentaje fijo",
+      "Фиксированный процент",
+      "固定百分比",
+      "固定割合",
+      "고정 비율"
+    ],
+    "batch_min_setting": [
+      "Minimum batch (% remaining)",
+      "Mindestmenge (% des Restbestands)",
+      "Lot minimum (% restant)",
+      "Lote mínimo (% restante)",
+      "Минимальная партия (% остатка)",
+      "最小批量（剩余量的%）",
+      "最小数量（残量比%）",
+      "최소 묶음 (잔여 수량 대비 %)"
+    ],
+    "batch_max_setting": [
+      "Maximum batch (% remaining)",
+      "Höchstmenge (% des Restbestands)",
+      "Lot maximum (% restant)",
+      "Lote máximo (% restante)",
+      "Максимальная партия (% остатка)",
+      "最大批量（剩余量的%）",
+      "最大数量（残量比%）",
+      "최대 묶음 (잔여 수량 대비 %)"
+    ],
+    "batch_help": [
+      "Whole units; small buys are more common than bulk buys. Retries keep the same quantity.",
+      "Ganze Einheiten; kleine Käufe sind häufiger als Großkäufe. Wiederholungen behalten dieselbe Menge.",
+      "Unités entières ; les petits achats sont plus fréquents. Une nouvelle tentative garde la quantité.",
+      "Unidades enteras; las compras pequeñas son más frecuentes. Los reintentos mantienen la cantidad.",
+      "Только целые единицы; небольшие покупки чаще оптовых. При повторной попытке количество не меняется.",
+      "仅购买整件，小额购买比批量购买更常见。重试时数量保持不变。",
+      "整数単位で購入。少量購入の方が多く、再試行でも数量は変わりません。",
+      "정수 단위로 구매하며 소량 구매가 더 흔합니다. 재시도 시 수량은 유지됩니다."
+    ],
+    "limits_group": [
+      "LIMITS / LIMITED MODE ONLY",
+      "LIMITS / NUR IM LIMITIERTEN MODUS",
+      "LIMITES / MODE LIMITÉ UNIQUEMENT",
+      "LÍMITES / SOLO MODO LIMITADO",
+      "ЛИМИТЫ / ТОЛЬКО ОГРАНИЧЕННЫЙ РЕЖИМ",
+      "限制 / 仅限制模式生效",
+      "上限 / 制限モードのみ",
+      "한도 / 제한 모드에서만 적용"
+    ],
+    "daily_budget_setting": [
+      "Daily NPC budget (ISK)",
+      "Tägliches NPC-Budget (ISK)",
+      "Budget PNJ quotidien (ISK)",
+      "Presupuesto diario NPC (ISK)",
+      "Суточный бюджет NPC (ISK)",
+      "NPC每日预算（ISK）",
+      "NPCの1日予算（ISK）",
+      "NPC 일일 예산 (ISK)"
+    ],
+    "seller_budget_setting": [
+      "Daily budget per seller (ISK)",
+      "Tagesbudget je Verkäufer (ISK)",
+      "Budget quotidien par vendeur (ISK)",
+      "Presupuesto diario por vendedor (ISK)",
+      "Суточный бюджет на продавца (ISK)",
+      "每位卖家每日预算（ISK）",
+      "売り手ごとの1日予算（ISK）",
+      "판매자별 일일 예산 (ISK)"
+    ],
+    "cycle_budget_setting": [
+      "Budget per cycle (ISK)",
+      "Budget je Zyklus (ISK)",
+      "Budget par cycle (ISK)",
+      "Presupuesto por ciclo (ISK)",
+      "Бюджет на цикл (ISK)",
+      "每周期预算（ISK）",
+      "サイクルごとの予算（ISK）",
+      "주기당 예산 (ISK)"
+    ],
+    "volume_setting": [
+      "Maximum TQ daily volume (%)",
+      "Anteil am täglichen TQ-Volumen (%)",
+      "Volume quotidien TQ maximum (%)",
+      "Volumen diario TQ máximo (%)",
+      "Доля суточного объёма TQ (%)",
+      "TQ每日成交量上限（%）",
+      "TQの1日取引量上限（%）",
+      "TQ 일일 거래량 한도 (%)"
+    ],
+    "quote_group": [
+      "REFERENCE & QUOTE QUALITY",
+      "REFERENZ & PREISQUALITÄT",
+      "RÉFÉRENCE ET QUALITÉ DES PRIX",
+      "REFERENCIA Y CALIDAD DEL PRECIO",
+      "ОРИЕНТИР И КАЧЕСТВО ЦЕН",
+      "参考市场与报价质量",
+      "基準市場と価格の信頼性",
+      "기준 시장 및 가격 신뢰도"
+    ],
+    "region_setting": [
+      "Reference trade region",
+      "Referenz-Handelsregion",
+      "Région commerciale de référence",
+      "Región comercial de referencia",
+      "Торговый регион-ориентир",
+      "参考贸易星域",
+      "価格基準の交易リージョン",
+      "기준 거래 지역"
+    ],
+    "station_setting": [
+      "Reference hub station",
+      "Referenz-Handelsstation",
+      "Station commerciale de référence",
+      "Estación comercial de referencia",
+      "Торговая станция-ориентир",
+      "参考贸易中心空间站",
+      "価格基準の交易ステーション",
+      "기준 거래 거점 정거장"
+    ],
+    "age_setting": [
+      "Maximum quote age (seconds)",
+      "Höchstalter des Preises (Sekunden)",
+      "Âge maximum du prix (secondes)",
+      "Antigüedad máxima del precio (segundos)",
+      "Максимальный возраст цены (секунды)",
+      "报价有效期（秒）",
+      "価格の有効期限（秒）",
+      "가격 최대 유효 시간 (초)"
+    ],
+    "history_setting": [
+      "History lookback (days)",
+      "Historienzeitraum (Tage)",
+      "Historique consulté (jours)",
+      "Historial consultado (días)",
+      "Глубина истории (дни)",
+      "历史回溯天数",
+      "履歴の参照期間（日）",
+      "과거 거래 참조 기간 (일)"
+    ],
+    "buying_setting": [
+      "NPC buying",
+      "NPC-Käufe",
+      "Achats PNJ",
+      "Compras NPC",
+      "Покупки NPC",
+      "NPC购买",
+      "NPC購入",
+      "NPC 구매"
+    ],
+    "enabled": [
+      "Enabled",
+      "Aktiviert",
+      "Activé",
+      "Activado",
+      "Включено",
+      "已启用",
+      "有効",
+      "활성화"
+    ],
+    "buying_mode": [
+      "Buying mode",
+      "Kaufmodus",
+      "Mode d'achat",
+      "Modo de compra",
+      "Режим покупки",
+      "购买模式",
+      "購入モード",
+      "구매 모드"
+    ],
+    "iron_mode": [
+      "Unlimited mode - fair prices only",
+      "Unbegrenzter Modus - nur faire Preise",
+      "Mode illimité - prix équitables",
+      "Modo ilimitado - precios justos",
+      "Неограниченный режим — только справедливые цены",
+      "无限制模式 - 仅按合理价格",
+      "無制限モード - 適正価格のみ",
+      "무제한 모드 - 적정 가격 기준"
+    ],
+    "limited_mode": [
+      "Limited mode - quotas and budgets",
+      "Limitierter Modus - Mengen und Budgets",
+      "Mode limité - quotas et budgets",
+      "Modo limitado - cuotas y presupuestos",
+      "Ограниченный режим — квоты и бюджеты",
+      "限制模式 - 数量与预算限制",
+      "制限モード - 数量と予算",
+      "제한 모드 - 수량 및 예산"
+    ],
+    "unsaved_draft": [
+      "Unsaved draft. Save to apply; Reload to discard.",
+      "Ungespeicherter Entwurf. Speichern zum Anwenden, neu laden zum Verwerfen.",
+      "Brouillon non enregistré. Enregistrez pour appliquer ; rechargez pour annuler.",
+      "Borrador sin guardar. Guarda para aplicar o recarga para descartar.",
+      "Черновик не сохранён. Сохраните для применения или перезагрузите для отмены.",
+      "草稿未保存。保存以应用，重新加载以放弃。",
+      "未保存の変更があります。保存で適用、再読み込みで破棄します。",
+      "저장하지 않은 변경 사항입니다. 저장하면 적용되고 다시 불러오면 취소됩니다."
+    ],
+    "numeric_values": [
+      "Enter valid, finite numeric values.",
+      "Gültige, endliche Zahlen eingeben.",
+      "Saisissez des nombres valides et finis.",
+      "Introduce números válidos y finitos.",
+      "Введите корректные конечные числа.",
+      "请输入有效的有限数值。",
+      "有効な有限の数値を入力してください。",
+      "유효한 유한 숫자를 입력하세요."
+    ],
+    "saved_more_draft": [
+      "Earlier changes saved. Further edits are still unsaved.",
+      "Frühere Änderungen gespeichert. Weitere Änderungen sind noch ungespeichert.",
+      "Modifications précédentes enregistrées. Les nouvelles restent à enregistrer.",
+      "Cambios anteriores guardados. Las nuevas ediciones siguen sin guardar.",
+      "Предыдущие изменения сохранены. Новые правки ещё не сохранены.",
+      "先前的更改已保存，新修改尚未保存。",
+      "以前の変更は保存済みです。追加の変更は未保存です。",
+      "이전 변경 사항은 저장했습니다. 추가 수정은 아직 저장되지 않았습니다."
+    ],
+    "saving_policy": [
+      "Saving settings. Please wait.",
+      "Einstellungen werden gespeichert. Bitte warten.",
+      "Enregistrement des réglages. Veuillez patienter.",
+      "Guardando ajustes. Espera un momento.",
+      "Сохранение настроек. Подождите.",
+      "正在保存设置，请稍候。",
+      "設定を保存しています。お待ちください。",
+      "설정을 저장하는 중입니다. 잠시 기다려 주세요."
+    ],
+    "policy_saved": [
+      "Policy saved. The next eligible cycle uses these settings.",
+      "Regeln gespeichert. Der nächste gültige Zyklus nutzt diese Einstellungen.",
+      "Règles enregistrées. Elles seront utilisées au prochain cycle admissible.",
+      "Política guardada. Se aplicará en el próximo ciclo válido.",
+      "Правила сохранены. Они применятся в следующем подходящем цикле.",
+      "规则已保存，将在下一个符合条件的周期生效。",
+      "設定を保存しました。次の購入可能なサイクルから適用されます。",
+      "정책을 저장했습니다. 다음 구매 가능한 주기부터 적용됩니다."
+    ],
+    "purchase_activity": [
+      "PURCHASE ACTIVITY",
+      "KAUFVERLAUF",
+      "HISTORIQUE DES ACHATS",
+      "ACTIVIDAD DE COMPRAS",
+      "ИСТОРИЯ ПОКУПОК",
+      "购买记录",
+      "購入履歴",
+      "구매 활동"
+    ],
+    "activity_help": [
+      "Server receipts for your market activity.",
+      "Serverbelege deiner Marktaktivität.",
+      "Reçus du serveur pour votre activité de marché.",
+      "Recibos del servidor de tu actividad de mercado.",
+      "Серверные квитанции ваших рыночных операций.",
+      "你的市场交易服务器凭据。",
+      "マーケット取引のサーバー記録。",
+      "시장 거래에 대한 서버 기록입니다."
+    ],
+    "no_activity": [
+      "No NPC purchases recorded yet.",
+      "Noch keine NPC-Käufe erfasst.",
+      "Aucun achat PNJ enregistré.",
+      "Aún no hay compras NPC registradas.",
+      "Покупки NPC пока не зарегистрированы.",
+      "暂无NPC购买记录。",
+      "NPC購入記録はまだありません。",
+      "아직 NPC 구매 기록이 없습니다."
+    ],
+    "purchase_event": [
+      "NPC bought {quantity} × {item}.",
+      "NPC kaufte {quantity} × {item}.",
+      "PNJ : achat de {quantity} × {item}.",
+      "NPC compró {quantity} × {item}.",
+      "NPC купил {quantity} × {item}.",
+      "NPC购买了 {quantity} × {item}。",
+      "NPCが {item} を {quantity} 個購入。",
+      "NPC가 {item} {quantity}개를 구매했습니다."
+    ],
+    "configuration_event": [
+      "Buying policy updated.",
+      "Kaufregeln aktualisiert.",
+      "Règles d'achat mises à jour.",
+      "Política de compra actualizada.",
+      "Правила покупки обновлены.",
+      "购买规则已更新。",
+      "購入設定を更新しました。",
+      "구매 정책이 변경되었습니다."
+    ],
+    "rejected_event": [
+      "Purchase rejected. Check the order and server log.",
+      "Kauf abgelehnt. Auftrag und Serverprotokoll prüfen.",
+      "Achat refusé. Vérifiez l'ordre et le journal serveur.",
+      "Compra rechazada. Revisa la orden y el registro del servidor.",
+      "Покупка отклонена. Проверьте ордер и журнал сервера.",
+      "购买被拒绝。请检查订单和服务器日志。",
+      "購入が拒否されました。注文とサーバーログを確認してください。",
+      "구매가 거부되었습니다. 주문과 서버 로그를 확인하세요."
+    ],
+    "recovery_event": [
+      "Recovering an interrupted purchase.",
+      "Unterbrochener Kauf wird wiederhergestellt.",
+      "Récupération d'un achat interrompu.",
+      "Recuperando una compra interrumpida.",
+      "Восстановление прерванной покупки.",
+      "正在恢复中断的购买。",
+      "中断された購入を復旧しています。",
+      "중단된 구매를 복구하는 중입니다."
+    ],
+    "market_event": [
+      "Market activity recorded.",
+      "Marktaktivität erfasst.",
+      "Activité de marché enregistrée.",
+      "Actividad de mercado registrada.",
+      "Рыночная операция записана.",
+      "市场交易已记录。",
+      "マーケット取引を記録しました。",
+      "시장 활동이 기록되었습니다."
+    ],
+    "activity_detail": [
+      "{date} | Order {order}",
+      "{date} | Auftrag {order}",
+      "{date} | Ordre {order}",
+      "{date} | Orden {order}",
+      "{date} | Ордер {order}",
+      "{date} | 订单 {order}",
+      "{date} | 注文 {order}",
+      "{date} | 주문 {order}"
+    ],
+    "checking_reference": [
+      "Checking price references...",
+      "Preisreferenzen werden geprüft...",
+      "Vérification des prix de référence...",
+      "Comprobando referencias de precio...",
+      "Проверка ценовых ориентиров...",
+      "正在查询参考价…",
+      "基準価格を確認中…",
+      "기준 가격 확인 중..."
+    ],
+    "checking_updated": [
+      "Checking updated price and quantity...",
+      "Preis und Menge werden geprüft...",
+      "Vérification du prix et de la quantité...",
+      "Comprobando precio y cantidad...",
+      "Проверка цены и количества...",
+      "正在检查更新后的价格和数量…",
+      "変更後の価格と数量を確認中…",
+      "변경된 가격과 수량 확인 중..."
+    ],
+    "advice_title": [
+      "TQ {reference} | {percent:.1f}% of TQ\nNPC {chance:.1f}% | Batch {minimum}–{maximum}",
+      "TQ {reference} | {percent:.1f}% von TQ\nNPC {chance:.1f}% | Menge {minimum}–{maximum}",
+      "TQ {reference} | {percent:.1f}% de TQ\nPNJ {chance:.1f}% | Lot {minimum}–{maximum}",
+      "TQ {reference} | {percent:.1f}% de TQ\nNPC {chance:.1f}% | Lote {minimum}–{maximum}",
+      "TQ {reference} | {percent:.1f}% от TQ\nNPC {chance:.1f}% | Партия {minimum}–{maximum}",
+      "TQ {reference} | TQ的{percent:.1f}%\nNPC {chance:.1f}% | 批量 {minimum}–{maximum}",
+      "TQ {reference} | TQ比{percent:.1f}%\nNPC {chance:.1f}% | 数量 {minimum}–{maximum}",
+      "TQ {reference} | TQ 대비 {percent:.1f}%\nNPC {chance:.1f}% | 수량 {minimum}–{maximum}"
+    ],
+    "no_reference_title": [
+      "No fair price reference | NPC chance: 0%",
+      "Keine faire Preisreferenz | NPC-Chance: 0%",
+      "Aucun prix de référence juste | Chance PNJ : 0%",
+      "Sin referencia de precio justa | Probabilidad NPC: 0%",
+      "Нет справедливой цены-ориентира | Шанс NPC: 0%",
+      "没有合理参考价 | NPC概率：0%",
+      "適正な基準価格なし | NPC購入確率：0%",
+      "공정한 기준 가격 없음 | NPC 구매 확률: 0%"
+    ],
+    "immediate_title": [
+      "Immediate sale | Scheduled NPC buying: not applicable",
+      "Sofortverkauf | Geplante NPC-Käufe: nicht anwendbar",
+      "Vente immédiate | Achats PNJ planifiés : sans objet",
+      "Venta inmediata | Compras NPC programadas: no aplicable",
+      "Мгновенная продажа | Плановые покупки NPC не применяются",
+      "立即出售 | 不适用定时NPC购买",
+      "即時売却 | 定期NPC購入の対象外",
+      "즉시 판매 | 예약 NPC 구매 대상 아님"
+    ],
+    "choose_duration": [
+      "Choose an order duration to preview NPC buying.",
+      "Auftragsdauer wählen, um NPC-Käufe anzuzeigen.",
+      "Choisissez une durée d'ordre pour afficher l'achat PNJ.",
+      "Elige la duración de la orden para ver la compra NPC.",
+      "Выберите срок ордера для прогноза покупки NPC.",
+      "请选择订单期限以预览NPC购买。",
+      "NPC購入予測を表示するには注文期間を選択してください。",
+      "NPC 구매 미리보기를 보려면 주문 기간을 선택하세요."
+    ],
+    "preview_unavailable": [
+      "Preview unavailable. Normal selling still works.",
+      "Vorschau nicht verfügbar. Normaler Verkauf bleibt möglich.",
+      "Aperçu indisponible. La vente normale reste possible.",
+      "Vista previa no disponible. La venta normal sigue funcionando.",
+      "Прогноз недоступен. Обычная продажа по-прежнему работает.",
+      "预览不可用，仍可正常出售。",
+      "予測を取得できません。通常の売却は可能です。",
+      "미리보기를 사용할 수 없습니다. 일반 판매는 가능합니다."
+    ],
+    "missing_quote": [
+      "Cannot determine a fair price: no usable TQ hub price, EVE average or local NPC buy offer. NPCs will not buy this item yet.",
+      "Kein fairer Preis ermittelbar: kein brauchbarer TQ-Preis, EVE-Durchschnitt oder lokales NPC-Kaufangebot. NPCs kaufen diesen Gegenstand vorerst nicht.",
+      "Impossible de déterminer un prix juste : aucun prix TQ, moyenne EVE ou offre d’achat PNJ locale utilisable. Les PNJ n’achèteront pas encore cet objet.",
+      "No se puede determinar un precio justo: no hay precio TQ, media de EVE ni oferta NPC local válidos. Los NPC no comprarán este objeto por ahora.",
+      "Невозможно определить справедливую цену: нет подходящей цены TQ, средней цены EVE или местного предложения NPC. NPC пока не будут покупать этот предмет.",
+      "无法确定合理价格：没有可用的TQ贸易中心价格、EVE平均价或本地NPC买单。NPC暂时不会购买此物品。",
+      "適正価格を算出できません。有効なTQ価格、EVE平均価格、ローカルNPC買取注文がありません。NPCは購入を見合わせます。",
+      "공정한 가격을 계산할 수 없습니다. 유효한 TQ 가격, EVE 평균가, 로컬 NPC 매입 주문이 모두 없습니다. NPC는 당분간 구매하지 않습니다."
+    ],
+    "invalid_order": [
+      "Enter a positive price and whole-number quantity.",
+      "Positiven Preis und ganzzahlige Menge eingeben.",
+      "Saisissez un prix positif et une quantité entière.",
+      "Introduce un precio positivo y una cantidad entera.",
+      "Введите положительную цену и целое количество.",
+      "请输入正数价格和整数数量。",
+      "正の価格と整数の数量を入力してください。",
+      "양수 가격과 정수 수량을 입력하세요."
+    ],
+    "stale_quote": [
+      "Price reference is outdated. Waiting for a fresh price.",
+      "Preisreferenz ist veraltet. Warte auf einen aktuellen Preis.",
+      "Prix de référence périmé. En attente d’un prix récent.",
+      "Referencia desactualizada. Esperando un precio reciente.",
+      "Цена-ориентир устарела. Ожидается актуальная цена.",
+      "参考价已过期，正在等待最新价格。",
+      "基準価格が古いため、最新価格を待っています。",
+      "기준 가격이 오래됐습니다. 최신 가격을 기다리는 중입니다."
+    ],
+    "thin_market": [
+      "No reliable price reference is available for this item.",
+      "Keine verlässliche Preisreferenz für diesen Gegenstand verfügbar.",
+      "Aucun prix de référence fiable pour cet objet.",
+      "No hay una referencia de precio fiable para este objeto.",
+      "Для этого предмета нет надёжного ценового ориентира.",
+      "此物品没有可靠参考价。",
+      "このアイテムには信頼できる基準価格がありません。",
+      "이 아이템의 신뢰할 수 있는 기준 가격이 없습니다."
+    ],
+    "buying_paused": [
+      "NPC buying is paused by the server owner.",
+      "Der Betreiber hat NPC-Käufe pausiert.",
+      "Achats PNJ suspendus par le propriétaire du serveur.",
+      "El propietario del servidor pausó las compras NPC.",
+      "Владелец сервера приостановил покупки NPC.",
+      "服主已暂停NPC购买。",
+      "サーバー管理者がNPC購入を一時停止しています。",
+      "서버 소유자가 NPC 구매를 일시 정지했습니다."
+    ],
+    "price_cap": [
+      "{above:.1f}% above reference. NPC limit: {cap:g}% of reference.",
+      "{above:.1f}% über dem Referenzpreis. NPC-Limit: {cap:g}% der Referenz.",
+      "{above:.1f}% au-dessus du prix de référence. Limite PNJ : {cap:g}% de la référence.",
+      "{above:.1f}% sobre el precio de referencia. Límite NPC: {cap:g}% de la referencia.",
+      "На {above:.1f}% выше цены-ориентира. Лимит NPC: {cap:g}% от неё.",
+      "高于参考价 {above:.1f}%。NPC上限为参考价的{cap:g}%。",
+      "基準価格より{above:.1f}%高い価格。NPC上限：基準比{cap:g}%。",
+      "기준 가격보다 {above:.1f}% 높습니다. NPC 한도: 기준 가격의 {cap:g}%."
+    ],
+    "demand_limit": [
+      "Daily item quota reached. Unlimited mode removes this limit.",
+      "Tagesmenge erreicht. Unbegrenzter Modus hebt dieses Limit auf.",
+      "Quota quotidien atteint. Le mode illimité supprime cette limite.",
+      "Cuota diaria alcanzada. El modo ilimitado elimina este límite.",
+      "Суточная квота исчерпана. В неограниченном режиме этого лимита нет.",
+      "已达到每日数量上限，无限制模式无此限制。",
+      "1日の数量上限に到達。無制限モードではこの制限はありません。",
+      "일일 수량 한도에 도달했습니다. 무제한 모드에서는 이 제한이 없습니다."
+    ],
+    "budget_limit": [
+      "Remaining NPC budget cannot buy one unit.",
+      "Verbleibendes NPC-Budget reicht nicht für eine Einheit.",
+      "Le budget PNJ restant ne suffit pas pour une unité.",
+      "El presupuesto NPC restante no alcanza para una unidad.",
+      "Оставшегося бюджета NPC не хватает на одну единицу.",
+      "NPC剩余预算不足以购买一件。",
+      "NPCの残り予算では1個も購入できません。",
+      "NPC 잔여 예산으로 한 개도 구매할 수 없습니다."
+    ],
+    "high_price": [
+      "{above:.1f}% above reference. Lower purchase chance.",
+      "{above:.1f}% über dem Referenzpreis. Geringere Kaufchance.",
+      "{above:.1f}% au-dessus de la référence. Chance d’achat réduite.",
+      "{above:.1f}% sobre la referencia. Menor probabilidad de compra.",
+      "На {above:.1f}% выше ориентира. Шанс покупки снижен.",
+      "高于参考价 {above:.1f}%，购买概率降低。",
+      "基準価格より{above:.1f}%高いため、購入確率が下がります。",
+      "기준 가격보다 {above:.1f}% 높아 구매 확률이 낮습니다."
+    ],
+    "low_price": [
+      "{below:.1f}% below reference. Check your selling price.",
+      "{below:.1f}% unter dem Referenzpreis. Verkaufspreis prüfen.",
+      "{below:.1f}% sous la référence. Vérifiez votre prix de vente.",
+      "{below:.1f}% por debajo de la referencia. Revisa tu precio.",
+      "На {below:.1f}% ниже ориентира. Проверьте цену продажи.",
+      "低于参考价 {below:.1f}%，请检查售价。",
+      "基準価格より{below:.1f}%安いため、売却価格を確認してください。",
+      "기준 가격보다 {below:.1f}% 낮습니다. 판매 가격을 확인하세요."
+    ],
+    "fair_price": [
+      "Price is within the configured reference range.",
+      "Preis liegt im eingestellten Referenzbereich.",
+      "Prix dans la plage de référence configurée.",
+      "Precio dentro del rango de referencia configurado.",
+      "Цена в настроенном диапазоне относительно ориентира.",
+      "价格位于设定的参考价范围内。",
+      "価格は設定した基準価格の範囲内です。",
+      "가격이 설정된 기준 가격 범위 안에 있습니다."
+    ],
+    "settlement_unavailable": [
+      "NPC buying is unavailable. Check the server.",
+      "NPC-Käufe nicht verfügbar. Server prüfen.",
+      "Achats PNJ indisponibles. Vérifiez le serveur.",
+      "Compras NPC no disponibles. Revisa el servidor.",
+      "Покупки NPC недоступны. Проверьте сервер.",
+      "NPC购买不可用，请检查服务器。",
+      "NPC購入を利用できません。サーバーを確認してください。",
+      "NPC 구매를 사용할 수 없습니다. 서버를 확인하세요."
+    ],
+    "immediate_sale": [
+      "Immediate sale uses existing buy orders.",
+      "Sofortverkauf nutzt vorhandene Kaufaufträge.",
+      "La vente immédiate utilise les ordres d'achat existants.",
+      "La venta inmediata usa las órdenes de compra existentes.",
+      "Мгновенная продажа использует существующие ордера на покупку.",
+      "立即出售使用现有买单。",
+      "即時売却は既存の買い注文を利用します。",
+      "즉시 판매는 기존 구매 주문을 이용합니다."
+    ],
+    "zero_chance": [
+      "NPC purchase chance is set to zero.",
+      "NPC-Kaufchance ist auf null gesetzt.",
+      "La chance d'achat PNJ est fixée à zéro.",
+      "La probabilidad de compra NPC está en cero.",
+      "Шанс покупки NPC установлен на ноль.",
+      "NPC购买概率已设为零。",
+      "NPC購入確率はゼロに設定されています。",
+      "NPC 구매 확률이 0으로 설정되어 있습니다."
+    ],
+    "request_failed": [
+      "Request failed. Check the server connection.",
+      "Anfrage fehlgeschlagen. Serververbindung prüfen.",
+      "Échec de la requête. Vérifiez la connexion au serveur.",
+      "La solicitud falló. Revisa la conexión al servidor.",
+      "Запрос не выполнен. Проверьте соединение с сервером.",
+      "请求失败，请检查服务器连接。",
+      "リクエストに失敗しました。サーバー接続を確認してください。",
+      "요청에 실패했습니다. 서버 연결을 확인하세요."
+    ],
+    "session_not_ready": [
+      "Character session is not ready.",
+      "Charaktersitzung noch nicht bereit.",
+      "La session du personnage n'est pas prête.",
+      "La sesión del personaje no está lista.",
+      "Сессия персонажа ещё не готова.",
+      "角色会话尚未就绪。",
+      "キャラクターセッションの準備ができていません。",
+      "캐릭터 세션이 준비되지 않았습니다."
+    ],
+    "stale_session": [
+      "Character changed. Stale response ignored.",
+      "Charakter gewechselt. Veraltete Antwort verworfen.",
+      "Personnage changé. Réponse périmée ignorée.",
+      "El personaje cambió. Respuesta antigua ignorada.",
+      "Персонаж сменился. Устаревший ответ проигнорирован.",
+      "角色已更换，已忽略过期响应。",
+      "キャラクターが変わったため、古い応答を無視しました。",
+      "캐릭터가 변경되어 이전 응답을 무시했습니다."
+    ],
+    "invalid_response": [
+      "Invalid server response.",
+      "Ungültige Serverantwort.",
+      "Réponse serveur invalide.",
+      "Respuesta del servidor no válida.",
+      "Некорректный ответ сервера.",
+      "服务器响应无效。",
+      "サーバー応答が無効です。",
+      "서버 응답이 올바르지 않습니다."
+    ],
+    "permission_error": [
+      "Only the server owner or a GM can change this policy.",
+      "Nur Betreiber oder GM dürfen diese Regeln ändern.",
+      "Seul le propriétaire du serveur ou un GM peut modifier ces règles.",
+      "Solo el propietario del servidor o un GM puede cambiar esta política.",
+      "Изменять правила может только владелец сервера или GM.",
+      "只有服主或GM可以更改此规则。",
+      "この設定を変更できるのはサーバー管理者またはGMのみです。",
+      "서버 소유자 또는 GM만 이 정책을 변경할 수 있습니다."
+    ],
+    "revision_error": [
+      "Policy changed in another window. Reload before saving.",
+      "Regeln in anderem Fenster geändert. Vor dem Speichern neu laden.",
+      "Règles modifiées dans une autre fenêtre. Rechargez avant d'enregistrer.",
+      "La política cambió en otra ventana. Recarga antes de guardar.",
+      "Правила изменены в другом окне. Перезагрузите перед сохранением.",
+      "规则已在其他窗口更改，请重新加载后再保存。",
+      "別のウィンドウで設定が変更されました。保存前に再読み込みしてください。",
+      "다른 창에서 정책이 변경되었습니다. 저장하기 전에 다시 불러오세요."
+    ],
+    "setting_range": [
+      "{setting}: enter {minimum}–{maximum}.",
+      "{setting}: {minimum}–{maximum} eingeben.",
+      "{setting} : saisissez {minimum}–{maximum}.",
+      "{setting}: introduce {minimum}–{maximum}.",
+      "{setting}: введите {minimum}–{maximum}.",
+      "{setting}：请输入 {minimum}–{maximum}。",
+      "{setting}：{minimum}–{maximum}を入力してください。",
+      "{setting}: {minimum}–{maximum} 값을 입력하세요."
+    ],
+    "boolean_error": [
+      "{setting}: choose enabled or disabled.",
+      "{setting}: aktiviert oder deaktiviert wählen.",
+      "{setting} : choisissez activé ou désactivé.",
+      "{setting}: elige activado o desactivado.",
+      "{setting}: выберите включено или выключено.",
+      "{setting}：请选择启用或禁用。",
+      "{setting}：有効または無効を選択してください。",
+      "{setting}: 활성화 또는 비활성화를 선택하세요."
+    ],
+    "interval_error": [
+      "The purchase interval is fixed.",
+      "Das Kaufintervall ist festgelegt.",
+      "L’intervalle d’achat est fixe.",
+      "El intervalo de compra es fijo.",
+      "Интервал покупок фиксирован.",
+      "购买间隔固定。",
+      "購入間隔は固定です。",
+      "구매 간격은 고정되어 있습니다."
+    ],
+    "warning_error": [
+      "High-price warning cannot exceed the NPC price limit.",
+      "Preiswarnung darf das NPC-Preislimit nicht überschreiten.",
+      "L'alerte de prix élevé ne peut dépasser la limite PNJ.",
+      "El aviso de precio alto no puede superar el límite NPC.",
+      "Порог предупреждения не может превышать ценовой лимит NPC.",
+      "高价警告阈值不能超过NPC价格上限。",
+      "高値警告の基準はNPC価格上限を超えられません。",
+      "고가 경고 기준은 NPC 가격 한도를 초과할 수 없습니다."
+    ],
+    "batch_range_error": [
+      "Minimum batch cannot exceed the maximum batch.",
+      "Mindestmenge darf die Höchstmenge nicht überschreiten.",
+      "Le lot minimum ne peut dépasser le maximum.",
+      "El lote mínimo no puede superar el máximo.",
+      "Минимальная партия не может превышать максимальную.",
+      "最小批量不能超过最大批量。",
+      "最小数量は最大数量を超えられません。",
+      "최소 묶음은 최대 묶음을 초과할 수 없습니다."
+    ],
+    "invalid_setting": [
+      "Invalid buying policy setting.",
+      "Ungültige Kaufregel-Einstellung.",
+      "Paramètre de règle d'achat invalide.",
+      "Ajuste de política de compra no válido.",
+      "Некорректный параметр правил покупки.",
+      "购买规则设置无效。",
+      "購入設定の項目が無効です。",
+      "구매 정책 설정이 올바르지 않습니다."
+    ],
+    "request_invalid": [
+      "Invalid item, price, quantity or request.",
+      "Ungültiger Gegenstand, Preis, Menge oder Anfrage.",
+      "Objet, prix, quantité ou requête invalide.",
+      "Objeto, precio, cantidad o solicitud no válidos.",
+      "Некорректный предмет, цена, количество или запрос.",
+      "物品、价格、数量或请求无效。",
+      "アイテム、価格、数量またはリクエストが無効です。",
+      "아이템, 가격, 수량 또는 요청이 올바르지 않습니다."
+    ],
+    "open_error": [
+      "Unable to open NPC Market Buyers. Reconnect after updating the mod.",
+      "NPC-Marktkäufer lässt sich nicht öffnen. Nach dem Mod-Update neu verbinden.",
+      "Impossible d'ouvrir les acheteurs PNJ. Reconnectez-vous après la mise à jour.",
+      "No se pueden abrir los compradores NPC. Reconecta tras actualizar el mod.",
+      "Не удалось открыть покупателей NPC. Переподключитесь после обновления мода.",
+      "无法打开NPC市场买家。更新模组后请重新连接。",
+      "NPC市場購入者を開けません。MOD更新後に再接続してください。",
+      "NPC 시장 구매자를 열 수 없습니다. 모드 업데이트 후 다시 접속하세요."
+    ],
+    "chance": [
+      "{chance:.1f}%",
+      "{chance:.1f}%",
+      "{chance:.1f}%",
+      "{chance:.1f}%",
+      "{chance:.1f}%",
+      "{chance:.1f}%",
+      "{chance:.1f}%",
+      "{chance:.1f}%"
+    ],
+    "policy_notice": [
+      "{advisor} | {policy}",
+      "{advisor} | {policy}",
+      "{advisor} | {policy}",
+      "{advisor} | {policy}",
+      "{advisor} | {policy}",
+      "{advisor} | {policy}",
+      "{advisor} | {policy}",
+      "{advisor} | {policy}"
+    ],
+    "dashboard_subtitle": [
+      "Institutional demand. Your market.",
+      "Institutionelle Nachfrage. Dein Markt.",
+      "Demande institutionnelle. Votre marché.",
+      "Demanda institucional. Tu mercado.",
+      "Спрос организаций. Ваш рынок.",
+      "机构需求，你的市场。",
+      "機関の需要。あなたの市場。",
+      "기관 수요, 나의 시장."
+    ],
+    "dashboard_notice": [
+      "NPC chance applies to a batch of your order.",
+      "Die NPC-Chance gilt für einen Teil deines Auftrags.",
+      "La probabilité PNJ concerne un lot de votre ordre.",
+      "La probabilidad NPC se aplica a un lote de tu orden.",
+      "Шанс покупки NPC относится к части вашего ордера.",
+      "NPC购买概率适用于订单的一批物品。",
+      "NPC購入確率は注文の一部に適用されます。",
+      "NPC 구매 확률은 주문의 일부 수량에 적용됩니다."
+    ],
+    "reference_inline": [
+      "TQ reference: {reference}",
+      "TQ-Referenz: {reference}",
+      "Référence TQ : {reference}",
+      "Referencia TQ: {reference}",
+      "Ориентир TQ: {reference}",
+      "TQ参考：{reference}",
+      "TQ基準：{reference}",
+      "TQ 기준: {reference}"
+    ],
+    "iron_mode_badge": [
+      "UNLIMITED MODE",
+      "UNBEGRENZTER MODUS",
+      "MODE ILLIMITÉ",
+      "MODO ILIMITADO",
+      "НЕОГРАНИЧЕННЫЙ РЕЖИМ",
+      "无限制模式",
+      "無制限モード",
+      "무제한 모드"
+    ],
+    "limited_mode_badge": [
+      "LIMITED MODE",
+      "BEGRENZTER MODUS",
+      "MODE LIMITÉ",
+      "MODO LIMITADO",
+      "РЕЖИМ С ЛИМИТАМИ",
+      "限制模式",
+      "制限モード",
+      "제한 모드"
+    ],
+    "close": [
+      "Close",
+      "Schließen",
+      "Fermer",
+      "Cerrar",
+      "Закрыть",
+      "关闭",
+      "閉じる",
+      "닫기"
+    ],
+    "my_sell_orders": [
+      "MY SELL ORDERS",
+      "MEINE VERKAUFSAUFTRÄGE",
+      "MES ORDRES DE VENTE",
+      "MIS ÓRDENES DE VENTA",
+      "МОИ ОРДЕРА НА ПРОДАЖУ",
+      "我的卖单",
+      "自分の売り注文",
+      "내 판매 주문"
+    ],
+    "original": [
+      "ORIGINAL",
+      "URSPRÜNGLICH",
+      "INITIALE",
+      "ORIGINAL",
+      "ИЗНАЧАЛЬНО",
+      "初始数量",
+      "出品時",
+      "최초 수량"
+    ],
+    "remaining": [
+      "REMAINING",
+      "VERBLEIBEND",
+      "RESTANTE",
+      "RESTANTE",
+      "ОСТАЛОСЬ",
+      "剩余数量",
+      "残り",
+      "남은 수량"
+    ],
+    "unknown": [
+      "Unknown",
+      "Unbekannt",
+      "Inconnu",
+      "Desconocido",
+      "Неизвестно",
+      "未知",
+      "不明",
+      "알 수 없음"
+    ],
+    "remaining_progress": [
+      "{remaining} remaining / {original} listed",
+      "{remaining} übrig / {original} angeboten",
+      "{remaining} restants / {original} proposés",
+      "{remaining} restantes / {original} publicados",
+      "Осталось {remaining} / выставлено {original}",
+      "剩余{remaining} / 上架{original}",
+      "残り{remaining}個 / {original}個出品",
+      "{original}개 중 {remaining}개 남음"
+    ],
+    "help_sold_title": [
+      "How much is left to sell?",
+      "Wie viel steht noch zum Verkauf?",
+      "Quelle quantité reste-t-il à vendre ?",
+      "¿Cuánto queda por vender?",
+      "Сколько осталось продать?",
+      "还剩多少待售？",
+      "あとどれだけ売れる？",
+      "판매할 수량이 얼마나 남았나요?"
+    ],
+    "help_sold": [
+      "You listed {original} units.\n{sold} units have been bought.\n{remaining} units are still for sale.\nA full bar means everything is still for sale.\nThe bar shrinks as units sell.",
+      "Du hast {original} Einheiten angeboten.\n{sold} wurden gekauft.\n{remaining} stehen noch zum Verkauf.\nEin voller Balken bedeutet, dass noch alles zum Verkauf steht.\nMit jedem Verkauf wird der Balken kürzer.",
+      "Vous avez proposé {original} unités.\n{sold} ont été achetées.\n{remaining} sont encore en vente.\nUne barre pleine signifie que tout reste à vendre.\nLa barre diminue au fil des ventes.",
+      "Publicaste {original} unidades.\nSe han comprado {sold}.\nQuedan {remaining} a la venta.\nUna barra llena significa que todo sigue a la venta.\nLa barra se reduce conforme vendes.",
+      "Вы выставили {original} шт.\nКуплено {sold} шт.\nВ продаже осталось {remaining} шт.\nПолная полоса означает, что весь товар ещё в продаже.\nПо мере продаж полоса уменьшается.",
+      "你上架了{original}件。\n已购买{sold}件。\n仍有{remaining}件在售。\n满格表示所有物品都还未售出。\n售出越多，进度条越短。",
+      "{original}個を出品しました。\n{sold}個が購入されました。\n残り{remaining}個が販売中です。\nバーが満タンなら、すべて未売却です。\n売れるほどバーが短くなります。",
+      "{original}개를 등록했습니다.\n{sold}개가 구매되었습니다.\n{remaining}개가 아직 판매 중입니다.\n막대가 가득 차 있으면 아직 하나도 팔리지 않은 상태입니다.\n팔릴수록 막대가 줄어듭니다."
+    ],
+    "original_unknown": [
+      "Original quantity unavailable",
+      "Ursprüngliche Menge nicht verfügbar",
+      "Quantité initiale indisponible",
+      "Cantidad original no disponible",
+      "Исходное количество недоступно",
+      "初始数量不可用",
+      "出品時の数量は不明",
+      "최초 수량 정보 없음"
+    ],
+    "help_original_unknown": [
+      "The market has not provided the original quantity. The remaining quantity is still accurate.",
+      "Der Markt liefert keine ursprüngliche Menge. Die Restmenge stimmt weiterhin.",
+      "Le marché ne fournit pas la quantité initiale. La quantité restante reste exacte.",
+      "El mercado no ha indicado la cantidad original. La cantidad restante sigue siendo correcta.",
+      "Рынок не сообщил исходное количество. Оставшееся количество по-прежнему точное.",
+      "市场未提供初始数量。剩余数量仍然准确。",
+      "市場から出品時の数量が取得できません。残り数量は正確です。",
+      "시장에서 최초 수량을 제공하지 않았습니다. 남은 수량은 정확합니다."
+    ],
+    "help_intro_title": [
+      "Need a hand?",
+      "Brauchst du Hilfe?",
+      "Besoin d’aide ?",
+      "¿Necesitas ayuda?",
+      "Нужна помощь?",
+      "需要帮助？",
+      "使い方がわからない？",
+      "도움이 필요하신가요?"
+    ],
+    "help_intro": [
+      "Hover a circled ! beside a setting.\nYou will get a plain explanation and examples here.\nYou can also click the icon to keep reading while you edit.",
+      "Fahre über ein eingekreistes ! neben einer Einstellung.\nHier erscheinen einfache Erklärungen und Beispiele.\nDu kannst das Symbol auch anklicken und beim Bearbeiten weiterlesen.",
+      "Survolez le ! entouré près d’un réglage.\nUne explication simple et des exemples apparaîtront ici.\nVous pouvez aussi cliquer pour lire pendant la modification.",
+      "Pasa el cursor sobre el ! rodeado de un círculo.\nAquí verás una explicación sencilla con ejemplos.\nTambién puedes pulsarlo para leer mientras editas.",
+      "Наведите курсор на ! в кружке рядом с настройкой.\nЗдесь появятся простое объяснение и примеры.\nМожно также нажать значок и читать во время изменения.",
+      "将鼠标移到设置旁圆圈内的!上。\n这里会显示简单说明和例子。\n也可点击图标，在修改设置时继续阅读。",
+      "設定横の丸い!にカーソルを合わせてください。\nここにわかりやすい説明と例が表示されます。\nクリックすると編集しながら説明を読めます。",
+      "설정 옆 원 안의 !에 마우스를 올리세요.\n쉬운 설명과 예제가 여기에 표시됩니다.\n아이콘을 클릭해 설정을 편집하면서 읽을 수도 있습니다."
+    ],
+    "buying_group": [
+      "BUYING",
+      "KAUFVERHALTEN",
+      "ACHATS",
+      "COMPRAS",
+      "ПОКУПКИ",
+      "购买",
+      "購入",
+      "구매"
+    ],
+    "market_activity": [
+      "MARKET ACTIVITY",
+      "MARKTAKTIVITÄT",
+      "ACTIVITÉ DU MARCHÉ",
+      "ACTIVIDAD DEL MERCADO",
+      "СОБЫТИЯ РЫНКА",
+      "市场活动",
+      "市場アクティビティ",
+      "시장 활동"
+    ],
+    "net_received": [
+      "NET RECEIVED",
+      "NETTO ERHALTEN",
+      "NET REÇU",
+      "NETO RECIBIDO",
+      "ПОЛУЧЕНО ЧИСТЫМИ",
+      "净收入",
+      "受取額（税引後）",
+      "실수령액"
+    ],
+    "help_net": [
+      "This is the ISK you receive after sales tax.\nExample: 100 ISK gross minus 8 ISK tax means you receive 92 ISK.\nPending purchases do not count as confirmed payments.",
+      "Das ist dein ISK-Erlös nach Verkaufssteuer.\nBeispiel: 100 ISK brutto minus 8 ISK Steuer ergeben 92 ISK netto.\nAusstehende Käufe sind keine bestätigten Zahlungen.",
+      "C’est la somme reçue après la taxe de vente.\nExemple : 100 ISK bruts moins 8 ISK de taxe donnent 92 ISK reçus.\nLes achats en attente ne sont pas des paiements confirmés.",
+      "Son los ISK que recibes tras el impuesto de venta.\nEjemplo: 100 ISK brutos menos 8 ISK de impuesto dejan 92 ISK.\nLas compras pendientes no son pagos confirmados.",
+      "Это сумма ISK после налога с продажи.\nПример: 100 ISK минус 8 ISK налога — вы получаете 92 ISK.\nОжидающая покупка ещё не является подтверждённой оплатой.",
+      "这是扣除销售税后收到的ISK。\n例如：销售额100 ISK减去税款8 ISK，实收92 ISK。\n待确认的购买不算已确认付款。",
+      "売上税を引いた後に受け取るISKです。\n例：売上100 ISKから税8 ISKを引くと、受取額は92 ISKです。\n保留中の購入は確定した支払いではありません。",
+      "판매세를 뺀 뒤 받는 ISK입니다.\n예: 총액 100 ISK에서 세금 8 ISK를 빼면 92 ISK를 받습니다.\n대기 중인 구매는 확정된 지급이 아닙니다."
+    ],
+    "purchase_detail": [
+      "{quantity} units × {price}",
+      "{quantity} Einheiten × {price}",
+      "{quantity} unités × {price}",
+      "{quantity} unidades × {price}",
+      "{quantity} шт. × {price}",
+      "{quantity}件 × {price}",
+      "{quantity}個 × {price}",
+      "{quantity}개 × {price}"
+    ],
+    "gross_tax": [
+      "Gross {gross} · Tax {tax}",
+      "Brutto {gross} · Steuer {tax}",
+      "Brut {gross} · Taxe {tax}",
+      "Bruto {gross} · Impuesto {tax}",
+      "Сумма {gross} · Налог {tax}",
+      "销售额{gross} · 税款{tax}",
+      "売上 {gross} · 税 {tax}",
+      "총액 {gross} · 세금 {tax}"
+    ],
+    "completed": [
+      "COMPLETED",
+      "ABGESCHLOSSEN",
+      "TERMINÉ",
+      "COMPLETADA",
+      "ЗАВЕРШЕНО",
+      "已完成",
+      "完了",
+      "완료"
+    ],
+    "net_unknown": [
+      "Net unavailable",
+      "Netto nicht verfügbar",
+      "Net indisponible",
+      "Neto no disponible",
+      "Чистая сумма недоступна",
+      "净收入不可用",
+      "税引後額は不明",
+      "실수령액 정보 없음"
+    ],
+    "settings_badge": [
+      "SETTINGS",
+      "EINSTELLUNGEN",
+      "RÉGLAGES",
+      "AJUSTES",
+      "НАСТРОЙКИ",
+      "设置",
+      "設定",
+      "설정"
+    ],
+    "confirmed": [
+      "CONFIRMED",
+      "BESTÄTIGT",
+      "CONFIRMÉ",
+      "CONFIRMADA",
+      "ПОДТВЕРЖДЕНО",
+      "已确认",
+      "確認済み",
+      "확인됨"
+    ],
+    "confirmed_event": [
+      "Purchase confirmed",
+      "Kauf bestätigt",
+      "Achat confirmé",
+      "Compra confirmada",
+      "Покупка подтверждена",
+      "购买已确认",
+      "購入を確認",
+      "구매 확인됨"
+    ],
+    "confirmed_detail": [
+      "Payment was confirmed. See the purchase entry for the amount.",
+      "Zahlung bestätigt. Den Betrag findest du im Kaufeintrag.",
+      "Paiement confirmé. Le montant figure dans l’entrée d’achat.",
+      "Pago confirmado. Consulta el importe en la entrada de compra.",
+      "Оплата подтверждена. Сумма указана в записи о покупке.",
+      "付款已确认。金额请查看购买记录。",
+      "支払いが確認されました。金額は購入記録をご覧ください。",
+      "지급이 확인되었습니다. 금액은 구매 기록에서 확인하세요."
+    ],
+    "configuration_detail": [
+      "Your buying settings were saved.",
+      "Deine Kaufeinstellungen wurden gespeichert.",
+      "Vos réglages d’achat ont été enregistrés.",
+      "Tus ajustes de compra se han guardado.",
+      "Ваши настройки покупок сохранены.",
+      "你的购买设置已保存。",
+      "購入設定を保存しました。",
+      "구매 설정을 저장했습니다."
+    ],
+    "pending": [
+      "PENDING",
+      "AUSSTEHEND",
+      "EN ATTENTE",
+      "PENDIENTE",
+      "ОЖИДАНИЕ",
+      "待确认",
+      "保留中",
+      "대기 중"
+    ],
+    "pending_detail": [
+      "Checking whether payment completed. This entry updates after confirmation.",
+      "Es wird geprüft, ob die Zahlung abgeschlossen ist. Dieser Eintrag wird danach aktualisiert.",
+      "Vérification du paiement en cours. Cette entrée sera mise à jour après confirmation.",
+      "Se está comprobando el pago. Esta entrada se actualizará al confirmarlo.",
+      "Проверяем завершение оплаты. Запись обновится после подтверждения.",
+      "正在检查付款是否完成。确认后此记录会更新。",
+      "支払いの完了を確認中です。確認後、この記録が更新されます。",
+      "지급 완료 여부를 확인 중입니다. 확인 후 이 기록이 갱신됩니다."
+    ],
+    "rejected_badge": [
+      "NOT COMPLETED",
+      "NICHT ABGESCHLOSSEN",
+      "NON TERMINÉ",
+      "NO COMPLETADA",
+      "НЕ ЗАВЕРШЕНО",
+      "未完成",
+      "未完了",
+      "미완료"
+    ],
+    "rejected_detail": [
+      "The purchase did not complete. Your remaining order is checked again when eligible.",
+      "Der Kauf wurde nicht abgeschlossen. Dein Restauftrag wird erneut geprüft, sobald er berechtigt ist.",
+      "L’achat n’a pas abouti. Le reste de votre ordre sera réévalué s’il est admissible.",
+      "La compra no se completó. Se revisará de nuevo tu orden restante cuando cumpla los requisitos.",
+      "Покупка не завершена. Остаток ордера будет снова проверен при соблюдении условий.",
+      "购买未完成。剩余订单满足条件时会再次检查。",
+      "購入が完了しませんでした。残りの注文は条件を満たすと再確認されます。",
+      "구매가 완료되지 않았습니다. 남은 주문은 조건이 맞으면 다시 확인합니다."
+    ],
+    "npc_purchase": [
+      "NPC purchased {item}",
+      "NPC kaufte {item}",
+      "Un PNJ a acheté {item}",
+      "Un NPC compró {item}",
+      "NPC купил: {item}",
+      "NPC已购买{item}",
+      "NPCが{item}を購入",
+      "NPC가 {item} 구매"
+    ],
+    "offline_setting": [
+      "Offline purchases",
+      "Offline-Käufe",
+      "Achats hors ligne",
+      "Compras sin conexión",
+      "Покупки за время офлайна",
+      "离线购买",
+      "オフライン購入",
+      "오프라인 구매"
+    ],
+    "help_enabled": [
+      "Turns NPC buying on or off. Turning it off stops new purchases; unfinished payments still recover safely.",
+      "Schaltet NPC-Käufe ein oder aus. Aus stoppt neue Käufe; offene Zahlungen werden weiterhin sicher abgeschlossen.",
+      "Active ou désactive les achats PNJ. La désactivation arrête les nouveaux achats ; les paiements en cours sont récupérés.",
+      "Activa o desactiva las compras NPC. Al desactivarlas se detienen las nuevas compras; los pagos pendientes se recuperan.",
+      "Включает или выключает покупки NPC. Новые покупки прекращаются, а незавершённые платежи восстанавливаются.",
+      "开启或关闭NPC购买。关闭后不再新增购买，未完成的付款仍会安全恢复。",
+      "NPC購入のオン・オフです。オフでは新規購入を止め、未完了の支払いは安全に復旧します。",
+      "NPC 구매를 켜거나 끕니다. 끄면 새 구매는 중단하지만 미완료 지급은 안전하게 복구합니다."
+    ],
+    "help_ironMode": [
+      "Unlimited mode: NPCs can buy any item with a usable price reference. No daily quantity or spending limits. Your price must still be fair, and each purchase is a chance. Limited mode adds quantity quotas and budgets.",
+      "Unbegrenzter Modus: NPCs können jeden Gegenstand mit einer brauchbaren Preisreferenz kaufen. Keine täglichen Mengen- oder Ausgabenlimits. Dein Preis muss weiterhin fair sein; jeder Kauf bleibt Zufall. Der begrenzte Modus ergänzt Mengenlimits und Budgets.",
+      "Mode illimité : les PNJ peuvent acheter tout objet ayant une référence de prix utilisable. Aucun quota quotidien ni plafond de dépense. Le prix doit rester juste et chaque achat dépend du hasard. Le mode limité ajoute quotas et budgets.",
+      "Modo ilimitado: los NPC pueden comprar cualquier objeto con una referencia de precio válida. Sin cuotas diarias ni límites de gasto. El precio debe seguir siendo justo y cada compra depende del azar. El modo limitado añade cuotas y presupuestos.",
+      "Неограниченный режим: NPC могут покупать любые предметы с подходящим ценовым ориентиром. Нет суточных лимитов количества и расходов. Цена всё равно должна быть справедливой, а покупка зависит от шанса. Ограниченный режим добавляет квоты и бюджеты.",
+      "无限制模式：只要有可用参考价，NPC就能购买任何物品。没有每日数量或支出上限。价格仍须合理，每次购买仍有概率。限制模式会增加数量配额和预算。",
+      "無制限モード：有効な基準価格があるアイテムをNPCが購入できます。1日の数量・支出上限はありません。価格は適正である必要があり、購入は確率によります。制限モードでは数量上限と予算を設けます。",
+      "무제한 모드: 유효한 기준 가격이 있는 모든 아이템을 NPC가 구매할 수 있습니다. 하루 수량 및 지출 제한이 없습니다. 가격은 여전히 공정해야 하며 구매는 확률에 따릅니다. 제한 모드는 수량 한도와 예산을 추가합니다."
+    ],
+    "help_offlinePurchases": [
+      "Off: missed purchase checks are skipped. On: after you return, missed checks run gradually using current price references and valid remaining orders. Orders never receive checks from before they were listed. Paused buying does not build a backlog.",
+      "Aus: verpasste Kaufprüfungen werden übersprungen. Ein: Nach deiner Rückkehr werden sie schrittweise mit aktuellen Preisreferenzen und gültigen Restaufträgen nachgeholt. Keine Prüfung gilt vor dem Einstellen. Bei pausiertem Kauf entsteht kein Rückstand.",
+      "Désactivé : les vérifications manquées sont ignorées. Activé : à votre retour, elles sont rejouées progressivement avec les prix de référence actuels et les ordres restants valides. Aucun achat n’est simulé avant la mise en vente. Une pause ne crée pas de retard.",
+      "Desactivado: se omiten las comprobaciones perdidas. Activado: al volver, se recuperan gradualmente con referencias de precio actuales y órdenes restantes válidas. Nunca se comprueba antes de publicar la orden. Pausar compras no acumula retraso.",
+      "Выкл.: пропущенные проверки не выполняются. Вкл.: после возврата они постепенно выполняются по актуальным ценовым ориентирам и действующим остаткам ордеров. Проверок до размещения не бывает. Пауза покупок не накапливает очередь.",
+      "关闭：跳过错过的购买检查。开启：返回后按当前参考价和有效剩余订单逐步补算。不会补算物品上架之前的检查。暂停购买期间不积累补算。",
+      "オフ：逃した購入チェックは省略します。オン：復帰後、現在の基準価格と有効な残り注文で順次補います。出品前のチェックは行いません。購入停止中は未処理回数を積みません。",
+      "끔: 놓친 구매 확인을 건너뜁니다. 켬: 돌아오면 현재 기준 가격과 유효한 남은 주문으로 점차 보충합니다. 등록 전 확인은 없으며 구매 일시 중지는 미처리 횟수를 쌓지 않습니다."
+    ],
+    "help_randomBatch": [
+      "NPCs buy part of your order. With 1,000,000 units and default limits, a successful purchase buys 100–100,000 units. Smaller buys happen more often. Unsold units stay for sale. Fixed mode always uses the maximum percentage.",
+      "NPCs kaufen einen Teil deines Auftrags. Bei 1.000.000 Einheiten und Standardlimits werden pro erfolgreichem Kauf 100–100.000 gekauft. Kleine Käufe sind häufiger. Der Rest bleibt angeboten. Feste Mengen nutzen immer den Höchstprozentsatz.",
+      "Les PNJ achètent une partie de votre ordre. Pour 1 000 000 d’unités et les limites par défaut, un achat réussi porte sur 100 à 100 000 unités. Les petits achats sont plus fréquents. Le reste reste en vente. Le mode fixe utilise le pourcentage maximal.",
+      "Los NPC compran parte de tu orden. Con 1.000.000 de unidades y límites predeterminados, una compra exitosa adquiere entre 100 y 100.000. Las compras pequeñas son más frecuentes. El resto sigue a la venta. El modo fijo usa siempre el porcentaje máximo.",
+      "NPC покупают часть ордера. При 1 000 000 шт. и стандартных пределах успешная покупка составляет 100–100 000 шт. Небольшие покупки чаще. Остаток остаётся в продаже. Фиксированный режим всегда использует максимальный процент.",
+      "NPC会买入订单的一部分。默认限制下，100万件订单每次成功购买100至10万件。小批购买更常见，未售部分继续出售。固定模式始终使用最大百分比。",
+      "NPCは注文の一部を購入します。100万個と初期設定の場合、成功時に100～10万個を購入します。少量購入ほど多く、残りは販売を続けます。固定モードは常に最大の割合を使います。",
+      "NPC는 주문의 일부를 구매합니다. 100만 개와 기본 한도라면 성공한 구매에서 100~10만 개를 삽니다. 작은 구매가 더 자주 발생하며 나머지는 계속 판매됩니다. 고정 모드는 항상 최대 비율을 사용합니다."
+    ],
+    "help_minimumBatchPercent": [
+      "Smallest random purchase, as a percentage of stock still for sale. At least one whole unit is bought. This setting is unused in fixed mode.",
+      "Kleinster Zufallskauf als Anteil des noch angebotenen Bestands. Mindestens eine ganze Einheit. Im festen Modus ungenutzt.",
+      "Plus petit achat aléatoire, en pourcentage du stock restant. Au moins une unité entière. Inutilisé en mode fixe.",
+      "Compra aleatoria más pequeña como porcentaje de las existencias restantes. Al menos una unidad entera. No se usa en modo fijo.",
+      "Минимальная случайная покупка в процентах от остатка. Не менее одной целой единицы. В фиксированном режиме не используется.",
+      "随机购买的最小数量，占剩余在售数量的百分比。至少为一整件。固定模式下不使用此设置。",
+      "販売中の残量に対する最小ランダム購入の割合です。最低1個です。固定モードでは使用しません。",
+      "남은 판매 수량 대비 최소 무작위 구매 비율입니다. 최소 한 개의 정수 수량을 삽니다. 고정 모드에서는 사용하지 않습니다."
+    ],
+    "help_batchPercent": [
+      "Largest purchase as a percentage of remaining stock. A one-unit item still sells as one unit. This does not change the chance of a purchase.",
+      "Größter Kauf als Anteil des Restbestands. Ein einzelner Gegenstand wird als eine Einheit verkauft. Die Kaufchance bleibt gleich.",
+      "Plus grand achat en pourcentage du stock restant. Un objet unique se vend toujours à l’unité. Cela ne change pas la probabilité d’achat.",
+      "Compra máxima como porcentaje del stock restante. Un objeto único se vende como una unidad. No cambia la probabilidad de compra.",
+      "Максимальная покупка в процентах от остатка. Единственный предмет продаётся целиком. На шанс покупки настройка не влияет.",
+      "每次最大购买数量，占剩余数量的百分比。单件物品仍按一件出售。此设置不改变购买概率。",
+      "残量に対する最大購入の割合です。1個だけの品物は1個で売れます。購入確率は変わりません。",
+      "남은 수량 대비 최대 구매 비율입니다. 한 개뿐인 물품은 한 개로 판매됩니다. 구매 확률은 바뀌지 않습니다."
+    ],
+    "help_chanceAtReference": [
+      "Chance of a purchase when your price equals the reference price. For example, 35% means roughly 35 successes in 100 checks, not 35% of your stock sold. The batch settings choose the quantity.",
+      "Kaufchance bei einem Preis genau auf dem Referenzpreis-Niveau. 35 % bedeutet etwa 35 Erfolge bei 100 Prüfungen, nicht 35 % verkaufter Bestand. Die Mengeneinstellungen bestimmen die Stückzahl.",
+      "Probabilité d’achat à un prix égal à la référence. 35 % signifie environ 35 réussites sur 100 vérifications, pas 35 % du stock vendu. Les réglages de lot déterminent la quantité.",
+      "Probabilidad de compra si tu precio coincide con la referencia. Un 35% son unas 35 compras en 100 comprobaciones, no el 35% de tu stock vendido. El lote determina la cantidad.",
+      "Шанс покупки при цене, равной ориентиру. 35% означает примерно 35 успехов на 100 проверок, а не продажу 35% запаса. Количество определяется настройками партии.",
+      "价格等于参考价时的购买概率。例如35%表示约100次检查成功35次，不是售出35%的库存。购买数量由批次设置决定。",
+      "価格が基準価格と同じ場合の購入確率です。35%なら100回のチェックで約35回成功し、在庫の35%を売る意味ではありません。数量はバッチ設定で決まります。",
+      "가격이 기준 가격과 같을 때 구매 확률입니다. 35%는 100번 확인 중 약 35번 성공한다는 뜻이며 재고 35% 판매라는 뜻이 아닙니다. 수량은 일괄 구매 설정이 정합니다."
+    ],
+    "help_maxPricePercent": [
+      "NPCs refuse prices above this percentage of the reference. At 125%, a reference price of 100 ISK allows up to 125 ISK per unit.",
+      "NPCs lehnen Preise über diesem Anteil des Referenzpreises ab. Bei 125 % und einem Referenzpreis von 100 ISK sind bis zu 125 ISK pro Einheit erlaubt.",
+      "Les PNJ refusent les prix supérieurs à ce pourcentage de la référence. À 125 %, une référence de 100 ISK autorise 125 ISK par unité.",
+      "Los NPC rechazan precios superiores a este porcentaje de la referencia. Con 125%, una referencia de 100 ISK permite hasta 125 ISK por unidad.",
+      "NPC откажутся покупать выше этого процента от ориентира. При 125% и ориентире 100 ISK допустимо до 125 ISK за штуку.",
+      "NPC拒绝高于此参考价百分比的价格。设为125%时，参考价100 ISK允许最高125 ISK一件。",
+      "この基準価格比率を超える価格ではNPCは買いません。125%で基準価格が100 ISKなら、1個125 ISKまで許可します。",
+      "이 기준 가격 비율보다 비싸면 NPC는 구매하지 않습니다. 125%에서 기준 가격이 100 ISK이면 개당 최대 125 ISK까지 허용합니다."
+    ],
+    "help_warnAbovePercent": [
+      "Warns that your price is expensive compared with the reference price. It is advice; the maximum allowed price is the hard limit.",
+      "Warnt vor einem hohen Preis gegenüber dem Referenzpreis. Es ist ein Hinweis; die erlaubte Höchstgrenze ist verbindlich.",
+      "Avertit d’un prix élevé par rapport à la référence. C’est un conseil ; le prix maximal autorisé est la limite stricte.",
+      "Avisa de que tu precio es caro frente a la referencia. Es una recomendación; el máximo permitido es el límite estricto.",
+      "Предупреждает о высокой цене относительно ориентира. Это подсказка; жёсткий предел задаётся максимальной ценой.",
+      "提醒价格相对参考价偏高。这只是建议；最高允许价格才是硬性上限。",
+      "基準価格より高い価格を警告します。これは助言であり、実際の上限は最大許可価格です。",
+      "기준 가격보다 비싼 가격임을 알려줍니다. 안내일 뿐이며 허용 최대 가격이 실제 상한입니다."
+    ],
+    "help_warnBelowPercent": [
+      "Warns that you may be selling too cheaply compared with the reference price. You can still list the item.",
+      "Warnt davor, deutlich unter dem Referenzpreis zu verkaufen. Du kannst den Gegenstand trotzdem anbieten.",
+      "Avertit que vous vendez peut-être trop bas par rapport à la référence. La mise en vente reste possible.",
+      "Avisa de que quizá vendes demasiado barato frente a la referencia. Puedes publicar el objeto igualmente.",
+      "Предупреждает, что цена может быть слишком низкой относительно ориентира. Выставить предмет всё равно можно.",
+      "提醒价格相对参考价可能过低。你仍可上架物品。",
+      "基準価格より安すぎる可能性を警告します。出品は続けられます。",
+      "기준 가격보다 너무 싸게 팔 수 있음을 알려줍니다. 그래도 물품을 등록할 수 있습니다."
+    ],
+    "help_dailyBudgetISK": [
+      "Limited mode only: maximum NPC spending per day across all your orders. Unlimited mode ignores this limit.",
+      "Nur begrenzter Modus: tägliche NPC-Ausgaben für alle deine Aufträge. Im unbegrenzten Modus ignoriert.",
+      "Mode limité : dépense PNJ maximale par jour pour tous vos ordres. Ignorée en mode illimité.",
+      "Solo modo limitado: gasto NPC máximo diario en todas tus órdenes. Se ignora en modo ilimitado.",
+      "Только ограниченный режим: максимум расходов NPC в день на все ваши ордера. В неограниченном режиме не действует.",
+      "仅限制模式：NPC每天对所有订单的最高支出。无限制模式忽略此上限。",
+      "制限モードのみ：全注文に対するNPCの1日の支出上限です。無制限モードでは無視します。",
+      "제한 모드 전용: 모든 주문에 대한 하루 NPC 최대 지출입니다. 무제한 모드에서는 무시합니다."
+    ],
+    "help_sellerDailyBudgetISK": [
+      "Limited mode only: daily spending cap for your character. It matters if you use more than one character. Unlimited mode ignores it.",
+      "Nur begrenzter Modus: tägliches Ausgabenlimit für deinen Charakter. Relevant bei mehreren Charakteren. Im unbegrenzten Modus ignoriert.",
+      "Mode limité : plafond journalier pour votre personnage. Utile si vous jouez plusieurs personnages. Ignoré en mode illimité.",
+      "Solo modo limitado: límite diario para tu personaje. Importa si usas varios personajes. Se ignora en modo ilimitado.",
+      "Только ограниченный режим: дневной предел для вашего персонажа. Имеет значение при нескольких персонажах. В неограниченном режиме не действует.",
+      "仅限制模式：针对当前角色的每日支出上限。使用多个角色时有区别。无限制模式忽略此项。",
+      "制限モードのみ：自分のキャラクターに対する日次支出上限です。複数キャラクターで意味があります。無制限モードでは無視します。",
+      "제한 모드 전용: 내 캐릭터에 대한 하루 지출 한도입니다. 여러 캐릭터를 쓸 때 의미가 있습니다. 무제한 모드에서는 무시합니다."
+    ],
+    "help_cycleBudgetISK": [
+      "Limited mode only: maximum NPC spending in one purchase check. Unlimited mode ignores this cap.",
+      "Nur begrenzter Modus: maximale NPC-Ausgaben pro Kaufprüfung. Im unbegrenzten Modus ignoriert.",
+      "Mode limité : dépense PNJ maximale lors d’une vérification d’achat. Ignorée en mode illimité.",
+      "Solo modo limitado: gasto NPC máximo en una comprobación de compra. Se ignora en modo ilimitado.",
+      "Только ограниченный режим: максимум расходов NPC за одну проверку покупок. В неограниченном режиме не действует.",
+      "仅限制模式：单次购买检查的NPC最高支出。无限制模式忽略此上限。",
+      "制限モードのみ：1回の購入チェックでのNPC支出上限です。無制限モードでは無視します。",
+      "제한 모드 전용: 구매 확인 한 번의 NPC 최대 지출입니다. 무제한 모드에서는 무시합니다."
+    ],
+    "help_tqDailyVolumePercent": [
+      "Limited mode only: item demand is capped using this percentage of TQ daily trading volume. Unlimited mode ignores TQ volume.",
+      "Nur begrenzter Modus: begrenzt die Nachfrage auf diesen Anteil des täglichen TQ-Handelsvolumens. Der unbegrenzte Modus ignoriert das TQ-Volumen.",
+      "Mode limité : limite la demande à ce pourcentage du volume quotidien TQ. Le mode illimité ignore ce volume.",
+      "Solo modo limitado: limita la demanda con este porcentaje del volumen diario de TQ. El modo ilimitado ignora ese volumen.",
+      "Только ограниченный режим: спрос ограничивается этим процентом дневного объёма TQ. Неограниченный режим игнорирует объём TQ.",
+      "仅限制模式：需求上限按此TQ日交易量百分比计算。无限制模式忽略TQ交易量。",
+      "制限モードのみ：TQ日次取引量のこの割合で需要を制限します。無制限モードでは取引量を無視します。",
+      "제한 모드 전용: TQ 일일 거래량의 이 비율로 수요를 제한합니다. 무제한 모드는 TQ 거래량을 무시합니다."
+    ],
+    "help_referenceRegionID": [
+      "Choose the TQ trade region used to judge your prices. Choosing a different region automatically selects its main hub station. The station list only shows hubs in that region. Jita / The Forge is the default. Save policy to apply your choice.\nOne valid, sensible hub order is enough. Missing, stale or implausible hub prices fall back to EVE average, then an eligible local NPC immediate-sale offer. Each fallback is labelled. If all three fail, NPCs cannot determine a fair price.",
+      "Wähle die TQ-Handelsregion für den Preisvergleich. Eine andere Region wählt automatisch ihre wichtigste Handelsstation. Die Stationsliste zeigt nur passende Handelsstationen. Standard: Jita / The Forge. Mit Regeln speichern anwenden.\nEin gültiger, plausibler Auftrag genügt. Fehlt ein brauchbarer aktueller Preis, folgen EVE-Durchschnitt und dann ein passendes lokales NPC-Sofortkaufangebot. Die Quelle wird angezeigt. Ohne diese drei Quellen ist kein fairer Preis ermittelbar.",
+      "Choisissez la région TQ qui sert à comparer vos prix. Changer de région sélectionne automatiquement sa station commerciale principale. La liste ne montre que ses centres commerciaux. Par défaut : Jita / The Forge. Enregistrez pour appliquer.\nUn seul ordre valide et plausible suffit. Sans prix actuel exploitable : moyenne EVE, puis offre PNJ locale de vente immédiate admissible. La source est indiquée. Sans ces trois sources, aucun prix juste ne peut être déterminé.",
+      "Elige la región TQ para comparar tus precios. Al cambiarla se selecciona su estación comercial principal. La lista solo muestra los centros de esa región. Por defecto: Jita / The Forge. Guarda la política para aplicar.\nBasta una orden válida y razonable. Sin precio actual utilizable: media de EVE y después una oferta NPC local válida de venta inmediata. Se indica la fuente. Sin las tres fuentes no se puede determinar un precio justo.",
+      "Выберите торговый регион TQ для сравнения цен. При смене региона автоматически выбирается его главная торговая станция. Список показывает только центры этого региона. По умолчанию: Jita / The Forge. Сохраните правила для применения.\nДостаточно одного подходящего ордера с разумной ценой. Если актуального пригодного значения нет, используются средняя цена EVE, затем местное предложение NPC для мгновенной продажи. Источник указан. Без всех трёх источников справедливую цену определить нельзя.",
+      "选择用于比较价格的TQ贸易星域。切换星域会自动选择其主要贸易空间站，列表只显示该星域的贸易中心。默认是吉他 / 伏尔戈。保存规则后生效。\n一个有效且合理的卖单就足够。价格缺失、过期或异常时，依次使用EVE平均价和符合条件的本地NPC立即收购价，并注明来源。三种来源均不可用时，无法确定合理价格。",
+      "価格を比較するTQの交易リージョンを選びます。変更すると地域の主要交易ステーションが自動選択され、リストにはその地域の交易拠点だけが表示されます。初期値はジタ／ザ・フォージです。設定を保存すると適用されます。\n有効で妥当な注文は1件で十分です。価格がない、古い、不自然な場合はEVE平均価格、次に条件を満たすローカルNPC即時買取価格を使い、出所を表示します。3つとも利用できなければ適正価格は算出できません。",
+      "가격을 비교할 TQ 거래 지역을 선택하세요. 지역을 바꾸면 주요 거래 정거장이 자동 선택되며 목록에는 해당 지역의 거래 거점만 표시됩니다. 기본값은 지타 / 포지입니다. 정책을 저장하면 적용됩니다.\n유효하고 합리적인 주문 하나면 충분합니다. 가격이 없거나 오래됐거나 비정상적이면 EVE 평균가, 다음으로 조건에 맞는 로컬 NPC 즉시 매입가를 사용하고 출처를 표시합니다. 세 출처가 모두 없으면 공정한 가격을 계산할 수 없습니다."
+    ],
+    "help_referenceStationID": [
+      "Choose a known TQ trade hub in the selected region. NPCs compare your unit price with sell orders at this station. The main hub is selected automatically when you change region. This does not move your items; you can still sell locally. Save policy to apply.\nOne valid, sensible hub order is enough. Missing, stale or implausible hub prices fall back to EVE average, then an eligible local NPC immediate-sale offer. Each fallback is labelled. If all three fail, NPCs cannot determine a fair price.",
+      "Wähle einen bekannten TQ-Handelsplatz in der Region. NPCs vergleichen deinen Stückpreis mit dortigen Verkaufsaufträgen. Beim Regionswechsel wird der Haupthandelsplatz gewählt. Deine Waren bleiben vor Ort verkaufbar. Mit Regeln speichern anwenden.\nEin gültiger, plausibler Auftrag genügt. Fehlt ein brauchbarer aktueller Preis, folgen EVE-Durchschnitt und dann ein passendes lokales NPC-Sofortkaufangebot. Die Quelle wird angezeigt. Ohne diese drei Quellen ist kein fairer Preis ermittelbar.",
+      "Choisissez un centre commercial TQ de la région. Les PNJ comparent votre prix unitaire à ses ordres de vente. Le centre principal est choisi au changement de région. Vos objets restent vendables localement. Enregistrez pour appliquer.\nUn seul ordre valide et plausible suffit. Sans prix actuel exploitable : moyenne EVE, puis offre PNJ locale de vente immédiate admissible. La source est indiquée. Sans ces trois sources, aucun prix juste ne peut être déterminé.",
+      "Elige un centro comercial TQ de la región. Los NPC comparan tu precio unitario con sus órdenes de venta. Al cambiar de región se selecciona el principal. Tus objetos no se mueven; puedes vender localmente. Guarda para aplicar.\nBasta una orden válida y razonable. Sin precio actual utilizable: media de EVE y después una oferta NPC local válida de venta inmediata. Se indica la fuente. Sin las tres fuentes no se puede determinar un precio justo.",
+      "Выберите известный торговый центр TQ в этом регионе. NPC сравнивают вашу цену за единицу с его ордерами на продажу. При смене региона выбирается главный центр. Предметы не перемещаются: продавать можно локально. Сохраните для применения.\nДостаточно одного подходящего ордера с разумной ценой. Если актуального пригодного значения нет, используются средняя цена EVE, затем местное предложение NPC для мгновенной продажи. Источник указан. Без всех трёх источников справедливую цену определить нельзя.",
+      "选择所选星域的知名TQ贸易中心。NPC会将你的单价与该站卖单比较。切换星域时自动选择主要中心。物品不会移动，仍可在本地出售。保存规则后生效。\n一个有效且合理的卖单就足够。价格缺失、过期或异常时，依次使用EVE平均价和符合条件的本地NPC立即收购价，并注明来源。三种来源均不可用时，无法确定合理价格。",
+      "選択した地域のTQ交易拠点を選びます。NPCはそこの売り注文と単価を比較します。地域を変えると主要拠点が自動選択されます。アイテムは移動せず、現地で販売できます。保存すると適用されます。\n有効で妥当な注文は1件で十分です。価格がない、古い、不自然な場合はEVE平均価格、次に条件を満たすローカルNPC即時買取価格を使い、出所を表示します。3つとも利用できなければ適正価格は算出できません。",
+      "선택한 지역의 TQ 거래 거점을 고르세요. NPC는 그 정거장의 판매 주문과 단가를 비교합니다. 지역을 바꾸면 주요 거점이 자동 선택됩니다. 물품은 이동하지 않으며 현지에서 계속 판매할 수 있습니다. 저장하면 적용됩니다.\n유효하고 합리적인 주문 하나면 충분합니다. 가격이 없거나 오래됐거나 비정상적이면 EVE 평균가, 다음으로 조건에 맞는 로컬 NPC 즉시 매입가를 사용하고 출처를 표시합니다. 세 출처가 모두 없으면 공정한 가격을 계산할 수 없습니다."
+    ],
+    "help_maxQuoteAgeSeconds": [
+      "If reference data is older than this many seconds, NPCs pause buying that item until a fresh price is available. 3600 seconds is one hour.",
+      "Sind Preisdaten älter als diese Sekundenanzahl, warten NPCs auf einen frischen Preis. 3600 Sekunden sind eine Stunde.",
+      "Si les prix dépassent cet âge en secondes, les PNJ attendent une référence fraîche. 3600 secondes = une heure.",
+      "Si los datos superan esta edad en segundos, los NPC esperan un precio actualizado. 3600 segundos equivalen a una hora.",
+      "Если цены старше этого числа секунд, NPC ждут свежего ориентира. 3600 секунд — один час.",
+      "参考数据超过此秒数时，NPC暂停购买该物品，直到有新价格。3600秒为1小时。",
+      "価格データがこの秒数より古ければ、新しい価格が取得できるまでNPCは購入を止めます。3600秒は1時間です。",
+      "가격 정보가 이 초 수보다 오래되면 새 가격이 나올 때까지 해당 물품 구매를 멈춥니다. 3600초는 한 시간입니다."
+    ],
+    "help_historyLookbackDays": [
+      "Number of completed TQ trading days used to check price reliability and average trading volume.",
+      "Anzahl abgeschlossener TQ-Handelstage zur Prüfung von Preiszuverlässigkeit und durchschnittlichem Volumen.",
+      "Nombre de jours TQ terminés utilisés pour vérifier la fiabilité des prix et le volume moyen.",
+      "Días completos de TQ usados para comprobar la fiabilidad de precios y el volumen medio.",
+      "Число завершённых торговых дней TQ для проверки надёжности цен и среднего объёма.",
+      "用于检查价格可靠性和平均交易量的已完成TQ交易天数。",
+      "価格の信頼性と平均取引量を確認する、完了済みTQ取引日の日数です。",
+      "가격 신뢰도와 평균 거래량을 확인하는 데 쓰는 완료된 TQ 거래일 수입니다."
+    ],
+    "on": [
+      "On",
+      "Ein",
+      "Activé",
+      "Activado",
+      "Вкл.",
+      "开启",
+      "オン",
+      "켬"
+    ],
+    "off": [
+      "Off",
+      "Aus",
+      "Désactivé",
+      "Desactivado",
+      "Выкл.",
+      "关闭",
+      "オフ",
+      "끔"
+    ],
+    "catching_up": [
+      "Processing offline purchases",
+      "Offline-Käufe werden nachgeholt",
+      "Traitement des achats hors ligne",
+      "Procesando compras sin conexión",
+      "Обработка покупок за время офлайна",
+      "正在处理离线购买",
+      "オフライン購入を処理中",
+      "오프라인 구매 처리 중"
+    ],
+    "offline_status": [
+      "Offline purchases: {state}",
+      "Offline-Käufe: {state}",
+      "Achats hors ligne : {state}",
+      "Compras sin conexión: {state}",
+      "Покупки за время офлайна: {state}",
+      "离线购买：{state}",
+      "オフライン購入：{state}",
+      "오프라인 구매: {state}"
+    ],
+    "offline_link_hint": [
+      "Click to open the Offline purchases setting.",
+      "Klicken, um die Einstellung für Offline-Käufe zu öffnen.",
+      "Cliquez pour ouvrir le réglage des achats hors ligne.",
+      "Haz clic para abrir el ajuste de compras sin conexión.",
+      "Нажмите, чтобы открыть настройку покупок за время офлайна.",
+      "点击打开离线购买设置。",
+      "クリックしてオフライン購入の設定を開きます。",
+      "클릭해 오프라인 구매 설정을 여세요."
+    ],
+    "region_forge": [
+      "The Forge",
+      "The Forge",
+      "The Forge",
+      "The Forge",
+      "The Forge",
+      "伏尔戈",
+      "ザ・フォージ",
+      "포지"
+    ],
+    "hub_jita": [
+      "Jita",
+      "Jita",
+      "Jita",
+      "Jita",
+      "Jita",
+      "吉他",
+      "ジタ",
+      "지타"
+    ],
+    "station_jita": [
+      "Jita IV - Moon 4",
+      "Jita IV - Mond 4",
+      "Jita IV - lune 4",
+      "Jita IV - luna 4",
+      "Jita IV - луна 4",
+      "吉他 IV - 卫星4",
+      "ジタ IV - 第4衛星",
+      "지타 IV - 위성 4"
+    ],
+    "region_domain": [
+      "Domain",
+      "Domain",
+      "Domain",
+      "Domain",
+      "Domain",
+      "多美",
+      "ドメイン",
+      "도메인"
+    ],
+    "hub_amarr": [
+      "Amarr",
+      "Amarr",
+      "Amarr",
+      "Amarr",
+      "Amarr",
+      "艾玛",
+      "アマー",
+      "아마르"
+    ],
+    "station_amarr": [
+      "Amarr VIII (Oris)",
+      "Amarr VIII (Oris)",
+      "Amarr VIII (Oris)",
+      "Amarr VIII (Oris)",
+      "Amarr VIII (Oris)",
+      "艾玛 VIII (奥里斯)",
+      "アマー VIII (オリス)",
+      "아마르 VIII (오리스)"
+    ],
+    "region_sinq_laison": [
+      "Sinq Laison",
+      "Sinq Laison",
+      "Sinq Laison",
+      "Sinq Laison",
+      "Sinq Laison",
+      "金纳泽",
+      "シンクレゾン",
+      "신크 라이슨"
+    ],
+    "hub_dodixie": [
+      "Dodixie",
+      "Dodixie",
+      "Dodixie",
+      "Dodixie",
+      "Dodixie",
+      "多迪谢",
+      "ドディクシー",
+      "도딕시"
+    ],
+    "station_dodixie": [
+      "Dodixie IX - Moon 20",
+      "Dodixie IX - Mond 20",
+      "Dodixie IX - lune 20",
+      "Dodixie IX - luna 20",
+      "Dodixie IX - луна 20",
+      "多迪谢 IX - 卫星20",
+      "ドディクシー IX - 第20衛星",
+      "도딕시 IX - 위성 20"
+    ],
+    "region_heimatar": [
+      "Heimatar",
+      "Heimatar",
+      "Heimatar",
+      "Heimatar",
+      "Heimatar",
+      "西玛特尔",
+      "ヘイマター",
+      "헤이마타"
+    ],
+    "hub_rens": [
+      "Rens",
+      "Rens",
+      "Rens",
+      "Rens",
+      "Rens",
+      "伦斯",
+      "レンズ",
+      "렌스"
+    ],
+    "station_rens": [
+      "Rens VI - Moon 8",
+      "Rens VI - Mond 8",
+      "Rens VI - lune 8",
+      "Rens VI - luna 8",
+      "Rens VI - луна 8",
+      "伦斯 VI - 卫星8",
+      "レンズ VI - 第8衛星",
+      "렌스 VI - 위성 8"
+    ],
+    "region_metropolis": [
+      "Metropolis",
+      "Metropolis",
+      "Metropolis",
+      "Metropolis",
+      "Metropolis",
+      "美特伯里斯",
+      "メトロポリス",
+      "메트로폴리스"
+    ],
+    "hub_hek": [
+      "Hek",
+      "Hek",
+      "Hek",
+      "Hek",
+      "Hek",
+      "赫克",
+      "ヘク",
+      "헤크"
+    ],
+    "station_hek": [
+      "Hek VIII - Moon 12",
+      "Hek VIII - Mond 12",
+      "Hek VIII - lune 12",
+      "Hek VIII - luna 12",
+      "Hek VIII - луна 12",
+      "赫克 VIII - 卫星12",
+      "ヘク VIII - 第12衛星",
+      "헤크 VIII - 위성 12"
+    ],
+    "saved_region": [
+      "Saved region ({region})",
+      "Gespeicherte Region ({region})",
+      "Région enregistrée ({region})",
+      "Región guardada ({region})",
+      "Сохранённый регион ({region})",
+      "已保存星域（{region}）",
+      "保存済みリージョン（{region}）",
+      "저장된 지역 ({region})"
+    ],
+    "saved_station": [
+      "Saved station ({station})",
+      "Gespeicherte Station ({station})",
+      "Station enregistrée ({station})",
+      "Estación guardada ({station})",
+      "Сохранённая станция ({station})",
+      "已保存空间站（{station}）",
+      "保存済みステーション（{station}）",
+      "저장된 정거장 ({station})"
+    ],
+    "reference_ids": [
+      "Region ID: {region} | Station ID: {station}",
+      "Regions-ID: {region} | Stations-ID: {station}",
+      "ID région : {region} | ID station : {station}",
+      "ID de región: {region} | ID de estación: {station}",
+      "ID региона: {region} | ID станции: {station}",
+      "星域ID：{region} | 空间站ID：{station}",
+      "リージョンID：{region} | ステーションID：{station}",
+      "지역 ID: {region} | 정거장 ID: {station}"
+    ],
+    "eve_average": [
+      "EVE average",
+      "EVE-Durchschnitt",
+      "Moyenne EVE",
+      "Media de EVE",
+      "Средняя цена EVE",
+      "EVE平均价",
+      "EVE平均価格",
+      "EVE 평균가"
+    ],
+    "advice_average_title": [
+      "EVE average {reference} | {percent:.1f}% of average\nNPC {chance:.1f}% | Batch {minimum}–{maximum}",
+      "EVE-Durchschnitt {reference} | {percent:.1f}% des Durchschnitts\nNPC {chance:.1f}% | Menge {minimum}–{maximum}",
+      "Moyenne EVE {reference} | {percent:.1f}% de la moyenne\nPNJ {chance:.1f}% | Lot {minimum}–{maximum}",
+      "Media de EVE {reference} | {percent:.1f}% de la media\nNPC {chance:.1f}% | Lote {minimum}–{maximum}",
+      "Средняя цена EVE {reference} | {percent:.1f}% от средней\nNPC {chance:.1f}% | Партия {minimum}–{maximum}",
+      "EVE平均价 {reference} | 平均价的{percent:.1f}%\nNPC {chance:.1f}% | 批量 {minimum}–{maximum}",
+      "EVE平均価格 {reference} | 平均価格比{percent:.1f}%\nNPC {chance:.1f}% | 数量 {minimum}–{maximum}",
+      "EVE 평균가 {reference} | 평균 대비 {percent:.1f}%\nNPC {chance:.1f}% | 수량 {minimum}–{maximum}"
+    ],
+    "tq_trade_hub": [
+      "TQ trade hub",
+      "TQ-Handelszentrum",
+      "Centre commercial TQ",
+      "Centro comercial TQ",
+      "Торговый центр TQ",
+      "TQ贸易中心",
+      "TQ取引拠点",
+      "TQ 거래 허브"
+    ],
+    "price_source_setting": [
+      "Price reference",
+      "Preisreferenz",
+      "Référence de prix",
+      "Referencia de precio",
+      "Источник цены",
+      "价格参考",
+      "価格基準",
+      "가격 기준"
+    ],
+    "price_source_status": [
+      "Prices: {source}",
+      "Preise: {source}",
+      "Prix : {source}",
+      "Precios: {source}",
+      "Цены: {source}",
+      "价格：{source}",
+      "価格：{source}",
+      "가격: {source}"
+    ],
+    "average_reference_inline": [
+      "Reference: EVE average",
+      "Referenz: EVE-Durchschnitt",
+      "Référence : moyenne EVE",
+      "Referencia: media de EVE",
+      "Ориентир: средняя цена EVE",
+      "参考：EVE平均价",
+      "基準：EVE平均価格",
+      "기준: EVE 평균가"
+    ],
+    "price_source_link_hint": [
+      "Selected primary price source. Click to configure. Each item labels EVE average or Local NPC offer when used as fallback.",
+      "Gewählte primäre Preisquelle. Zum Konfigurieren klicken. Ersatzquellen werden am Gegenstand als EVE-Durchschnitt oder lokales NPC-Angebot angezeigt.",
+      "Source principale sélectionnée. Cliquez pour configurer. Chaque objet indique la moyenne EVE ou l’offre PNJ locale utilisée en secours.",
+      "Fuente principal seleccionada. Haz clic para configurar. Cada objeto indica si usa la media de EVE o una oferta NPC local como alternativa.",
+      "Выбранный основной источник цены. Нажмите для настройки. Средняя цена EVE или местное предложение NPC помечаются у предмета при использовании в резерве.",
+      "当前首选价格来源。点击配置。物品改用EVE平均价或本地NPC报价时会单独注明。",
+      "選択中の優先価格ソースです。クリックで設定します。代替のEVE平均価格やローカルNPC買取価格はアイテムごとに表示します。",
+      "선택한 기본 가격 출처입니다. 클릭하여 설정합니다. 대체 가격인 EVE 평균가 또는 로컬 NPC 매입가는 아이템별로 표시합니다."
+    ],
+    "help_useEveAveragePrices": [
+      "TQ trade hub (default): use a sensible sell price at your selected hub. Missing, stale or wildly inflated hub price? Try EVE average next. EVE average mode starts with CCP’s published average. If no usable online price exists, use an eligible local NPC buy offer from Sell → Immediate at your item’s location, before tax. Player buy orders cannot set this fallback. If all sources fail, NPCs pause that item. Your price limit and purchase chance always apply. Save policy to apply changes.",
+      "TQ-Handelszentrum (Standard): einen plausiblen Verkaufspreis am gewählten Handelsplatz verwenden. Fehlt er, ist er veraltet oder stark überhöht, folgt der EVE-Durchschnitt. Im Durchschnittsmodus wird dieser zuerst verwendet. Ohne brauchbaren Online-Preis folgt ein passendes lokales NPC-Kaufangebot aus Sofortverkauf am Warenstandort, vor Steuern. Spieler-Kaufaufträge zählen nicht. Fehlen alle Quellen, pausiert der Kauf. Preislimit und Kaufchance gelten immer. Änderungen speichern.",
+      "Centre commercial TQ (défaut) : utiliser un prix de vente plausible au centre choisi, puis la moyenne EVE si ce prix manque, est périmé ou excessif. Le mode moyenne EVE commence par la moyenne publiée par CCP. Sans prix en ligne utilisable, prendre une offre PNJ locale admissible de vente immédiate au lieu de l’objet, avant taxe. Les ordres des joueurs sont exclus. Sans aucune source, l’achat est suspendu. Plafond et probabilité restent actifs. Enregistrez les changements.",
+      "Centro comercial TQ (predeterminado): usa un precio de venta razonable del centro elegido; si falta, está desactualizado o es exagerado, prueba la media de EVE. El modo media de EVE empieza por la media publicada por CCP. Sin precio online válido, usa una oferta NPC local de venta inmediata válida en la ubicación del objeto, antes de impuestos. Se excluyen órdenes de jugadores. Si falla todo, se pausa la compra. El límite y la probabilidad siempre se aplican. Guarda los cambios.",
+      "Торговый центр TQ (по умолчанию): разумная цена продажи в выбранном центре. Если её нет, она устарела или сильно завышена, используется средняя цена EVE. Режим средней цены начинает со средней цены CCP. Без подходящей онлайн-цены берётся доступное местное предложение NPC для мгновенной продажи в месте хранения предмета, до налога. Ордера игроков исключены. Если источников нет, покупки приостанавливаются. Лимит цены и шанс действуют всегда. Сохраните изменения.",
+      "TQ贸易中心（默认）：使用所选中心合理的卖价。价格缺失、过期或异常偏高时，改用EVE平均价。EVE平均价模式优先使用CCP公布的平均价。没有可用在线价格时，使用物品所在地“立即出售”中符合条件的本地NPC买单价格，按税前单价计算。玩家买单不参与此后备定价。全部来源都不可用时暂停购买。价格上限和购买概率始终有效。保存规则后生效。",
+      "TQ取引拠点（初期値）：選択した拠点の妥当な売値を使います。価格がない、古い、異常に高い場合はEVE平均価格を使います。平均価格モードではCCPの平均価格から開始します。有効なオンライン価格がなければ、アイテムの所在地で即時売却できるNPC買取注文の税引前単価を使います。プレイヤーの買い注文は除外します。全て利用できなければ購入を見合わせます。価格上限と購入確率は常に適用されます。変更は保存してください。",
+      "TQ 거래 허브(기본): 선택한 허브의 합리적인 판매 가격을 사용합니다. 가격이 없거나 오래됐거나 터무니없이 높으면 EVE 평균가를 사용합니다. EVE 평균가 모드는 CCP의 평균가부터 확인합니다. 유효한 온라인 가격이 없으면 아이템 위치에서 즉시 판매 가능한 로컬 NPC 매입 주문의 세전 단가를 사용합니다. 플레이어 매입 주문은 제외합니다. 모든 출처가 없으면 구매를 보류합니다. 가격 한도와 구매 확률은 항상 적용됩니다. 변경 사항을 저장하세요."
+    ],
+    "missing_average": [
+      "Cannot determine a fair price: neither EVE average nor an eligible local NPC buy offer is available.",
+      "Kein fairer Preis ermittelbar: weder EVE-Durchschnitt noch ein passendes lokales NPC-Kaufangebot verfügbar.",
+      "Impossible de déterminer un prix juste : ni moyenne EVE ni offre d’achat PNJ locale admissible.",
+      "No se puede determinar un precio justo: no hay media de EVE ni oferta NPC local válida.",
+      "Невозможно определить справедливую цену: нет средней цены EVE и подходящего местного предложения NPC.",
+      "无法确定合理价格：没有EVE平均价，也没有符合条件的本地NPC买单。",
+      "適正価格を算出できません。EVE平均価格も、条件に合うローカルNPC買取注文もありません。",
+      "공정한 가격을 계산할 수 없습니다. EVE 평균가와 조건에 맞는 로컬 NPC 매입 주문이 모두 없습니다."
+    ],
+    "demand_region_setting": [
+      "Demand region",
+      "Nachfrageregion",
+      "Région de demande",
+      "Región de demanda",
+      "Регион спроса",
+      "需求参考星域",
+      "需要の参照リージョン",
+      "수요 기준 지역"
+    ],
+    "help_demand_region": [
+      "Limited mode uses this region’s recent TQ trading volume to set the daily item quantity limit. Your selected EVE average price stays the same. Choosing a region here does not move your items. Unlimited mode has no quantity limit and hides this setting.",
+      "Der begrenzte Modus verwendet das jüngste TQ-Handelsvolumen dieser Region für das tägliche Mengenlimit. Der gewählte EVE-Durchschnittspreis bleibt gleich. Die Regionswahl verschiebt keine Gegenstände. Der unbegrenzte Modus hat kein Mengenlimit und blendet diese Einstellung aus.",
+      "Le mode limité utilise le volume récent des échanges TQ de cette région pour fixer la limite quotidienne par objet. Le prix moyen EVE sélectionné reste identique. Choisir une région ne déplace pas vos objets. Le mode illimité n’a pas de limite de quantité et masque ce réglage.",
+      "El modo limitado usa el volumen reciente de comercio TQ de esta región para fijar el límite diario de unidades por objeto. La media de EVE seleccionada no cambia. Elegir una región no mueve tus objetos. El modo ilimitado no tiene límite de unidades y oculta este ajuste.",
+      "В ограниченном режиме недавний объём торговли TQ в этом регионе задаёт суточный лимит количества предметов. Выбранная средняя цена EVE не меняется. Выбор региона не перемещает ваши предметы. В неограниченном режиме нет лимита количества, поэтому настройка скрыта.",
+      "限制模式使用此星域近期的TQ交易量来设置每种物品的每日数量上限。所选的EVE平均价格不变。选择星域不会移动你的物品。无限制模式没有数量上限，因此隐藏此设置。",
+      "制限モードでは、このリージョンの最近のTQ取引量からアイテムごとの1日あたりの数量上限を決めます。選択したEVE平均価格は変わりません。リージョンを選んでもアイテムは移動しません。無制限モードには数量上限がないため、この設定は表示されません。",
+      "제한 모드는 이 지역의 최근 TQ 거래량으로 아이템별 하루 구매 수량 한도를 정합니다. 선택한 EVE 평균 가격은 바뀌지 않습니다. 지역을 선택해도 아이템이 이동하지 않습니다. 무제한 모드는 수량 한도가 없어 이 설정을 숨깁니다."
+    ],
+    "local_buy_offer": [
+      "Local NPC offer",
+      "Lokales NPC-Angebot",
+      "Offre PNJ locale",
+      "Oferta NPC local",
+      "Местное предложение NPC",
+      "本地NPC报价",
+      "ローカルNPC買取価格",
+      "로컬 NPC 매입가"
+    ],
+    "advice_local_title": [
+      "Local NPC offer {reference} | {percent:.1f}% of offer\nNPC {chance:.1f}% | Batch {minimum}–{maximum}",
+      "Lokales NPC-Angebot {reference} | {percent:.1f}% des Angebots\nNPC {chance:.1f}% | Menge {minimum}–{maximum}",
+      "Offre PNJ locale {reference} | {percent:.1f}% de l’offre\nPNJ {chance:.1f}% | Lot {minimum}–{maximum}",
+      "Oferta NPC local {reference} | {percent:.1f}% de la oferta\nNPC {chance:.1f}% | Lote {minimum}–{maximum}",
+      "Местное предложение NPC {reference} | {percent:.1f}% от предложения\nNPC {chance:.1f}% | Партия {minimum}–{maximum}",
+      "本地NPC报价 {reference} | 报价的{percent:.1f}%\nNPC {chance:.1f}% | 批量 {minimum}–{maximum}",
+      "ローカルNPC買取価格 {reference} | 買取価格比{percent:.1f}%\nNPC {chance:.1f}% | 数量 {minimum}–{maximum}",
+      "로컬 NPC 매입가 {reference} | 매입가 대비 {percent:.1f}%\nNPC {chance:.1f}% | 수량 {minimum}–{maximum}"
+    ],
+    "reset_field": [
+      "Reset",
+      "Zurücksetzen",
+      "Réinitialiser",
+      "Restablecer",
+      "Сбросить",
+      "重置",
+      "リセット",
+      "초기화"
+    ],
+    "reset_field_hint": [
+      "Restore this field’s default value. This only changes your draft; use Save policy to apply it.",
+      "Setzt dieses Feld auf den Standardwert zurück. Ändert nur den Entwurf; zum Übernehmen die Richtlinie speichern.",
+      "Rétablit la valeur par défaut de ce champ. Seul le brouillon change ; enregistrez la politique pour l’appliquer.",
+      "Restaura el valor predeterminado de este campo. Solo cambia el borrador; guarda la política para aplicarlo.",
+      "Восстановить значение поля по умолчанию. Изменится только черновик; сохраните политику, чтобы применить его.",
+      "恢复此字段的默认值。只修改草稿；保存策略后才会应用。",
+      "この項目を初期値に戻します。下書きだけが変わります。適用するにはポリシーを保存してください。",
+      "이 항목을 기본값으로 되돌립니다. 초안만 변경되며, 적용하려면 정책을 저장하세요."
+    ],
+    "reset_region_hint": [
+      "Restore The Forge and its main trading station in Jita. This only changes your draft; use Save policy to apply it.",
+      "Stellt The Forge und die Haupthandelsstation in Jita wieder her. Ändert nur den Entwurf; zum Übernehmen die Richtlinie speichern.",
+      "Rétablit The Forge et sa station commerciale principale à Jita. Seul le brouillon change ; enregistrez la politique pour l’appliquer.",
+      "Restaura The Forge y su principal estación comercial en Jita. Solo cambia el borrador; guarda la política para aplicarlo.",
+      "Восстановить регион The Forge и главный торговый хаб в Jita. Изменится только черновик; сохраните политику для применения.",
+      "恢复伏尔戈星域及其吉他主要贸易空间站。只修改草稿；保存策略后才会应用。",
+      "ザ・フォージとジタの主要交易ステーションに戻します。下書きだけが変わります。適用するにはポリシーを保存してください。",
+      "더 포지와 지타의 주요 무역 정거장으로 되돌립니다. 초안만 변경되며, 적용하려면 정책을 저장하세요."
+    ],
+    "reset_station_hint": [
+      "Choose the main trading station in the currently selected region. This only changes your draft; use Save policy to apply it.",
+      "Wählt die Haupthandelsstation der aktuell gewählten Region. Ändert nur den Entwurf; zum Übernehmen die Richtlinie speichern.",
+      "Choisit la station commerciale principale de la région sélectionnée. Seul le brouillon change ; enregistrez la politique pour l’appliquer.",
+      "Elige la principal estación comercial de la región seleccionada. Solo cambia el borrador; guarda la política para aplicarlo.",
+      "Выбрать главный торговый хаб текущего региона. Изменится только черновик; сохраните политику, чтобы применить его.",
+      "选择当前星域的主要贸易空间站。只修改草稿；保存策略后才会应用。",
+      "選択中のリージョンの主要交易ステーションを選びます。下書きだけが変わります。適用するにはポリシーを保存してください。",
+      "현재 선택한 지역의 주요 무역 정거장을 선택합니다. 초안만 변경되며, 적용하려면 정책을 저장하세요."
+    ],
+    "view_icons": [
+      "Icons",
+      "Symbole",
+      "Icônes",
+      "Iconos",
+      "Значки",
+      "图标",
+      "アイコン",
+      "아이콘"
+    ],
+    "view_details": [
+      "Details",
+      "Details",
+      "Détails",
+      "Detalles",
+      "Подробно",
+      "详细信息",
+      "詳細",
+      "자세히"
+    ],
+    "view_list": [
+      "List",
+      "Liste",
+      "Liste",
+      "Lista",
+      "Список",
+      "列表",
+      "リスト",
+      "목록"
+    ],
+    "view_mode_hint": [
+      "View: {mode}. Choose Icons, Details or List. Remembered separately for My Orders and Activity.",
+      "Ansicht: {mode}. Symbole, Details oder Liste wählen. Wird für Meine Aufträge und Aktivität getrennt gespeichert.",
+      "Vue : {mode}. Choisissez Icônes, Détails ou Liste. Mémorisée séparément pour Mes ordres et Activité.",
+      "Vista: {mode}. Elige Iconos, Detalles o Lista. Se recuerda por separado para Mis órdenes y Actividad.",
+      "Вид: {mode}. Выберите значки, подробный вид или список. Для ордеров и активности выбор сохраняется отдельно.",
+      "视图：{mode}。选择图标、详细信息或列表。我的订单和活动会分别记住选择。",
+      "表示：{mode}。アイコン・詳細・リストから選択します。自分の注文と履歴で個別に保存されます。",
+      "보기: {mode}. 아이콘, 자세히, 목록 중 선택하세요. 내 주문과 활동에서 각각 기억합니다."
+    ],
+    "activity_time": [
+      "TIME",
+      "ZEIT",
+      "HEURE",
+      "HORA",
+      "ВРЕМЯ",
+      "时间",
+      "時刻",
+      "시간"
+    ],
+    "activity_event": [
+      "EVENT / ITEM",
+      "EREIGNIS / GEGENSTAND",
+      "ÉVÉNEMENT / OBJET",
+      "EVENTO / OBJETO",
+      "СОБЫТИЕ / ПРЕДМЕТ",
+      "事件／物品",
+      "イベント／アイテム",
+      "이벤트 / 아이템"
+    ],
+    "activity_state": [
+      "STATUS",
+      "STATUS",
+      "ÉTAT",
+      "ESTADO",
+      "СТАТУС",
+      "状态",
+      "状態",
+      "상태"
+    ],
+    "batch_preview": [
+      "Batch: {minimum}–{maximum} units",
+      "Menge: {minimum}–{maximum} Einheiten",
+      "Lot : {minimum}–{maximum} unités",
+      "Lote: {minimum}–{maximum} unidades",
+      "Партия: {minimum}–{maximum} шт.",
+      "批量：{minimum}–{maximum}件",
+      "購入数量：{minimum}～{maximum}個",
+      "구매 수량: {minimum}–{maximum}개"
+    ]
+  }
+}

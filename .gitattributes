@@ -1,0 +1,7 @@
+# Preserve reviewed file bytes, including matching native source/payload hashes.
+* -text
+*.bin binary
+*.png binary
+*.jpg binary
+*.mp4 binary
+*.zip binary

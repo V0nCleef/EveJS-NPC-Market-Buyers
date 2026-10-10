@@ -1,0 +1,62 @@
+"use strict";
+const fs=require("node:fs"),path=require("node:path"),Module=require("node:module");
+const {isMainThread}=require("node:worker_threads");
+const delivery=require("./lib/loginDelivery");
+const symbol=Symbol.for(delivery.KEY);
+const canonical=p=>path.resolve(p).replace(/\\/g,"/").toLowerCase();
+function resolveRoot(start=__dirname){let dir=path.resolve(start);for(let i=0;i<10;i++){if(fs.existsSync(path.join(dir,"server/package.json")))return dir;const next=path.dirname(dir);if(next===dir)break;dir=next;}throw Error("EveJS root was not found");}
+function install(root=resolveRoot()){
+  if(!isMainThread)return {active:false,reason:"worker_thread"};
+  if(process.env.EVEJS_WALLET_AUTHORITY_OWNER==='1'||/[\\/]server[\\/]src[\\/].*\.worker\.js$/i.test(process.argv[1]||''))return {active:false,reason:"native_owner_worker"};
+  if(globalThis[symbol])return globalThis[symbol];
+  const version=JSON.parse(fs.readFileSync(path.join(root,"server/package.json"),"utf8")).version;
+  if(version!=="0.12.9"||!delivery.supportsRoot(root))throw Error("NPC Market Buyers supports the reviewed EveJS 0.12.9 Native login builder");
+  const state={active:true,root,delivery:delivery.createDelivery(__dirname),runtime:null};
+  const marketFile=canonical(path.join(root,"server/src/services/market/marketProxyService.js"));
+  const handshakeFile=canonical(path.join(root,"server/src/network/tcp/handshake.js"));
+  const walletFiles=new Map([
+    [canonical(path.join(root,'server/src/services/account/walletState.js')),false],
+    [canonical(path.join(root,'server/src/services/corporation/corpWalletState.js')),true],
+  ]);
+  const accountFile=canonical(path.join(root,'server/src/services/account/accountService.js'));
+  const {prepareWalletSource,shared:walletBatching}=require('./lib/walletBatching');
+  // Validate both owned seams before any native module is changed in memory.
+  for(const [file,isCorp] of walletFiles)prepareWalletSource(fs.readFileSync(file,'utf8'),isCorp);
+  globalThis[symbol]=state;
+  const {prepareMarketSource,createMarketAdapter}=require("./lib/marketAdapter");
+  const oldCompile=Module.prototype._compile;
+  Module.prototype._compile=function(source,filename){
+    const file=canonical(filename);
+    try{
+      if(state.active&&file===marketFile)source=prepareMarketSource(source);
+      if(state.active&&walletFiles.has(file))source=prepareWalletSource(source,walletFiles.get(file));
+    }catch(error){state.active=false;state.runtime?.engine.stop();console.error(`[NPC Market Buyers] Required seam unavailable; mod inactive: ${error.message}`);}
+    const result=oldCompile.call(this,source,filename);
+    if(state.active&&(walletFiles.has(file)||file===accountFile)){
+      try{
+        if(walletFiles.has(file))walletBatching.installWallet(this.exports,walletFiles.get(file));
+        else walletBatching.installAccountService(this.exports);
+      }catch(error){state.active=false;state.runtime?.engine.stop();console.error('[NPC Market Buyers] Wallet presentation attachment unavailable; mod inactive: '+error.message);}
+    }
+    if(file===handshakeFile&&state.active){
+      try{delivery.installHandshake(this.exports,{root,delivery:state.delivery,active:()=>state.active});}
+      catch(error){state.active=false;state.runtime?.engine.stop();console.error('[NPC Market Buyers] Login attachment unavailable; mod inactive: '+error.message);}
+    }
+    if(file===marketFile&&state.active&&!state.runtime){
+      try{
+      const {createStore}=require("./lib/store"),{createQuoteProvider}=require("./lib/quotes"),{createEngine}=require("./lib/engine"),{evaluate}=require("./lib/policy"),{installService}=require("./lib/service");
+      const store=createStore(path.join(root,"_local/npc-market-buyers/state.sqlite"),{root});
+      walletBatching.attach(store);
+      const adapter=createMarketAdapter(root,{store}),quotes=createQuoteProvider({store,localQuote:adapter.localQuote});
+      const engine=createEngine({adapter,quotes,store,getConfig:()=>store.getConfig(),evaluate,clock:Date.now,random:Math.random,log:console,walletBatching});
+      installService(this.exports,{root,store,quotes,engine,adapter});
+      state.runtime={store,adapter,quotes,engine};engine.start();
+      console.log("[NPC Market Buyers] Native Sell Items advisor and buying service attached");
+      }catch(error){state.active=false;state.runtime?.engine.stop();console.error(`[NPC Market Buyers] Runtime unavailable; native service preserved: ${error.message}`);}
+    }
+    return result;
+  };
+  return state;
+}
+if(require.main!==module){try{install();}catch(error){console.error(`[NPC Market Buyers] Mod inactive: ${error.message}`);}}
+module.exports={install,resolveRoot};

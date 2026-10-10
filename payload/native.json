@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "reviewedEveJS": "0.12.9",
+  "clientBuild": 3396210,
+  "files": [
+    {
+      "target": "externalservices/market-server/target/release/market-server.exe",
+      "payload": "native/0.bin",
+      "baseSHA": "f03c3378e1a41a8001c454ac74b15f29da1412eb4686dcd5a99669b5c477af51",
+      "installedSHA": "7762375102466d8f464adf1b30a8ba2db9796bea971b93c39765fbc8ca73e637"
+    },
+    {
+      "target": "externalservices/market-server/crates/market-common/src/lib.rs",
+      "payload": "native/1.bin",
+      "baseSHA": "75a4e8fac530141584d174cd2c48936ff7ca5ba5fd15a29ca82445962b1635ce",
+      "installedSHA": "638ab24a15d56259818bed640b67d7a14104f4312246d227423f49cae1c59006"
+    },
+    {
+      "target": "externalservices/market-server/src/main.rs",
+      "payload": "native/2.bin",
+      "baseSHA": "352781a30fd57ab4967ba8cc136869e39f18afad3584431d44f1d5a680e4f01a",
+      "installedSHA": "2d3235c978eabb1b982fda72ca06e7a643d3dd37773fc52354b93727c25854f2"
+    },
+    {
+      "target": "externalservices/market-server/src/rpc.rs",
+      "payload": "native/3.bin",
+      "baseSHA": "36edb3996b6c31c015318ea7bf22959dd5242c4707af6ce41e65edcdb2b4b952",
+      "installedSHA": "3b659696ac70eb271d19eba68a6abd57366902559061d1ebfdea0629e8186ccd"
+    },
+    {
+      "target": "externalservices/market-server/src/state.rs",
+      "payload": "native/4.bin",
+      "baseSHA": "f095abfa2a04629726fceb0e706e6137600d88e34e2fc95c213ff34323bfa07d",
+      "installedSHA": "ccb00458031300389fe47c7c7299a9e29ef08d6b01801be2389d9c8d8c9a7b13"
+    }
+  ]
+}

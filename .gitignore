@@ -1,0 +1,25 @@
+# Local builds and reviewed release assets live outside Git history.
+/dist/
+/evidence/
+/.test-runtime/
+/.tools/
+**/target/
+**/node_modules/
+**/__pycache__/
+*.py[cod]
+*.zip
+*.log
+*.sqlite*
+*.db
+*.db-*
+*.bak
+*.tmp
+.env
+.env.*
+!.env.example
+/tests/private/
+/_local/
+/evejs.config*.json
+/native/market-server/config/*local*.toml
+.DS_Store
+Thumbs.db
