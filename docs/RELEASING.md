@@ -5,6 +5,6 @@
 3. Prepare a draft GitHub release targeting the reviewed commit. Attach the Launcher ZIP and `SHA256SUMS.txt`; compare the uploaded asset with the local reviewed bytes.
 4. Publish only after the maintainer approves the candidate. Do not enable automatic publication from a push or tag.
 
-The initial 0.1.15 update has the maintainer's in-game approval. Keep its release as a draft during showcase preparation. The edited video must receive separate approval before it is uploaded anywhere on GitHub, including a draft release.
+The initial 0.1.15 update, third showcase cut and public release received the maintainer's separate approvals on 10 October 2026. Keep future releases as drafts until approved. Any future edited video also needs separate approval before upload, including to a draft release.
 
 Never upload game/server databases, backups, private client reference modules or local account/configuration files. GitHub's automatic Source code archives are for development, not Launcher installation.

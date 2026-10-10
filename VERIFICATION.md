@@ -16,4 +16,6 @@ This is a client display change. Live EVE rendering and actual Python 2 executio
 
 ## Maintainer approval
 
-On 10 October 2026, the maintainer reported testing the installed 0.1.15 update in game and approved it, with a gameplay recording supplied for the showcase. This user acceptance is separate from the automated checks above. The edited showcase requires its own approval before publication.
+On 10 October 2026, the maintainer reported testing the installed 0.1.15 update in game and approved it, with a gameplay recording supplied for the showcase. This user acceptance is separate from the automated checks above. The third edited showcase cut then received separate approval, followed by an explicit request to publish 0.1.15.
+
+The approved showcase is 2560 × 1440 at 30 fps, with LYRA narration and captions. Its complete decode passed, and sampled frames from the opening and pricing explanations were reviewed. The published video matches that approved local file; it is an edited walkthrough, rather than additional automated gameplay coverage.

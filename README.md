@@ -10,9 +10,11 @@ NPC institutions buy your sell orders in sensible, randomised batches. Prices ar
 
 [Releases](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases) · [Feature guide](docs/FEATURES.md) · [Changelog](CHANGELOG.md) · [Report an issue](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/issues)
 
-**Release status:** 0.1.15 has been tested and approved in game by the maintainer. The release is being kept as a draft while its showcase video is prepared and reviewed.
+**Version 0.1.15 is available.** The mod and showcase have been tested and approved by the maintainer.
 
-<!-- Add the approved, edited gameplay showcase here. Keep mockups labelled. -->
+[![Watch the NPC Market Buyers showcase](docs/media/showcase-thumbnail.jpg)](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/download/v0.1.15/NPC-Market-Buyers-Showcase-0.1.15.mp4)
+
+[Watch the 2-minute showcase](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/download/v0.1.15/NPC-Market-Buyers-Showcase-0.1.15.mp4) · [Download 0.1.15](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/tag/v0.1.15)
 
 ## What it does
 
@@ -37,7 +39,7 @@ The installer validates the reviewed native file hashes. Other EveJS builds or m
 
 ## Install
 
-1. Download **NPC-Market-Buyers-0.1.15.zip** from the release's Assets once it is published.
+1. Download **NPC-Market-Buyers-0.1.15.zip** from the [release's Assets](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/tag/v0.1.15).
 2. Stop EveJS and the native market in the Launcher, and close EVE.
 3. Open **Launcher → Mods → Add ZIP**, select the package and install/enable it.
 4. Start the stack and reconnect EVE.
@@ -51,7 +53,7 @@ When updating, disable/remove the old package before importing the new one, and 
 
 | Mode | What it means |
 |---|---|
-| **Unlimited** — default | NPCs can consider any eligible item at a fair price. No daily budgets or item-volume quotas. Useful for an almost empty single-player market. |
+| **Unlimited** — default | NPCs can consider any eligible item at a fair price. No daily budgets or item-volume quotas. |
 | **Limited** | The same price checks and buying chances, with configurable spending caps and TQ volume quotas. Only relevant settings appear. |
 
 Unlimited does not guarantee a purchase. By default, an order at the reference price has a **35% chance per fixed 15-minute check**. Successful checks buy a random **0.01%–10% of the remaining grouped stock**, rounded to whole units, with at least one unit when eligible. Above the default **125% price ceiling**, NPCs do not buy.
@@ -60,7 +62,7 @@ Unlimited does not guarantee a purchase. By default, an order at the reference p
 
 The default is **TQ trade hub**, starting with Jita / The Forge. Region and station dropdowns select the other curated hubs. The reference uses the cheapest 5% of available station sell depth; one valid order is enough.
 
-If a usable hub reference is unavailable, the mod tries CCP's EVE average price, then an eligible local seeded NPC buy offer using the native immediate-sell rules. EVE average can also be selected directly. The UI names the source actually used. If all sources fail, the item pauses with a clear explanation rather than inventing a fair price.
+If a hub price is missing or rejected as unrealistic, the mod tries CCP's EVE average price, then an eligible local seeded NPC buy offer using the native immediate-sell rules. EVE average can also be selected directly: it is EVE Online's overall average, rather than your local EveJS market. The UI names the source actually used. If all sources fail, the item pauses with a clear explanation rather than inventing a fair price.
 
 Public ESI requests need no account login or API key. See the [feature guide](docs/FEATURES.md#tq-connection) for the endpoints, caching and fallback details.
 

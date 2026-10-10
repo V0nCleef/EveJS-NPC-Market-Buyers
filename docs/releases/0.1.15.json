@@ -5,5 +5,13 @@
   "bytes": 2986250,
   "entries": 46,
   "compatibility": {"evejs": "0.12.9", "launcherMinimum": "1.0.69", "clientBuild": 3396210, "backend": "native"},
-  "publication": "draft; gameplay approved; showcase video requires separate approval"
+  "publication": "gameplay, showcase and public release approved on 2026-10-10",
+  "showcase": {
+    "asset": "NPC-Market-Buyers-Showcase-0.1.15.mp4",
+    "sha256": "e7540f664c41d86de515e1290ecfefabc872e9465653b4cf8e42722b12ea0a45",
+    "bytes": 37690752,
+    "durationSeconds": 142.13333333333333,
+    "captions": "NPC-Market-Buyers-Showcase-0.1.15.en.srt",
+    "approved": true
+  }
 }
