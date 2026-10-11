@@ -9,9 +9,10 @@ Use Node.js 22 or newer and Python 3.12. No npm install is needed.
 ```sh
 npm test
 python tools/check_source.py
+python -B tests/update_package_tests.py
 ```
 
-The first command runs the existing pricing, reference/fallback and policy tests with simulated HTTP data. The second checks catalogue completeness, matching embedded translations, Python syntax/grammar, JavaScript syntax, metadata and the reviewed payload hashes. GitHub Actions runs these checks; it does not run an EVE client or native purchase stack.
+The first command runs the existing pricing, reference/fallback and policy tests with simulated HTTP data. The second checks catalogue completeness, matching embedded translations, Python syntax/grammar, JavaScript syntax, metadata and the reviewed payload hashes. The third builds a disposable ZIP and checks its matching update sidecar, including rejected legacy packages and wrong asset names. GitHub Actions runs these checks; it does not run an EVE client or native purchase stack.
 
 ## Native integration checks
 
@@ -21,6 +22,7 @@ Provide your own reviewed EveJS 0.12.9 installation and Launcher checkout. Insta
 $env:EVEJS_TEST_ROOT = 'D:\EveJS-v0.12.9'
 $env:EVEJS_LAUNCHER_ROOT = 'D:\evejs-launcher'
 npm run test:native
+python -B tests/launcher_update_tests.py
 ```
 
 The tests use isolated databases and simulated transports where stated. They do not start your live stack. `tests/market-integration.js` is a separate deeper fixture that starts an isolated native market process; review that harness and its environment first.
@@ -54,6 +56,8 @@ python tools/check_source.py
 python pack-release.py
 ```
 
-Output goes to `dist/`. Packaging uses the included reviewed payload; it does not compile Rust or touch a live server. Rebuilt ZIP containers and repository documentation can differ from the original reviewed release asset. The published 0.1.16 asset's SHA-256 is recorded in [release metadata](../releases/0.1.16.json).
+Output goes to `dist/`: an installable `NPC-Market-Buyers-{version}.zip`, a matching `.update.json` sidecar, and a local build receipt. Attach **both the ZIP and sidecar** to the same stable GitHub release tagged `v{version}`. The sidecar is derived from the finished ZIP's manifest; never hand-edit it. Users import only the ZIP. Packaging uses the included reviewed payload; it does not compile Rust or touch a live server. Rebuilt ZIP containers and repository documentation can differ from the original reviewed release asset. The published 0.1.17 asset's SHA-256 is recorded in [release metadata](../releases/0.1.17.json).
+
+The Launcher integration test requires a finished ZIP in `dist/` and the two environment paths above. It reads the reviewed server baseline and creates disposable, stopped fixtures under `.test-runtime/`. It exercises the actual Launcher checker, downloader, enabled/disabled replacement and failed-activation rollback. Its older package is explicitly synthetic: it has update support so the replacement path can be tested. Real 0.1.16 and earlier packages require manual import. Set `EVEJS_PREVIOUS_PACKAGE` to an original older ZIP to also test that one-time import with the actual legacy package. No game or market process is started. With `--hosted`, the test also checks the public GitHub feed and downloaded digest after publication.
 
 To change the native daemon, build from `native/market-server` with `cargo build --release --locked`. Regenerate the payload only against a separate clean reviewed EveJS baseline. `build-payload.cjs` records baseline hashes; pointing it at an already patched live installation would produce invalid baseline guards. Native source and executable must stay in sync.

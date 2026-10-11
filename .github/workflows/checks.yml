@@ -24,3 +24,5 @@ jobs:
         run: npm test
       - name: Sources, translations and reviewed payload
         run: python tools/check_source.py
+      - name: Launcher release ZIP and update metadata
+        run: python -B tests/update_package_tests.py

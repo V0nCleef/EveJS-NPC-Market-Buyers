@@ -1,0 +1,27 @@
+{
+  "version": "0.1.17",
+  "tag": "v0.1.17",
+  "date": "2026-10-11",
+  "repository": "V0nCleef/EveJS-NPC-Market-Buyers",
+  "asset": "NPC-Market-Buyers-0.1.17.zip",
+  "sha256": "4a2175c442ac8d547d027c9ac16e0b23d875cc3d7d2f702baf00fe651441cbd0",
+  "bytes": 3002547,
+  "entries": 47,
+  "nativePayloadChanged": false,
+  "gameplayAndClientChanged": false,
+  "updateMetadata": "NPC-Market-Buyers-0.1.17.update.json",
+  "updateMetadataSHA256": "4e5b5e25761fe4c9ec79cce2755419ba86535db1062b7988b2d19ae27fdf9a13",
+  "oneTimeManualUpdateRequiredFrom": "0.1.16 and earlier",
+  "maintainerApproved": true,
+  "verification": {
+    "serverNativeContracts": 84,
+    "clientContracts": 81,
+    "walletContracts": 2,
+    "gridCheckPurchases": 12010,
+    "scaleFixtureSales": 100000,
+    "clientLanguages": 8,
+    "portableUpdateChecks": 4,
+    "launcherIntegrationChecks": 5,
+    "priorGameplayEvidenceVersion": "0.1.16"
+  }
+}

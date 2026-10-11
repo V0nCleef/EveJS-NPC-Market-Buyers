@@ -1,6 +1,15 @@
-# Verification — NPC Market Buyers 0.1.16
+# Verification — NPC Market Buyers 0.1.17
 
-Version 0.1.16 adds active-order financial totals, archived Activity, Statistics and wallet-style readable ISK amounts. The five-file native market payload is unchanged from 0.1.15. The maintainer approved the isolated in-game test and authorized publication on 2026-10-10. The player's Launcher installation was not updated as part of this release.
+Version 0.1.17 adds Launcher update metadata and automatic sidecar packaging. Gameplay, client code and the five-file native market payload are unchanged from 0.1.16. The visual and accounting evidence below applies to the approved 0.1.16 implementation. The maintainer requested publication as a new version and a local installation update on 2026-10-11.
+
+## Launcher updates
+
+- Four portable checks build the finished ZIP and validate its derived sidecar, reject undeclared legacy packages and wrong asset names, and prevent accidental standalone sidecar overwrites. CI runs these checks for future releases.
+- The actual Launcher checker and downloader accept matching mod identity, version, ZIP name and EveJS 0.12.9 compatibility. Checks reject a missing or mismatched sidecar, unsupported EveJS 0.12.8, and an already current version. HTTP responses are local fixtures in this pre-publication test.
+- The actual Launcher replacement path is exercised in stopped disposable roots for enabled and disabled packages. The saved policy/activity SQLite database and an unrelated save remain byte-for-byte unchanged. The database passes its integrity check, and no recovery job remains pending.
+- A deliberately failed candidate activation restores the previous package and its enabled state. Its five native files again match the previous installed hashes, and the real helper verifies the restored installation. No stack or client is started for these update tests.
+- The older update-capable package in replacement tests is explicitly synthetic. A separate test imports the original 0.1.15 ZIP, confirms that it has no update source, then uses actual Launcher remove/import/enable actions to install 0.1.17 while preserving the saved database. This is the required one-time manual bootstrap for real older installations.
+- The portable checks need only Python. The real Launcher integration also needs the Launcher's Python dependencies, including PyQt6; it uses that environment and does not stub the version/compatibility check.
 
 ## Accounting and persistence
 

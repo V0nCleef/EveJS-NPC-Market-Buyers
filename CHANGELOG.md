@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.17 — Launcher update support (2026-10-11)
+
+- Adds the missing GitHub update source and matching release metadata so future compatible versions appear in Launcher → Mods → Check mod updates.
+- Builds the update metadata from the finished ZIP automatically and checks it in CI.
+- Earlier versions need one manual ZIP update to gain update detection. Settings and sales history stay outside the package and are preserved.
+- Gameplay, client UI and the reviewed native market payload are unchanged from 0.1.16.
+
 ## 0.1.16 — Sales statistics and archived Activity (2026-10-10)
 
 - My Sell Orders shows actual NPC sales, remaining asking value and their combined total for active orders.

@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "npc-market-buyers",
   "displayName": "NPC Market Buyers",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "Unlimited NPC buying with fair price references, automatic EVE average / local NPC offer fallback, and native Sell Items advice. In-game dashboard and configuration via Mods.",
   "kind": "loader",
   "supportedBackends": [
@@ -32,6 +32,14 @@
       "prepare_remove",
       "recover"
     ]
+  },
+  "updates": {
+    "provider": "github",
+    "repository": "V0nCleef/EveJS-NPC-Market-Buyers",
+    "asset": "NPC-Market-Buyers-{version}.zip",
+    "channel": "stable",
+    "tagPrefix": "v",
+    "preserveFiles": []
   },
   "clientMenu": {
     "apiVersion": 1,

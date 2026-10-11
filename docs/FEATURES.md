@@ -1,4 +1,4 @@
-# NPC Market Buyers 0.1.16
+# NPC Market Buyers 0.1.17
 
 NPCs buy your sell orders in single-player EveJS using configurable probabilities and current TQ prices. The real **Sell Items** window shows the actual price reference, your price percentage, warnings and the base NPC chance while you edit each item. A native in-game dashboard provides **My Orders**, **Configure**, **Activity** and **Statistics**, opened from the Launcher's shared **Mods** menu.
 
@@ -6,12 +6,12 @@ The graphite/teal dashboard shows item icons, original and remaining quantities,
 
 ## Install
 
-This guide covers version 0.1.16.
+This guide covers version 0.1.17.
 
 Requires the Native backend, reviewed EveJS **0.12.9**, Launcher **1.0.69+**, and EVE client **3396210**. ZIP import and the real install/verify/prepare/disable helper lifecycle are checked against the current Launcher source in isolation. The new layouts are checked in an isolated real EVE client using GridCheck. Reconnect after updating to load the new companion.
 
 1. Stop the game server and native market from the Launcher.
-2. In **Mods**, use **Add ZIP** and select `NPC-Market-Buyers-0.1.16.zip` from the GitHub release's Assets.
+2. In **Mods**, use **Add ZIP** and select `NPC-Market-Buyers-0.1.17.zip` from the GitHub release's Assets.
 3. Install/enable **NPC Market Buyers**, start the server, and reconnect the client.
 4. Open **Mods → NPC Market Buyers** in game. Use the ordinary **Sell Items** window to see per-item advice before pressing Sell.
 
@@ -23,7 +23,9 @@ The client companion is delivered at login, alongside AutoMining and the shared 
 
 My Orders bars now show the fraction of the original quantity **still for sale**. A new order starts full and the bar drains as units sell. This applies to the existing Details and Icons bars. The Details caption and help popup match it in all eight languages. List retains its numeric Original and Remaining columns. Unknown original quantities retain their unavailable explanation.
 
-Stop the server/native market first and close EVE. Disable/remove the old package, import and enable 0.1.16, then restart and reconnect. Keep only one version enabled. The helper retains the same verified native payload and original rollback files. Settings and receipts live outside the replaceable mod folder. Completed purchase receipts are added to Statistics once on first start, without new payments or inventory changes.
+Stop the server/native market first and close EVE. For 0.1.16 or earlier, disable/remove the old package, import and enable 0.1.17, then restart and reconnect. Keep only one version enabled. Earlier packages have no update source, so this one manual import is necessary. From 0.1.17 onward, use **Launcher → Mods → Check mod updates**, then **Update** when a newer compatible release is offered. The `.update.json` release attachment is read by the Launcher; import only the ZIP.
+
+The helper retains the same verified native payload and original rollback files. Settings and receipts live outside the replaceable mod folder. Completed purchase receipts are added to Statistics once on first start, without new payments or inventory changes.
 
 Activity List keeps the same 36-pixel item thumbnails as My Orders. Non-purchase rows keep their settings/recovery/rejection symbols. Compact rows reserve room for their icons, help buttons and readable currency captions.
 

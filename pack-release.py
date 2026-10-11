@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import zipfile
+from tools.build_update_metadata import build as build_update_metadata
 
 root = Path(__file__).resolve().parent
 version = json.loads((root / 'package.json').read_text())['version']
@@ -35,7 +36,10 @@ with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as tar
 with zipfile.ZipFile(archive) as check:
     assert check.testzip() is None
     assert not any('/evidence/' in name or '/target/' in name or '/.tools/' in name for name in check.namelist())
+sidecar = build_update_metadata(archive, overwrite=True)
 receipt = {'archive': str(archive), 'sha256': hashlib.sha256(archive.read_bytes()).hexdigest(),
-           'bytes': archive.stat().st_size, 'entries': len(check.namelist())}
+           'bytes': archive.stat().st_size, 'entries': len(check.namelist()),
+           'updateMetadata': str(sidecar),
+           'updateMetadataSHA256': hashlib.sha256(sidecar.read_bytes()).hexdigest()}
 (output / 'package.json').write_text(json.dumps(receipt, indent=2) + '\n')
 print(json.dumps(receipt))

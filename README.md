@@ -10,7 +10,7 @@ NPC institutions buy your sell orders in sensible, randomised batches. Prices ar
 
 [Releases](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases) · [Feature guide](docs/FEATURES.md) · [Changelog](CHANGELOG.md) · [Report an issue](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/issues)
 
-**Version 0.1.16 is available.** Active-order totals, archived Activity and the new Statistics page have been tested in an isolated EVE client and approved by the maintainer.
+**Version 0.1.17 adds Launcher update support.** It includes the approved active-order totals, archived Activity and Statistics page from 0.1.16.
 
 ![Statistics in the EVE client](docs/media/statistics-0.1.16.png)
 
@@ -18,7 +18,7 @@ NPC institutions buy your sell orders in sensible, randomised batches. Prices ar
 
 [![Watch the NPC Market Buyers showcase](docs/media/showcase-thumbnail.jpg)](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/download/v0.1.15/NPC-Market-Buyers-Showcase-0.1.15.mp4)
 
-[Watch the original 2-minute showcase](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/download/v0.1.15/NPC-Market-Buyers-Showcase-0.1.15.mp4) · [Download 0.1.16](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/tag/v0.1.16)
+[Watch the original 2-minute showcase](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/download/v0.1.15/NPC-Market-Buyers-Showcase-0.1.15.mp4) · [Download 0.1.17](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/tag/v0.1.17)
 
 ## What it does
 
@@ -47,7 +47,7 @@ The installer validates the reviewed native file hashes. Other EveJS builds or m
 
 ## Install
 
-1. Download **NPC-Market-Buyers-0.1.16.zip** from the [release's Assets](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/tag/v0.1.16).
+1. Download **NPC-Market-Buyers-0.1.17.zip** from the [release's Assets](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/tag/v0.1.17).
 2. Stop EveJS and the native market in the Launcher, and close EVE.
 3. Open **Launcher → Mods → Add ZIP**, select the package and install/enable it.
 4. Start the stack and reconnect EVE.
@@ -55,7 +55,9 @@ The installer validates the reviewed native file hashes. Other EveJS builds or m
 
 Use the attached Launcher ZIP. GitHub's automatic **Source code** downloads are development archives and cannot be imported as this mod.
 
-When updating, disable/remove the old package before importing the new one, and keep only one version enabled. Settings and purchase history live outside the replaceable mod folder. Back up your server data before installing or updating mods.
+**Updating from 0.1.16 or earlier:** these versions did not declare a Launcher update source, so one manual update is required. Disable/remove the old package, import the 0.1.17 ZIP, and enable it. Keep only one version enabled. Settings and purchase history live outside the replaceable mod folder and are retained.
+
+**From 0.1.17 onward:** use **Launcher → Mods → Check mod updates**, then the offered **Update** button for a newer compatible release. Checking does not install anything. Stop the stack and close EVE before applying an update. The attached `.update.json` file is for the Launcher; import only the mod ZIP. Back up your server data before installing or updating mods.
 
 On the first start after updating, existing completed purchase receipts are added to Statistics once. This does not make new payments or change your orders. Archived sales remain included in totals.
 

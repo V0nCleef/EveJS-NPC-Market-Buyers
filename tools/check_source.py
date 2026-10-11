@@ -11,6 +11,10 @@ manifest=json.loads((root/'evejs-launcher.mod.json').read_text(encoding='utf-8')
 assert package['version']==manifest['version']
 assert package['license']=='AGPL-3.0-only'
 assert manifest['supportedBackends']==['native']
+assert manifest['updates']=={'provider':'github',
+    'repository':'V0nCleef/EveJS-NPC-Market-Buyers',
+    'asset':'NPC-Market-Buyers-{version}.zip','channel':'stable',
+    'tagPrefix':'v','preserveFiles':[]}, 'Launcher update discovery must remain configured'
 catalogue=json.loads((root/'client/locales.json').read_text(encoding='utf-8'))
 assert catalogue['languages']==['en','de','fr','es','ru','zh','ja','ko']
 formatter=string.Formatter()
