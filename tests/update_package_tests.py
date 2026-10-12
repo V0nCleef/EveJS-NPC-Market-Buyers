@@ -32,9 +32,12 @@ class UpdatePackageTests(unittest.TestCase):
         with zipfile.ZipFile(self.archive) as bundle:
             manifest = json.loads(bundle.read('NPC-Market-Buyers-' + self.version + '/evejs-launcher.mod.json'))
         metadata = json.loads(self.archive.with_suffix('.update.json').read_text())
-        self.assertEqual(metadata, dict(schemaVersion=1, id=manifest['id'],
-            version=manifest['version'], asset=manifest['updates']['asset'].replace('{version}', self.version),
-            evejsVersions=manifest['compatibility']['evejsVersions']))
+        expected = dict(schemaVersion=1, id=manifest['id'],
+            version=manifest['version'], asset=manifest['updates']['asset'].replace('{version}', self.version))
+        versions = manifest.get('compatibility', {}).get('evejsVersions')
+        if versions:
+            expected['evejsVersions'] = versions
+        self.assertEqual(metadata, expected)
 
     def test_standalone_generator_does_not_overwrite_existing_sidecar(self):
         target = self.archive.with_suffix('.update.json')

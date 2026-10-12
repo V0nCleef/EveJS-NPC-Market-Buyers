@@ -22,7 +22,7 @@ jobs:
           python-version: '3.12'
       - name: Pricing and fallback contracts
         run: npm test
-      - name: Sources, translations and reviewed payload
+      - name: Sources, translations and packaged native source
         run: python tools/check_source.py
       - name: Launcher release ZIP and update metadata
         run: python -B tests/update_package_tests.py

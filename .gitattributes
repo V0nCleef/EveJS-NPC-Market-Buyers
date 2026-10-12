@@ -1,4 +1,4 @@
-# Preserve reviewed file bytes, including matching native source/payload hashes.
+# Preserve source and asset bytes without automatic line-ending conversion.
 * -text
 *.bin binary
 *.png binary

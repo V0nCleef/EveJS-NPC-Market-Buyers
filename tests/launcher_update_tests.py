@@ -43,6 +43,7 @@ MANIFEST = json.loads((ROOT / 'evejs-launcher.mod.json').read_text())
 SOURCE = parse_update_source(MANIFEST['updates'])
 PAYLOAD = json.loads((ROOT / 'payload/native.json').read_text())['files']
 RECORDS = []
+NATIVE_ORIGINALS = {}
 
 
 def sha(file):
@@ -58,14 +59,16 @@ def current(root):
 def fixture():
     root = Path(tempfile.mkdtemp(prefix='evejs-', dir=ANCHOR)).resolve()
     assert root.is_relative_to(ANCHOR) and root != BASELINE
-    for index, entry in enumerate(PAYLOAD):
+    originals = {}
+    for entry in PAYLOAD:
         original = BASELINE / entry['target']
-        if sha(original) != entry['baseSHA']:
-            original = BASELINE / '_local/npc-market-buyers/install/backup' / (str(index) + '.bin')
-        assert sha(original) == entry['baseSHA'], 'Unreviewed native baseline'
+        originals[entry['target']] = original.read_bytes() if original.exists() else None
+        if not original.exists():
+            continue
         target = root / entry['target']
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(original, target)
+    NATIVE_ORIGINALS[root] = originals
     for relative in ('package.json', 'server/package.json', 'server/src/network/tcp/handshake.js'):
         target = root / relative
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -152,7 +155,7 @@ class LauncherUpdateTests(unittest.TestCase):
         self.assertIsNotNone(check_update(SOURCE, OLD_VERSION, evejs_version='0.12.9',
             expected_mod_id='npc-market-buyers', opener=fake_feed()))
         self.assertIsNone(check_update(SOURCE, VERSION, evejs_version='0.12.9', opener=fake_feed()))
-        self.assertIsNone(check_update(SOURCE, OLD_VERSION, evejs_version='0.12.8', opener=fake_feed()))
+        self.assertIsNotNone(check_update(SOURCE, OLD_VERSION, evejs_version='0.12.8', opener=fake_feed()))
         self.assertIsNone(check_update(SOURCE, OLD_VERSION, evejs_version='0.12.9', opener=fake_feed(missing=True)))
         metadata = json.loads(ARCHIVE.with_suffix('.update.json').read_text())
         metadata['id'] = 'different-mod'
@@ -183,7 +186,13 @@ class LauncherUpdateTests(unittest.TestCase):
         self.assertEqual(mod.active, enabled)
         self.assertEqual(mod.api_descriptor.updates, SOURCE)
         for entry in PAYLOAD:
-            self.assertEqual(sha(root / entry['target']), entry['installedSHA'] if enabled else entry['baseSHA'])
+            expected = ((ROOT / 'payload' / entry['payload']).read_bytes() if enabled
+                        else NATIVE_ORIGINALS[root][entry['target']])
+            file = root / entry['target']
+            if expected is None:
+                self.assertFalse(file.exists())
+            else:
+                self.assertEqual(file.read_bytes(), expected)
         if enabled:
             run_public_action(mod, 'verify', operation).require_ready()
         assert_preserved(root, saved)

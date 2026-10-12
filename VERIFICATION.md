@@ -1,3 +1,15 @@
+# Version 0.1.18 verification
+
+The installation change removes file-hash and exact-version gates. Native files are backed up from the selected installation and restored on removal. File paths, package completeness, stopped-stack checks and unfinished-settlement recovery remain checked.
+
+Clean-source testing uses the unmodified server JavaScript from the official EveJS 0.12.9 source ZIP, with dependencies and a small selection of static reference data supplied separately. The installer creates the missing native executable. The real native purchase harness passed personal/corporation purchases, random batches, offline catch-up, lost daemon/wallet acknowledgements and restart recovery with no duplicate payment. All test processes and writable databases are isolated; no live installation update or restart is performed.
+
+Focused checks passed: 57 installer, login, settlement, scheduler and wallet contracts; 23 pricing/policy tests; four package/update-metadata checks; and four actual Launcher update/rollback checks. Two Launcher checks were skipped: public-hosted download (this candidate is not published) and the optional legacy ZIP bootstrap. Catalogue/source validation covers 257 strings in eight languages, client Python grammar and JavaScript syntax.
+
+The UI is unchanged. Earlier in-client visual approval is recorded below. Removing a version lock is not a claim that every future EveJS API change has been tested.
+
+## Earlier 0.1.17 evidence
+
 # Verification — NPC Market Buyers 0.1.17
 
 Version 0.1.17 adds Launcher update metadata and automatic sidecar packaging. Gameplay, client code and the five-file native market payload are unchanged from 0.1.16. The visual and accounting evidence below applies to the approved 0.1.16 implementation. The maintainer requested publication as a new version and a local installation update on 2026-10-11.

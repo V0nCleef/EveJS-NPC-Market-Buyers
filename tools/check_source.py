@@ -1,6 +1,6 @@
 """Portable source/catalogue/payload checks; never reads a live EveJS install."""
 from pathlib import Path
-import ast, hashlib, json, string, subprocess, warnings
+import ast, json, string, subprocess, warnings
 warnings.filterwarnings('ignore',category=DeprecationWarning)
 from lib2to3 import pygram, pytree
 from lib2to3.pgen2 import driver
@@ -41,7 +41,6 @@ for file in javascript:
 payload=json.loads((root/'payload/native.json').read_text())
 for entry in payload['files']:
     file=root/'payload'/entry['payload']
-    assert hashlib.sha256(file.read_bytes()).hexdigest()==entry['installedSHA'],entry['target']
     relative=entry['target'].removeprefix('externalservices/market-server/')
     if relative.endswith('.exe'):
         assert file.read_bytes()[:2]==b'MZ'
@@ -50,4 +49,4 @@ for entry in payload['files']:
 assert (root/'LICENSE').is_file()
 print(json.dumps({'version':package['version'],'catalogueStrings':len(catalogue['strings']),
     'languages':8,'pythonFiles':len(clients),'javascriptFiles':len(javascript),
-    'reviewedNativePayloadFiles':len(payload['files']),'liveRuntimeAccessed':False}))
+    'nativePayloadFiles':len(payload['files']),'liveRuntimeAccessed':False}))

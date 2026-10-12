@@ -10,7 +10,7 @@ NPC institutions buy your sell orders in sensible, randomised batches. Prices ar
 
 [Releases](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases) · [Feature guide](docs/FEATURES.md) · [Changelog](CHANGELOG.md) · [Report an issue](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/issues)
 
-**Version 0.1.17 adds Launcher update support.** It includes the approved active-order totals, archived Activity and Statistics page from 0.1.16.
+**Version 0.1.18 simplifies installation.** No native baseline hashes, login-source fingerprints or exact EveJS version lock. Launcher updates, active-order totals, archived Activity and Statistics remain included.
 
 ![Statistics in the EVE client](docs/media/statistics-0.1.16.png)
 
@@ -18,7 +18,7 @@ NPC institutions buy your sell orders in sensible, randomised batches. Prices ar
 
 [![Watch the NPC Market Buyers showcase](docs/media/showcase-thumbnail.jpg)](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/download/v0.1.15/NPC-Market-Buyers-Showcase-0.1.15.mp4)
 
-[Watch the original 2-minute showcase](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/download/v0.1.15/NPC-Market-Buyers-Showcase-0.1.15.mp4) · [Download 0.1.17](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/tag/v0.1.17)
+[Watch the original 2-minute showcase](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/download/v0.1.15/NPC-Market-Buyers-Showcase-0.1.15.mp4) · [Download the latest release](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/latest)
 
 ## What it does
 
@@ -36,18 +36,18 @@ NPC institutions buy your sell orders in sensible, randomised batches. Prices ar
 
 ## Requirements
 
-| Component | Reviewed compatibility |
+| Component | Tested setup |
 |---|---|
 | EveJS | **0.12.9** |
 | Launcher | **1.0.69 or newer**, with the shared Mods menu |
 | EVE client | Build **3396210** |
 | Backend | **Native Windows** |
 
-The installer validates the reviewed native file hashes. Other EveJS builds or modified native market files can be refused. Docker is not supported by this release.
+The installer backs up your actual native market files and installs the included executable and matching source. A precompiled market executable is not required. It does not compare file hashes or require an exact EveJS version; the setup above is the version tested. Docker is not supported by this release. Disabling or removing the mod restores the files saved when it was enabled.
 
 ## Install
 
-1. Download **NPC-Market-Buyers-0.1.17.zip** from the [release's Assets](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/tag/v0.1.17).
+1. Download the **NPC-Market-Buyers-{version}.zip** attached to the [latest release](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/latest).
 2. Stop EveJS and the native market in the Launcher, and close EVE.
 3. Open **Launcher → Mods → Add ZIP**, select the package and install/enable it.
 4. Start the stack and reconnect EVE.
@@ -55,7 +55,7 @@ The installer validates the reviewed native file hashes. Other EveJS builds or m
 
 Use the attached Launcher ZIP. GitHub's automatic **Source code** downloads are development archives and cannot be imported as this mod.
 
-**Updating from 0.1.16 or earlier:** these versions did not declare a Launcher update source, so one manual update is required. Disable/remove the old package, import the 0.1.17 ZIP, and enable it. Keep only one version enabled. Settings and purchase history live outside the replaceable mod folder and are retained.
+**Updating from 0.1.16 or earlier:** these versions did not declare a Launcher update source, so one manual update is required. Disable/remove the old package, import the latest ZIP, and enable it. Keep only one version enabled. Settings and purchase history live outside the replaceable mod folder and are retained.
 
 **From 0.1.17 onward:** use **Launcher → Mods → Check mod updates**, then the offered **Update** button for a newer compatible release. Checking does not install anything. Stop the stack and close EVE before applying an update. The attached `.update.json` file is for the Launcher; import only the mod ZIP. Back up your server data before installing or updating mods.
 
@@ -93,4 +93,4 @@ python tools/check_source.py
 
 Use Node.js 22+ and Python 3.12. These portable checks need no server or npm dependencies. Native and client contracts require your own local installation/reference files; see [Development](docs/DEVELOPMENT.md).
 
-[VERIFICATION.md](VERIFICATION.md) records the latest checks and their limits. Isolated checks are separate from live rendering and gameplay approval. The native market source and reviewed payload are included; see [Attribution](NOTICE.md) and [LICENSE](LICENSE).
+[VERIFICATION.md](VERIFICATION.md) records the latest checks and their limits. Isolated checks are separate from live rendering and gameplay approval. The native market source and packaged executable are included; see [Attribution](NOTICE.md) and [LICENSE](LICENSE).

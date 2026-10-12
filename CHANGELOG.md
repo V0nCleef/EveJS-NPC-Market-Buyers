@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.18 — Simple installation (2026-10-12)
+
+- Removes native baseline/content hash gates, login-source fingerprints and the exact EveJS version lock.
+- Backs up the user's actual market files, installs the packaged executable/source, and restores originals on removal. Fresh source ZIPs do not need a precompiled market executable.
+- Existing installation receipts keep their original backups. Repair/reinstall accepts rebuilt native files.
+- Fixes the purchase completion hook for clean stock EveJS as well as local trade-history builds.
+- Retains stopped-stack protection, interrupted-install recovery and unfinished-payment recovery checks.
+
 ## 0.1.17 — Launcher update support (2026-10-11)
 
 - Adds the missing GitHub update source and matching release metadata so future compatible versions appear in Launcher → Mods → Check mod updates.

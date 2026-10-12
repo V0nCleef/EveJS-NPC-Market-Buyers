@@ -9,8 +9,6 @@ function install(root=resolveRoot()){
   if(!isMainThread)return {active:false,reason:"worker_thread"};
   if(process.env.EVEJS_WALLET_AUTHORITY_OWNER==='1'||/[\\/]server[\\/]src[\\/].*\.worker\.js$/i.test(process.argv[1]||''))return {active:false,reason:"native_owner_worker"};
   if(globalThis[symbol])return globalThis[symbol];
-  const version=JSON.parse(fs.readFileSync(path.join(root,"server/package.json"),"utf8")).version;
-  if(version!=="0.12.9"||!delivery.supportsRoot(root))throw Error("NPC Market Buyers supports the reviewed EveJS 0.12.9 Native login builder");
   const state={active:true,root,delivery:delivery.createDelivery(__dirname),runtime:null};
   const marketFile=canonical(path.join(root,"server/src/services/market/marketProxyService.js"));
   const handshakeFile=canonical(path.join(root,"server/src/network/tcp/handshake.js"));

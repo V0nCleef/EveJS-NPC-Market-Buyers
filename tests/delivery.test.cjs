@@ -3,20 +3,12 @@ const test=require('node:test'),assert=require('node:assert/strict'),fs=require(
 const delivery=require('../lib/loginDelivery');
 const root=path.resolve(process.env.EVEJS_TEST_ROOT||path.join(__dirname,'../../EveJS-v0.12.9')),modRoot=path.resolve(__dirname,'..');
 function envelope(expression){const bytes=Buffer.from(expression,'latin1'),header=Buffer.alloc(5);header[0]=0x74;header.writeUInt32LE(bytes.length,1);return Buffer.concat([header,bytes]);}
-test('handshake guard accepts the exact GridCheck client-agent patch and rejects altered or relocated hunks',t=>{
- const base=fs.readFileSync(path.join(root,'server/src/network/tcp/handshake.js'),'utf8').replace(/\r\n/g,'\n');
- const directory=path.join(modRoot,'.test-runtime');fs.mkdirSync(directory,{recursive:true});
- const temporary=fs.mkdtempSync(path.join(directory,'handshake-')),file=path.join(temporary,'server/src/network/tcp/handshake.js');
- fs.mkdirSync(path.dirname(file),{recursive:true});
- t.after(()=>{assert.ok(temporary.startsWith(directory+path.sep));fs.rmSync(temporary,{recursive:true,force:true});});
- const func='  // gridcheck:patch client-agent v1\n  const gridcheckClientFunc = globalThis[Symbol.for("gridcheck.clientAgent.v1")];\n  if (gridcheckClientFunc) return buildMarshaledString(gridcheckClientFunc.wrapLoginExpression(expr, clientId));\n';
- const login='    // gridcheck:patch client-agent v1\n    const gridcheckClientLogin = globalThis[Symbol.for("gridcheck.clientAgent.v1")];\n    if (gridcheckClientLogin) gridcheckClientLogin.resolveLogin(loginData, { accountStore, dictGet, strVal });\n';
- const patched=base.replace('  return buildMarshaledString(expr);',func+'  return buildMarshaledString(expr);')
-   .replace('    const loginData = decoded[1];\n','    const loginData = decoded[1];\n'+login);
- for(const source of [base,patched,patched.replace(/\n/g,'\r\n')]){fs.writeFileSync(file,source);assert.equal(delivery.supportsRoot(temporary),true);}
- for(const source of [patched+'\n',patched.replace('resolveLogin(loginData','resolveLogin(changed'),patched.replace(func,'')+func]){
-   fs.writeFileSync(file,source);assert.equal(delivery.supportsRoot(temporary),false);
- }
+test('login attachment uses the available send method without source or version fingerprints',()=>{
+ class Handshake{_sendPacket(packet){return packet;}}
+ delivery.installHandshake(Handshake,{delivery:delivery.createDelivery(modRoot),codec:{}});
+ const bytes=Buffer.from('unrelated');assert.equal(new Handshake()._sendPacket(bytes),bytes);
+ class Missing{}
+ assert.throws(()=>delivery.installHandshake(Missing,{codec:{}}),/login send seam/);
 });
 test('post-compile login payload composes after installed AutoMining and preserves original bytes',()=>{
   const autoRoot=path.join(root,'mods/AutoMining-1.2.0');

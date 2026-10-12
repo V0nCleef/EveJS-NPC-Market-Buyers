@@ -53,6 +53,6 @@ test('actual transformed saga retains ambiguous commit and retries same wallet/c
   const f=fixture('unknown');await assert.rejects(f.run(),/reply lost/);
   assert.deepEqual(f.balances,{1:900,2:99});assert.equal(f.stats().queued,1);
   await f.run();assert.deepEqual(f.balances,{1:900,2:99});assert.equal(f.moves.size,1);
-  assert.equal(f.stats().daemonCalls,2);assert.equal(f.stats().tradeCalls,1);assert.equal(f.stats().completionCalls,1);
+  assert.equal(f.stats().daemonCalls,2);assert.equal(f.stats().completionCalls,1);
   assert.equal(f.stats().escrow.remainingQuantity,90);assert.equal(f.stats().escrow.pendingFill,null);
 });

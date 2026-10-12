@@ -1,0 +1,24 @@
+{
+  "version": "0.1.18",
+  "tag": "v0.1.18",
+  "date": "2026-10-12",
+  "repository": "V0nCleef/EveJS-NPC-Market-Buyers",
+  "asset": "NPC-Market-Buyers-0.1.18.zip",
+  "sha256": "2ba54a08d604aad306cf4777e9f3d16b5e72bb91136e3d03ad3cb6177a733903",
+  "bytes": 3002087,
+  "entries": 47,
+  "updateMetadata": "NPC-Market-Buyers-0.1.18.update.json",
+  "updateMetadataSHA256": "71290c5e5d97ea7cfc09fb3216c65572e89cf270d36c26be46c2180781e912d1",
+  "nativePayloadChanged": false,
+  "clientChanged": false,
+  "installerAndStockSettlementChanged": true,
+  "maintainerApproved": true,
+  "verification": {
+    "serverNativeContracts": 57,
+    "pricingContracts": 23,
+    "portableUpdateChecks": 4,
+    "launcherIntegrationChecks": 4,
+    "cleanStockNativeIntegration": true,
+    "priorVisualEvidenceVersion": "0.1.16"
+  }
+}
