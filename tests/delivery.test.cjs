@@ -2,6 +2,7 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const delivery=require('../lib/loginDelivery');
 const root=path.resolve(process.env.EVEJS_TEST_ROOT||path.join(__dirname,'../../EveJS-v0.12.9')),modRoot=path.resolve(__dirname,'..');
+const autoRoot=path.resolve(process.env.EVEJS_AUTOMINING_ROOT||path.join(root,'mods/AutoMining-1.2.0'));
 function envelope(expression){const bytes=Buffer.from(expression,'latin1'),header=Buffer.alloc(5);header[0]=0x74;header.writeUInt32LE(bytes.length,1);return Buffer.concat([header,bytes]);}
 test('login attachment uses the available send method without source or version fingerprints',()=>{
  class Handshake{_sendPacket(packet){return packet;}}
@@ -11,7 +12,6 @@ test('login attachment uses the available send method without source or version 
  assert.throws(()=>delivery.installHandshake(Missing,{codec:{}}),/login send seam/);
 });
 test('post-compile login payload composes after installed AutoMining and preserves original bytes',()=>{
-  const autoRoot=path.join(root,'mods/AutoMining-1.2.0');
   const auto=require(path.join(autoRoot,'lib/loginDelivery')).createDelivery(autoRoot);
   const own=delivery.createDelivery(modRoot),original=envelope("'\xff'");
   // AutoMining wraps the builder; NPC wraps the outgoing packet after the
@@ -25,7 +25,7 @@ test('post-compile login payload composes after installed AutoMining and preserv
 });
 test('actual Launcher shared-menu and AutoMining wrappers retain native source without NPC source mutation',()=>{
   const file=path.join(root,'server/src/network/tcp/handshake.js'),baseline=fs.readFileSync(file,'utf8');
-  const auto=require(path.join(root,'mods/AutoMining-1.2.0/lib/loginDelivery'));
+  const auto=require(path.join(autoRoot,'lib/loginDelivery'));
   const shared=path.join(process.env.EVEJS_LAUNCHER_ROOT||'../evejs-launcher','src/core/client/shared_menu_loader.cjs');
   const frozen={handshakeSha256:require('node:crypto').createHash('sha256').update(baseline).digest('hex'),framework:'IyBmaXh0dXJl',frameworkDigest:'fixture',entries:[]};
   for(const input of [auto.extendSource(baseline)]){

@@ -10,7 +10,7 @@ NPC institutions buy your sell orders in sensible, randomised batches. Prices ar
 
 [Releases](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases) · [Feature guide](docs/FEATURES.md) · [Changelog](CHANGELOG.md) · [Report an issue](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/issues)
 
-**Version 0.1.18 simplifies installation.** No native baseline hashes, login-source fingerprints or exact EveJS version lock. Launcher updates, active-order totals, archived Activity and Statistics remain included.
+**Version 0.1.19 supports EveJS 261018.1 and preserves native support across supported official updates.** Launcher startup automatically repairs recognized upstream source replacements, keeps settings and history, and refreshes uninstall originals. Unrecognized changes require a merge.
 
 ![Statistics in the EVE client](docs/media/statistics-0.1.16.png)
 
@@ -38,12 +38,16 @@ NPC institutions buy your sell orders in sensible, randomised batches. Prices ar
 
 | Component | Tested setup |
 |---|---|
-| EveJS | **0.12.9** |
-| Launcher | **1.0.69 or newer**, with the shared Mods menu |
+| EveJS | **0.12.9 and 261018.1** |
+| Launcher | **1.0.74 or newer**, with native service startup preparation |
 | EVE client | Build **3396210** |
 | Backend | **Native Windows** |
 
-The installer backs up your actual native market files and installs the included executable and matching source. A precompiled market executable is not required. It does not compare file hashes or require an exact EveJS version; the setup above is the version tested. Docker is not supported by this release. Disabling or removing the mod restores the files saved when it was enabled.
+The installer backs up your actual native market files and installs the included executable and matching source. A precompiled market executable is not required. Docker is not supported. Active installation changes are checked against the receipt and supported upstream source identities before any replacement.
+
+After the official EveJS updater replaces native sources, start the Native stack normally in Launcher **1.0.74 or newer**. The Launcher calls the mod's declared `prepare_server_start` capability before spawning either native service. Healthy support is checked without writes, even when the market is already running. A recognized complete upstream replacement is repaired only while both services are stopped. Disabled or absent support is never automatically installed, and interrupted disable/removal requires manual recovery.
+
+Repair saves the new upstream originals so later disable/removal cannot restore the previous EveJS version. A preserved executable from the old version is removed on disable; normal Native startup rebuilds it from the restored current source. Purchase settings and history remain under `_local/npc-market-buyers/state.sqlite`. Explicit **Actions → Install / Update** and **Recover** remain available; Verify and client launch preparation stay read-only.
 
 ## Install
 

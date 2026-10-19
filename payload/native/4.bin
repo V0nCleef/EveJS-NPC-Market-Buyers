@@ -2663,14 +2663,34 @@ fn insert_order(database_path: &Path, request: PlaceOrderRequest) -> Result<Plac
     }
 
     let mut connection = load_connection(database_path)?;
-    let station_meta = lookup_station_meta(&connection, request.station_id)?;
+    let transaction = begin_write_transaction(&mut connection)?;
+    let station_exists: bool = transaction.query_row(
+        "SELECT EXISTS(SELECT 1 FROM stations WHERE station_id = ?1)",
+        params![request.station_id], |row| row.get(0),
+    )?;
+    if !station_exists {
+        if let Some(metadata) = &request.station_metadata {
+            if metadata.station_id != request.station_id || metadata.station_id == 0 ||
+                metadata.solar_system_id == 0 || metadata.constellation_id == 0 || metadata.region_id == 0 ||
+                metadata.station_name.trim().is_empty() || !metadata.security.is_finite() ||
+                !(-1.0..=1.0).contains(&metadata.security) {
+                bail!("invalid game-authority station metadata");
+            }
+            transaction.execute(
+                "INSERT INTO stations (station_id, solar_system_id, constellation_id, region_id, station_name, security)
+                 VALUES (?1, ?2, ?3, ?4, ?5, ?6)",
+                params![metadata.station_id, metadata.solar_system_id, metadata.constellation_id,
+                    metadata.region_id, metadata.station_name, metadata.security],
+            )?;
+        }
+    }
+    let station_meta = lookup_station_meta(&transaction, request.station_id)?;
     let now = now_rfc3339();
     let source = request.source.unwrap_or_else(|| "player".to_string());
     let wallet_division = request.wallet_division.unwrap_or(1000);
     let min_volume = request.min_volume.unwrap_or(1);
     let duration_days = request.duration_days.unwrap_or(90);
     let range_value = request.range_value.unwrap_or(32_767);
-    let transaction = begin_write_transaction(&mut connection)?;
     transaction.execute(
         "INSERT INTO market_orders (
            owner_id, is_corp, wallet_division, station_id, solar_system_id, constellation_id, region_id,

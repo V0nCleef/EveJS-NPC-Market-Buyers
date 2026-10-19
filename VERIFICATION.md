@@ -1,3 +1,17 @@
+# Version 0.1.19 verification
+
+The included native source and executable preserve EveJS 261018.1 station metadata and order validation while retaining conditional fills, wallet/escrow settlement and trade-history idempotency. The payload also supports the tested EveJS 0.12.9 baseline. In-game client code and UI are unchanged.
+
+The manifest requires Launcher 1.0.74 and opts into `prepare_server_start`. Healthy active support returns without writes or service-inactivity checks. A complete recognized upstream source replacement is repaired only while both native services are stopped. Disabled/absent support is never silently installed. Partial or unknown changes, invalid rollback backups and interrupted disable/removal stop before replacement. Interrupted active repair resumes only from durable exact source identities.
+
+Nineteen focused lifecycle tests passed, including automatic repair, healthy no-op byte/mtime checks, running-service refusal, preserved settings/history SQLite bytes, unknown/partial source rejection and interrupted repair/disable behavior. Portable source/catalogue validation covers 257 strings in eight languages, six client Python files, JavaScript syntax and five matching native payload files.
+
+An isolated copy of EveJS 0.12.9 was upgraded to 261018.1 with the actual official updater. The real Launcher startup path automatically repaired NPC Market Buyers before starting a real native market process; its health RPC passed. Starting the game while that market was healthy performed no repair writes. Game spawning was simulated: this check did not start the EVE client or a real game server. Busy-service and unknown-edit controls blocked startup without writes; a market-only retry repaired successfully. The saved settings/history database remained byte-for-byte identical and no manual Recover action was used.
+
+Earlier testing of this exact native payload passed 23 existing Rust tests plus a station-metadata/conditional-fill regression, 82 focused Node contracts and real isolated native purchase settlement against EveJS 261018.1: personal/corporation payments, tax, custody/escrow, quantities, random/offline batches, restart idempotency and lost daemon/wallet acknowledgement recovery. No live installation, financial database or game client was changed for these checks. New live HUD rendering and real ESI pricing were not rerun.
+
+## Earlier 0.1.18 evidence
+
 # Version 0.1.18 verification
 
 The installation change removes file-hash and exact-version gates. Native files are backed up from the selected installation and restored on removal. File paths, package completeness, stopped-stack checks and unfinished-settlement recovery remain checked.

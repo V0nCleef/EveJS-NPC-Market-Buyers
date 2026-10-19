@@ -10,6 +10,44 @@ const SYSTEM: u32 = 30_002_775;
 const REGION: u32 = 10_000_033;
 
 #[test]
+fn institutional_port_preserves_new_native_station_metadata() -> Result<()> {
+    let fixture = TestDatabase::new()?;
+    let station_id = STATION + 1;
+    let request = PlaceOrderRequest {
+        owner_id: 99, is_corp: false, wallet_division: None, station_id,
+        station_metadata: Some(market_common::StationMetadata {
+            station_id, solar_system_id: SYSTEM, constellation_id: 4,
+            region_id: REGION, station_name: "New unseeded station".into(), security: 0.9,
+        }),
+        type_id: 35, price: 5.0, quantity: 10, bid: false,
+        min_volume: None, duration_days: None, range_value: None, source: Some("player".into()),
+    };
+    let placed = insert_order(&fixture.0, request.clone())?;
+    let connection = load_connection(&fixture.0)?;
+    assert_eq!(connection.query_row(
+        "SELECT station_name FROM stations WHERE station_id=?1", params![station_id],
+        |row| row.get::<_, String>(0),
+    )?, "New unseeded station");
+    let result = fill_order_in_db(&fixture.0, FillOrderRequest {
+        order_id: placed.order_id, fill_quantity: 3,
+        idempotency_key: Some("conditional:new-station".into()),
+        expected: Some(market_common::ExpectedFill {
+            owner_id: 99, is_corp: false, type_id: 35, station_id,
+            price: 5.0, vol_remaining: 10, source: "player".into(),
+        }),
+    })?;
+    assert_eq!(result.filled_quantity, 3);
+    let mut invalid = request;
+    invalid.station_id += 1;
+    assert!(insert_order(&fixture.0, invalid).is_err());
+    assert_eq!(connection.query_row(
+        "SELECT COUNT(*) FROM stations WHERE station_id=?1", params![station_id + 1],
+        |row| row.get::<_, u64>(0),
+    )?, 0);
+    Ok(())
+}
+
+#[test]
 fn institutional_conditional_fill_checks_identity_price_state_and_receipt() -> Result<()> {
     let fixture = TestDatabase::new()?;
     let expected = market_common::ExpectedFill { owner_id:99, is_corp:false, type_id:35,

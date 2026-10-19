@@ -418,12 +418,26 @@ pub struct DiagnosticsResponse {
     pub manifest: MarketManifest,
 }
 
+/// Immutable NPC-station metadata supplied by the game authority, never by a
+/// player order payload. Seed presets may omit stations that still allow trade.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct StationMetadata {
+    pub station_id: u64,
+    pub solar_system_id: u32,
+    pub constellation_id: u32,
+    pub region_id: u32,
+    pub station_name: String,
+    pub security: f64,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PlaceOrderRequest {
     pub owner_id: u64,
     pub is_corp: bool,
     pub wallet_division: Option<u32>,
     pub station_id: u64,
+    #[serde(default)]
+    pub station_metadata: Option<StationMetadata>,
     pub type_id: u32,
     pub price: f64,
     pub quantity: u64,

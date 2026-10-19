@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.19 — EveJS 261018.1 and automatic update recovery (2026-10-19)
+
+- Supports EveJS 261018.1 while preserving its native station metadata and order validation.
+- Repairs native market support automatically after a supported official EveJS update, before either native service starts. Requires Launcher 1.0.74 or newer.
+- Preserves saved settings and purchase history. Refreshed rollback originals prevent later removal from restoring the previous EveJS version.
+- Leaves healthy installs untouched, including when the native market is already running. Unrecognized or partial source changes stop startup without overwriting them; interrupted disable/removal stays manual.
+- Retains existing pricing, purchase settlement and in-game UI behavior. Native Windows only.
+
 ## 0.1.18 — Simple installation (2026-10-12)
 
 - Removes native baseline/content hash gates, login-source fingerprints and the exact EveJS version lock.

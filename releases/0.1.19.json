@@ -1,0 +1,29 @@
+{
+  "version": "0.1.19",
+  "tag": "v0.1.19",
+  "date": "2026-10-19",
+  "repository": "V0nCleef/EveJS-NPC-Market-Buyers",
+  "asset": "NPC-Market-Buyers-0.1.19.zip",
+  "sha256": "d6ed9f594ed3075ffc614b5c8e8bd798e13570f2970418d0985a90348c5b1259",
+  "bytes": 3018369,
+  "entries": 48,
+  "updateMetadata": "NPC-Market-Buyers-0.1.19.update.json",
+  "updateMetadataSHA256": "40fd4964edfd70240e7302f1bb7933d2ab5f1ff23d64ba59bf751ab216ac4285",
+  "minLauncherVersion": "1.0.74",
+  "nativePayloadChanged": true,
+  "clientChanged": false,
+  "maintainerApproved": true,
+  "verification": {
+    "freshCheckoutLifecycleAndPricingChecks": 42,
+    "portableUpdateChecks": 4,
+    "nativeLifecycleChecks": 19,
+    "sourceCataloguePayloadCheck": true,
+    "officialUpdater261018": true,
+    "automaticRepairBeforeNativeMarketSpawn": true,
+    "realNativeHealth": true,
+    "gameSpawnSimulated": true,
+    "savedSettingsHistoryByteIdentical": true,
+    "exactTestedRuntimeBytes": true,
+    "noLiveInstallationWrites": true
+  }
+}

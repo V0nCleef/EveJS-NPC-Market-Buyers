@@ -220,7 +220,7 @@ async fn dispatch_request(runtime: MarketRuntime, method: &str, params: Value) -
           "status": "ok",
           "started_at": runtime.started_at,
           "database_path": runtime.database_path.to_string_lossy(),
-          "capabilities": ["idempotent-fill-v1", "inventory-trade-averages-v1", "conditional-fill-v1"],
+          "capabilities": ["idempotent-fill-v1", "native-station-metadata-v1", "inventory-trade-averages-v1", "conditional-fill-v1"],
         })),
         "GetManifest" => Ok(serde_json::to_value(&*runtime.manifest)?),
         "GetDiagnostics" => Ok(serde_json::to_value(runtime.diagnostics().await?)?),
