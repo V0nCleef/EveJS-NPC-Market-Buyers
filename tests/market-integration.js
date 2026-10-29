@@ -53,8 +53,9 @@ async function runChild(phase,directory,rpcPort){return new Promise((resolve,rej
   child.once('exit',code=>{clearTimeout(timer);output.end();if(code===0)resolve();else reject(Error(`Integration ${phase} exited ${code}; see ${phase}.log`));});
 });}
 async function parent(){
-  const binary=process.argv[2]||path.join(candidate,'native/market-server/target/release/market-server.exe');
+  const binary=path.resolve(process.argv[2]||path.join(candidate,'native/market-server/target/release/market-server.exe'));
   if(!fs.existsSync(binary))throw Error('Built candidate daemon required: '+binary);
+  fs.mkdirSync(path.join(candidate,'evidence'),{recursive:true});
   const directory=fs.mkdtempSync(path.join(candidate,'evidence/market-native-'));
   fs.mkdirSync(path.join(directory,'store/data'),{recursive:true});staticFixture(path.join(directory,'store/data'));
   marketFixture(path.join(directory,'market.sqlite'));
@@ -73,8 +74,20 @@ async function phase(name,directory){
   assert.equal(process.env.NPC_MARKET_INTEGRATION_FIXTURE,directory);
   assert.ok(path.resolve(process.env.EVEJS_GAMESTORE_DATA_DIR).startsWith(path.resolve(directory)+path.sep));
   const {prepareMarketSource,createMarketAdapter}=require('../lib/marketAdapter');
+  const {prepareWalletSource,shared:walletBatching}=require('../lib/walletBatching');
   const target=path.join(root,'server/src/services/market/marketProxyService.js'),originalCompile=Module.prototype._compile;
-  Module.prototype._compile=function(content,filename){return originalCompile.call(this,path.resolve(filename)===target?prepareMarketSource(content):content,filename);};
+  const walletFiles=new Map([
+    [path.join(root,'server/src/services/account/walletState.js'),false],
+    [path.join(root,'server/src/services/corporation/corpWalletState.js'),true],
+  ]);
+  Module.prototype._compile=function(content,filename){
+    const file=path.resolve(filename);
+    if(file===target)content=prepareMarketSource(content);
+    if(walletFiles.has(file))content=prepareWalletSource(content,walletFiles.get(file));
+    const result=originalCompile.call(this,content,filename);
+    if(walletFiles.has(file))walletBatching.installWallet(this.exports,walletFiles.get(file));
+    return result;
+  };
   const db=require(path.join(root,'server/src/gameStore'));
   const wallet=require(path.join(root,'server/src/services/account/walletState'));
   let lostWalletKey=null,walletInjected=false;
@@ -90,6 +103,7 @@ async function phase(name,directory){
   const {marketDaemonClient}=require(path.join(root,'server/src/services/market/marketDaemonClient'));
   const Service=require(target);
   const {createStore}=require('../lib/store'),store=createStore(path.join(directory,'mod.sqlite'),{Database});
+  walletBatching.attach(store);
   const adapter=createMarketAdapter(root,{store});
   try{
     if(name==='purchase'){
@@ -131,12 +145,20 @@ async function phase(name,directory){
       assert.equal(corporations.setCorporationRecord({corporationID,corporationName:'Isolated Player Corporation',
         tickerName:'NMB',ceoID:sellerID,creatorID:sellerID,isNPC:false,memberIDs:[sellerID]}).success,true);
       assert.equal(runtime.updateCorporationRuntime(corporationID,()=>({})).success,true);
+      // Native permissions require a persisted affiliation/index transition,
+      // rather than just a Trader role asserted by the fixture session.
+      assert.equal(corporations.setCharacterAffiliation(sellerID,corporationID).success,true);
       db.flushTableSync('corporations');db.flushTableSync('corporationRuntime');
       assert.equal((await corpWallet.setCorporationWalletDivisionBalanceAsync(corporationID,1000,10000000,
         {description:'Isolated test fixture funding'},{commandID:'integration:corp:initial'})).success,true);
       const corpGrant=items.grantItemToCharacterStationHangar(sellerID,stationID,34,100);
       assert.equal(corpGrant.success,true);const corpItem=corpGrant.data.items?corpGrant.data.items[0]:corpGrant.data;
-      const corpSession={...session,corpid:corporationID,corprole:'18014398509481984',corpAccountKey:1000};
+      runtime.ensureCharacterMemberState(corporationID,sellerID);
+      const corpRoles=runtime.getCorporationSessionRoleState(corporationID,sellerID);
+      const corpSession={...session,...corpRoles,corpid:corporationID,corpAccountKey:corpRoles.accountKey};
+      const corpAuthority=require(path.join(root,'server/src/services/corporation/corporationAuthority'));
+      assert.ok(corpAuthority.getPersistedCorporationAuthority(corpSession),'fixture seller must be a persisted corporation member');
+      assert.ok(corpAuthority.corporationAuthorityHasRole(corpAuthority.getPersistedCorporationAuthority(corpSession),runtime.CORP_ROLE_TRADER),'fixture role calculation must grant Trader');
       assert.equal(await service.Handle_PlaceMultiSellOrder([[{itemID:corpItem.itemID,typeID:34,stationID,quantity:100,price:10}],true,30],corpSession),true);
       const corpOrder=(await adapter.listOrders()).find(order=>order.isCorp);assert.ok(corpOrder);
       const corpBefore=corpWallet.getCorporationWalletBalance(corporationID,1000),corpKey=`npc-market:integration:corp:${corpOrder.orderID}`;
@@ -158,7 +180,7 @@ async function phase(name,directory){
       let ironTime=Date.now();
       const ironQuotes={get:async()=>({typeID:34,referencePrice:1000000000,dailyVolume:0,orders:3,confidence:'high',updatedAt:ironTime})};
       const ironEngine=createEngine({adapter:{...adapter,listOrders:async()=>[ironOrder]},quotes:ironQuotes,store,
-        getConfig:()=>store.getConfig(),evaluate,clock:()=>ironTime,random:()=>0});
+        getConfig:()=>store.getConfig(),evaluate,clock:()=>ironTime,random:()=>0,walletBatching});
       const ironBefore=wallet.getCharacterWallet(sellerID).balance;
       await ironEngine.runCycle();ironTime+=900000;await ironEngine.runCycle();await ironEngine.stop();
       assert.equal(ironEngine.status().pending,0);assert.equal(ironEngine.status().spentTodayISK,1000000000);
@@ -178,7 +200,7 @@ async function phase(name,directory){
       const samples=[0,.75];ironTime+=900000;
       const randomEngine=createEngine({adapter:{...adapter,listOrders:async()=>[randomOrder]},
         quotes:{get:async()=>({typeID:34,referencePrice:9,dailyVolume:0,orders:3,confidence:'high',updatedAt:ironTime})},
-        store,getConfig:()=>store.getConfig(),evaluate,clock:()=>ironTime,random:()=>{assert.ok(samples.length);return samples.shift();}});
+        store,getConfig:()=>store.getConfig(),evaluate,clock:()=>ironTime,walletBatching,random:()=>{assert.ok(samples.length);return samples.shift();}});
       const randomBefore=wallet.getCharacterWallet(sellerID).balance;
       await randomEngine.runCycle();await randomEngine.stop();assert.equal(samples.length,0);
       const randomReceipt=JSON.parse(store.db.prepare("SELECT result_json FROM nm_operations WHERE quantity=31 AND state='settled'").get().result_json);
@@ -194,7 +216,7 @@ async function phase(name,directory){
       let offlineTime=ironTime;
       const offlineOptions={adapter:{...adapter,listOrders:async()=>(await adapter.listOrders()).filter(o=>o.orderID===randomOrder.orderID)},
         quotes:{get:async()=>({typeID:34,referencePrice:9,dailyVolume:0,orders:3,confidence:'high',updatedAt:offlineTime})},
-        store,getConfig:()=>store.getConfig(),evaluate,clock:()=>offlineTime,random:()=>0};
+        store,getConfig:()=>store.getConfig(),evaluate,clock:()=>offlineTime,random:()=>0,walletBatching};
       const offlineEngine=createEngine(offlineOptions),offlineBefore=wallet.getCharacterWallet(sellerID).balance;
       await offlineEngine.runCycle();offlineTime+=3*900000;
       for(let pass=0;pass<3;pass++)await offlineEngine.runCycle();
@@ -287,6 +309,7 @@ async function phase(name,directory){
       assert.equal(Object.keys(db.read('skills',`/${result.buyerID}`).data||{}).length,0);
       assert.equal(Object.values(db.read('items','/').data||{}).filter(i=>i.ownerID===result.buyerID&&i.typeID!==34).length,0);
       report.restartIdempotency=true;report.ambiguousCommitRecovery=true;report.walletAmbiguousRecovery=true;
+      report.realWalletSourceTransforms=true;report.realWalletBatching=true;
       report.institutionNoLogin=true;report.institutionBootstrapGoods=0;report.institutionBootstrapSkills=0;
       fs.writeFileSync(path.join(directory,'result.json'),JSON.stringify(report,null,2));
     }

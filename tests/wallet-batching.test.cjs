@@ -17,7 +17,7 @@ function fixture(t,{isCorp=false,cap=1000}={}){
   function wallet(owner,account=1000){const key=`${owner}:${account}`;
     if(!wallets.has(key))wallets.set(key,{balance:1000,rows:[]});return wallets.get(key);}
   const context={__npcMarketWalletBatching:batch,sessionRegistry:{getSessions:()=>sessions},
-    normalizeMoney:n=>Number(n),buildMarshalRealMoney:n=>n,ACCOUNT_KEY_NAME:{CASH:'cash'},
+    normalizeMoney:n=>Number(n),buildMarshalRealMoney:n=>n,ACCOUNT_KEY_NAME:{CASH:'cash'},CORPORATION_WALLET_KEY_START:1000,
     WALLET_COMMAND_TYPE:{CHARACTER_ADJUST_ISK:'personal',CORPORATION_ADJUST_ISK:'corporation'},
     getCharacterWallet:owner=>({balance:wallet(owner).balance,aurBalance:0,plexBalance:0,balanceChange:0}),
     getCorporationWalletBalance:(owner,account)=>wallet(owner,account).balance,
@@ -39,6 +39,7 @@ function fixture(t,{isCorp=false,cap=1000}={}){
   vm.createContext(context);
   const names=isCorp?['notifyCorporationWalletChange','isCollidedWalletReplay','resolveAnnouncedDivisionBalance','adjustCorporationWalletDivisionBalanceAsync']:
     ['syncWalletToSession','emitAccountChangeToSession','notifyCharacterWalletChange','resolveAnnouncedCharacterWallet','announceCharacterIskResult','adjustCharacterBalanceAsync'];
+  if(isCorp&&corpSource.includes('function notifyCorporationLiquidationWallet('))names.push('notifyCorporationLiquidationWallet');
   vm.runInContext(names.map(name=>extract(isCorp?corpSource:personalSource,name)).join('\n'),context);
   const native={};
   function install(){
@@ -68,6 +69,8 @@ function fixture(t,{isCorp=false,cap=1000}={}){
   return {native,receipts,sessions,notifications,session,adjust,purchase,get rows(){return wallet(2).rows;},get batch(){return batch;},get store(){return store;},get balance(){return wallet(2).balance;},
     read:(lang,owner=2,account=1000)=>batch.read(lang,()=>native[isCorp?'getCorporationWalletJournal':'getCharacterWalletJournal'](owner,{accountKey:account})),
     loseNextReply:key=>{lostReply=key;},
+    notify:balance=>context.notifyCorporationWalletChange(2,1000,balance),
+    liquidation:()=>context.notifyCorporationLiquidationWallet(2,140000101,0),
     reopen(){batch.flush();store.close();store=createStore(filename,{Database});batch=createWalletBatching();batch.attach(store);install();}};
 }
 
@@ -78,6 +81,32 @@ test('notification transforms compose with incoming native source and fail at ch
     assert.ok(transformed.includes('// other mod'));assert.throws(()=>prepareWalletSource(transformed,corp),/already installed/);
     assert.throws(()=>prepareWalletSource(source.replace('session.sendNotification("OnAccountChange"','session.changed("OnAccountChange"'),corp),/seam changed/);
   }
+});
+test('corporation bridge accepts both known notification shapes and rejects ambiguous or unknown shapes',()=>{
+  const input=fs.readFileSync(path.join(root,'server/src/services/corporation/corpWalletState.js'),'utf8');
+  const current='balance === null ? null : buildMarshalRealMoney(balance, 0)';
+  const legacy=input.replace(current,'buildMarshalRealMoney(balance, 0)');
+  for(const source of [legacy,legacy.replace('      buildMarshalRealMoney(balance, 0),','      '+current+',')])new vm.Script(prepareWalletSource(source,true));
+  assert.throws(()=>prepareWalletSource(legacy.replace('      buildMarshalRealMoney(balance, 0),','      Number(balance),'),true),/seam changed/);
+  const notification=extract(legacy,'notifyCorporationWalletChange');
+  assert.throws(()=>prepareWalletSource(legacy+'\n'+notification,true),/seam changed/);
+});
+test('corporation liquidation keeps all six null invalidations after a queued NPC batch',async t=>{
+  if(!corpSource.includes('function notifyCorporationLiquidationWallet('))return t.skip('Older native source has no corporation liquidation notifications');
+  const f=fixture(t,{isCorp:true});f.session();await f.purchase(1);
+  assert.equal(f.notifications.length,0);const rows=JSON.stringify(f.rows),balance=f.balance;
+  f.liquidation();
+  assert.deepEqual(f.notifications.map(n=>n.args[2][2]),[1092,null,null,null,null,null,null,0]);
+  assert.ok(f.notifications.every(n=>n.args[1]==='*corpid&corpAccountKey'&&n.args[2][0]==='cash'&&n.args[2][1]===2));
+  f.batch.flush();assert.equal(f.notifications.length,8);
+  assert.equal(f.balance,balance);assert.equal(JSON.stringify(f.rows),rows);
+});
+test('null invalidations remain immediate inside an owned corporation batch command',async t=>{
+  if(!corpSource.includes('balance === null ? null : buildMarshalRealMoney(balance, 0)'))return t.skip('Older native source has no null invalidations');
+  const f=fixture(t,{isCorp:true});f.session();const key=await f.purchase(1);
+  await f.batch.command(key+':wallet:seller-credit',2,true,1000,async()=>{f.notify(null);return {success:false};});
+  assert.deepEqual(f.notifications.map(n=>n.args[2][2]),[1092,null]);
+  f.batch.flush();assert.equal(f.notifications.length,2);assert.equal(f.balance,1092);
 });
 test('actual native wallet functions: 60 offline sales produce one net popup and one journal summary',async t=>{
   const f=fixture(t),client=f.session();

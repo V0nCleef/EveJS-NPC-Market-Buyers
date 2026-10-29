@@ -1,0 +1,64 @@
+{
+  "version": "0.1.20",
+  "tag": "v0.1.20",
+  "date": "2026-10-30",
+  "repository": "V0nCleef/EveJS-NPC-Market-Buyers",
+  "previousVersion": "0.1.19",
+  "asset": "NPC-Market-Buyers-0.1.20.zip",
+  "sha256": "340e1ecaddd668d57d893c7d951641c4e55061846c269778adba30641a697d88",
+  "bytes": 3019189,
+  "entries": 48,
+  "updateMetadata": "NPC-Market-Buyers-0.1.20.update.json",
+  "updateMetadataSHA256": "59a67ffe6edc48ca201aa574ec68c1297b84ea10610475487d6a171ce32fccf1",
+  "minLauncherVersion": "1.0.74",
+  "evejsVersions": [
+    "0.12.9",
+    "261018.1",
+    "261028.1"
+  ],
+  "nativePayloadChanged": false,
+  "clientChanged": false,
+  "maintainerApproved": true,
+  "exactPreparedZIP": true,
+  "sourceZIPDifferences": [
+    "README.md and VERIFICATION.md publication/user-confirmation wording",
+    "Source metadata uses LF line endings; packaged JSON content is equivalent",
+    "Development package.json scripts are omitted from the ZIP, as in prior releases"
+  ],
+  "verification": {
+    "focusedNodeChecks": 87,
+    "clientContractChecks": 83,
+    "sourceCataloguePayloadCheck": true,
+    "realIsolatedNativeSettlement": true,
+    "restartIdempotency": true,
+    "lostDaemonAndWalletAcknowledgementRecovery": true,
+    "actualLoaderServiceAndHandshakeAttachment": true,
+    "playerStateHashesPreservedAtInstallation": true,
+    "userReportedGameplay": "2026-10-30: current installed mods appear to work",
+    "automatedRetailClientTest": false,
+    "dockerTest": false,
+    "extendedSoakTest": false
+  },
+  "nativePayload": [
+    {
+      "target": "externalservices/market-server/target/release/market-server.exe",
+      "sha256": "eba2869b68885f92771e84c58a47cc28767c8a71cc41d999bd988e3a172fe681"
+    },
+    {
+      "target": "externalservices/market-server/crates/market-common/src/lib.rs",
+      "sha256": "f4a201600e70238a417488c884ca345dccf4ebc4c01a5b576bdca0ec1201d77c"
+    },
+    {
+      "target": "externalservices/market-server/src/main.rs",
+      "sha256": "2d3235c978eabb1b982fda72ca06e7a643d3dd37773fc52354b93727c25854f2"
+    },
+    {
+      "target": "externalservices/market-server/src/rpc.rs",
+      "sha256": "11220d749ff91f8ba5502b67babf781ce3e1e34b96ca1e836b97c4a14c919c1b"
+    },
+    {
+      "target": "externalservices/market-server/src/state.rs",
+      "sha256": "a4c289656d3b2310cd1862d7bc7a1410ac2a007c02c5cb290bf4a4d4cc4768f7"
+    }
+  ]
+}

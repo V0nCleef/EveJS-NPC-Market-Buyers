@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.20 — EveJS 261028.1 wallet compatibility (2026-10-30)
+
+- Restores runtime and menu attachment on EveJS 261028.1 by supporting its new corporation-wallet null-balance notification shape.
+- Preserves immediate corporation cache invalidations, numeric personal/corporation notification batching, wallet division isolation and current-balance delivery.
+- Retains Activity/history, saved settings and the matching five-file 0.1.19 native market payload. No state reset or financial replay is required.
+- Adds focused regression coverage and adapts the isolated corporation fixture to native persisted membership and role checks.
+- Requires Launcher 1.0.74 or newer. Stop the Native stack before updating, then start it and reconnect EVE. Native Windows only.
+
 ## 0.1.19 — EveJS 261018.1 and automatic update recovery (2026-10-19)
 
 - Supports EveJS 261018.1 while preserving its native station metadata and order validation.

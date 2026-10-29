@@ -1,3 +1,14 @@
+# Version 0.1.20 — EveJS 261028.1 compatibility
+
+The corporation-wallet transform accepts the two reviewed native notification shapes. New null-balance cache invalidations remain immediate and preserve their count and arguments. Numeric NPC notifications retain personal/corporation batching, division isolation and current-balance delivery. Authoritative wallet commands, identities, tax, settlement and native market payload are unchanged.
+
+- 87 focused Node checks passed against actual 261028.1 sources: wallet batching and restart receipts, settlement recovery, installer lifecycle guards, statistics, local pricing, native login codec, AutoMining composition and Launcher 1.0.74 shared-menu wrapper.
+- 83 client contracts passed using retained client-build-3396210 reference source: Sell Items advisor, HUD/settings/history/statistics, menus and native Wallet formatting. All 257 strings retain eight-language coverage; six client Python files and 17 JavaScript files pass source validation.
+- Real isolated Rust-market and wallet-authority integration passed: personal/corporation purchases, tax, item custody, order quantity, unlimited/random/offline buying, restart idempotency and recovery after lost daemon and wallet acknowledgements. Both updated wallet transforms and batching were active. Databases and random localhost ports were task-owned; player databases were not used for tests.
+- The four Rust overlays and executable are exactly the existing 0.1.19 payload. No Rust change or rebuild was needed because upstream market sources are unchanged in this upgrade.
+
+The release preserves the exact ZIP validated locally, including its pre-publication documentation snapshot. The public source documentation records publication and this later confirmation: on 30 October 2026 the maintainer reported that the current installed mods appear to work in gameplay. This is user-reported confirmation, not an automated retail-client test. Automated retail rendering, real ESI pricing, Docker and extended soak coverage were not rerun for 261028.1. A server restart and client reconnect are needed after updating to load the repaired companion.
+
 # Version 0.1.19 verification
 
 The included native source and executable preserve EveJS 261018.1 station metadata and order validation while retaining conditional fills, wallet/escrow settlement and trade-history idempotency. The payload also supports the tested EveJS 0.12.9 baseline. In-game client code and UI are unchanged.
