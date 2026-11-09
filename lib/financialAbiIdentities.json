@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "protocol": "npc-market-buyers-native-settlement-v1",
+  "predecessors": [
+    {
+      "versions": [
+        "0.1.20",
+        "0.1.21",
+        "0.1.22"
+      ],
+      "files": {
+        "engine.js": "4c56edbb4d909dc7d2658d1a7f5bd6546d00c8f8a13223faa7d520aa311990c2",
+        "settlement.js": "27d0674f16138e87f25c85e4e08800f52f209932faae951ac357d0aa03acc6e5",
+        "marketAdapter.js": "707488a65bdb7635c83c203ee4d10b4e216b065d0a7432dec391dafee96e4200",
+        "statistics.js": "bf783b69807aaa58e1e60f543b39897704bc79a12d6de590730e056527d2bf89",
+        "store.js": "af0b564da23beede1e549d0603a9941a6a9620ac06b384f7d8c3a866418b20ea",
+        "walletBatching.js": "f097062c3e730b82d064e20ba18d9bfe35fbe6879b134988ca818c1764f9c2c8"
+      }
+    }
+  ]
+}

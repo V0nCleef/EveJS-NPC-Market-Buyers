@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "npc-market-buyers",
   "displayName": "NPC Market Buyers",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "description": "Unlimited NPC buying with fair price references, automatic EVE average / local NPC offer fallback, and native Sell Items advice. In-game dashboard and configuration via Mods.",
   "kind": "loader",
   "supportedBackends": [
@@ -35,7 +35,11 @@
     "enabledUpdate": {
       "protocol": "evejs-mod-enabled-update-v1",
       "compatibility": "npc-market-buyers-native-settlement-v1",
-      "fromVersions": ["0.1.20", "0.1.21"]
+      "fromVersions": [
+        "0.1.20",
+        "0.1.21",
+        "0.1.22"
+      ]
     }
   },
   "updates": {

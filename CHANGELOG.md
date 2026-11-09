@@ -1,6 +1,14 @@
 # Changelog
 
-## 0.1.22 — Updates with pending settlements (2026-11-09)
+## 0.1.23 — Pending updates and receipted recovery (2026-11-10)
+
+- Updates enabled 0.1.20–0.1.22 installations without disabling Native support first. Requires Launcher 1.0.79+; keeps pending work, policy and history through replacement and exact rollback.
+- Recovers a narrowly proven historical failure where a personal NPC purchase moved goods and money but the daemon permanently recorded a terminal zero fill and the Native escrow anchor disappeared. Returns the intact stack to the seller's station, refunds tax and reverses the failed purchase through Native owners with durable per-effect receipts.
+- Resumes compensation after lost replies and restarts without repeating goods or wallet changes. Keeps legitimate institutional funding and records compensation without inventing a successful sale.
+- Defers expiry returns while an NPC settlement remains pending. Normal startup and later polls retry without advancing the expiry cursor past unfinished work.
+- Keeps ambiguous or unsupported recovery cases blocked, including changed goods, unproven payments and uncertain evicted receipts. Actual disable/removal also checks the compensation journal.
+
+## 0.1.22 — Unpublished update-only candidate (2026-11-09)
 
 - Updates enabled 0.1.20/0.1.21 installations without first disabling native market support, including when a purchase was interrupted during shutdown. Requires Launcher 1.0.79+.
 - Retains pending payment, goods and fill identities for normal recovery after restart. Buying policy, permanent sales history and the native payload are unchanged.

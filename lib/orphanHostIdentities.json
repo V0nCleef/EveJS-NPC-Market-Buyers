@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "qualified": [
+    {
+      "evejs": "261028.1",
+      "marketSource": "e78eb36f45dd71399ee5addaeeb4346e15f48cb7cf00507b63c2dc75a82f2675",
+      "walletSource": "08eb39bd0d829795f903bb35a318ecb26d3acde08a7149e80fa5785f19a5fd89",
+      "legacyReceiptLimit": 512,
+      "authorityReceiptLimit": 1024
+    },
+    {
+      "evejs": "261108.1",
+      "marketSource": "45006e5a634de27d5e66fe1b32edcff872ba3e0cb804b8b2874ae85242efd10b",
+      "walletSource": "b64a26f26249a1f1f34f6fc9eda4c9a1e7d918eb3e8f227be5a40b20e089a914",
+      "legacyReceiptLimit": 512,
+      "authorityReceiptLimit": 1024
+    }
+  ]
+}

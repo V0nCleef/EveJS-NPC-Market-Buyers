@@ -30,5 +30,7 @@
     "officialSourceRebaseAndOriginalAbsence": true,
     "terminalCleanupDriftRefused": true
   },
-  "assetPolicy": "Exact frozen 0.1.22 ZIP used by both real updater integrations; no payload rebuild or extra digest/download verification for publication"
+  "assetPolicy": "Exact frozen 0.1.22 ZIP used by both real updater integrations; no payload rebuild or extra digest/download verification for publication",
+  "published": false,
+  "status": "Unpublished update-only qualification candidate; superseded by 0.1.23"
 }

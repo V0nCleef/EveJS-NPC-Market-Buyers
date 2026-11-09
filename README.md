@@ -10,7 +10,7 @@ NPC institutions buy your sell orders in sensible, randomised batches. Prices ar
 
 [Releases](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases) · [Feature guide](docs/FEATURES.md) · [Changelog](CHANGELOG.md) · [Report an issue](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/issues)
 
-**Version 0.1.22 fixes updates that were blocked by an unfinished NPC purchase.** With Launcher 1.0.79+, updating an enabled 0.1.20 or 0.1.21 keeps native support and settlement receipts in place. The next normal server start resumes the same purchase safely. The EveJS 261108.1 backend, buying settings, sales history and in-game UI are retained.
+**Version 0.1.23 fixes updates blocked by unfinished purchases and adds guarded recovery for a proven historical zero-fill failure.** With Launcher 1.0.79+, enabled 0.1.20–0.1.22 installations update while keeping their settlement receipts. Normal server startup resumes recovery, including while buying is paused. The EveJS 261108.1 backend, buying settings, sales history and in-game UI are retained.
 
 ![Statistics in the EVE client](docs/media/statistics-0.1.16.png)
 
@@ -63,7 +63,9 @@ Use the attached Launcher ZIP. GitHub's automatic **Source code** downloads are 
 
 **From 0.1.17 onward:** use **Launcher → Mods → Check mod updates**, then the offered **Update** button for a newer compatible release. Checking does not install anything. Stop the stack and close EVE before applying an update. The attached `.update.json` file is for the Launcher; import only the mod ZIP. Back up your server data before installing or updating mods.
 
-**Updating an enabled 0.1.20 or 0.1.21:** update the Launcher to **1.0.79+** first, leave NPC Market Buyers enabled, stop the Native stack and close EVE, then use its normal **Update** button. An interrupted purchase no longer requires disabling the mod before the update. Recognized official EveJS source replacements are supported too. Pending work resumes on the next server start using its existing payment, goods and fill keys. Disabling or removing the mod still requires pending settlements to finish; do not delete their receipts.
+**Updating an enabled 0.1.20, 0.1.21 or 0.1.22:** update the Launcher to **1.0.79+** first, leave NPC Market Buyers enabled, stop the Native stack and close EVE, then use its normal **Update** button. An interrupted purchase no longer requires disabling the mod before the update. Recognized official EveJS source replacements are supported too. Pending work resumes on the next server start using its existing payment, goods and fill keys. Disabling or removing the mod still requires pending settlements to finish; do not delete their receipts.
+
+The new historical recovery covers personal purchases with one intact delivered stack, exact Native payment and custody receipts, and a permanent terminal **zero-fill** receipt. It returns the goods to the seller's station hangar, refunds the tax and reverses the failed purchase once, retaining legitimate institutional funding. It records compensation in Activity without adding a sale to Statistics. Ambiguous receipts, modified goods and unsupported cases stay blocked for inspection. Pending Native expiry returns wait for settlement recovery and retry on a later poll or restart.
 
 On the first start after updating, existing completed purchase receipts are added to Statistics once. This does not make new payments or change your orders. Archived sales remain included in totals.
 
