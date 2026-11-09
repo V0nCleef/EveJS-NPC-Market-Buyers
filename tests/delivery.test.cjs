@@ -53,3 +53,25 @@ test('post-compile login attachment uses actual native codec and preserves metad
   assert.deepEqual(h.sent[1].subarray(h.sent[1].length-(packet.length-at-encodedBuffer.length)),packet.subarray(at+encodedBuffer.length));
   h._sendPacket(packet);assert.deepEqual(h.sent[2],packet);
 });
+test('actual 261108.1 numeric-zero signed-function flag attaches exactly once without changing native metadata',()=>{
+  const codec=require(path.join(root,'server/src/network/tcp/utils/marshal.js'));
+  const source=fs.readFileSync(path.join(root,'server/src/network/tcp/handshake.js'),'utf8');
+  assert.match(source,/\[buildTidiSignedFunc\(this\.clientId\),\s*0\]/,'Use the real release wire flag');
+  class Handshake{constructor(){this.userId=7;this.sent=[];} _sendPacket(packet){this.sent.push(packet);}}
+  delivery.installHandshake(Handshake,{root,delivery:delivery.createDelivery(modRoot)});
+  const original=['',[envelope('41'),0],{type:'dict',entries:[]},{type:'dict',entries:[['challenge_responsehash','55087']]}];
+  const packet=codec.encodePacket(original),before=codec.marshalDecodeExact(packet.subarray(4)),h=new Handshake();
+  h._sendPacket(packet);const after=codec.marshalDecodeExact(h.sent[0].subarray(4));
+  assert.ok(after[1][0].length>before[1][0].length,'The actual numeric-zero wire packet must carry the companion');
+  after[1][0]=before[1][0];assert.deepEqual(after,before);
+  h._sendPacket(packet);assert.deepEqual(h.sent[1],packet,'Do not deliver twice on the same handshake');
+});
+test('unsupported signed-function flags remain untouched',()=>{
+  const codec=require(path.join(root,'server/src/network/tcp/utils/marshal.js'));
+  for(const flag of [true,1,null,'0']){
+    class Handshake{constructor(){this.userId=7;this.sent=[];} _sendPacket(packet){this.sent.push(packet);}}
+    delivery.installHandshake(Handshake,{root,delivery:delivery.createDelivery(modRoot)});
+    const packet=codec.encodePacket(['',[envelope('41'),flag],{type:'dict',entries:[]},{type:'dict',entries:[['challenge_responsehash','55087']]}]),h=new Handshake();
+    h._sendPacket(packet);assert.deepEqual(h.sent[0],packet,'Unexpected flag must remain native: '+String(flag));
+  }
+});

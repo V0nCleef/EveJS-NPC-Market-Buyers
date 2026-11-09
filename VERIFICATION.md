@@ -1,3 +1,29 @@
+# Version 0.1.21 — EveJS 261108.1 compatibility
+
+The first private retail-client run exposed a login-delivery defect that the earlier boolean-only codec fixture missed: the actual release emits numeric `0`, while the old NPC wrapper matched only boolean `false`. The candidate accepts exactly those two reviewed values. A real-release numeric-zero regression fails before and passes after the one-condition fix; six delivery contracts pass, including legacy false, unknown-flag rejection, duplicate suppression, codec metadata preservation and other-companion composition. The native payload is unchanged by this follow-up.
+
+The one-file JS update was applied to the lab and staged runtime while the existing Launcher OS lifecycle leases for both roots were held by its Python owner. Both helpers verified afterward; all five native files, installer receipts/backups and NPC SQLite families retained their exact before/after hashes. No Rust rebuild was performed for this JS fix.
+
+After fully closing the manually injected diagnostic client, a completely fresh build-3396210 client process received the companion through the normal numeric-zero login. All four companions coexisted. Native Orders (Icons, Details and List), Statistics, Activity and the real Sell Items advisor passed client checks. The advisor displayed an actual CCP ESI reference and the configured price-cap warning. The normal-login arm used no manual injection or fixture preload.
+
+The unchanged scheduler bought six units from actual client-created sell order 1382 under operation `npc-market:1794249544032:140000008:34:60015249`. A later one-unit purchase used a different cycle key. The cold restart retained the exact original daemon-fill, wallet-authority, inventory-custody, Activity and sales receipts with no duplicate payment. The read-only receipt digest before/after was `99825bb6d0b06ae4727eb1c925880cb9bdc670da8681907607bd2ed6f04543d2`. At that control point, two purchases represented seven units, 0.07 ISK net income, 93 units remaining, seven institutional hangar units and a 99,900.07 ISK seller balance. Later ordinary cycles remain distinguishable by their own operation keys. No synthetic history or policy/scheduler edit was used.
+
+A quick same-character logoff/reselection retained a usable companion, four unique subscriptions, one dashboard window and unique payment receipts. Its initial timing control selected before the native session timer/view had settled and while Daily Login Campaigns was open; that stricter timing-aware control is not claimed as qualified. The fresh-process normal-login and cold-receipt controls passed independently. Observed client exceptions were stock XMPP connection/leave-channel failures; no NPC companion exception was observed in the normal UI arm.
+
+Source baseline: the actual EveJS-261108.1 ZIP, SHA-256 `373266a05fd9acf0c220d06d5469907637a6d09bf2cf926adf4aaee97a3ccc59`. The four Rust overlays were merged against that release, retaining its new due-order index, expiry batches and price/time ordering. The executable was rebuilt offline with the locked dependencies.
+
+- 31 Rust tests passed, including conditional-fill identity/idempotency, expiry batching/index use, price/time ordering, transaction rollback and concurrent writes.
+- 104 focused Node checks passed against the actual 261108.1 JavaScript sources. These include four new actual-release identity/install/migration/unknown-executable controls; wallet, settlement/recovery, pricing, statistics, native codec and composition with the 1.2.26 AutoMining candidate and the retained Launcher shared-menu wrapper.
+- The real native daemon and wallet authority passed isolated personal/corporation purchases, tax, item custody, order quantities, random/offline buying, restart idempotency, lost-daemon-ack recovery and lost-wallet-ack recovery. Writable databases and random localhost ports were task-owned.
+- The actual loader attached its login hook and market service, reached the rebuilt daemon and answered the dashboard RPC in an isolated 261108.1 source fixture.
+- 83 existing client contracts passed using retained build-3396210 reference source. Source/catalogue validation passed for 257 strings in eight languages, six Python files, 17 JavaScript files and five matching native payload members. Python 3.11 ran these existing portable scripts; this is not execution inside the retail Python 2 client.
+
+GridCheck qualification used only the dedicated lab actor and preserved the buying policy. The old hard-coded 0.12.9 staging tools and the unexecuted seed fixture are historical and must not be staged into this lab. No played-world fixture, shared-client archive, global Launcher setting or release was changed. Docker and production purchases were not tested. The staged runtime's financial data remained unchanged during the guarded installation/update.
+
+The published asset is the exact previously qualified ZIP. Repository publication text is newer than the packaged local verification snapshot; executable JS, client Python, native source and payload bytes are unchanged. Josh reported a basic gameplay check as working before approving publication.
+
+## Earlier 0.1.20 verification
+
 # Version 0.1.20 — EveJS 261028.1 compatibility
 
 The corporation-wallet transform accepts the two reviewed native notification shapes. New null-balance cache invalidations remain immediate and preserve their count and arguments. Numeric NPC notifications retain personal/corporation batching, division isolation and current-balance delivery. Authoritative wallet commands, identities, tax, settlement and native market payload are unchanged.

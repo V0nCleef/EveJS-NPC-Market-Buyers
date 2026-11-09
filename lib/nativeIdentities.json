@@ -20,6 +20,16 @@
         "6c5c8e425aed1ce4fff926c39d25ce55ba54b116a193bc230c28786c961ae78e"
       ],
       "id": "261018.1"
+    },
+    {
+      "id": "261108.1",
+      "sha256": [
+        null,
+        "7df28fc7e7f62d9e44649c85dd50d538798c5c48b5f5ac1dd770e135e9927e4d",
+        "352781a30fd57ab4967ba8cc136869e39f18afad3584431d44f1d5a680e4f01a",
+        "c5edff9a3c5e5b2d3308b5debd88bafb3545707aeb1bab112abfd1205519351c",
+        "7539deff4a6b7cec2991000d690455cc903aca8331baea30e11e4ab78611a611"
+      ]
     }
   ],
   "legacyPayloads": [
@@ -32,6 +42,16 @@
         "ccb00458031300389fe47c7c7299a9e29ef08d6b01801be2389d9c8d8c9a7b13"
       ],
       "version": "0.1.18"
+    },
+    {
+      "version": "0.1.19-0.1.20",
+      "sha256": [
+        "eba2869b68885f92771e84c58a47cc28767c8a71cc41d999bd988e3a172fe681",
+        "f4a201600e70238a417488c884ca345dccf4ebc4c01a5b576bdca0ec1201d77c",
+        "2d3235c978eabb1b982fda72ca06e7a643d3dd37773fc52354b93727c25854f2",
+        "11220d749ff91f8ba5502b67babf781ce3e1e34b96ca1e836b97c4a14c919c1b",
+        "a4c289656d3b2310cd1862d7bc7a1410ac2a007c02c5cb290bf4a4d4cc4768f7"
+      ]
     }
   ]
 }

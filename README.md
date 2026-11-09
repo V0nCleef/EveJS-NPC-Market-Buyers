@@ -10,7 +10,7 @@ NPC institutions buy your sell orders in sensible, randomised batches. Prices ar
 
 [Releases](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases) · [Feature guide](docs/FEATURES.md) · [Changelog](CHANGELOG.md) · [Report an issue](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/issues)
 
-**Version 0.1.20 supports EveJS 261028.1, retaining 261018.1 and 0.12.9 notification shapes.** Launcher startup automatically repairs recognized upstream source replacements, keeps settings and history, and refreshes uninstall originals. Unrecognized changes require a merge.
+**Version 0.1.21 supports EveJS 261108.1.** Its rebuilt native daemon preserves the release's expiry batching, due-order index and price/time ordering alongside guarded NPC purchases. Launcher startup repairs recognized upstream source replacements, keeps settings and history, and refreshes uninstall originals. Unrecognized changes require a merge. Normal native login delivers the in-game dashboard and Sell Items advice again.
 
 ![Statistics in the EVE client](docs/media/statistics-0.1.16.png)
 
@@ -38,7 +38,7 @@ NPC institutions buy your sell orders in sensible, randomised batches. Prices ar
 
 | Component | Tested setup |
 |---|---|
-| EveJS | **0.12.9, 261018.1 and 261028.1** |
+| EveJS | **261108.1**; older-version results are recorded separately |
 | Launcher | **1.0.74 or newer**, with native service startup preparation |
 | EVE client | Build **3396210** |
 | Backend | **Native Windows** |

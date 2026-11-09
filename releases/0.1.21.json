@@ -1,0 +1,31 @@
+{
+  "version": "0.1.21",
+  "tag": "v0.1.21",
+  "date": "2026-11-09",
+  "repository": "V0nCleef/EveJS-NPC-Market-Buyers",
+  "asset": "NPC-Market-Buyers-0.1.21.zip",
+  "sha256": "c2d7c1c6ba61e7338c99fcd3f616d739f43f61d7e6487ba40c8bb8ce70f92a0a",
+  "bytes": 3027191,
+  "entries": 48,
+  "updateMetadata": "NPC-Market-Buyers-0.1.21.update.json",
+  "updateMetadataSHA256": "42f4733f92013abcccdc236537ef58f34cf290174ffa0760eb1e4daf454507f6",
+  "minLauncherVersion": "1.0.74",
+  "evejsQualified": "261108.1",
+  "clientBuildQualified": 3396210,
+  "nativePayloadChanged": true,
+  "normalLoginDeliveryFixed": true,
+  "maintainerApproved": true,
+  "basicGameplayReported": true,
+  "verification": {
+    "rustTests": 31,
+    "priorFocusedNodeChecks": 104,
+    "postFixDeliveryContracts": 6,
+    "retainedClientContracts": 83,
+    "realNativeSettlementAndLostAckRecovery": true,
+    "normalFreshClientLogin": true,
+    "ordinarySchedulerPurchase": true,
+    "coldFinancialAndCustodyReceiptPersistence": true,
+    "strictNativeTimerTransitionQualified": false
+  },
+  "assetPolicy": "Exact frozen qualified ZIP; no payload rebuild or new qualification for publication"
+}

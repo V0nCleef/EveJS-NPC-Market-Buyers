@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.21 — EveJS 261108.1 compatibility (2026-11-09)
+
+- Restores the in-game companion on current native logins, including the dashboard and Sell Items advisor.
+- Preserves EveJS 261108.1 indexed expiry batches and price/time ordering in the rebuilt native backend.
+- Recognizes the new stock source set and prior 0.1.19/0.1.20 payload during guarded update recovery.
+- Retains buying policy, sales history, pending-settlement protection and exact new-version uninstall originals.
+
 ## 0.1.20 — EveJS 261028.1 wallet compatibility (2026-10-30)
 
 - Restores runtime and menu attachment on EveJS 261028.1 by supporting its new corporation-wallet null-balance notification shape.
