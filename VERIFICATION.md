@@ -1,4 +1,18 @@
-# Version 0.1.21 — EveJS 261108.1 compatibility
+# Version 0.1.22 — Updates with pending settlements
+
+The new enabled-update contract requires Launcher 1.0.79+ and explicitly supports installed 0.1.20/0.1.21 packages. The incoming helper checks package identity, unchanged financial JavaScript, Native backend, coherent recognized payload or official upstream sources, active native receipts/backups and the settlement schema before replacing files. It never executes settlement, changes policy or writes the financial databases during an update.
+
+Focused producer fixtures cover pending-row preservation; normal disable/remove protection; failures before and midway through native replacement; post-apply rollback; unknown source, restore-intent and schema rejection; lost-response retries; and interrupted terminal cleanup with source/receipt drift. Recognized official EveJS source upgrades are tested with both a preserved old executable and an absent executable. The existing native installer records a rebase generation before writing its first original backup, and resumes that exact plan after interruption. Rollback restores the pre-update native bytes, original absence and exact raw receipt before the Launcher restores the old package.
+
+A focused replay fixture uses the actual transformed EveJS sell saga and unchanged settlement bridge. It loses the tax acknowledgement after the tax commits, preserves that pending operation through the enabled update, then runs normal paused recovery. Repeated replay leaves one tax debit, one buyer debit, one seller credit, one goods transfer, one daemon fill, one statistics sale and one Activity purchase. This is isolated fixture evidence; it does not manufacture or replay a played-world purchase.
+
+The native executable, payload source, financial JavaScript, login fix and client UI are reused unchanged from 0.1.21. Existing lifecycle regression checks are retained. Launcher consumer integration is qualified with the corresponding Launcher release; this document does not claim new production gameplay or new client qualification for unchanged payloads.
+
+The actual Launcher updater also passed on the played 261028.1 installation (0.1.20 → 0.1.22) and the migrated 261108.1 installation (0.1.21 → 0.1.22), both with a genuine pending settlement. All 20 NPC SQLite tables, including policy, schedule, pending operation, wallet intents and history, compared exactly before/after each update. An injected failure after native apply restored all five previous native files, the exact raw receipt and the previous enabled 0.1.20 package, with all 20 tables unchanged; a normal retry then succeeded. Actual prepare_disable still refused the unfinished settlement. These update/rollback checks ran through the production updater, lifecycle leases and contained helper process; they did not execute a financial recovery or require a cloned runtime.
+
+The source verification text includes this later consumer qualification. The release ZIP remains the exact producer-frozen archive used by those integration runs; its native payload and financial JavaScript were not rebuilt.
+
+## Historical 0.1.21 — EveJS 261108.1 compatibility
 
 The first private retail-client run exposed a login-delivery defect that the earlier boolean-only codec fixture missed: the actual release emits numeric `0`, while the old NPC wrapper matched only boolean `false`. The candidate accepts exactly those two reviewed values. A real-release numeric-zero regression fails before and passes after the one-condition fix; six delivery contracts pass, including legacy false, unknown-flag rejection, duplicate suppression, codec metadata preservation and other-companion composition. The native payload is unchanged by this follow-up.
 

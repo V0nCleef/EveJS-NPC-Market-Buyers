@@ -1,0 +1,34 @@
+{
+  "version": "0.1.22",
+  "tag": "v0.1.22",
+  "date": "2026-11-09",
+  "repository": "V0nCleef/EveJS-NPC-Market-Buyers",
+  "asset": "NPC-Market-Buyers-0.1.22.zip",
+  "sha256": "b6a6915dcefc09859b94d890b8eb7e532c68d61d30dba906dce42907381bc1c3",
+  "bytes": 3033907,
+  "entries": 49,
+  "updateMetadata": "NPC-Market-Buyers-0.1.22.update.json",
+  "updateMetadataSHA256": "f89b69fc0f19ae63d200382754f3e811d58932d5d9be25f82746b335e65b2424",
+  "minLauncherVersion": "1.0.79",
+  "enabledUpgradeFrom": [
+    "0.1.20",
+    "0.1.21"
+  ],
+  "evejsQualified": "261108.1",
+  "nativePayloadChanged": false,
+  "financialJavaScriptChanged": false,
+  "financialDatabasesChangedDuringUpgrade": false,
+  "verification": {
+    "newFocusedUpdateChecks": 11,
+    "existingInstallerChecks": 19,
+    "normalLauncherOldWorldUpgrade": true,
+    "normalLauncherMigratedWorldUpgrade": true,
+    "all20NpcTablesExactlyPreserved": true,
+    "postApplyFailureExactNativeReceiptAndEnabledPackageRollback": true,
+    "genuineDisableGuardRetained": true,
+    "realSagaLostTaxReplyFixtureExactlyOnce": true,
+    "officialSourceRebaseAndOriginalAbsence": true,
+    "terminalCleanupDriftRefused": true
+  },
+  "assetPolicy": "Exact frozen 0.1.22 ZIP used by both real updater integrations; no payload rebuild or extra digest/download verification for publication"
+}

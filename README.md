@@ -10,7 +10,7 @@ NPC institutions buy your sell orders in sensible, randomised batches. Prices ar
 
 [Releases](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases) · [Feature guide](docs/FEATURES.md) · [Changelog](CHANGELOG.md) · [Report an issue](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/issues)
 
-**Version 0.1.21 supports EveJS 261108.1.** Its rebuilt native daemon preserves the release's expiry batching, due-order index and price/time ordering alongside guarded NPC purchases. Launcher startup repairs recognized upstream source replacements, keeps settings and history, and refreshes uninstall originals. Unrecognized changes require a merge. Normal native login delivers the in-game dashboard and Sell Items advice again.
+**Version 0.1.22 fixes updates that were blocked by an unfinished NPC purchase.** With Launcher 1.0.79+, updating an enabled 0.1.20 or 0.1.21 keeps native support and settlement receipts in place. The next normal server start resumes the same purchase safely. The EveJS 261108.1 backend, buying settings, sales history and in-game UI are retained.
 
 ![Statistics in the EVE client](docs/media/statistics-0.1.16.png)
 
@@ -39,13 +39,13 @@ NPC institutions buy your sell orders in sensible, randomised batches. Prices ar
 | Component | Tested setup |
 |---|---|
 | EveJS | **261108.1**; older-version results are recorded separately |
-| Launcher | **1.0.74 or newer**, with native service startup preparation |
+| Launcher | **1.0.79 or newer**, including enabled-mod update transactions |
 | EVE client | Build **3396210** |
 | Backend | **Native Windows** |
 
 The installer backs up your actual native market files and installs the included executable and matching source. A precompiled market executable is not required. Docker is not supported. Active installation changes are checked against the receipt and supported upstream source identities before any replacement.
 
-After the official EveJS updater replaces native sources, start the Native stack normally in Launcher **1.0.74 or newer**. The Launcher calls the mod's declared `prepare_server_start` capability before spawning either native service. Healthy support is checked without writes, even when the market is already running. A recognized complete upstream replacement is repaired only while both services are stopped. Disabled or absent support is never automatically installed, and interrupted disable/removal requires manual recovery.
+After the official EveJS updater replaces native sources, start the Native stack normally in Launcher **1.0.79 or newer**. The Launcher calls the mod's declared `prepare_server_start` capability before spawning either native service. Healthy support is checked without writes, even when the market is already running. A recognized complete upstream replacement is repaired only while both services are stopped. Disabled or absent support is never automatically installed, and interrupted disable/removal requires manual recovery.
 
 Repair saves the new upstream originals so later disable/removal cannot restore the previous EveJS version. A preserved executable from the old version is removed on disable; normal Native startup rebuilds it from the restored current source. Purchase settings and history remain under `_local/npc-market-buyers/state.sqlite`. Explicit **Actions → Install / Update** and **Recover** remain available; Verify and client launch preparation stay read-only.
 
@@ -62,6 +62,8 @@ Use the attached Launcher ZIP. GitHub's automatic **Source code** downloads are 
 **Updating from 0.1.16 or earlier:** these versions did not declare a Launcher update source, so one manual update is required. Disable/remove the old package, import the latest ZIP, and enable it. Keep only one version enabled. Settings and purchase history live outside the replaceable mod folder and are retained.
 
 **From 0.1.17 onward:** use **Launcher → Mods → Check mod updates**, then the offered **Update** button for a newer compatible release. Checking does not install anything. Stop the stack and close EVE before applying an update. The attached `.update.json` file is for the Launcher; import only the mod ZIP. Back up your server data before installing or updating mods.
+
+**Updating an enabled 0.1.20 or 0.1.21:** update the Launcher to **1.0.79+** first, leave NPC Market Buyers enabled, stop the Native stack and close EVE, then use its normal **Update** button. An interrupted purchase no longer requires disabling the mod before the update. Recognized official EveJS source replacements are supported too. Pending work resumes on the next server start using its existing payment, goods and fill keys. Disabling or removing the mod still requires pending settlements to finish; do not delete their receipts.
 
 On the first start after updating, existing completed purchase receipts are added to Statistics once. This does not make new payments or change your orders. Archived sales remain included in totals.
 

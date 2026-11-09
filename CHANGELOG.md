@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.22 — Updates with pending settlements (2026-11-09)
+
+- Updates enabled 0.1.20/0.1.21 installations without first disabling native market support, including when a purchase was interrupted during shutdown. Requires Launcher 1.0.79+.
+- Retains pending payment, goods and fill identities for normal recovery after restart. Buying policy, permanent sales history and the native payload are unchanged.
+- Restores exact previous native files and the installation receipt if an update fails. Supports recognized official EveJS source replacements and preserves their new uninstall originals.
+- Keeps the unfinished-settlement guard for actual disable/removal, and refuses unknown source changes or incompatible settlement schemas.
+
 ## 0.1.21 — EveJS 261108.1 compatibility (2026-11-09)
 
 - Restores the in-game companion on current native logins, including the dashboard and Sell Items advisor.
