@@ -86,3 +86,16 @@ test('invalid progress is validated before goods and column-name binding support
   g.store.db.prepare("UPDATE nm_orphan_recovery SET progress_json=?").run(JSON.stringify({custody:{state:'new'},wallets:[]}));
   const before=clone(g.state.effects);g.reopen();await assert.rejects(g.engine().runCycle(),/progress shape/);assert.deepEqual(g.state.effects,before);
 });
+
+test('compensated Activity wire row renders as rejected without pending status or sale income',async t=>{
+  const f=fixture(t);await f.engine().runCycle();complete(f);
+  class Service {}
+  require('../lib/service').installService(Service,{store:f.store,hasStaffAccountRole:()=>false});
+  const reply=JSON.parse(await new Service().Handle_NpcMarketActivity([],{charid:2}));
+  assert.equal(reply.success,true);const row=reply.activity.find(r=>r.kind==='recovery_compensated');assert.ok(row);
+  assert.equal(row.resolution,'rejected');assert.equal(row.details.resolution,'rejected');assert.equal(row.compensated,true);
+  assert.equal(reply.activity.some(r=>r.kind==='purchase'),false);
+  const {spawnSync}=require('node:child_process'),path=require('node:path');
+  const result=spawnSync(process.env.PYTHON||'python',['-B',path.join(__dirname,'activity-compensation-presenter.py')],{input:JSON.stringify(row),encoding:'utf8'});
+  assert.equal(result.status,0,result.error?.message||result.stderr);assert.equal(JSON.parse(result.stdout).status,'rejected_badge');
+});

@@ -4,8 +4,8 @@
   "date": "2026-11-10",
   "repository": "V0nCleef/EveJS-NPC-Market-Buyers",
   "asset": "NPC-Market-Buyers-0.1.23.zip",
-  "sha256": "9177c949ecf548342b23664738d5ba0540ece23f70ffbb77caee292368e0cc4a",
-  "bytes": 3049102,
+  "sha256": "28a14b2e0eba84573dc3aabc61b80b4022459bca03e61c2d057897aa239f4cfc",
+  "bytes": 3049207,
   "entries": 54,
   "updateMetadata": "NPC-Market-Buyers-0.1.23.update.json",
   "updateMetadataSHA256": "54a958efa03a2578b94f8cad3438fe81553fc8e7393de4a5ca41875865ea7db4",
@@ -20,13 +20,14 @@
   "financialJavaScriptChanged": true,
   "financialDatabasesChangedDuringUpgrade": false,
   "verification": {
-    "focusedChecks": 45,
+    "focusedChecks": 46,
     "realNativeOwnerRecovery": true,
     "allFourLostRepliesAndRestart": true,
     "coldReplay": true,
     "exactGoodsAndISK": true,
     "permanentZeroFillUnchanged": true,
-    "expiryCursorDeferral": true
+    "expiryCursorDeferral": true,
+    "actualActivityWireAndPresenterRejected": true
   },
   "assetPolicy": "Reuse this exact producer-frozen ZIP for final integration and publication; no Native rebuild or extra digest/download verification for unchanged assets"
 }
