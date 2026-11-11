@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "protocol": "npc-market-buyers-native-settlement-v1",
+  "baselineVersion": "0.1.23",
+  "files": {
+    "engine.js": "4c56edbb4d909dc7d2658d1a7f5bd6546d00c8f8a13223faa7d520aa311990c2",
+    "settlement.js": "b198b8a8ea357285e384ee99061441b4586cf62c87e66833917cdafba886d3a8",
+    "marketAdapter.js": "cedfcc0bc24e6ce96cc4c5c370d27c9818e5fdaf9282cae9c098b4fc976862ec",
+    "statistics.js": "bf783b69807aaa58e1e60f543b39897704bc79a12d6de590730e056527d2bf89",
+    "store.js": "af0b564da23beede1e549d0603a9941a6a9620ac06b384f7d8c3a866418b20ea",
+    "walletBatching.js": "f097062c3e730b82d064e20ba18d9bfe35fbe6879b134988ca818c1764f9c2c8"
+  }
+}

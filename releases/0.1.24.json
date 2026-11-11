@@ -1,0 +1,277 @@
+{
+  "version": "0.1.24",
+  "asset": "NPC-Market-Buyers-0.1.24.zip",
+  "sha256": "c3149911d746063040e00ead89819f3c2e7753a9d3884d2ee637cbebd5f404dd",
+  "bytes": 3076857,
+  "updateMetadata": "NPC-Market-Buyers-0.1.24.update.json",
+  "updateMetadataSHA256": "4d94c98083fc06e655fa07557cd8132c8185d5f5794a3d523631b513f9e82101",
+  "sourceMemberMapping": {
+    "build-locales.py": {
+      "source": "build-locales.py",
+      "sha256": "7e82f44b59c047321f72a1d980750cd54c0da5b4e44f67e8a607c90617999281"
+    },
+    "build-payload.cjs": {
+      "source": "build-payload.cjs",
+      "sha256": "274d6dfec3f975c45247e0578197c3465f8d9b15ef1963d1b7d3dd66a3063249"
+    },
+    "client/companion.py": {
+      "source": "client/companion.py",
+      "sha256": "00e45236e33011f7368a3de9b16a79896473950ff03bbb5c07848244dcc84928"
+    },
+    "client/hud.py": {
+      "source": "client/hud.py",
+      "sha256": "910d73c5b002af0b34e20e1c5922d350e20b37449896a2e18ff912e08f232ad5"
+    },
+    "client/i18n.py": {
+      "source": "client/i18n.py",
+      "sha256": "373a882205fefaaf9d080cc2ee4db1df6cfc1e6e63e3c1768ad87bcb521a2e44"
+    },
+    "client/locales.json": {
+      "source": "client/locales.json",
+      "sha256": "1ee88426e7491ccc3a96b9df5b60ccc31f59031fe37f284aaefac64c5d9a51d9"
+    },
+    "client/menu.py": {
+      "source": "client/menu.py",
+      "sha256": "83491931cb68dc61262b01560a3dc14b3c5db2ec7ba7846728231ae2fde41085"
+    },
+    "client/sell_advisor.py": {
+      "source": "client/sell_advisor.py",
+      "sha256": "eb716f03282c2bb5ce2a3848c01dc41dfc7a894db29cc29b070f33d41ebf5f0f"
+    },
+    "client/wallet_summary.py": {
+      "source": "client/wallet_summary.py",
+      "sha256": "97007a1544c95630afbbba2105c954888a6b8eb0ce1a967a6f2738ea3963d89b"
+    },
+    "docker/financial-identity.cjs": {
+      "source": "docker/financial-identity.cjs",
+      "sha256": "f11f980f86b6efc890c20ee33728121d6e52d904be13ee1e1e43ab3dba7ee82d"
+    },
+    "docker/financial-source-identity.json": {
+      "source": "docker/financial-source-identity.json",
+      "sha256": "8dbec32062700574b34350720aa1e868cff9a4ef3214888076230ada29d6cb26"
+    },
+    "docker/helper-v1.cjs": {
+      "source": "docker/helper-v1.cjs",
+      "sha256": "a14bbb1208434f6c19a94cba32b4dd4fb2462ca6583d39b6c3bf52f925b80122"
+    },
+    "docker/linux-source-identity.json": {
+      "source": "docker/linux-source-identity.json",
+      "sha256": "0eeb6a1d4a9eea5cd13d7ec09da69a4b1bf88974cd31eeb82cbdf5325b2257ef"
+    },
+    "docker/market-authority.cjs": {
+      "source": "docker/market-authority.cjs",
+      "sha256": "9bd6b6eb03b1a3d4ea9b4d91f6a46e3554b6b33b7c224e611a88691264cd5c93"
+    },
+    "docker/server-helper.cjs": {
+      "source": "docker/server-helper.cjs",
+      "sha256": "3e223361542bdf9d631ef6a004fc1c2d6b7647d7ae75e4142ebfe48af8963366"
+    },
+    "docker/server-lifecycle.cjs": {
+      "source": "docker/server-lifecycle.cjs",
+      "sha256": "d583982939b23deac84902c41ef8b18a1b0eb7845b73ec5a8a3747e61d9b4e68"
+    },
+    "DOCKER-PORT.md": {
+      "source": "DOCKER-PORT.md",
+      "sha256": "01e26b106dc8251d918f942fb24723bb88897b00905807dbb5d1464ed1a83107"
+    },
+    "evejs-launcher.mod.json": {
+      "source": "evejs-launcher.mod.json",
+      "sha256": "683f7d73c8569f192e443d16a7aff126b34df236c57cef8e3fee1a5e0b1cde51"
+    },
+    "helper.js": {
+      "source": "helper.js",
+      "sha256": "e29d3850669e8255dde90d438dde9f4494e8853163e90aab197817006e904fb3"
+    },
+    "lib/activeUpdate.js": {
+      "source": "lib/activeUpdate.js",
+      "sha256": "8a51acc79de1c46e488965fcdd9438599bbe1f9ee130c2133e6c6c8d83c50199"
+    },
+    "lib/config.js": {
+      "source": "lib/config.js",
+      "sha256": "0d0355648f74e4f0398aff26d87a5446148627f59bb5e236e3ea12117fc4b4f2"
+    },
+    "lib/engine.js": {
+      "source": "lib/engine.js",
+      "sha256": "4c56edbb4d909dc7d2658d1a7f5bd6546d00c8f8a13223faa7d520aa311990c2"
+    },
+    "lib/financialAbiIdentities.json": {
+      "source": "lib/financialAbiIdentities.json",
+      "sha256": "d1417a31eae3ab31cfad18afab11b104e075eef7eb38151a2feddcf52f53f948"
+    },
+    "lib/install.js": {
+      "source": "lib/install.js",
+      "sha256": "2721f20208f4779b9a22fc93a1d4fb85663f7417126fa0eece18133a7ee43c08"
+    },
+    "lib/localQuote.js": {
+      "source": "lib/localQuote.js",
+      "sha256": "3c9e9257047112d5d0192e86c970f55964ae19bd8556c7651cc93a4d1b9f91fa"
+    },
+    "lib/loginDelivery.js": {
+      "source": "lib/loginDelivery.js",
+      "sha256": "8067714f5312d88fd255cf40e3ff2e8ed3ccb3e5a4acc82a00efa16a5b42ee20"
+    },
+    "lib/marketAdapter.js": {
+      "source": "lib/marketAdapter.js",
+      "sha256": "cedfcc0bc24e6ce96cc4c5c370d27c9818e5fdaf9282cae9c098b4fc976862ec"
+    },
+    "lib/nativeIdentities.json": {
+      "source": "lib/nativeIdentities.json",
+      "sha256": "2ea180a0e8459af39924146b5a3b60b9a871839449adce0add476ed66b2205cd"
+    },
+    "lib/orphanEvidence.js": {
+      "source": "lib/orphanEvidence.js",
+      "sha256": "f209cd69435fab34ef4eb399b45e65b91e6955c2ec42d0e475b8293ab991a359"
+    },
+    "lib/orphanHostIdentities.json": {
+      "source": "lib/orphanHostIdentities.json",
+      "sha256": "5851965ce1ad43973d22f6c095a0afe3455318eb6457ff51551ead16df7c286d"
+    },
+    "lib/orphanNative.js": {
+      "source": "lib/orphanNative.js",
+      "sha256": "0399204c328069b6eae191932d269bf509369a44798745a70b81de4289c2b8e1"
+    },
+    "lib/orphanReconciliation.js": {
+      "source": "lib/orphanReconciliation.js",
+      "sha256": "8f3522741151481c74dd4453eea658c83311116ea123c5ce77f5c8f64ed3d69c"
+    },
+    "lib/policy.js": {
+      "source": "lib/policy.js",
+      "sha256": "67a16d57941b1637433d39cab8d2e8b853935c43a1ce0ac94614d5a19c6f09f2"
+    },
+    "lib/quotes.js": {
+      "source": "lib/quotes.js",
+      "sha256": "8492bbb6242e003abe86383207f680dd987295c6a95a9cab7f1d781323abab1d"
+    },
+    "lib/service.js": {
+      "source": "lib/service.js",
+      "sha256": "6ff03b3b5719656704c57e86a8f62a7b02d59a281741915d36f3b26647feb608"
+    },
+    "lib/settlement.js": {
+      "source": "lib/settlement.js",
+      "sha256": "b198b8a8ea357285e384ee99061441b4586cf62c87e66833917cdafba886d3a8"
+    },
+    "lib/statePaths.js": {
+      "source": "lib/statePaths.js",
+      "sha256": "a6b03d9329edb8e201e02642e1a58617f9d7cd7e6782109536e0957542acca27"
+    },
+    "lib/statistics.js": {
+      "source": "lib/statistics.js",
+      "sha256": "bf783b69807aaa58e1e60f543b39897704bc79a12d6de590730e056527d2bf89"
+    },
+    "lib/store.js": {
+      "source": "lib/store.js",
+      "sha256": "af0b564da23beede1e549d0603a9941a6a9620ac06b384f7d8c3a866418b20ea"
+    },
+    "lib/uiErrors.js": {
+      "source": "lib/uiErrors.js",
+      "sha256": "44939f763be818d8e5a8f75e16fb5a6348a5aa095cf562b93f27766dfeffcb0a"
+    },
+    "lib/walletBatching.js": {
+      "source": "lib/walletBatching.js",
+      "sha256": "f097062c3e730b82d064e20ba18d9bfe35fbe6879b134988ca818c1764f9c2c8"
+    },
+    "LICENSE": {
+      "source": "LICENSE",
+      "sha256": "bb63fd78f0f195fedf3255ac588c3256c94840c0303871e524c02cc3616e2d51"
+    },
+    "loader.js.disabled": {
+      "source": "loader.js.disabled",
+      "sha256": "8af69a29302cc70a4d88fcc9faf52d70992f695cfd9d0756c7fdacbfe8c680e8"
+    },
+    "native/market-server/Cargo.lock": {
+      "source": "native/market-server/Cargo.lock",
+      "sha256": "5e377597076c16d313cf5483d49d7625d7190e5793a99efc9e8f762176b68507"
+    },
+    "native/market-server/Cargo.toml": {
+      "source": "native/market-server/Cargo.toml",
+      "sha256": "4a5ed461834535dc4d04dc59fde3ad082ab3c7333db6b33bb131f069b76414de"
+    },
+    "native/market-server/config/market-server.example.toml": {
+      "source": "native/market-server/config/market-server.example.toml",
+      "sha256": "3be30ff2d08fdae13035d445fcff4a9abc1d11440b729b62bc70ea3958e5b94e"
+    },
+    "native/market-server/crates/market-common/Cargo.toml": {
+      "source": "native/market-server/crates/market-common/Cargo.toml",
+      "sha256": "80fad73c83bf3764202391fa28bf815cdd64f149b096b36e00bf6d10c008d435"
+    },
+    "native/market-server/crates/market-common/src/lib.rs": {
+      "source": "native/market-server/crates/market-common/src/lib.rs",
+      "sha256": "913b393bccfeaa8021d1823bd58040c9e77f7704d0fa58591d67b1b238e612ef"
+    },
+    "native/market-server/src/config.rs": {
+      "source": "native/market-server/src/config.rs",
+      "sha256": "50a3e4864449057d8107e73d7237fbfdedf624421c20d59781774da378e93782"
+    },
+    "native/market-server/src/main.rs": {
+      "source": "native/market-server/src/main.rs",
+      "sha256": "2d3235c978eabb1b982fda72ca06e7a643d3dd37773fc52354b93727c25854f2"
+    },
+    "native/market-server/src/rpc.rs": {
+      "source": "native/market-server/src/rpc.rs",
+      "sha256": "11220d749ff91f8ba5502b67babf781ce3e1e34b96ca1e836b97c4a14c919c1b"
+    },
+    "native/market-server/src/state/order_book_tests.rs": {
+      "source": "native/market-server/src/state/order_book_tests.rs",
+      "sha256": "fcbd1415c1310d03936283f5af9e56aa90476f6f711c8c5e24e4d83d04b657bb"
+    },
+    "native/market-server/src/state/transaction_tests.rs": {
+      "source": "native/market-server/src/state/transaction_tests.rs",
+      "sha256": "34f38a0a0db3368ad1960bd6e0d0acd3bec83d1e6a79d195f8a61f54107234f1"
+    },
+    "native/market-server/src/state.rs": {
+      "source": "native/market-server/src/state.rs",
+      "sha256": "77c295cc5ae5ae65665be981e1f4c70a079cba6a9e947762fce88be951813819"
+    },
+    "package.json": {
+      "source": "package.json",
+      "sha256": "1ed0bb8709572cefc49b1f720737b8ccd836fa77f90d42d98682e713fce02a0b"
+    },
+    "payload/native/0.bin": {
+      "source": "payload/native/0.bin",
+      "sha256": "0f6e70ea63d33711c8f5b4f238be778e96402c782dcd1709ef15c2c2d0e83ed2"
+    },
+    "payload/native/1.bin": {
+      "source": "payload/native/1.bin",
+      "sha256": "913b393bccfeaa8021d1823bd58040c9e77f7704d0fa58591d67b1b238e612ef"
+    },
+    "payload/native/2.bin": {
+      "source": "payload/native/2.bin",
+      "sha256": "2d3235c978eabb1b982fda72ca06e7a643d3dd37773fc52354b93727c25854f2"
+    },
+    "payload/native/3.bin": {
+      "source": "payload/native/3.bin",
+      "sha256": "11220d749ff91f8ba5502b67babf781ce3e1e34b96ca1e836b97c4a14c919c1b"
+    },
+    "payload/native/4.bin": {
+      "source": "payload/native/4.bin",
+      "sha256": "77c295cc5ae5ae65665be981e1f4c70a079cba6a9e947762fce88be951813819"
+    },
+    "payload/native.json": {
+      "source": "payload/native.json",
+      "sha256": "97f1c1367d74a02c786bbd1a80d0e8a5e71b7c815f93533de5fba1d741e4cde4"
+    },
+    "README.md": {
+      "source": "README.md",
+      "sha256": "d7499d2fde5561dac94d59b634e56e3f71b7e4f13f270675346d68e0a94c66fd"
+    },
+    "VERIFICATION.md": {
+      "source": "VERIFICATION.md",
+      "sha256": "25b22c9424b0af5abba344768f5b063c8a938bb80e0294bf982b9d9c81fec520"
+    }
+  },
+  "packageJsonTransform": "Buyers source scripts omitted from installable ZIP",
+  "linuxRuntimeDeltaFromQualifiedPrivatePackage": [],
+  "changedMembersFromQualifiedPrivatePackage": [
+    "DOCKER-PORT.md",
+    "README.md",
+    "evejs-launcher.mod.json",
+    "lib/activeUpdate.js",
+    "lib/financialAbiIdentities.json",
+    "package.json"
+  ],
+  "dockerAdmittedFinancialFingerprints": [
+    "16d0067ffcd34be142aa3b8073f6437616a90848825f8e5061499411fb3accc0",
+    "2bf86115efc213be65be2be1c5306a095f14bd9d4c324995d41dbbf8694885a4"
+  ],
+  "dockerAdmittedFinancialIdentitySetUnchanged": true
+}

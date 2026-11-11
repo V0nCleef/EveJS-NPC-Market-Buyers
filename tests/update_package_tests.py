@@ -1,5 +1,6 @@
 """Portable release-sidecar checks; no Launcher or game installation needed."""
 import json
+import hashlib
 from pathlib import Path
 import subprocess
 import sys
@@ -15,9 +16,11 @@ from tools.build_update_metadata import build
 class UpdatePackageTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.temporary = tempfile.TemporaryDirectory(prefix='npc-market-update-package-')
+        cls.scratch = ROOT / '.test-runtime'
+        cls.scratch.mkdir(exist_ok=True)
+        cls.temporary = tempfile.TemporaryDirectory(prefix='npc-market-update-package-', dir=cls.scratch)
         cls.directory = Path(cls.temporary.name).resolve()
-        assert cls.directory.is_relative_to(Path(tempfile.gettempdir()).resolve())
+        assert cls.directory.is_relative_to(cls.scratch.resolve())
         subprocess.run([sys.executable, '-B', str(ROOT / 'pack-release.py'),
                         '--output-dir', str(cls.directory)], check=True, capture_output=True)
         cls.version = json.loads((ROOT / 'package.json').read_text())['version']
@@ -25,19 +28,30 @@ class UpdatePackageTests(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        assert cls.directory.is_relative_to(Path(tempfile.gettempdir()).resolve())
+        assert cls.directory.is_relative_to(cls.scratch.resolve())
         cls.temporary.cleanup()
 
     def test_finished_assets_bind_identity_version_and_compatibility(self):
         with zipfile.ZipFile(self.archive) as bundle:
-            manifest = json.loads(bundle.read('NPC-Market-Buyers-' + self.version + '/evejs-launcher.mod.json'))
+            manifest = json.loads(bundle.read('npc-market-buyers/evejs-launcher.mod.json'))
         metadata = json.loads(self.archive.with_suffix('.update.json').read_text())
         expected = dict(schemaVersion=1, id=manifest['id'],
             version=manifest['version'], asset=manifest['updates']['asset'].replace('{version}', self.version))
-        versions = manifest.get('compatibility', {}).get('evejsVersions')
+        versions = manifest.get('compatibility', {}).get('evejsVersions', ['261108.1'])
         if versions:
             expected['evejsVersions'] = versions
         self.assertEqual(metadata, expected)
+
+    def test_rebuild_contains_exact_frozen_release_members(self):
+        receipt = json.loads((ROOT / 'releases' / (self.version + '.json')).read_text())
+        expected = receipt['sourceMemberMapping']
+        with zipfile.ZipFile(self.archive) as bundle:
+            members = {name.split('/', 1)[1]: bundle.read(name) for name in bundle.namelist()}
+        self.assertEqual(set(members), set(expected))
+        for name, content in members.items():
+            self.assertEqual(hashlib.sha256(content).hexdigest(), expected[name]['sha256'], name)
+        self.assertEqual(hashlib.sha256(self.archive.with_suffix('.update.json').read_bytes()).hexdigest(),
+                         receipt['updateMetadataSHA256'])
 
     def test_standalone_generator_does_not_overwrite_existing_sidecar(self):
         target = self.archive.with_suffix('.update.json')

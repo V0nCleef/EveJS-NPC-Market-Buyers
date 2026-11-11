@@ -10,7 +10,7 @@ package=json.loads((root/'package.json').read_text(encoding='utf-8'))
 manifest=json.loads((root/'evejs-launcher.mod.json').read_text(encoding='utf-8'))
 assert package['version']==manifest['version']
 assert package['license']=='AGPL-3.0-only'
-assert manifest['supportedBackends']==['native']
+assert manifest['supportedBackends']==['native','docker']
 assert manifest['updates']=={'provider':'github',
     'repository':'V0nCleef/EveJS-NPC-Market-Buyers',
     'asset':'NPC-Market-Buyers-{version}.zip','channel':'stable',
@@ -35,7 +35,7 @@ for file in clients:
     for node in ast.walk(ast.parse(source)):
         if isinstance(node,ast.Call) and isinstance(node.func,ast.Name) and node.func.id=='_nmb_tr' and node.args and isinstance(node.args[0],ast.Constant):
             assert node.args[0].value in catalogue['strings'],(file.name,node.args[0].value)
-javascript=list((root/'lib').glob('*.js'))+[root/'helper.js',root/'loader.js.disabled',root/'build-payload.cjs']
+javascript=list((root/'lib').glob('*.js'))+list((root/'docker').glob('*.cjs'))+[root/'helper.js',root/'loader.js.disabled',root/'build-payload.cjs']
 for file in javascript:
     subprocess.run(['node','-e','new (require("node:vm").Script)(require("node:fs").readFileSync(process.argv[1],"utf8"),{filename:process.argv[1]})',str(file)],check=True)
 payload=json.loads((root/'payload/native.json').read_text())

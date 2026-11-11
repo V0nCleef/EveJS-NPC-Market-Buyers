@@ -2,11 +2,12 @@
   "schemaVersion": 3,
   "id": "npc-market-buyers",
   "displayName": "NPC Market Buyers",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "description": "Unlimited NPC buying with fair price references, automatic EVE average / local NPC offer fallback, and native Sell Items advice. In-game dashboard and configuration via Mods.",
   "kind": "loader",
   "supportedBackends": [
-    "native"
+    "native",
+    "docker"
   ],
   "activation": {
     "strategy": "loader_rename"
@@ -14,7 +15,7 @@
   "restart": "game_server",
   "launcherApi": {
     "version": 1,
-    "minLauncherVersion": "1.0.79",
+    "minLauncherVersion": "1.0.80",
     "helper": {
       "runtime": "node",
       "path": "helper.js"
@@ -38,7 +39,8 @@
       "fromVersions": [
         "0.1.20",
         "0.1.21",
-        "0.1.22"
+        "0.1.22",
+        "0.1.23"
       ]
     }
   },
@@ -53,5 +55,36 @@
   "clientMenu": {
     "apiVersion": 1,
     "entrypoint": "client/menu.py"
+  },
+  "docker": {
+    "schemaVersion": 1,
+    "dataDirectory": "npc-market-buyers",
+    "serverHelper": {
+      "runtime": "node",
+      "path": "docker/server-helper.cjs",
+      "actions": [
+        "install",
+        "verify",
+        "prepare_profile",
+        "prepare_server_start",
+        "prepare_disable",
+        "prepare_remove",
+        "recover",
+        "prepare_update",
+        "apply_update",
+        "commit_update",
+        "rollback_update"
+      ]
+    },
+    "hostActions": [],
+    "image": {
+      "service": "market",
+      "recipe": "cargo-release-v1",
+      "sourceDirectory": "native/market-server",
+      "manifest": "Cargo.toml",
+      "binary": "market-server",
+      "destination": "/usr/local/bin/market-server",
+      "toolchain": "rust:1.95-bookworm"
+    }
   }
 }

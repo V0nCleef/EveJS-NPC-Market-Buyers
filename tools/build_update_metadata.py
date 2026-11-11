@@ -14,7 +14,8 @@ def build(archive_path, *, overwrite=False):
                      if PurePosixPath(entry.filename).name == 'evejs-launcher.mod.json']
         if len(manifests) != 1 or manifests[0].file_size > 1024 * 1024:
             raise ValueError('The ZIP must contain exactly one bounded mod manifest.')
-        manifest = json.loads(archive.read(manifests[0]))
+        manifest_bytes = archive.read(manifests[0])
+        manifest = json.loads(manifest_bytes)
     updates = manifest.get('updates', {})
     if manifest.get('schemaVersion') != 3 or updates.get('provider') != 'github':
         raise ValueError('The ZIP must declare schema-3 GitHub update support.')
@@ -23,11 +24,12 @@ def build(archive_path, *, overwrite=False):
         raise ValueError('The ZIP filename differs from its declared update asset.')
     metadata = dict(schemaVersion=1, id=manifest['id'], version=version,
                     asset=archive_path.name)
-    versions = manifest.get('compatibility', {}).get('evejsVersions')
+    versions = manifest.get('compatibility', {}).get('evejsVersions', ['261108.1'])
     if versions is not None:
         metadata['evejsVersions'] = versions
     destination = archive_path.with_suffix('.update.json')
-    with destination.open('w' if overwrite else 'x', encoding='utf-8', newline='\n') as output:
+    newline = '\r\n' if b'\r\n' in manifest_bytes else '\n'
+    with destination.open('w' if overwrite else 'x', encoding='utf-8', newline=newline) as output:
         output.write(json.dumps(metadata, indent=2) + '\n')
     return destination
 

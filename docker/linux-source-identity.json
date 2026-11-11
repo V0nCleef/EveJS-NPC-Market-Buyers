@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "contribution": "npc-market-buyers-linux-market-v1",
+  "settlementABI": "npc-market-buyers-native-settlement-v1",
+  "sourceSHA256": "d71f72b94e3d3aeb6a8d4a36a0a5588ff9894044c19c761e219dc80ea7a36754",
+  "files": {
+    "Cargo.lock": "5e377597076c16d313cf5483d49d7625d7190e5793a99efc9e8f762176b68507",
+    "Cargo.toml": "4a5ed461834535dc4d04dc59fde3ad082ab3c7333db6b33bb131f069b76414de",
+    "config/market-server.example.toml": "3be30ff2d08fdae13035d445fcff4a9abc1d11440b729b62bc70ea3958e5b94e",
+    "crates/market-common/Cargo.toml": "80fad73c83bf3764202391fa28bf815cdd64f149b096b36e00bf6d10c008d435",
+    "crates/market-common/src/lib.rs": "913b393bccfeaa8021d1823bd58040c9e77f7704d0fa58591d67b1b238e612ef",
+    "src/config.rs": "50a3e4864449057d8107e73d7237fbfdedf624421c20d59781774da378e93782",
+    "src/main.rs": "2d3235c978eabb1b982fda72ca06e7a643d3dd37773fc52354b93727c25854f2",
+    "src/rpc.rs": "11220d749ff91f8ba5502b67babf781ce3e1e34b96ca1e836b97c4a14c919c1b",
+    "src/state/order_book_tests.rs": "fcbd1415c1310d03936283f5af9e56aa90476f6f711c8c5e24e4d83d04b657bb",
+    "src/state/transaction_tests.rs": "34f38a0a0db3368ad1960bd6e0d0acd3bec83d1e6a79d195f8a61f54107234f1",
+    "src/state.rs": "77c295cc5ae5ae65665be981e1f4c70a079cba6a9e947762fce88be951813819"
+  },
+  "targetOS": "linux",
+  "targetArchitecture": "amd64",
+  "libc": "glibc-bookworm",
+  "builder": "rust:1.95-bookworm",
+  "cargoLocked": true,
+  "artifactPath": "/usr/local/bin/market-server"
+}

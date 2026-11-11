@@ -1,5 +1,7 @@
 # NPC Market Buyers
 
+**Private version 0.1.24 Docker candidate, unpublished.** Requires the Launcher 1.0.80 candidate. Docker qualification covers EveJS 261108.1 on Linux amd64, including real purchases and container-recreation recovery. See [Docker port details](DOCKER-PORT.md). Combined Launcher and retail-client acceptance remains outstanding.
+
 **Give your single-player EveJS market someone to sell to.**
 
 [![Checks](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/actions/workflows/checks.yml/badge.svg)](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/actions/workflows/checks.yml)
@@ -39,11 +41,11 @@ NPC institutions buy your sell orders in sensible, randomised batches. Prices ar
 | Component | Tested setup |
 |---|---|
 | EveJS | **261108.1**; older-version results are recorded separately |
-| Launcher | **1.0.79 or newer**, including enabled-mod update transactions |
+| Launcher | **1.0.80 candidate or newer**, including enabled-mod update transactions |
 | EVE client | Build **3396210** |
-| Backend | **Native Windows** |
+| Backend | **Native Windows**, **Linux amd64 Docker candidate** |
 
-The installer backs up your actual native market files and installs the included executable and matching source. A precompiled market executable is not required. Docker is not supported. Active installation changes are checked against the receipt and supported upstream source identities before any replacement.
+On Native, the installer backs up your actual native market files and installs the included executable and matching source. A precompiled market executable is not required. Active installation changes are checked against the receipt and supported upstream source identities before any replacement. On Docker, the Launcher builds the declared Linux source contribution and owns the captured image transaction; persistent mod data lives in the selected data mount.
 
 After the official EveJS updater replaces native sources, start the Native stack normally in Launcher **1.0.79 or newer**. The Launcher calls the mod's declared `prepare_server_start` capability before spawning either native service. Healthy support is checked without writes, even when the market is already running. A recognized complete upstream replacement is repaired only while both services are stopped. Disabled or absent support is never automatically installed, and interrupted disable/removal requires manual recovery.
 

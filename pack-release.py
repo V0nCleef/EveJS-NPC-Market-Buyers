@@ -8,18 +8,20 @@ from tools.build_update_metadata import build as build_update_metadata
 
 root = Path(__file__).resolve().parent
 version = json.loads((root / 'package.json').read_text())['version']
-prefix = 'NPC-Market-Buyers-' + version
+manifest = json.loads((root / 'evejs-launcher.mod.json').read_text())
+prefix = manifest['id']
+asset = manifest['updates']['asset'].replace('{version}', version)
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--output-dir', type=Path, default=root / 'dist',
                     help='Destination directory; use a separate directory for rebuild checks.')
 output = parser.parse_args().output_dir.resolve()
 output.mkdir(parents=True, exist_ok=True)
-archive = output / (prefix + '.zip')
+archive = output / asset
 files = [root / name for name in (
     'loader.js.disabled', 'helper.js', 'evejs-launcher.mod.json',
-    'README.md', 'VERIFICATION.md', 'build-payload.cjs', 'build-locales.py')]
+    'README.md', 'DOCKER-PORT.md', 'VERIFICATION.md', 'build-payload.cjs', 'build-locales.py')]
 for folder in ('lib', 'client', 'payload', 'native/market-server/src',
-               'native/market-server/crates'):
+               'native/market-server/crates', 'docker'):
     files.extend(p for p in (root / folder).rglob('*') if p.is_file())
 files.extend(root / ('native/market-server/' + name) for name in (
     'Cargo.toml', 'Cargo.lock', 'config/market-server.example.toml'))
@@ -31,7 +33,8 @@ with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as tar
         if file.suffix == '.pyc' or '__pycache__' in file.parts:
             continue
         target.write(file, prefix + '/' + file.relative_to(root).as_posix())
-    target.writestr(prefix + '/package.json', json.dumps(package, indent=2) + '\n')
+    newline = '\r\n' if b'\r\n' in (root / 'package.json').read_bytes() else '\n'
+    target.writestr(prefix + '/package.json', (json.dumps(package, indent=2) + '\n').replace('\n', newline))
     target.writestr(prefix + '/LICENSE', license_bytes)
 with zipfile.ZipFile(archive) as check:
     assert check.testzip() is None

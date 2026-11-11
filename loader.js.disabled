@@ -3,7 +3,7 @@ const fs=require("node:fs"),path=require("node:path"),Module=require("node:modul
 const {isMainThread}=require("node:worker_threads");
 const delivery=require("./lib/loginDelivery");
 const symbol=Symbol.for(delivery.KEY);
-const canonical=p=>path.resolve(p).replace(/\\/g,"/").toLowerCase();
+const canonical=p=>{const resolved=path.resolve(p).replace(/\\/g,"/");return process.platform==="win32"?resolved.toLowerCase():resolved;};
 function resolveRoot(start=__dirname){let dir=path.resolve(start);for(let i=0;i<10;i++){if(fs.existsSync(path.join(dir,"server/package.json")))return dir;const next=path.dirname(dir);if(next===dir)break;dir=next;}throw Error("EveJS root was not found");}
 function install(root=resolveRoot()){
   if(!isMainThread)return {active:false,reason:"worker_thread"};
@@ -43,9 +43,13 @@ function install(root=resolveRoot()){
     if(file===marketFile&&state.active&&!state.runtime){
       try{
       const {createStore}=require("./lib/store"),{createQuoteProvider}=require("./lib/quotes"),{createEngine}=require("./lib/engine"),{evaluate}=require("./lib/policy"),{installService}=require("./lib/service");
-      const store=createStore(path.join(root,"_local/npc-market-buyers/state.sqlite"),{root});
+      const store=createStore(path.join(require('./lib/statePaths').stateRoot(root),"state.sqlite"),{root});
       walletBatching.attach(store);
       const adapter=createMarketAdapter(root,{store}),quotes=createQuoteProvider({store,localQuote:adapter.localQuote});
+      if(process.env.EVEJS_MOD_DATA_ROOT){
+        const previousReady=adapter.ready.bind(adapter);
+        adapter.ready=async()=>{await previousReady();await require('./docker/market-authority.cjs').activate(root,__dirname);};
+      }
       const engine=createEngine({adapter,quotes,store,getConfig:()=>store.getConfig(),evaluate,clock:Date.now,random:Math.random,log:console,walletBatching});
       installService(this.exports,{root,store,quotes,engine,adapter});
       state.runtime={store,adapter,quotes,engine};engine.start();
