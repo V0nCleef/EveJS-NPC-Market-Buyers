@@ -4,7 +4,7 @@
   "sha256": "c3149911d746063040e00ead89819f3c2e7753a9d3884d2ee637cbebd5f404dd",
   "bytes": 3076857,
   "updateMetadata": "NPC-Market-Buyers-0.1.24.update.json",
-  "updateMetadataSHA256": "4d94c98083fc06e655fa07557cd8132c8185d5f5794a3d523631b513f9e82101",
+  "updateMetadataSHA256": "8d6aeeaa640a65fafd8c7c68ce391196b3effecd5fc3fdee0d12456c3d5d43c4",
   "sourceMemberMapping": {
     "build-locales.py": {
       "source": "build-locales.py",
@@ -273,5 +273,13 @@
     "16d0067ffcd34be142aa3b8073f6437616a90848825f8e5061499411fb3accc0",
     "2bf86115efc213be65be2be1c5306a095f14bd9d4c324995d41dbbf8694885a4"
   ],
-  "dockerAdmittedFinancialIdentitySetUnchanged": true
+  "dockerAdmittedFinancialIdentitySetUnchanged": true,
+  "metadataCorrection": {
+    "date": "2026-11-11",
+    "previousSHA256": "4d94c98083fc06e655fa07557cd8132c8185d5f5794a3d523631b513f9e82101",
+    "reason": "Removed sidecar-only Docker qualification incorrectly advertised as global EveJS compatibility. ZIP intentionally omits compatibility.evejsVersions.",
+    "zipUnchanged": true,
+    "publicTagUnchanged": true,
+    "sourceToolingCorrection": "Follow-up main commit; original v0.1.24 tag and runtime sources retained."
+  }
 }

@@ -24,7 +24,7 @@ def build(archive_path, *, overwrite=False):
         raise ValueError('The ZIP filename differs from its declared update asset.')
     metadata = dict(schemaVersion=1, id=manifest['id'], version=version,
                     asset=archive_path.name)
-    versions = manifest.get('compatibility', {}).get('evejsVersions', ['261108.1'])
+    versions = manifest.get('compatibility', {}).get('evejsVersions')
     if versions is not None:
         metadata['evejsVersions'] = versions
     destination = archive_path.with_suffix('.update.json')

@@ -37,7 +37,7 @@ class UpdatePackageTests(unittest.TestCase):
         metadata = json.loads(self.archive.with_suffix('.update.json').read_text())
         expected = dict(schemaVersion=1, id=manifest['id'],
             version=manifest['version'], asset=manifest['updates']['asset'].replace('{version}', self.version))
-        versions = manifest.get('compatibility', {}).get('evejsVersions', ['261108.1'])
+        versions = manifest.get('compatibility', {}).get('evejsVersions')
         if versions:
             expected['evejsVersions'] = versions
         self.assertEqual(metadata, expected)
@@ -75,6 +75,18 @@ class UpdatePackageTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             build(archive)
         self.assertFalse(archive.with_suffix('.update.json').exists())
+
+    def test_generator_preserves_actual_declared_versions_without_a_docker_fallback(self):
+        directory = self.directory / 'declared-version-control'
+        directory.mkdir()
+        archive = directory / self.archive.name
+        manifest = dict(schemaVersion=3, id='npc-market-buyers', version=self.version,
+                        updates=dict(provider='github', asset='NPC-Market-Buyers-{version}.zip'),
+                        compatibility=dict(evejsVersions=['261028.1', '261108.1']))
+        with zipfile.ZipFile(archive, 'w') as bundle:
+            bundle.writestr('control/evejs-launcher.mod.json', json.dumps(manifest))
+        metadata = json.loads(build(archive).read_text())
+        self.assertEqual(metadata['evejsVersions'], ['261028.1', '261108.1'])
 
 
 if __name__ == '__main__':
