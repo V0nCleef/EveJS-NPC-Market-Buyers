@@ -1,4 +1,8 @@
-# Private Docker candidate
+# Private 0.1.25 compatibility candidate
+
+261115.2 source adaptation is implemented and fixture-tested. Before writing receipts the helper validates the actual market and both wallet transforms. New-version Linux image/runtime and retail-client qualification are pending. The changed financial adapter has its own exact identity; enabled 0.1.24 predecessors remain checked against their original identity. The old results below do not qualify 261115.2.
+
+## Historical 0.1.24 Docker candidate
 
 Unpublished candidate based on NPC Market Buyers 0.1.23. The proposed version is 0.1.24; no tag or public release has been created. Requires the Launcher 1.0.80 candidate, EveJS 261108.1 and Linux amd64. Native installers, update validation and default state paths remain intact.
 

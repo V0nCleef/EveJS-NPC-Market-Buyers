@@ -22,7 +22,12 @@ function fixture(t,{seedPending=true,fromVersion='0.1.20'}={}){
     write(path.join(mod,'evejs-launcher.mod.json'),JSON.stringify(manifest));write(path.join(mod,'package.json'),JSON.stringify({version}));
     write(path.join(mod,'loader.js'),'// enabled fixture');
     for(const name of ['i18n.py','sell_advisor.py','hud.py','companion.py','wallet_summary.py'])write(path.join(mod,'client',name),'# fixture');
-    for(const name of FINANCIAL)write(path.join(mod,'lib',name),fs.readFileSync(path.resolve(__dirname,mod===old&&fromVersion!=='0.1.23'?'fixtures/financial-v1':'../lib',name)));
+    for(const name of FINANCIAL){
+      const reviewed=mod===old&&['0.1.23','0.1.24'].includes(fromVersion);
+      const file=reviewed&&name==='marketAdapter.js'?'fixtures/financial-v123/marketAdapter.js':
+        path.join(mod===old&&!reviewed?'fixtures/financial-v1':'../lib',name);
+      write(path.join(mod,'lib',name),fs.readFileSync(path.resolve(__dirname,file)));
+    }
     for(const [i,target]of ALLOWED.entries()){
       write(path.join(mod,'payload/native',i+'.bin'),bytes[i]);
       if(mod===old)write(path.join(root,target),'uninstall-original-'+i);
@@ -262,14 +267,16 @@ test('Windows path letter casing does not reject a real enabled package as a jun
 });
 
 test('0.1.23 enabled update admits its exact reviewed ABI and preserves pending settlement rows',async t=>{
-  const f=fixture(t,{fromVersion:'0.1.23'});await f.installOld();
-  const receipt=JSON.parse(fs.readFileSync(f.receipt));receipt.version='0.1.23';fs.writeFileSync(f.receipt,JSON.stringify(receipt));
+  for(const fromVersion of ['0.1.23','0.1.24']){
+  const f=fixture(t,{fromVersion});await f.installOld();
+  const receipt=JSON.parse(fs.readFileSync(f.receipt));receipt.version=fromVersion;fs.writeFileSync(f.receipt,JSON.stringify(receipt));
   const before=f.financial();
   for(const action of ['prepare_update','apply_update','apply_update','commit_update','commit_update']){
     await f.run(action);assert.equal(f.financial(),before);
   }
   assert.equal(JSON.parse(fs.readFileSync(f.receipt)).version,TO_VERSION);
   await assert.rejects(f.run('prepare_disable'),/settlement needs recovery/);
+  }
 });
 test('an edited 0.1.23 financial predecessor is refused before snapshotting pending data',async t=>{
   const f=fixture(t,{fromVersion:'0.1.23'});await f.installOld();const before=f.financial(),receipt=fs.readFileSync(f.receipt);

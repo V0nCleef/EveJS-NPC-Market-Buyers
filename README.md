@@ -1,6 +1,6 @@
 # NPC Market Buyers
 
-**Private version 0.1.24 Docker candidate, unpublished.** Requires the Launcher 1.0.80 candidate. Docker qualification covers EveJS 261108.1 on Linux amd64, including real purchases and container-recreation recovery. See [Docker port details](DOCKER-PORT.md). Combined Launcher and retail-client acceptance remains outstanding.
+**Private 0.1.25 compatibility candidate for EveJS 261115.2, unpublished.** Requires Launcher 1.0.80+. The corporation wallet adapter preserves upstream idempotency/refund behavior and prior NPC command fingerprints. All 132 Node checks pass. Real 261115.2 native settlement, saved-receipt orphan compensation, all four lost acknowledgements and cold replay pass in isolated fixtures. The new host identity remains exact-hash guarded. New-version Docker, GridCheck/client and combined-mod acceptance are pending. See [verification](VERIFICATION.md).
 
 **Give your single-player EveJS market someone to sell to.**
 

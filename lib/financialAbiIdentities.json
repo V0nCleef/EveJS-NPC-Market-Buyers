@@ -19,7 +19,8 @@
     },
     {
       "versions": [
-        "0.1.23"
+        "0.1.23",
+        "0.1.24"
       ],
       "files": {
         "engine.js": "4c56edbb4d909dc7d2658d1a7f5bd6546d00c8f8a13223faa7d520aa311990c2",

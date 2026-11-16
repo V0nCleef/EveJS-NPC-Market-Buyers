@@ -14,6 +14,13 @@
       "walletSource": "b64a26f26249a1f1f34f6fc9eda4c9a1e7d918eb3e8f227be5a40b20e089a914",
       "legacyReceiptLimit": 512,
       "authorityReceiptLimit": 1024
+    },
+    {
+      "evejs": "261115.2",
+      "marketSource": "a4c16b0e41fcee3a0741aca66ebe45dc909ff9f3a9121af1a955488cdd8bd024",
+      "walletSource": "410312526b4d1ae29c4e1ce026b9aee9fb8a3a59a5b24cc69e29b5eaedf16a5a",
+      "legacyReceiptLimit": 512,
+      "authorityReceiptLimit": 1024
     }
   ]
 }

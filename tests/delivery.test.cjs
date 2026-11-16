@@ -23,18 +23,31 @@ test('post-compile login payload composes after installed AutoMining and preserv
   assert.ok(own.compose(original).includes(Buffer.from([0xff])));
   assert.throws(()=>own.compose(Buffer.from('bad')),/Unsupported login envelope/);
 });
-test('actual Launcher shared-menu and AutoMining wrappers retain native source without NPC source mutation',()=>{
+test('current Launcher registry and AutoMining compose with Buyers in either attachment order',()=>{
   const file=path.join(root,'server/src/network/tcp/handshake.js'),baseline=fs.readFileSync(file,'utf8');
   const auto=require(path.join(autoRoot,'lib/loginDelivery'));
   const shared=path.join(process.env.EVEJS_LAUNCHER_ROOT||'../evejs-launcher','src/core/client/shared_menu_loader.cjs');
-  const frozen={handshakeSha256:require('node:crypto').createHash('sha256').update(baseline).digest('hex'),framework:'IyBmaXh0dXJl',frameworkDigest:'fixture',entries:[]};
-  for(const input of [auto.extendSource(baseline)]){
+  const api=fs.readFileSync(path.join(path.dirname(shared),'login_delivery.cjs'),'utf8');
+  const frozen={handshakeSha256:require('node:crypto').createHash('sha256').update(baseline).digest('hex'),bootstrap:'# shared menu fixture\n'};
+  const codec=require(path.join(root,'server/src/network/tcp/utils/marshal.js'));
+  for(const npcFirst of [true,false]){
     const Module={prototype:{_compile:source=>source}};
-    vm.runInNewContext(fs.readFileSync(shared,'utf8').replace('/*__FROZEN_PAYLOAD__*/',JSON.stringify(frozen)),{
-      require:name=>name==='module'?Module:require(name),__dirname:path.join(root,'server/src/network'),Buffer,console:{log(){}}
-    });
-    const composed=Module.prototype._compile(input,file);assert.ok(composed.startsWith(baseline));new vm.Script(composed);
-    assert.ok(composed.includes('_evejsSharedMenuPreviousBuilder'));assert.ok(composed.includes('__amPreviousLogin'));
+    const sandbox={require:name=>['module','node:module'].includes(name)?Module:require(name),
+      __dirname:path.join(root,'server/src/network'),Buffer,process,setTimeout,clearTimeout,console:{log(){},error:message=>assert.fail(message)}};
+    vm.createContext(sandbox);
+    vm.runInContext(fs.readFileSync(shared,'utf8').replace('/*__FROZEN_PAYLOAD__*/',JSON.stringify(frozen)).replace('/*__LOGIN_DELIVERY_RUNTIME__*/',api),sandbox);
+    const runtime=vm.runInContext('globalThis[Symbol.for("evejs.loginDelivery.v1")]',sandbox);assert.ok(runtime);
+    runtime.register({id:'automining',source:auto.createDelivery(autoRoot).source});
+    class Handshake{constructor(){this.userId=7;this.sent=[];} _sendPacket(packet){this.sent.push(packet);} _handleFuncResult(){return {done:true};}}
+    const install=()=>delivery.installHandshake(Handshake,{root,delivery:delivery.createDelivery(modRoot)});
+    if(npcFirst)install();runtime.attach(Handshake);if(!npcFirst)install();
+    assert.equal(Module.prototype._compile.call({exports:Handshake},baseline,file),baseline,'no source rewriting');
+    const h=new Handshake(),original=['',[envelope('41'),0],{type:'dict',entries:[]},{type:'dict',entries:[['challenge_responsehash','55087']]}];
+    const packet=codec.encodePacket(original);h._sendPacket(packet);
+    const value=codec.marshalDecodeExact(h.sent[0].subarray(4)),text=value[1][0].toString('latin1');
+    assert.ok(text.includes('_nmb_context'));assert.ok(text.includes('<evejs-login-delivery-v1>'));
+    value[1][0]=original[1][0];assert.deepEqual(value,codec.marshalDecodeExact(packet.subarray(4)));
+    h._sendPacket(packet);assert.deepEqual(h.sent[1],packet);
   }
   new vm.Script(fs.readFileSync(path.join(modRoot,'loader.js.disabled'),'utf8'));
 });
@@ -53,10 +66,10 @@ test('post-compile login attachment uses actual native codec and preserves metad
   assert.deepEqual(h.sent[1].subarray(h.sent[1].length-(packet.length-at-encodedBuffer.length)),packet.subarray(at+encodedBuffer.length));
   h._sendPacket(packet);assert.deepEqual(h.sent[2],packet);
 });
-test('actual 261108.1 numeric-zero signed-function flag attaches exactly once without changing native metadata',()=>{
+test('actual release numeric-zero signed-function flag attaches exactly once without changing native metadata',()=>{
   const codec=require(path.join(root,'server/src/network/tcp/utils/marshal.js'));
   const source=fs.readFileSync(path.join(root,'server/src/network/tcp/handshake.js'),'utf8');
-  assert.match(source,/\[buildTidiSignedFunc\(this\.clientId\),\s*0\]/,'Use the real release wire flag');
+  assert.match(source,/\[buildTidiSignedFunc\(this\.clientId(?:, \{ accountRole: this\.accountRole \})?\),\s*0\]/,'Use the real release wire flag, including 261115.2 staff-health delivery');
   class Handshake{constructor(){this.userId=7;this.sent=[];} _sendPacket(packet){this.sent.push(packet);}}
   delivery.installHandshake(Handshake,{root,delivery:delivery.createDelivery(modRoot)});
   const original=['',[envelope('41'),0],{type:'dict',entries:[]},{type:'dict',entries:[['challenge_responsehash','55087']]}];

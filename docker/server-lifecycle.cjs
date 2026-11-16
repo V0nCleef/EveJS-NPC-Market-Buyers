@@ -57,7 +57,11 @@ async function execute(request,{modRoot=path.resolve(__dirname,"..")}={}){
   const ctx=h.context(request,modRoot,ACTIONS),identity=sourceIdentity(modRoot);
   financial.identity(modRoot,{currentPackage:true});
   const version=h.readJSON(path.join(ctx.root,"server/package.json"))?.version;
-  if(version!=="261108.1")throw Error("This Docker port is qualified only for EveJS 261108.1; Native compatibility is unchanged");
+  if(!["261108.1","261115.2"].includes(version))throw Error("This Docker port requires reviewed EveJS 261108.1 or 261115.2 source");
+  // Fail before writing receipts if an upstream wallet/market seam changed.
+  new (require("node:vm").Script)(require("../lib/marketAdapter").prepareMarketSource(fs.readFileSync(path.join(ctx.root,"server/src/services/market/marketProxyService.js"),"utf8")));
+  for(const [file,isCorp] of [["account/walletState.js",false],["corporation/corpWalletState.js",true]])
+    require("../lib/walletBatching").prepareWalletSource(fs.readFileSync(path.join(ctx.root,"server/src/services",file),"utf8"),isCorp);
   if(process.arch!=="x64")throw Error("This Linux market source contribution is qualified only for amd64");
   require("../lib/loginDelivery").createDelivery(modRoot);
   inspectDatabase(ctx);
