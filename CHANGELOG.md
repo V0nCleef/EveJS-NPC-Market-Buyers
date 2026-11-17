@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.26 - Native Linux support (2026-11-17)
+
+- Include a native x86_64 Linux Market executable alongside the existing Windows payload.
+- Bind Linux runtime selection to the installed package, exact binary and compiler inputs. Linux requires Launcher 1.0.87 or newer; Windows requirements are retained.
+- Preserve original file permissions through installation, source repair and rollback.
+- Retain pending settlements, settings and history across updates. Disable and removal continue to require normal settlement recovery.
+
 ## 0.1.23 — Pending updates and receipted recovery (2026-11-10)
 
 - Updates enabled 0.1.20–0.1.22 installations without disabling Native support first. Requires Launcher 1.0.79+; keeps pending work, policy and history through replacement and exact rollback.

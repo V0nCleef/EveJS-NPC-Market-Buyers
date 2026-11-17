@@ -1,21 +1,11 @@
-# NPC Market Buyers 0.1.25 — verification
+# NPC Market Buyers 0.1.26 verification
 
-## Qualified target
+Target: EveJS 261115.2. Windows uses the unchanged packaged Market executable and requires Launcher 1.0.80 or newer. Native Linux x86_64 requires Launcher 1.0.87 and the separately compiled ELF payload.
 
-Windows Native on EveJS 261115.2, with the existing packaged market executable and Launcher 1.0.80 or newer. No new Docker/Linux runtime qualification is claimed.
+The Linux payload was built from this package's locked Rust source and compiler-input inventory. Its metadata binds the executable, patched sources, dependencies and target version. The launcher checks that binding before selecting the executable. Windows payload bytes remain unchanged.
 
-## Completed checks
+Checks on isolated Windows and Linux installations cover install, verification, recovery, removal, source and executable tamper refusal, permissions, enabled updates and rollback. Production launcher import/update checks preserve pending settlement rows. Real native Market daemons exercise conditional fills, duplicate replay and cold restart, with one fill receipt and intact SQLite data. Linux checks run as an ordinary user in a disposable container with no published host ports.
 
-- 132 Node checks against the actual target source, covering wallet command identity, corporation idempotency and refund metadata, pending-work preservation, guarded updates and rollback, settlement, persistence and shared login delivery.
-- Source, localisation, Python 2 grammar, JavaScript and packaged native-source checks, plus six package/update-metadata contracts.
-- Real native personal and corporation purchases using the native wallet authority, market daemon and custody APIs; random/offline scheduling and cold recovery after lost replies.
-- Eighteen historical orphan-recovery controls, including all four interrupted effects, restart/replay, unsupported-source refusal and unchanged original inputs. Private saved-game data and diagnostic receipts are not release assets.
-- Actual Launcher update into a separate installation root, preserving settings, history, pending work and rollback material.
-- Actual GridCheck purchase and cold replay, including a focused replay on the exact packaged executable with real lifecycle verification before and after startup.
-- Actual retail Orders, Statistics, Activity, native Sell Items advisor and shared Mods menu in the combined native world. The coordinator also accepted the same-world retail reconnect and unchanged financial fingerprint.
+The Windows predecessor is the actual published 0.1.25 archive. There was no published native Linux 0.1.25: the Linux predecessor is an explicitly synthetic first-port fixture using a different real compiled ELF. Candidate downloads are injected locally; these packages have not been published.
 
-Deterministic price, clock and random inputs were used where identified by the isolated test cases. These checks do not establish external price-feed behaviour or every gameplay feature of other mods. The initial GridCheck-managed build produced a different local executable; the separate exact-packaged-executable replay closed that artifact gap without changing any receipt or allowlist.
-
-## Remaining limits
-
-Docker source adaptation and lifecycle checks ran in simulated host fixtures. A new-version Linux image/runtime run was not performed. Existing source guards and pending-settlement protection remain in force; do not delete receipts or history to force an update.
+This port does not repeat the prior release's retail-client, wallet and custody gameplay qualification. No current real EVE/Proton gameplay, Steam Deck hardware, or complete Docker game stack qualification is claimed. Historical version fixtures and pinned third-party coexistence fixtures are outside the current-target regression selection. Keep source guards, financial history and pending-settlement protection intact.

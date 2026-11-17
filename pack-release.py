@@ -19,7 +19,8 @@ output.mkdir(parents=True, exist_ok=True)
 archive = output / asset
 files = [root / name for name in (
     'loader.js.disabled', 'helper.js', 'evejs-launcher.mod.json',
-    'README.md', 'DOCKER-PORT.md', 'VERIFICATION.md', 'build-payload.cjs', 'build-locales.py')]
+    'README.md', 'DOCKER-PORT.md', 'VERIFICATION.md', 'build-payload.cjs', 'build-locales.py',
+    'docs/LINUX_SUPPORT.md', 'tools/build_linux_payload.py')]
 for folder in ('lib', 'client', 'payload', 'native/market-server/src',
                'native/market-server/crates', 'docker'):
     files.extend(p for p in (root / folder).rglob('*') if p.is_file())

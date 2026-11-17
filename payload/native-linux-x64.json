@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "target": "externalservices/market-server/target/release/market-server",
+      "payload": "native/linux-x64/0.bin"
+    },
+    {
+      "target": "externalservices/market-server/crates/market-common/src/lib.rs",
+      "payload": "native/1.bin"
+    },
+    {
+      "target": "externalservices/market-server/src/main.rs",
+      "payload": "native/2.bin"
+    },
+    {
+      "target": "externalservices/market-server/src/rpc.rs",
+      "payload": "native/3.bin"
+    },
+    {
+      "target": "externalservices/market-server/src/state.rs",
+      "payload": "native/4.bin"
+    }
+  ],
+  "runtime": {
+    "schema": "npc-market-buyers-linux-x64/1",
+    "architecture": "x64",
+    "evejsVersions": [
+      "261115.2"
+    ],
+    "binarySHA256": "7992fe2bbdbc6aa9909b4d5b5a0c97dd528be1394d540a79da9102e21cc91e17",
+    "compilerInputs": {
+      "Cargo.lock": "5e377597076c16d313cf5483d49d7625d7190e5793a99efc9e8f762176b68507",
+      "Cargo.toml": "4a5ed461834535dc4d04dc59fde3ad082ab3c7333db6b33bb131f069b76414de",
+      "crates/market-common/src/lib.rs": "913b393bccfeaa8021d1823bd58040c9e77f7704d0fa58591d67b1b238e612ef",
+      "src/config.rs": "50a3e4864449057d8107e73d7237fbfdedf624421c20d59781774da378e93782",
+      "src/main.rs": "2d3235c978eabb1b982fda72ca06e7a643d3dd37773fc52354b93727c25854f2",
+      "src/rpc.rs": "11220d749ff91f8ba5502b67babf781ce3e1e34b96ca1e836b97c4a14c919c1b",
+      "src/state.rs": "77c295cc5ae5ae65665be981e1f4c70a079cba6a9e947762fce88be951813819"
+    },
+    "rustc": "rustc 1.92.0 (ded5c06cf 2025-12-08)",
+    "cargoLocked": true
+  }
+}

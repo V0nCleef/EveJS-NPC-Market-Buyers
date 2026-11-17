@@ -18,7 +18,7 @@ function fixture(t){
   write(path.join(mod,'payload/native.json'),JSON.stringify({schema:2,files}));
   t.after(()=>{if(!temp.startsWith(testRoot+path.sep))throw Error('Invalid cleanup target');fs.rmSync(temp,{recursive:true,force:true});});
   const request=action=>({protocol:'evejs-launcher-mod-helper-v1',requestId:'test',action,runtime:{backend:'native',evejsRoot:root}});
-  return {root,mod,files,request,run:action=>execute(request(action),{modRoot:mod,inactive:async()=>{}}),
+  return {root,mod,files,request,run:action=>execute(request(action),{host:'win32',modRoot:mod,inactive:async()=>{}}),
     receipt:path.join(root,'_local/npc-market-buyers/install/receipt.json'),pending:path.join(root,'_local/npc-market-buyers/install/pending.json')};
 }
 test('native install and disable restore exact bytes; launch preparation is read-only',async t=>{
@@ -32,7 +32,7 @@ test('native install and disable restore exact bytes; launch preparation is read
 });
 test('active servers remain protected; different native builds are backed up and accepted',async t=>{
   const f=fixture(t);let called=0;
-  await assert.rejects(execute(f.request('install'),{modRoot:f.mod,inactive:async()=>{called++;throw Error('Server running');}}),/Server running/);
+  await assert.rejects(execute(f.request('install'),{host:'win32',modRoot:f.mod,inactive:async()=>{called++;throw Error('Server running');}}),/Server running/);
   assert.equal(called,1);assert.equal(fs.existsSync(f.receipt),false);
   fs.writeFileSync(path.join(f.root,ALLOWED[4]),'newer');await f.run('install');
   await f.run('prepare_disable');assert.equal(fs.readFileSync(path.join(f.root,ALLOWED[4]),'utf8'),'newer');
@@ -137,7 +137,7 @@ test('server-start preparation is a read-only no-op for healthy active support e
   const receipt=JSON.parse(fs.readFileSync(f.receipt));
   const files=[f.receipt,...ALLOWED.map(target=>path.join(f.root,target)),...receipt.files.filter(file=>file.existed).map(file=>path.join(path.dirname(f.receipt),file.backup))];
   const before=files.map(file=>({bytes:fs.readFileSync(file),mtime:fs.statSync(file).mtimeMs}));let checked=0;
-  const result=await execute(f.request('prepare_server_start'),{modRoot:f.mod,inactive:async()=>{checked++;throw Error('Market already running');}});
+  const result=await execute(f.request('prepare_server_start'),{host:'win32',modRoot:f.mod,inactive:async()=>{checked++;throw Error('Market already running');}});
   assert.equal(result.success,true);assert.equal(checked,0);assert.equal(fs.existsSync(f.pending),false);
   files.forEach((file,i)=>{assert.deepEqual(fs.readFileSync(file),before[i].bytes);assert.equal(fs.statSync(file).mtimeMs,before[i].mtime);});
 });
@@ -147,14 +147,14 @@ test('server-start preparation automatically repairs a complete updater replacem
   const file=path.join(f.root,'_local/npc-market-buyers/state.sqlite'),db=new Database(file);
   db.exec("CREATE TABLE nm_meta(key TEXT PRIMARY KEY,value TEXT);INSERT INTO nm_meta VALUES('config','{\"offlinePurchases\":true}');CREATE TABLE nm_activity(id INTEGER PRIMARY KEY,message TEXT);INSERT INTO nm_activity VALUES(1,'Retained sale history')");db.close();
   const saved=fs.readFileSync(file);let checked=0;
-  const result=await execute(f.request('prepare_server_start'),{modRoot:f.mod,inactive:async()=>{checked++;}});
+  const result=await execute(f.request('prepare_server_start'),{host:'win32',modRoot:f.mod,inactive:async()=>{checked++;}});
   assert.equal(checked,1);assert.match(result.message,/repaired after the EveJS update/);await f.run('verify');
   assert.deepEqual(fs.readFileSync(file),saved);assert.equal(fs.existsSync(f.pending),false);
 });
 test('server-start updater repair refuses running services before any writes',async t=>{
   const f=fixture(t),stock=upstream(t,f);await f.run('install');stock.replace();
   const receipt=fs.readFileSync(f.receipt);let checked=0;
-  await assert.rejects(execute(f.request('prepare_server_start'),{modRoot:f.mod,inactive:async()=>{checked++;throw Error('Game or market running');}}),/Game or market running/);
+  await assert.rejects(execute(f.request('prepare_server_start'),{host:'win32',modRoot:f.mod,inactive:async()=>{checked++;throw Error('Game or market running');}}),/Game or market running/);
   assert.equal(checked,1);assert.deepEqual(fs.readFileSync(f.receipt),receipt);assert.equal(fs.existsSync(f.pending),false);
   for(let i=1;i<ALLOWED.length;i++)assert.deepEqual(fs.readFileSync(path.join(f.root,ALLOWED[i])),stock.bytes[i]);
 });
@@ -168,7 +168,7 @@ test('server-start preparation never installs absent or disabled support',async 
 });
 test('server-start preparation rejects partial updates and invalid backups without checking services',async t=>{
   const f=fixture(t),stock=upstream(t,f);await f.run('install');
-  const run=()=>execute(f.request('prepare_server_start'),{modRoot:f.mod,inactive:async()=>{throw Error('Inactive must not be checked');}});
+  const run=()=>execute(f.request('prepare_server_start'),{host:'win32',modRoot:f.mod,inactive:async()=>{throw Error('Inactive must not be checked');}});
   fs.writeFileSync(path.join(f.root,ALLOWED[1]),stock.bytes[1]);await assert.rejects(run(),/unrecognized changes/);
   fs.writeFileSync(path.join(f.root,ALLOWED[1]),'replacement-1');
   const receipt=JSON.parse(fs.readFileSync(f.receipt));fs.writeFileSync(path.join(path.dirname(f.receipt),receipt.files[2].backup),'invalid backup');

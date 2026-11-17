@@ -1,6 +1,6 @@
 """Portable source/catalogue/payload checks; never reads a live EveJS install."""
 from pathlib import Path
-import ast, json, string, subprocess, warnings
+import ast, hashlib, json, string, struct, subprocess, warnings
 warnings.filterwarnings('ignore',category=DeprecationWarning)
 from lib2to3 import pygram, pytree
 from lib2to3.pgen2 import driver
@@ -47,6 +47,16 @@ for entry in payload['files']:
     else:
         assert (root/'native/market-server'/relative).read_bytes()==file.read_bytes(),relative
 assert (root/'LICENSE').is_file()
+linux=json.loads((root/'payload/native-linux-x64.json').read_text())
+assert linux['schema']==1 and linux['runtime']['architecture']=='x64'
+binary=root/'payload/native/linux-x64/0.bin'
+header=binary.read_bytes()[:64]
+assert header[:6]==b'\x7fELF\x02\x01' and struct.unpack_from('<H',header,18)[0]==62
+assert hashlib.sha256(binary.read_bytes()).hexdigest()==linux['runtime']['binarySHA256']
+assert linux['files'][0]['target']==payload['files'][0]['target'].removesuffix('.exe')
+assert linux['files'][1:]==payload['files'][1:]
+for name,digest in linux['runtime']['compilerInputs'].items():
+    assert hashlib.sha256((root/'native/market-server'/name).read_bytes()).hexdigest()==digest
 print(json.dumps({'version':package['version'],'catalogueStrings':len(catalogue['strings']),
     'languages':8,'pythonFiles':len(clients),'javascriptFiles':len(javascript),
     'nativePayloadFiles':len(payload['files']),'liveRuntimeAccessed':False}))

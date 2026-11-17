@@ -24,7 +24,7 @@ function fixture(t,{seedPending=true,fromVersion='0.1.20'}={}){
     for(const name of ['i18n.py','sell_advisor.py','hud.py','companion.py','wallet_summary.py'])write(path.join(mod,'client',name),'# fixture');
     for(const name of FINANCIAL){
       const reviewed=mod===old&&['0.1.23','0.1.24'].includes(fromVersion);
-      const file=reviewed&&name==='marketAdapter.js'?'fixtures/financial-v123/marketAdapter.js':
+      const file=mod===old&&fromVersion==='0.1.25'?path.join('../lib',name):reviewed&&name==='marketAdapter.js'?'fixtures/financial-v123/marketAdapter.js':
         path.join(mod===old&&!reviewed?'fixtures/financial-v1':'../lib',name);
       write(path.join(mod,'lib',name),fs.readFileSync(path.resolve(__dirname,file)));
     }
@@ -47,7 +47,7 @@ function fixture(t,{seedPending=true,fromVersion='0.1.20'}={}){
   const transactionId=crypto.randomUUID();
   const request=action=>({protocol:'evejs-launcher-mod-helper-v1',requestId:'test',action,runtime:{backend:'native',evejsRoot:root},
     update:{protocol:PROTOCOL,transactionId,fromVersion,fromModRoot:old,toVersion:TO_VERSION}});
-  const run=(action,changes={})=>execute({...request(action),...changes},{modRoot:incoming,inactive:async()=>{}});
+  const run=(action,changes={})=>execute({...request(action),...changes},{host:'win32',modRoot:incoming,inactive:async()=>{}});
   const receipt=path.join(root,'_local/npc-market-buyers/install/receipt.json'),pending=path.join(path.dirname(receipt),'pending.json');
   const financial=()=>JSON.stringify(store.db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name GLOB 'nm_*' ORDER BY name").all()
     .map(({name})=>({name,rows:store.db.prepare('SELECT * FROM '+name).all()})));
@@ -57,7 +57,7 @@ function fixture(t,{seedPending=true,fromVersion='0.1.20'}={}){
     fs.rmSync(temp,{recursive:true,force:true});
   });
   return {root,old,incoming,oldBytes,newBytes,store,request,run,receipt,pending,financial,
-    async installOld(){await execute(request('install'),{modRoot:old,inactive:async()=>{}});
+    async installOld(){await execute(request('install'),{host:'win32',modRoot:old,inactive:async()=>{}});
       const value=JSON.parse(fs.readFileSync(receipt));value.version='0.1.19';fs.writeFileSync(receipt,JSON.stringify(value,null,2)+'\n');},
     native:()=>ALLOWED.map(target=>fs.existsSync(path.join(root,target))?fs.readFileSync(path.join(root,target)):null)};
 }
@@ -283,4 +283,11 @@ test('an edited 0.1.23 financial predecessor is refused before snapshotting pend
   fs.appendFileSync(path.join(f.old,'lib/engine.js'),'\n// unreviewed edit\n');
   await assert.rejects(f.run('prepare_update'),/unrecognized predecessor source/);
   assert.equal(f.financial(),before);assert.deepEqual(fs.readFileSync(f.receipt),receipt);
+});
+
+
+test('exact 0.1.25 financial ABI updates without changing pending settlement rows',async t=>{
+  const f=fixture(t,{fromVersion:'0.1.25'});await f.installOld();const before=f.financial();
+  await f.run('prepare_update');await f.run('apply_update');await f.run('commit_update');
+  assert.equal(f.financial(),before);assert.deepEqual(f.native(),f.newBytes);
 });
