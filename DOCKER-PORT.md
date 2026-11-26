@@ -1,17 +1,18 @@
-# Private 0.1.25 compatibility candidate
+# Private 0.1.29 Docker compatibility
 
-261115.2 source adaptation is implemented and fixture-tested. Before writing receipts the helper validates the actual market and both wallet transforms. New-version Linux image/runtime and retail-client qualification are pending. The changed financial adapter has its own exact identity; enabled 0.1.24 predecessors remain checked against their original identity. The old results below do not qualify 261115.2.
+The Docker helper admits reviewed 261126.2 alongside 261125.3 and older targets,
+validating market/wallet seams before receipt mutation. New corporation history
+uses the reviewed stock wallet-account helper; pending outbox entries remain
+byte-identical. Exact 0.1.28 financial identity is retained for enabled updates.
 
-## Historical 0.1.24 Docker candidate
+The captured-image contribution still uses native/market-server-2611253 with
+locked Cargo and rust:1.95-bookworm. Pristine .2/.3 compiler files match, so the
+same reviewed ELF is reused. Source inventory, executable/image attestation,
+endpoint/peer and physical database guards remain. Pending work blocks disable;
+image decisions and Compose application remain the Launcher's responsibility.
 
-Unpublished candidate based on NPC Market Buyers 0.1.23. The proposed version is 0.1.24; no tag or public release has been created. Requires the Launcher 1.0.80 candidate, EveJS 261108.1 and Linux amd64. Native installers, update validation and default state paths remain intact.
-
-The manifest declares the `cargo-release-v1` market contribution. The Launcher builds the locked Rust source on its captured base image, owns image application/rollback and attests the selected market image. The mod helper never stops services or chooses a different Compose project. Docker state persists below `EVEJS_MOD_DATA_ROOT/npc-market-buyers`, normally `/var/lib/evejs/mods/npc-market-buyers`; the package can be mounted read-only.
-
-Prestart requires `runtime.market.imageId` and `runtime.market.expectedImageId`, both the same Root-captured `sha256:` identity. It prepares an installation-bound nonce without connecting to the stopped market. Actual loader readiness then validates the live daemon capabilities and its absolute database path inside the selected data mount. Historical recovery additionally checks the configured endpoint, live DNS/socket peer, fresh nonce and matching physical database. Native loopback protections remain unchanged.
-
-Pending transactions block real disable/removal. Docker update prepare/apply/commit/rollback preserves settlement data and exact prior receipts, supports retry after interruption and returns `recovery-required` when the Launcher image decision is unresolved. It never discards pending rows, history, wallet intents or custody receipts.
-
-Verified in isolation: 31 Linux Rust tests; actual Buyers loader startup; real market, wallet-authority process, personal/corporation sales, taxes, custody and history; deterministic random/offline scheduling; lost daemon/wallet acknowledgements and exactly-once replay across recreated containers. Eight Linux lifecycle cases and 19 Native installer cases pass. The six core financial files match the original release byte for byte.
-
-Combined Launcher image/lifecycle, common login runtime, retail-client acknowledgement, UI and package acceptance belong to the consolidation pass. No live installation has been changed.
+The private qualification receipt records actual bounded separate-container
+settlement/restart results and any unresolved stock owner-lease failures in the
+QA environment. No Docker Desktop, published ports, user databases, production
+Compose project or retail client is used. Stock owner leases and financial guards
+are never relaxed for qualification. No publication.

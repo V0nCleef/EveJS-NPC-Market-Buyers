@@ -6,7 +6,7 @@ const { spawn } = require("node:child_process");
 const sha = bytes => crypto.createHash("sha256").update(bytes).digest("hex");
 const linux = { skip: process.platform !== "linux" };
 process.env.EVEJS_LAUNCHER_HELPER_FEATURES = "native-linux-market-runtime-v1";
-function fixture(t) {
+function fixture(t,{version='261115.2'}={}) {
   const base = path.resolve(__dirname, "../.test-runtime"); fs.mkdirSync(base, { recursive: true });
   const temp = fs.mkdtempSync(path.join(base, "native-linux-"));
   t.after(() => { assert.ok(temp.startsWith(base + path.sep)); fs.rmSync(temp, { recursive: true, force: true }); });
@@ -14,11 +14,11 @@ function fixture(t) {
   const write = (file, bytes) => { fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, bytes); };
   const targets = [ALLOWED[0].replace(/\.exe$/, ""), ...ALLOWED.slice(1)];
   const binary = Buffer.alloc(64); binary.set([0x7f, 0x45, 0x4c, 0x46, 2, 1]); binary.writeUInt16LE(62, 18);
-  write(path.join(root, "package.json"), '{"version":"261115.2"}');
+  write(path.join(root, "package.json"), JSON.stringify({version}));
   write(path.join(root, "server/package.json"), "{}");
   for (const name of ["i18n.py", "sell_advisor.py", "hud.py", "companion.py", "wallet_summary.py"]) write(path.join(mod, "client", name), "# fixture\n");
   const files = targets.map((target, i) => {
-    const payload = i === 0 ? "native/linux-x64/0.bin" : `native/${i}.bin`;
+    const payload = i === 0 ? require('../lib/linuxNative').binaryPayload(require('../lib/linuxNative').manifestName(version)) : `native/${i}.bin`;
     write(path.join(mod, "payload", payload), i === 0 ? binary : "patched-" + i);
     write(path.join(root, target), i === 0 ? Buffer.concat([binary, Buffer.from("original")]) : "original-" + i);
     fs.chmodSync(path.join(root, target), i === 0 ? 0o750 : 0o640);
@@ -34,8 +34,9 @@ function fixture(t) {
   }
   for (const [i, file] of files.entries()) if (i > 0) compilerInputs[path.relative(market, path.join(root, file.target)).replaceAll(path.sep, "/")] = sha("patched-" + i);
   const metadata = { schema: 1, files, runtime: { schema: "npc-market-buyers-linux-x64/1", architecture: "x64",
-    evejsVersions: ["261115.2"], binarySHA256: sha(binary), compilerInputs } };
-  write(path.join(mod, "payload/native-linux-x64.json"), JSON.stringify(metadata));
+    evejsVersions: [version], binarySHA256: sha(binary), compilerInputs } };
+  const manifestName=require('../lib/linuxNative').manifestName(version);
+  write(path.join(mod, "payload",manifestName), JSON.stringify(metadata));
   const request = action => ({ protocol: "evejs-launcher-mod-helper-v1", requestId: "fixture", action,
     runtime: { backend: "native", evejsRoot: root } });
   const run = action => execute(request(action), { modRoot: mod, inactive: async () => {} });
@@ -57,6 +58,19 @@ test("native Linux installation selects ELF and binds the exact runtime; disable
   await f.run("prepare_disable");
   f.targets.forEach((name, i) => assert.deepEqual(fs.readFileSync(path.join(f.root, name)), originals[i]));
   assert.equal(fs.statSync(path.join(f.root, f.targets[0])).mode & 0o777, 0o750);
+});
+
+test('261125.3 and 261126.2 select the shared exact-input Linux binary and never fall back to the old payload',linux,async t=>{
+ for(const version of ['261125.3','261126.2']){
+  const f=fixture(t,{version});
+  const legacy=path.join(f.mod,'payload/native/linux-x64/0.bin');fs.mkdirSync(path.dirname(legacy),{recursive:true});fs.writeFileSync(legacy,'legacy-binary-must-not-be-selected');
+  await f.run('install');await f.run('verify');
+  const receipt=JSON.parse(fs.readFileSync(f.receipt));assert.equal(receipt.linuxRuntime.evejsVersion,version);
+  assert.deepEqual(fs.readFileSync(path.join(f.root,f.targets[0])),f.binary);
+  const before=fs.readFileSync(f.receipt);
+  fs.unlinkSync(path.join(f.mod,'payload/native/linux-x64-2611253/0.bin'));
+  await assert.rejects(f.run('verify'),/Bundled native file is missing/);assert.deepEqual(fs.readFileSync(f.receipt),before);
+ }
 });
 test("Linux rejects a Windows binary or mismatched compiled source before any installation mutation", linux, async t => {
   const f = fixture(t), binary = path.join(f.mod, "payload/native/linux-x64/0.bin");
@@ -115,7 +129,7 @@ for (const terminal of ["commit_update", "rollback_update"]) test("Linux enabled
     write(path.join(folder, "evejs-launcher.mod.json"), JSON.stringify({ ...declared, version }));
     write(path.join(folder, "package.json"), JSON.stringify({ version }));
     write(path.join(folder, "loader.js"), "// enabled authored predecessor fixture");
-    for (const name of FINANCIAL) write(path.join(folder, "lib", name), fs.readFileSync(path.resolve(__dirname, "../lib", name)));
+    for (const name of FINANCIAL) write(path.join(folder, "lib", name), fs.readFileSync(path.resolve(__dirname, folder===old?'fixtures/financial-v125':'../lib', name)));
   }
   await execute(f.request("install"), { modRoot: old, inactive: async () => {} });
   const oldReceipt = JSON.parse(fs.readFileSync(f.receipt)); oldReceipt.version = "0.1.25";

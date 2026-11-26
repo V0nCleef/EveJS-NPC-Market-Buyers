@@ -24,6 +24,7 @@ files = [root / name for name in (
 for folder in ('lib', 'client', 'payload', 'native/market-server/src',
                'native/market-server/crates', 'docker'):
     files.extend(p for p in (root / folder).rglob('*') if p.is_file())
+files.extend(p for p in (root/'native/market-server-2611253').rglob('*') if p.is_file())
 files.extend(root / ('native/market-server/' + name) for name in (
     'Cargo.toml', 'Cargo.lock', 'config/market-server.example.toml'))
 package = json.loads((root / 'package.json').read_text())

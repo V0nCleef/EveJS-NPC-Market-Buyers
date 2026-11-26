@@ -9,7 +9,10 @@ function sourceIdentity(modRoot){
   const identity=h.readJSON(path.join(modRoot,"docker/linux-source-identity.json"));
   if(identity?.schemaVersion!==1||identity.settlementABI!==ABI||identity.targetOS!=="linux"||identity.targetArchitecture!=="amd64")throw Error("Unsupported Linux market source/ABI contract");
   const hashes={};
-  const sourceRoot=path.join(modRoot,"native/market-server"),actual=[];
+  const directory=identity.sourceDirectory||"native/market-server";
+  if(!["native/market-server","native/market-server-2611253"].includes(directory))throw Error("Unrecognized Linux source contribution directory");
+  if(h.readJSON(path.join(modRoot,'evejs-launcher.mod.json'))?.docker?.image?.sourceDirectory!==directory)throw Error("Docker source contribution differs from its recipe");
+  const sourceRoot=path.join(modRoot,directory),actual=[];
   const walk=directory=>{for(const entry of fs.readdirSync(directory,{withFileTypes:true})){
     const file=path.join(directory,entry.name);
     if(entry.isSymbolicLink())throw Error("Linux source contribution contains a link");
@@ -19,7 +22,7 @@ function sourceIdentity(modRoot){
   walk(sourceRoot);
   if(JSON.stringify(actual.sort())!==JSON.stringify(Object.keys(identity.files).sort()))throw Error("Linux market source inventory changed");
   for(const file of Object.keys(identity.files).sort()){
-    hashes[file]=hashFile(h.contained(path.join(modRoot,"native/market-server"),file));
+    hashes[file]=hashFile(h.contained(sourceRoot,file));
     if(hashes[file]!==identity.files[file])throw Error("Linux market source changed: "+file);
   }
   if(sha(JSON.stringify(hashes))!==identity.sourceSHA256)throw Error("Linux source identity manifest differs");
@@ -57,7 +60,7 @@ async function execute(request,{modRoot=path.resolve(__dirname,"..")}={}){
   const ctx=h.context(request,modRoot,ACTIONS),identity=sourceIdentity(modRoot);
   financial.identity(modRoot,{currentPackage:true});
   const version=h.readJSON(path.join(ctx.root,"server/package.json"))?.version;
-  if(!["261108.1","261115.2"].includes(version))throw Error("This Docker port requires reviewed EveJS 261108.1 or 261115.2 source");
+  if(!["261108.1","261115.2","261125.3","261126.2"].includes(version))throw Error("This Docker port requires reviewed EveJS 261108.1, 261115.2, 261125.3 or 261126.2 source");
   // Fail before writing receipts if an upstream wallet/market seam changed.
   new (require("node:vm").Script)(require("../lib/marketAdapter").prepareMarketSource(fs.readFileSync(path.join(ctx.root,"server/src/services/market/marketProxyService.js"),"utf8")));
   for(const [file,isCorp] of [["account/walletState.js",false],["corporation/corpWalletState.js",true]])

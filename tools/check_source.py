@@ -57,6 +57,17 @@ assert linux['files'][0]['target']==payload['files'][0]['target'].removesuffix('
 assert linux['files'][1:]==payload['files'][1:]
 for name,digest in linux['runtime']['compilerInputs'].items():
     assert hashlib.sha256((root/'native/market-server'/name).read_bytes()).hexdigest()==digest
+current=json.loads((root/'payload/native-linux-x64-2611253.json').read_text())
+assert current['schema']==1 and current['runtime']['architecture']=='x64'
+assert current['runtime']['evejsVersions']==['261125.3','261126.2']
+binary=root/'payload/native/linux-x64-2611253/0.bin'
+header=binary.read_bytes()[:64]
+assert header[:6]==b'\x7fELF\x02\x01' and struct.unpack_from('<H',header,18)[0]==62
+assert hashlib.sha256(binary.read_bytes()).hexdigest()==current['runtime']['binarySHA256']
+assert current['files'][0]['payload']=='native/linux-x64-2611253/0.bin'
+assert current['files'][1:]==payload['files'][1:]
+for name,digest in current['runtime']['compilerInputs'].items():
+    assert hashlib.sha256((root/'native/market-server-2611253'/name).read_bytes()).hexdigest()==digest
 print(json.dumps({'version':package['version'],'catalogueStrings':len(catalogue['strings']),
     'languages':8,'pythonFiles':len(clients),'javascriptFiles':len(javascript),
     'nativePayloadFiles':len(payload['files']),'liveRuntimeAccessed':False}))

@@ -32,7 +32,7 @@ function fixture(mode){
     requireDurableMarketSagaWrite:result=>{assert.equal(result.success,true);},
     recordCompletedMarketFillAchievements:()=>({success:true}),
     recordCompletedMarketFillTrade:async s=>{if(!s.tradeRecorded){tradeCalls++;s.tradeRecorded=true;}},
-    __npcMarketBuyerBridge:{completed:async()=>{completionCalls++;},hasUnacknowledgedWallet:()=>false},
+    __npcMarketBuyerBridge:{prepareSaga(){},completed:async()=>{completionCalls++;},hasUnacknowledgedWallet:()=>false},
     removeEscrowRecordDurable:()=>({success:true}),
     putEscrowRecordDurable:value=>{escrow=value;return {success:true};},
     getEscrowRecord:()=>null,computeOrderValue:(price,q)=>price*q,

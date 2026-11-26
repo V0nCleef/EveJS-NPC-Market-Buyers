@@ -1,6 +1,6 @@
 # NPC Market Buyers
 
-**Private 0.1.25 compatibility candidate for EveJS 261115.2, unpublished.** Requires Launcher 1.0.80+. The corporation wallet adapter preserves upstream idempotency/refund behavior and prior NPC command fingerprints. All 132 Node checks pass. Real 261115.2 native settlement, saved-receipt orphan compensation, all four lost acknowledgements and cold replay pass in isolated fixtures. The new host identity remains exact-hash guarded. New-version Docker, GridCheck/client and combined-mod acceptance are pending. See [verification](VERIFICATION.md).
+**Private 0.1.29 compatibility candidate for EveJS 261126.2 and 261125.3; unpublished.** Preserves older support and reuses the exact reviewed native binaries. See [verification](VERIFICATION.md) and the private qualification receipt for scope and remaining acceptance.
 
 **Give your single-player EveJS market someone to sell to.**
 
@@ -10,9 +10,9 @@
 
 NPC institutions buy your sell orders in sensible, randomised batches. Prices are checked against Tranquility trade hubs, with EVE average and local NPC buy offers available as fallbacks. Advice appears directly in the normal Sell Items window.
 
-[Releases](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases) · [Feature guide](docs/FEATURES.md) · [Changelog](CHANGELOG.md) · [Report an issue](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/issues)
+[Releases](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases) Â· [Feature guide](docs/FEATURES.md) Â· [Changelog](CHANGELOG.md) Â· [Report an issue](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/issues)
 
-**Version 0.1.23 fixes updates blocked by unfinished purchases and adds guarded recovery for a proven historical zero-fill failure.** With Launcher 1.0.79+, enabled 0.1.20–0.1.22 installations update while keeping their settlement receipts. Normal server startup resumes recovery, including while buying is paused. The EveJS 261108.1 backend, buying settings, sales history and in-game UI are retained.
+**Version 0.1.23 fixes updates blocked by unfinished purchases and adds guarded recovery for a proven historical zero-fill failure.** With Launcher 1.0.79+, enabled 0.1.20â€“0.1.22 installations update while keeping their settlement receipts. Normal server startup resumes recovery, including while buying is paused. The EveJS 261108.1 backend, buying settings, sales history and in-game UI are retained.
 
 ![Statistics in the EVE client](docs/media/statistics-0.1.16.png)
 
@@ -20,7 +20,7 @@ NPC institutions buy your sell orders in sensible, randomised batches. Prices ar
 
 [![Watch the NPC Market Buyers showcase](docs/media/showcase-thumbnail.jpg)](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/download/v0.1.15/NPC-Market-Buyers-Showcase-0.1.15.mp4)
 
-[Watch the original 2-minute showcase](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/download/v0.1.15/NPC-Market-Buyers-Showcase-0.1.15.mp4) · [Download the latest release](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/latest)
+[Watch the original 2-minute showcase](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/download/v0.1.15/NPC-Market-Buyers-Showcase-0.1.15.mp4) Â· [Download the latest release](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/latest)
 
 ## What it does
 
@@ -40,30 +40,30 @@ NPC institutions buy your sell orders in sensible, randomised batches. Prices ar
 
 | Component | Tested setup |
 |---|---|
-| EveJS | **261108.1**; older-version results are recorded separately |
+| EveJS | **261125.3**, with **261115.2** regression controls |
 | Launcher | **1.0.80 candidate or newer**, including enabled-mod update transactions |
-| EVE client | Build **3396210** |
+| EVE client | Build **3724492 acceptance pending**; prior screenshots are historical |
 | Backend | **Native Windows**, **Linux amd64 Docker candidate** |
 
 On Native, the installer backs up your actual native market files and installs the included executable and matching source. A precompiled market executable is not required. Active installation changes are checked against the receipt and supported upstream source identities before any replacement. On Docker, the Launcher builds the declared Linux source contribution and owns the captured image transaction; persistent mod data lives in the selected data mount.
 
 After the official EveJS updater replaces native sources, start the Native stack normally in Launcher **1.0.79 or newer**. The Launcher calls the mod's declared `prepare_server_start` capability before spawning either native service. Healthy support is checked without writes, even when the market is already running. A recognized complete upstream replacement is repaired only while both services are stopped. Disabled or absent support is never automatically installed, and interrupted disable/removal requires manual recovery.
 
-Repair saves the new upstream originals so later disable/removal cannot restore the previous EveJS version. A preserved executable from the old version is removed on disable; normal Native startup rebuilds it from the restored current source. Purchase settings and history remain under `_local/npc-market-buyers/state.sqlite`. Explicit **Actions → Install / Update** and **Recover** remain available; Verify and client launch preparation stay read-only.
+Repair saves the new upstream originals so later disable/removal cannot restore the previous EveJS version. A preserved executable from the old version is removed on disable; normal Native startup rebuilds it from the restored current source. Purchase settings and history remain under `_local/npc-market-buyers/state.sqlite`. Explicit **Actions â†’ Install / Update** and **Recover** remain available; Verify and client launch preparation stay read-only.
 
 ## Install
 
 1. Download the **NPC-Market-Buyers-{version}.zip** attached to the [latest release](https://github.com/V0nCleef/EveJS-NPC-Market-Buyers/releases/latest).
 2. Stop EveJS and the native market in the Launcher, and close EVE.
-3. Open **Launcher → Mods → Add ZIP**, select the package and install/enable it.
+3. Open **Launcher â†’ Mods â†’ Add ZIP**, select the package and install/enable it.
 4. Start the stack and reconnect EVE.
-5. Open **Mods → NPC Market Buyers** in game. Use the ordinary **Sell Items** window for price advice.
+5. Open **Mods â†’ NPC Market Buyers** in game. Use the ordinary **Sell Items** window for price advice.
 
 Use the attached Launcher ZIP. GitHub's automatic **Source code** downloads are development archives and cannot be imported as this mod.
 
 **Updating from 0.1.16 or earlier:** these versions did not declare a Launcher update source, so one manual update is required. Disable/remove the old package, import the latest ZIP, and enable it. Keep only one version enabled. Settings and purchase history live outside the replaceable mod folder and are retained.
 
-**From 0.1.17 onward:** use **Launcher → Mods → Check mod updates**, then the offered **Update** button for a newer compatible release. Checking does not install anything. Stop the stack and close EVE before applying an update. The attached `.update.json` file is for the Launcher; import only the mod ZIP. Back up your server data before installing or updating mods.
+**From 0.1.17 onward:** use **Launcher â†’ Mods â†’ Check mod updates**, then the offered **Update** button for a newer compatible release. Checking does not install anything. Stop the stack and close EVE before applying an update. The attached `.update.json` file is for the Launcher; import only the mod ZIP. Back up your server data before installing or updating mods.
 
 **Updating an enabled 0.1.20, 0.1.21 or 0.1.22:** update the Launcher to **1.0.79+** first, leave NPC Market Buyers enabled, stop the Native stack and close EVE, then use its normal **Update** button. An interrupted purchase no longer requires disabling the mod before the update. Recognized official EveJS source replacements are supported too. Pending work resumes on the next server start using its existing payment, goods and fill keys. Disabling or removing the mod still requires pending settlements to finish; do not delete their receipts.
 
@@ -75,10 +75,10 @@ On the first start after updating, existing completed purchase receipts are adde
 
 | Mode | What it means |
 |---|---|
-| **Unlimited** — default | NPCs can consider any eligible item at a fair price. No daily budgets or item-volume quotas. |
+| **Unlimited** â€” default | NPCs can consider any eligible item at a fair price. No daily budgets or item-volume quotas. |
 | **Limited** | The same price checks and buying chances, with configurable spending caps and TQ volume quotas. Only relevant settings appear. |
 
-Unlimited does not guarantee a purchase. By default, an order at the reference price has a **35% chance per fixed 15-minute check**. Successful checks buy a random **0.01%–10% of the remaining grouped stock**, rounded to whole units, with at least one unit when eligible. Above the default **125% price ceiling**, NPCs do not buy.
+Unlimited does not guarantee a purchase. By default, an order at the reference price has a **35% chance per fixed 15-minute check**. Successful checks buy a random **0.01%â€“10% of the remaining grouped stock**, rounded to whole units, with at least one unit when eligible. Above the default **125% price ceiling**, NPCs do not buy.
 
 ## Price references
 

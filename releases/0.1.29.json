@@ -1,0 +1,336 @@
+{
+  "version": "0.1.29",
+  "status": "private-stock-compatibility-candidate",
+  "asset": "NPC-Market-Buyers-0.1.29.zip",
+  "sha256": "9dfd53b4ff92ffc0629250d1b44e000aab1bb6336e398b3ea2944c49b8319289",
+  "bytes": 9683629,
+  "updateMetadata": "NPC-Market-Buyers-0.1.29.update.json",
+  "updateMetadataSHA256": "f916f332e4bbe07601752b6a43561fb4c5d0a63e459679420e5d55fe601fd361",
+  "publicBaseRevision": "4502e0841d27ed4e58d4498aad52cf64a809dcad",
+  "sourceMemberMapping": {
+    "build-locales.py": {
+      "source": "build-locales.py",
+      "sha256": "7e82f44b59c047321f72a1d980750cd54c0da5b4e44f67e8a607c90617999281"
+    },
+    "build-payload.cjs": {
+      "source": "build-payload.cjs",
+      "sha256": "274d6dfec3f975c45247e0578197c3465f8d9b15ef1963d1b7d3dd66a3063249"
+    },
+    "client/companion.py": {
+      "source": "client/companion.py",
+      "sha256": "00e45236e33011f7368a3de9b16a79896473950ff03bbb5c07848244dcc84928"
+    },
+    "client/hud.py": {
+      "source": "client/hud.py",
+      "sha256": "910d73c5b002af0b34e20e1c5922d350e20b37449896a2e18ff912e08f232ad5"
+    },
+    "client/i18n.py": {
+      "source": "client/i18n.py",
+      "sha256": "373a882205fefaaf9d080cc2ee4db1df6cfc1e6e63e3c1768ad87bcb521a2e44"
+    },
+    "client/locales.json": {
+      "source": "client/locales.json",
+      "sha256": "1ee88426e7491ccc3a96b9df5b60ccc31f59031fe37f284aaefac64c5d9a51d9"
+    },
+    "client/menu.py": {
+      "source": "client/menu.py",
+      "sha256": "83491931cb68dc61262b01560a3dc14b3c5db2ec7ba7846728231ae2fde41085"
+    },
+    "client/sell_advisor.py": {
+      "source": "client/sell_advisor.py",
+      "sha256": "eb716f03282c2bb5ce2a3848c01dc41dfc7a894db29cc29b070f33d41ebf5f0f"
+    },
+    "client/wallet_summary.py": {
+      "source": "client/wallet_summary.py",
+      "sha256": "97007a1544c95630afbbba2105c954888a6b8eb0ce1a967a6f2738ea3963d89b"
+    },
+    "docker/financial-identity.cjs": {
+      "source": "docker/financial-identity.cjs",
+      "sha256": "f11f980f86b6efc890c20ee33728121d6e52d904be13ee1e1e43ab3dba7ee82d"
+    },
+    "docker/financial-source-identity.json": {
+      "source": "docker/financial-source-identity.json",
+      "sha256": "ea234930a023bf0d48119281d2132ce664876258c283a6914f76ef029bec7358"
+    },
+    "docker/helper-v1.cjs": {
+      "source": "docker/helper-v1.cjs",
+      "sha256": "a14bbb1208434f6c19a94cba32b4dd4fb2462ca6583d39b6c3bf52f925b80122"
+    },
+    "docker/linux-source-identity.json": {
+      "source": "docker/linux-source-identity.json",
+      "sha256": "5dd4da294d3018a02bc047449d3f535954566527bfda1bdd9dc9befd2a313111"
+    },
+    "docker/market-authority.cjs": {
+      "source": "docker/market-authority.cjs",
+      "sha256": "9bd6b6eb03b1a3d4ea9b4d91f6a46e3554b6b33b7c224e611a88691264cd5c93"
+    },
+    "docker/server-helper.cjs": {
+      "source": "docker/server-helper.cjs",
+      "sha256": "3e223361542bdf9d631ef6a004fc1c2d6b7647d7ae75e4142ebfe48af8963366"
+    },
+    "docker/server-lifecycle.cjs": {
+      "source": "docker/server-lifecycle.cjs",
+      "sha256": "16735fcea6bc87410249f0e7e2f3c10db5c3db032b3e4fa9b6ddf6109424acaa"
+    },
+    "DOCKER-PORT.md": {
+      "source": "DOCKER-PORT.md",
+      "sha256": "301dac9ef5b33cd065690a0f8c97a9363ee353184b84d6ce942ad535c737b0c1"
+    },
+    "docs/LINUX_SUPPORT.md": {
+      "source": "docs/LINUX_SUPPORT.md",
+      "sha256": "814c943e393437275f3260746fe938948a09cc4f0aaa7f13082667318ecf788d"
+    },
+    "evejs-launcher.mod.json": {
+      "source": "evejs-launcher.mod.json",
+      "sha256": "a10dd9c271b9055ecb04b91bb8070bf42dce98daa51c9b8f6d7bf2bf8ce7a68a"
+    },
+    "helper.js": {
+      "source": "helper.js",
+      "sha256": "e29d3850669e8255dde90d438dde9f4494e8853163e90aab197817006e904fb3"
+    },
+    "lib/activeUpdate.js": {
+      "source": "lib/activeUpdate.js",
+      "sha256": "0889f1b694cf609db67ca7172b5fc7106b796e20bd8aaa9099c62eaf36e5b717"
+    },
+    "lib/config.js": {
+      "source": "lib/config.js",
+      "sha256": "0d0355648f74e4f0398aff26d87a5446148627f59bb5e236e3ea12117fc4b4f2"
+    },
+    "lib/engine.js": {
+      "source": "lib/engine.js",
+      "sha256": "4c56edbb4d909dc7d2658d1a7f5bd6546d00c8f8a13223faa7d520aa311990c2"
+    },
+    "lib/financialAbiIdentities.json": {
+      "source": "lib/financialAbiIdentities.json",
+      "sha256": "ba070a4c5142effa54dcccdc050c92d5dd0ef6934f64c1a0bc861dafccc93525"
+    },
+    "lib/install.js": {
+      "source": "lib/install.js",
+      "sha256": "27f8049100c322cdc594607c97f7b2d39299a5e4185201f047c5f7d7598578fb"
+    },
+    "lib/linuxNative.js": {
+      "source": "lib/linuxNative.js",
+      "sha256": "20bcbeddbe7334ab7b4796f5bd4855b08d1dc132559fbbd51d0fd30f92f756f6"
+    },
+    "lib/localQuote.js": {
+      "source": "lib/localQuote.js",
+      "sha256": "3c9e9257047112d5d0192e86c970f55964ae19bd8556c7651cc93a4d1b9f91fa"
+    },
+    "lib/loginDelivery.js": {
+      "source": "lib/loginDelivery.js",
+      "sha256": "8067714f5312d88fd255cf40e3ff2e8ed3ccb3e5a4acc82a00efa16a5b42ee20"
+    },
+    "lib/marketAdapter.js": {
+      "source": "lib/marketAdapter.js",
+      "sha256": "79e45f69ba195c48c107caa491a718f4cc7a38a2b970abaec137c213c531c34a"
+    },
+    "lib/nativeIdentities.json": {
+      "source": "lib/nativeIdentities.json",
+      "sha256": "2ea180a0e8459af39924146b5a3b60b9a871839449adce0add476ed66b2205cd"
+    },
+    "lib/orphanEvidence.js": {
+      "source": "lib/orphanEvidence.js",
+      "sha256": "f209cd69435fab34ef4eb399b45e65b91e6955c2ec42d0e475b8293ab991a359"
+    },
+    "lib/orphanHostIdentities.json": {
+      "source": "lib/orphanHostIdentities.json",
+      "sha256": "639f9ddae7c163f8389a67789188458cf092c1cc7d339ce16177af5adef6557c"
+    },
+    "lib/orphanNative.js": {
+      "source": "lib/orphanNative.js",
+      "sha256": "0399204c328069b6eae191932d269bf509369a44798745a70b81de4289c2b8e1"
+    },
+    "lib/orphanReconciliation.js": {
+      "source": "lib/orphanReconciliation.js",
+      "sha256": "8f3522741151481c74dd4453eea658c83311116ea123c5ce77f5c8f64ed3d69c"
+    },
+    "lib/policy.js": {
+      "source": "lib/policy.js",
+      "sha256": "67a16d57941b1637433d39cab8d2e8b853935c43a1ce0ac94614d5a19c6f09f2"
+    },
+    "lib/quotes.js": {
+      "source": "lib/quotes.js",
+      "sha256": "8492bbb6242e003abe86383207f680dd987295c6a95a9cab7f1d781323abab1d"
+    },
+    "lib/service.js": {
+      "source": "lib/service.js",
+      "sha256": "6ff03b3b5719656704c57e86a8f62a7b02d59a281741915d36f3b26647feb608"
+    },
+    "lib/settlement.js": {
+      "source": "lib/settlement.js",
+      "sha256": "af3a25cb81d44f05f754e7f591fa4febc8bdb382acfafa0cbcf31dc9bd226cc5"
+    },
+    "lib/statePaths.js": {
+      "source": "lib/statePaths.js",
+      "sha256": "a6b03d9329edb8e201e02642e1a58617f9d7cd7e6782109536e0957542acca27"
+    },
+    "lib/statistics.js": {
+      "source": "lib/statistics.js",
+      "sha256": "bf783b69807aaa58e1e60f543b39897704bc79a12d6de590730e056527d2bf89"
+    },
+    "lib/store.js": {
+      "source": "lib/store.js",
+      "sha256": "af0b564da23beede1e549d0603a9941a6a9620ac06b384f7d8c3a866418b20ea"
+    },
+    "lib/uiErrors.js": {
+      "source": "lib/uiErrors.js",
+      "sha256": "44939f763be818d8e5a8f75e16fb5a6348a5aa095cf562b93f27766dfeffcb0a"
+    },
+    "lib/walletBatching.js": {
+      "source": "lib/walletBatching.js",
+      "sha256": "f097062c3e730b82d064e20ba18d9bfe35fbe6879b134988ca818c1764f9c2c8"
+    },
+    "loader.js.disabled": {
+      "source": "loader.js.disabled",
+      "sha256": "8af69a29302cc70a4d88fcc9faf52d70992f695cfd9d0756c7fdacbfe8c680e8"
+    },
+    "native/market-server/Cargo.lock": {
+      "source": "native/market-server/Cargo.lock",
+      "sha256": "5e377597076c16d313cf5483d49d7625d7190e5793a99efc9e8f762176b68507"
+    },
+    "native/market-server/Cargo.toml": {
+      "source": "native/market-server/Cargo.toml",
+      "sha256": "4a5ed461834535dc4d04dc59fde3ad082ab3c7333db6b33bb131f069b76414de"
+    },
+    "native/market-server/config/market-server.example.toml": {
+      "source": "native/market-server/config/market-server.example.toml",
+      "sha256": "3be30ff2d08fdae13035d445fcff4a9abc1d11440b729b62bc70ea3958e5b94e"
+    },
+    "native/market-server/crates/market-common/Cargo.toml": {
+      "source": "native/market-server/crates/market-common/Cargo.toml",
+      "sha256": "80fad73c83bf3764202391fa28bf815cdd64f149b096b36e00bf6d10c008d435"
+    },
+    "native/market-server/crates/market-common/src/lib.rs": {
+      "source": "native/market-server/crates/market-common/src/lib.rs",
+      "sha256": "913b393bccfeaa8021d1823bd58040c9e77f7704d0fa58591d67b1b238e612ef"
+    },
+    "native/market-server/src/config.rs": {
+      "source": "native/market-server/src/config.rs",
+      "sha256": "50a3e4864449057d8107e73d7237fbfdedf624421c20d59781774da378e93782"
+    },
+    "native/market-server/src/main.rs": {
+      "source": "native/market-server/src/main.rs",
+      "sha256": "2d3235c978eabb1b982fda72ca06e7a643d3dd37773fc52354b93727c25854f2"
+    },
+    "native/market-server/src/rpc.rs": {
+      "source": "native/market-server/src/rpc.rs",
+      "sha256": "11220d749ff91f8ba5502b67babf781ce3e1e34b96ca1e836b97c4a14c919c1b"
+    },
+    "native/market-server/src/state/order_book_tests.rs": {
+      "source": "native/market-server/src/state/order_book_tests.rs",
+      "sha256": "fcbd1415c1310d03936283f5af9e56aa90476f6f711c8c5e24e4d83d04b657bb"
+    },
+    "native/market-server/src/state/transaction_tests.rs": {
+      "source": "native/market-server/src/state/transaction_tests.rs",
+      "sha256": "34f38a0a0db3368ad1960bd6e0d0acd3bec83d1e6a79d195f8a61f54107234f1"
+    },
+    "native/market-server/src/state.rs": {
+      "source": "native/market-server/src/state.rs",
+      "sha256": "77c295cc5ae5ae65665be981e1f4c70a079cba6a9e947762fce88be951813819"
+    },
+    "native/market-server-2611253/Cargo.lock": {
+      "source": "native/market-server-2611253/Cargo.lock",
+      "sha256": "bf08aef936736d917515200c72584d9168f9340b3b239916214f354fb1486f22"
+    },
+    "native/market-server-2611253/Cargo.toml": {
+      "source": "native/market-server-2611253/Cargo.toml",
+      "sha256": "b7af4e39c97d056822f9ccfaa6758f168aea6f4ac9d0dfbb83f9e2f2b1beea9e"
+    },
+    "native/market-server-2611253/config/market-server.example.toml": {
+      "source": "native/market-server-2611253/config/market-server.example.toml",
+      "sha256": "3be30ff2d08fdae13035d445fcff4a9abc1d11440b729b62bc70ea3958e5b94e"
+    },
+    "native/market-server-2611253/crates/market-common/Cargo.toml": {
+      "source": "native/market-server-2611253/crates/market-common/Cargo.toml",
+      "sha256": "80fad73c83bf3764202391fa28bf815cdd64f149b096b36e00bf6d10c008d435"
+    },
+    "native/market-server-2611253/crates/market-common/src/lib.rs": {
+      "source": "native/market-server-2611253/crates/market-common/src/lib.rs",
+      "sha256": "913b393bccfeaa8021d1823bd58040c9e77f7704d0fa58591d67b1b238e612ef"
+    },
+    "native/market-server-2611253/src/config.rs": {
+      "source": "native/market-server-2611253/src/config.rs",
+      "sha256": "50a3e4864449057d8107e73d7237fbfdedf624421c20d59781774da378e93782"
+    },
+    "native/market-server-2611253/src/main.rs": {
+      "source": "native/market-server-2611253/src/main.rs",
+      "sha256": "2d3235c978eabb1b982fda72ca06e7a643d3dd37773fc52354b93727c25854f2"
+    },
+    "native/market-server-2611253/src/rpc.rs": {
+      "source": "native/market-server-2611253/src/rpc.rs",
+      "sha256": "11220d749ff91f8ba5502b67babf781ce3e1e34b96ca1e836b97c4a14c919c1b"
+    },
+    "native/market-server-2611253/src/state/order_book_tests.rs": {
+      "source": "native/market-server-2611253/src/state/order_book_tests.rs",
+      "sha256": "fcbd1415c1310d03936283f5af9e56aa90476f6f711c8c5e24e4d83d04b657bb"
+    },
+    "native/market-server-2611253/src/state/transaction_tests.rs": {
+      "source": "native/market-server-2611253/src/state/transaction_tests.rs",
+      "sha256": "34f38a0a0db3368ad1960bd6e0d0acd3bec83d1e6a79d195f8a61f54107234f1"
+    },
+    "native/market-server-2611253/src/state.rs": {
+      "source": "native/market-server-2611253/src/state.rs",
+      "sha256": "77c295cc5ae5ae65665be981e1f4c70a079cba6a9e947762fce88be951813819"
+    },
+    "payload/native/0.bin": {
+      "source": "payload/native/0.bin",
+      "sha256": "0f6e70ea63d33711c8f5b4f238be778e96402c782dcd1709ef15c2c2d0e83ed2"
+    },
+    "payload/native/1.bin": {
+      "source": "payload/native/1.bin",
+      "sha256": "913b393bccfeaa8021d1823bd58040c9e77f7704d0fa58591d67b1b238e612ef"
+    },
+    "payload/native/2.bin": {
+      "source": "payload/native/2.bin",
+      "sha256": "2d3235c978eabb1b982fda72ca06e7a643d3dd37773fc52354b93727c25854f2"
+    },
+    "payload/native/3.bin": {
+      "source": "payload/native/3.bin",
+      "sha256": "11220d749ff91f8ba5502b67babf781ce3e1e34b96ca1e836b97c4a14c919c1b"
+    },
+    "payload/native/4.bin": {
+      "source": "payload/native/4.bin",
+      "sha256": "77c295cc5ae5ae65665be981e1f4c70a079cba6a9e947762fce88be951813819"
+    },
+    "payload/native/linux-x64/0.bin": {
+      "source": "payload/native/linux-x64/0.bin",
+      "sha256": "7992fe2bbdbc6aa9909b4d5b5a0c97dd528be1394d540a79da9102e21cc91e17"
+    },
+    "payload/native/linux-x64-2611253/0.bin": {
+      "source": "payload/native/linux-x64-2611253/0.bin",
+      "sha256": "b9d5238282cb3381647c5ea642f152505e0131e022c56aec892afe534f5d0c4c"
+    },
+    "payload/native-linux-x64-2611253.json": {
+      "source": "payload/native-linux-x64-2611253.json",
+      "sha256": "c39676c180bfdf906943d5912cf1019b1ea8a66b34c458b0f1027e0e36089b89"
+    },
+    "payload/native-linux-x64.json": {
+      "source": "payload/native-linux-x64.json",
+      "sha256": "41d3398dd0f9e318db89fd627507f98929110cca92cafc79a6637091c8c65a97"
+    },
+    "payload/native.json": {
+      "source": "payload/native.json",
+      "sha256": "97f1c1367d74a02c786bbd1a80d0e8a5e71b7c815f93533de5fba1d741e4cde4"
+    },
+    "README.md": {
+      "source": "README.md",
+      "sha256": "d9ce93089edf4c6925a6736b7ecf672b3f74514967ddcf9b2ba29e5c4b42b690"
+    },
+    "tools/build_linux_payload.py": {
+      "source": "tools/build_linux_payload.py",
+      "sha256": "16a185c57ccaeb9cb7094e21a7f490d5541a7ef7617a532488856b3783a6259c"
+    },
+    "VERIFICATION.md": {
+      "source": "VERIFICATION.md",
+      "sha256": "966ca5726744f35877a191e85bef7e32f900e22acb3f62d2f53c0b45cd7b0262"
+    },
+    "package.json": {
+      "source": "package.json",
+      "sha256": "ebf3b07dc7eeb159534bcf382664e1bde305142764bbc22546c3ce5960937829"
+    },
+    "LICENSE": {
+      "source": "LICENSE",
+      "sha256": "bb63fd78f0f195fedf3255ac588c3256c94840c0303871e524c02cc3616e2d51"
+    }
+  }
+}

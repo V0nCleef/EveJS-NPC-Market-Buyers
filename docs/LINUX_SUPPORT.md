@@ -1,22 +1,20 @@
 # Native Linux support
 
-NPC Market Buyers 0.1.26 includes both Windows and native x86_64 Linux Market
-payloads in one ZIP. Windows requirements and financial behavior are retained.
-Native Linux support targets EveJS 261115.2 and requires Launcher 1.0.87 or newer.
-An older Linux launcher is refused before native files are changed.
+Private 0.1.29 selects the same exact-input modern x86_64 Linux ELF for EveJS
+261125.3 and 261126.2; all 18 stock compiler files match between those releases.
+The separate 261115.2 ELF and Windows payload remain unchanged. The runtime
+receipt still binds the actual selected version, source digest, all compiler
+inputs, binary hash, ownership and permissions. Unknown targets cannot use an
+unchecked fallback. The inactive guard recognizes Node 26 node-MainThread.
 
-Use the Launcher to install, enable, update, recover, disable or remove the mod.
-The Linux installer selects the ELF executable, preserves original files and
-permissions, and records the binary and exact compiler inputs. The Launcher
-checks that receipt and starts that binary for the selected installation.
-Unknown file changes, unsupported builds and unfinished transactions remain
-blocked. Source repair and rollback retain the original uninstall backups.
+Use the compatible Launcher Native lifecycle (Linux 1.0.87+). Settings, draws,
+sales and settlement journals remain outside replaceable package files. Enabled
+0.1.28 updates admit only its frozen financial hashes. Existing history outbox
+payloads and command fingerprints are preserved. Pending work blocks removal.
 
-Purchase history, settings and settlement receipts remain outside the replaceable
-package. Enabled updates retain pending settlement work; disabling and removal
-still require that work to finish through normal recovery. No settlement guard
-is bypassed and no financial journal is deleted by the installer.
-
-The Linux executable is built on Debian Bookworm with glibc and locked Cargo
-dependencies. Actual EVE/Proton gameplay and SteamOS hardware still require
-separate qualification; daemon and helper tests do not establish client gameplay.
+The unchanged modern executable uses Debian Bookworm/glibc and the locked
+rustc 1.95.0 compiler inputs. To rebuild its shared metadata, use
+tools/build_linux_payload.py --target-2611253 --evejs-version 261125.3
+--evejs-version 261126.2 --target-dir <isolated-build-directory> on Linux x86_64.
+The private receipt records focused runtime results and the QA clock limit.
+EVE/Proton, Steam Deck and installed launcher GUI acceptance remain separate.

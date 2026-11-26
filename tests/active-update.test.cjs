@@ -24,8 +24,8 @@ function fixture(t,{seedPending=true,fromVersion='0.1.20'}={}){
     for(const name of ['i18n.py','sell_advisor.py','hud.py','companion.py','wallet_summary.py'])write(path.join(mod,'client',name),'# fixture');
     for(const name of FINANCIAL){
       const reviewed=mod===old&&['0.1.23','0.1.24'].includes(fromVersion);
-      const file=mod===old&&fromVersion==='0.1.25'?path.join('../lib',name):reviewed&&name==='marketAdapter.js'?'fixtures/financial-v123/marketAdapter.js':
-        path.join(mod===old&&!reviewed?'fixtures/financial-v1':'../lib',name);
+      const file=mod===old&&fromVersion==='0.1.28'?path.join('fixtures/financial-v128',name):mod===old&&['0.1.25','0.1.26'].includes(fromVersion)?path.join('fixtures/financial-v125',name):reviewed&&name==='marketAdapter.js'?'fixtures/financial-v123/marketAdapter.js':
+        path.join(mod===old?(reviewed?'fixtures/financial-v125':'fixtures/financial-v1'):'../lib',name);
       write(path.join(mod,'lib',name),fs.readFileSync(path.resolve(__dirname,file)));
     }
     for(const [i,target]of ALLOWED.entries()){
@@ -286,8 +286,10 @@ test('an edited 0.1.23 financial predecessor is refused before snapshotting pend
 });
 
 
-test('exact 0.1.25 financial ABI updates without changing pending settlement rows',async t=>{
-  const f=fixture(t,{fromVersion:'0.1.25'});await f.installOld();const before=f.financial();
+test('exact 0.1.25, 0.1.26 and 0.1.28 financial ABIs update without changing pending settlement rows',async t=>{
+  for(const fromVersion of ['0.1.25','0.1.26','0.1.28']){
+  const f=fixture(t,{fromVersion});await f.installOld();const before=f.financial();
   await f.run('prepare_update');await f.run('apply_update');await f.run('commit_update');
   assert.equal(f.financial(),before);assert.deepEqual(f.native(),f.newBytes);
+  }
 });

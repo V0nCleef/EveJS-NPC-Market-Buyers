@@ -16,7 +16,7 @@ function staticFixture(directory){
     characterCreationSchools:['schools',()=>true],skillTypes:['skills',row=>[3443,3446,16594,16595,16622,3444,3445].includes(row.typeID)],
     typeDogma:['types',()=>false]};
   for(const [table,[key,filter]]of Object.entries(selected)){
-    const input=path.join(root,'_local/gameStore/data',table,'data.json');
+    const input=path.join(process.env.EVEJS_TEST_STATIC_ROOT||root,'_local/gameStore/data',table,'data.json');
     const original=fs.existsSync(input)?JSON.parse(fs.readFileSync(input,'utf8')):{};
     const values=Array.isArray(original[key])?original[key]:Object.values(original[key]||{});
     fs.mkdirSync(path.join(directory,table),{recursive:true});
@@ -37,7 +37,8 @@ function marketFixture(filename){
     selection_mode:'isolated-test',selection_label:'NPC Market Buyers isolated integration',selected_solar_system_ids:[30000142],selected_solar_system_names:['Jita']};
   db.prepare('INSERT INTO manifest VALUES (?,?)').run('manifest_json',JSON.stringify(manifest));db.close();
 }
-async function freePort(){return new Promise((resolve,reject)=>{const server=net.createServer();server.on('error',reject);server.listen(0,'127.0.0.1',()=>{const port=server.address().port;server.close(()=>resolve(port));});});}
+let fixturePort=Number(process.env.NPC_MARKET_TEST_PORT_BASE||0);
+async function freePort(){return new Promise((resolve,reject)=>{const server=net.createServer();server.on('error',reject);server.listen(fixturePort?fixturePort++:0,'127.0.0.1',()=>{const port=server.address().port;server.close(()=>resolve(port));});});}
 async function waitPort(port,child){let lastError;for(let count=0;count<40;count++){if(child.exitCode!==null)throw Error('Isolated daemon exited before readiness');
   const ready=await new Promise(resolve=>{const socket=net.connect({host:'127.0.0.1',port});socket.setTimeout(1000,()=>{lastError='socket timeout';socket.destroy();resolve(false);});socket.once('connect',()=>{socket.destroy();resolve(true);});socket.once('error',error=>{lastError=error.code;resolve(false);});});
   if(ready)return;await new Promise(r=>setTimeout(r,250));}throw Error('Isolated daemon readiness timeout: '+lastError);}
@@ -65,14 +66,26 @@ async function parent(){
   async function start(){const output=fs.createWriteStream(path.join(directory,'daemon.log'),{flags:'a'});
     daemon=spawn(binary,['--config',config],{cwd:directory,windowsHide:true,stdio:['ignore','pipe','pipe']});daemon.stdout.pipe(output);daemon.stderr.pipe(output);daemon.once('exit',()=>output.end());await waitPort(rpcPort,daemon);}
   async function stop(){if(daemon&&daemon.exitCode===null){await new Promise(resolve=>{daemon.once('exit',resolve);daemon.kill();});}}
-  try{await start();await runChild('purchase',directory,rpcPort);await stop();await start();await runChild('restart',directory,rpcPort);
+  function checkWorld(){
+    const world=new Database(path.join(directory,'store/gamestore.sqlite'),{readonly:true});
+    try{
+      assert.equal(world.pragma('integrity_check',{simple:true}),'ok');
+      const rejected=world.prepare("SELECT 1 FROM sqlite_master WHERE name='_persistence_rejected_rows'").get();
+      if(rejected)assert.equal(world.prepare('SELECT count(*) n FROM _persistence_rejected_rows').get().n,0,'no rejected world persistence rows');
+      return {schemaVersion:world.pragma('user_version',{simple:true}),integrity:'ok',rejectedRows:0};
+    }finally{world.close();}
+  }
+  try{await start();await runChild('purchase',directory,rpcPort);checkWorld();await stop();await start();await runChild('restart',directory,rpcPort);
     const result=JSON.parse(fs.readFileSync(path.join(directory,'result.json'),'utf8'));
+    result.world=checkWorld();fs.writeFileSync(path.join(directory,'result.json'),JSON.stringify(result,null,2));
     console.log(JSON.stringify({success:true,directory,httpPort,rpcPort,...result},null,2));
   }finally{await stop();}
 }
 async function phase(name,directory){
   assert.equal(process.env.NPC_MARKET_INTEGRATION_FIXTURE,directory);
   assert.ok(path.resolve(process.env.EVEJS_GAMESTORE_DATA_DIR).startsWith(path.resolve(directory)+path.sep));
+  const startup=path.join(root,'server/src/gameStore/startupSharedStore.js');
+  if(fs.existsSync(startup))require(startup).prepareSharedStore(path.join(directory,'store/gamestore.sqlite'));
   const {prepareMarketSource,createMarketAdapter}=require('../lib/marketAdapter');
   const {prepareWalletSource,shared:walletBatching}=require('../lib/walletBatching');
   const target=path.join(root,'server/src/services/market/marketProxyService.js'),originalCompile=Module.prototype._compile;
@@ -102,9 +115,19 @@ async function phase(name,directory){
   const escrow=require(path.join(root,'server/src/services/market/marketEscrowState'));
   const {marketDaemonClient}=require(path.join(root,'server/src/services/market/marketDaemonClient'));
   const Service=require(target);
-  const {createStore}=require('../lib/store'),store=createStore(path.join(directory,'mod.sqlite'),{Database});
+  const modFile=process.env.EVEJS_MOD_DATA_ROOT?path.join(require('../lib/statePaths').stateRoot(root),'state.sqlite'):path.join(directory,'mod.sqlite');
+  const {createStore}=require('../lib/store'),store=createStore(modFile,{Database});
   walletBatching.attach(store);
   const adapter=createMarketAdapter(root,{store});
+  if(process.env.EVEJS_MOD_DATA_ROOT){
+    const lifecycle=require('../docker/server-lifecycle.cjs'),descriptor=require('../evejs-launcher.mod.json');
+    const request={protocol:'evejs_launcher_mod_v1',requestId:'isolated-docker-proof',mod:{id:descriptor.id,version:descriptor.version},
+      runtime:{backend:'docker',platform:'linux',role:'server',evejsRoot:root,modRoot:candidate,dataRoot:directory,
+        targetIdentity:'isolated-stock-'+require(path.join(root,'server/package.json')).version,installationIdentity:'isolated-stock',
+        market:{imageId:process.env.NPC_MARKET_TEST_IMAGE_ID,expectedImageId:process.env.NPC_MARKET_TEST_IMAGE_ID}}};
+    await lifecycle.execute({...request,action:'install'});await lifecycle.execute({...request,action:'prepare_server_start'});
+    await require('../docker/market-authority.cjs').activate(root,candidate);
+  }
   try{
     if(name==='purchase'){
       const now=(BigInt(Date.now())*10000n+116444736000000000n).toString();
@@ -165,6 +188,15 @@ async function phase(name,directory){
       const corpResult=await adapter.buy(corpOrder,10,corpKey),corpAfter=corpWallet.getCorporationWalletBalance(corporationID,1000);
       assert.equal(Math.round((corpAfter-corpBefore)*100),Math.round((100-corpResult.taxISK)*100));
       assert.equal(corpWallet.getCorporationMarketTransactions(corporationID,1000).length,1);
+      if(require(path.join(root,'server/package.json')).version==='261126.2'){
+        const history=corpWallet.getCorporationMarketTransactions(corporationID,1000)[0];
+        assert.equal(history.buyerID,corpResult.buyerID,'corporate history buyer is the pilot');
+        assert.equal(history.sellerID,sellerID,'corporate history seller is the issuing pilot');
+        assert.equal(history.accountID,corporationID*16+1,'corporate history identifies the selling wallet');
+        assert.equal(history.buyerAccountID,corpResult.buyerID*16,'corporate history identifies the buyer wallet');
+        assert.equal(history.sellerAccountID,corporationID*16+1);
+        assert.equal(history.keyID,1000);
+      }
       await adapter.buy(corpOrder,10,corpKey);assert.equal(corpWallet.getCorporationWalletBalance(corporationID,1000),corpAfter);
       assert.equal(corpWallet.getCorporationMarketTransactions(corporationID,1000).length,1);
       report.corporation={order:corpOrder,operationKey:corpKey,result:corpResult,before:corpBefore,after:corpAfter,historyCount:1};
@@ -258,13 +290,17 @@ async function phase(name,directory){
       await service.Handle_PlaceMultiSellOrder([[{itemID:walletItem.itemID,typeID:34,stationID,quantity:100,price:10}],false,30],session);
       const walletOrder=(await adapter.listOrders()).find(order=>![listed[0].orderID,corpOrder.orderID,randomOrder.orderID].includes(order.orderID));
       assert.ok(walletOrder);const walletKey=`npc-market:integration:wallet-lost-ack:${walletOrder.orderID}`;
-      lostWalletKey=walletKey+':wallet:buyer-debit';
+      const walletLeg=process.env.NPC_MARKET_TEST_WALLET_LEG||'buyer-debit';
+      assert.ok(['buyer-debit','seller-credit','tax-debit'].includes(walletLeg));
+      const walletBefore=wallet.getCharacterWallet(sellerID).balance;
+      lostWalletKey=walletKey+':wallet:'+walletLeg;
       await assert.rejects(adapter.buy(walletOrder,10,walletKey),/Injected lost wallet acknowledgement/);
       assert.equal((await marketDaemonClient.call('GetOrder',{order_id:walletOrder.orderID})).row.vol_remaining,100);
-      assert.equal(escrow.getEscrowRecord(walletOrder.orderID).pendingFill.buyerDebited,false);
+      const lostFlag={'buyer-debit':'buyerDebited','seller-credit':'sellerCredited','tax-debit':'taxDebited'}[walletLeg];
+      assert.equal(escrow.getEscrowRecord(walletOrder.orderID).pendingFill[lostFlag],false);
       assert.equal(wallet.getCharacterWallet(result.buyerID).balance,0);
       report.pending.afterWallet=wallet.getCharacterWallet(sellerID).balance;
-      report.walletPending={order:walletOrder,operationKey:walletKey,afterWallet:report.pending.afterWallet};
+      report.walletPending={order:walletOrder,operationKey:walletKey,afterWallet:report.pending.afterWallet,beforeWallet:walletBefore,leg:walletLeg};
       report.goodsQuantity+=10;
       fs.writeFileSync(path.join(directory,'result.json'),JSON.stringify(report,null,2));
     } else {
@@ -275,7 +311,7 @@ async function phase(name,directory){
       assert.equal(escrow.getEscrowRecord(pending.order.orderID).pendingFill,null);
       assert.equal((await marketDaemonClient.call('GetOrder',{order_id:pending.order.orderID})).row.vol_remaining,90);
       const walletPending=report.walletPending,walletRecovered=await adapter.buy(walletPending.order,10,walletPending.operationKey);
-      assert.equal(walletRecovered.state,'settled');const expectedFinalWallet=walletPending.afterWallet+walletRecovered.grossISK-walletRecovered.taxISK;
+      assert.equal(walletRecovered.state,'settled');const expectedFinalWallet=walletPending.beforeWallet+walletRecovered.grossISK-walletRecovered.taxISK;
       assert.equal(wallet.getCharacterWallet(sellerID).balance,expectedFinalWallet);
       assert.equal(escrow.getEscrowRecord(walletPending.order.orderID).pendingFill,null);
       assert.equal((await marketDaemonClient.call('GetOrder',{order_id:walletPending.order.orderID})).row.vol_remaining,90);
@@ -318,4 +354,5 @@ async function phase(name,directory){
     if(marketDaemonClient._socket)marketDaemonClient._socket.destroy();store.close();db.flushAllSync();await db.shutdown();
   }
 }
-(process.argv[2]==='purchase'||process.argv[2]==='restart'?phase(process.argv[2],process.argv[3]):parent()).then(()=>process.exit(0),error=>{console.error(error.stack||error);process.exit(1);});
+if(require.main===module)(process.argv[2]==='purchase'||process.argv[2]==='restart'?phase(process.argv[2],process.argv[3]):parent()).then(()=>process.exit(0),error=>{console.error(error.stack||error);process.exit(1);});
+module.exports={staticFixture,marketFixture};

@@ -24,6 +24,23 @@ test('guarded source transform parses current incoming source and refuses change
   assert.throws(()=>prepareMarketSource(patched),/already installed/);
   assert.throws(()=>prepareMarketSource(source.replace('async function executePlayerSellFillSagaUnlocked(','async function changed(')),/seam missing/);
 });
+
+test('cold native recovery restores only its immutable NPC fill guard without persisting extension fields',t=>{
+  const f=fixture(t),bridge=createNativeBridge({});bridge.attach(f.store);
+  const purchase=order(),quantity=10,key='npc-market:typed-cold-recovery';
+  const fingerprint=require('node:crypto').createHash('sha256').update(JSON.stringify({order:purchase,quantity})).digest('hex');
+  f.store.db.prepare('INSERT INTO nm_native_ops VALUES (?,?,?,?,?,?,?,?)').run(key,fingerprint,'pending',JSON.stringify(purchase),quantity,null,null,1);
+  const saga={operationKey:key,orderID:purchase.orderID,tradedQuantity:quantity,sellerCharacterID:purchase.sellerID,
+    sellerWalletID:purchase.ownerID,sellerIsCorp:false,typeID:34,destinationStationID:purchase.stationID,
+    orderPrice:purchase.price,availableQuantity:purchase.quantity};
+  bridge.prepareSaga(saga);assert.equal(saga.npcMarketExpected.vol_remaining,100);
+  assert.equal(Object.hasOwn(JSON.parse(JSON.stringify(saga)),'npcMarketExpected'),false);
+  const cold=JSON.parse(JSON.stringify(saga));bridge.prepareSaga(cold);assert.deepEqual(cold.npcMarketExpected,saga.npcMarketExpected);
+  assert.throws(()=>bridge.prepareSaga({...cold,tradedQuantity:11}),/immutable purchase/);
+  assert.throws(()=>bridge.prepareSaga({...cold,operationKey:'npc-market:unknown'}),/anchor missing/);
+  assert.throws(()=>bridge.prepareSaga({...cold,npcMarketExpected:{...cold.npcMarketExpected,price:1}}),/identity differs/);
+  const ordinary={operationKey:'ordinary:fill'};bridge.prepareSaga(ordinary);assert.deepEqual(ordinary,{operationKey:'ordinary:fill'});
+});
 test('scheduler and Limited allowance lookup preserve actual station and quantity for local fallback',async t=>{
  const f=fixture(t),env=engineEnv(f),seen=[];
  env.options.quotes={get:async(typeID,config,context)=>{seen.push({kind:'get',typeID,context});return {...quote,updatedAt:900000};},
@@ -250,12 +267,12 @@ test('a delayed callback cannot reuse an expired reentrancy lease',async()=>{
   await delayed;assert.deepEqual(trace,['new owner','owner done','callback']);
 });
 
-function nativeFixture(f,{corp=false}={}) {
+function nativeFixture(f,{corp=false,modernHistory=false}={}) {
   const chars=new Map([[140000002,{accountId:1,characterName:'Player'}]]),balances=new Map(),commands=new Map();
   let current={order_id:'1',owner_id:corp?98000001:140000002,is_corp:corp,source:'player',state:'open',
     row:{order_id:'1',type_id:34,station_id:60003760,region_id:10000002,price:10,vol_entered:100,vol_remaining:100,bid:false}};
   let escrow={orderId:'1',ownerId:140000002,isCorp:corp,walletOwnerId:corp?98000001:140000002,accountKey:1000,remainingQuantity:100};
-  const history=[],goods=[],funding=[];let bridge,failHistory=false,failAfterFunding=false;
+  const history=[],goods=[],funding=[];let bridge,lastSaga,failHistory=false,failAfterFunding=false;
   const native={
     database:{read:()=>({success:true,data:Object.fromEntries(chars)}),write:(table,key,value)=>{chars.set(Number(key.slice(1)),value);balances.set(Number(key.slice(1)),value.balance);return {success:true};},flushTableSync:()=>({success:true})},
     marketDaemonClient:{call:async()=>({capabilities:['conditional-fill-v1']})},
@@ -267,7 +284,7 @@ function nativeFixture(f,{corp=false}={}) {
       appendCharacterMarketTransactionAsync:async(id,entry,meta)=>{if(failHistory){failHistory=false;throw Error('history RPC lost');}if(!commands.has(meta.commandID)){commands.set(meta.commandID,1);history.push({id,entry,meta});}return {success:true};}},
     corpWallet:{appendCorporationMarketTransactionAsync:async(id,accountKey,entry,meta)=>{if(!commands.has(meta.commandID)){commands.set(meta.commandID,1);history.push({id,accountKey,entry,meta});}return {success:true};}},
     buildCharacterMarketContext:()=>({}),computeSalesTaxAmount:(_c,value)=>value*.01,getMarketCounterpartyOwnerID:()=>1000009,notifyOwnOrdersChanged:()=>{},
-    buildPlayerSellFillSaga:input=>{if(failAfterFunding){failAfterFunding=false;throw Error('after funding crash');}const {escrowRecord,sellOrder,...data}=input;return {...data,
+    buildPlayerSellFillSaga:input=>{if(failAfterFunding){failAfterFunding=false;throw Error('after funding crash');}const {escrowRecord,sellOrder,...data}=input;return lastSaga={...data,
       orderID:'1',buyerWalletID:input.buyerCharacterID,sellerWalletID:input.sellerWalletID,itemLegs:[],attempt:1,
       createdAt:new Date(0).toISOString()};},
     persistPlayerSellFillSaga:(_escrow,saga)=>{escrow.pendingFill=saga;},
@@ -279,9 +296,11 @@ function nativeFixture(f,{corp=false}={}) {
       bridge.completed(saga,saga.fillResponse);escrow.pendingFill=null;escrow.remainingQuantity=current.row.vol_remaining;
       return {compensated:false,fillResponse:saga.fillResponse};}
   };
+  function enableModernHistory(){native.marketWalletAccountID=owner=>owner.id*16+(owner.isCorp?owner.accountKey-1000+1:0);}
+  if(modernHistory)enableModernHistory();
   bridge=createNativeBridge(native);bridge.attach(f.store);
-  return {bridge,chars,history,goods,funding,balances,get current(){return current;},get escrow(){return escrow;},
-    loseHistory(){failHistory=true;},crashAfterFunding(){failAfterFunding=true;}};
+  return {bridge,chars,history,goods,funding,balances,get current(){return current;},get escrow(){return escrow;},get saga(){return lastSaga;},
+    enableModernHistory,loseHistory(){failHistory=true;},crashAfterFunding(){failAfterFunding=true;}};
 }
 test('native adapter creates zero-funded institution only on purchase, keeps goods and replays receipts/history',async t=>{
   const f=fixture(t),n=nativeFixture(f);assert.equal(n.chars.size,1);
@@ -305,6 +324,28 @@ test('funding receipt survives failure before saga creation and corporation hist
   assert.deepEqual(n.funding,[100]);assert.equal(n.history.filter(x=>x.accountKey===1000).length,1);
   assert.equal(n.bridge.walletMetadata({idempotencyKey:key+':wallet:seller-credit'}).commandID,key+':wallet:seller-credit');
   assert.deepEqual(n.bridge.walletMetadata({idempotencyKey:'normal-market'}),{});
+});
+
+test('modern corporation history identifies both wallet accounts and issuing pilots once',async t=>{
+ const f=fixture(t),n=nativeFixture(f,{corp:true,modernHistory:true}),[order]=await n.bridge.listOrders();
+ const key='npc-market:modern-corp-history',result=await n.bridge.buy(order,10,key);
+ const history=n.history.find(x=>x.accountKey===1000).entry;
+ assert.equal(history.sellerID,order.sellerID);assert.equal(history.buyerID,result.buyerID);
+ assert.equal(history.accountID,order.ownerID*16+1);assert.equal(history.sellerAccountID,history.accountID);
+ assert.equal(history.buyerAccountID,result.buyerID*16);assert.equal(history.keyID,1000);
+ await n.bridge.buy(order,10,key);assert.equal(n.history.length,2);
+});
+
+test('host upgrade preserves an existing pending history payload and its command fingerprints',async t=>{
+ const f=fixture(t),n=nativeFixture(f,{corp:true}),[order]=await n.bridge.listOrders(),key='npc-market:prior-history';
+ n.loseHistory();await assert.rejects(n.bridge.buy(order,10,key),/history RPC lost/);
+ const rows=()=>f.store.db.prepare('SELECT operation_key,payload FROM nm_native_outbox ORDER BY operation_key').all();
+ const before=rows();n.enableModernHistory();
+ const saga=JSON.parse(JSON.stringify(n.saga));
+ n.bridge.prepareSaga(saga);n.bridge.completed(saga,{vol_remaining:90});assert.deepEqual(rows(),before);
+ await n.bridge.recover();assert.deepEqual(rows(),before);
+ assert.equal(n.history.find(x=>x.accountKey===1000).entry.sellerID,order.ownerID);
+ assert.equal(n.history.length,2);assert.deepEqual(n.funding,[100]);
 });
 test('changed exact order is rejected before funding and institutional orders cannot become eligible',async t=>{
   const f=fixture(t),n=nativeFixture(f),orders=await n.bridge.listOrders();n.current.row.price=11;
